@@ -1,9 +1,0 @@
-// The list is written with the `table` classes: like a consuming application, the page loads their styles itself.
-@use '@lucca-front/scss/src/components/table';
-
-.harvestPlanning-main {
-	@layer product {
-		padding-block: var(--pr-t-spacings-200);
-		padding-inline: var(--pr-t-spacings-300);
-	}
-}

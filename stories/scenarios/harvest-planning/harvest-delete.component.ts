@@ -8,7 +8,7 @@ import { Harvest } from './harvest-planning.data';
  */
 @Component({
 	selector: 'sb-harvest-delete',
-	template: `<p>La récolte de {{ harvest.varieties[0].name }} sur la parcelle {{ harvest.plot.name }} sera supprimée du planning.</p>`,
+	template: `La récolte de {{ harvest.varieties[0].name }} sur la parcelle {{ harvest.plot.name }} sera supprimée du planning.`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HarvestDeleteComponent implements ILuModalContent<true> {

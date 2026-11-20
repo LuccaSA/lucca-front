@@ -1,9 +1,12 @@
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { ContainerComponent } from '@lucca-front/ng/container';
+import { DataTableBodyComponent, DataTableComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
 import { LuDialogService } from '@lucca-front/ng/dialog';
 import { DropdownActionComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { LuModal } from '@lucca-front/ng/modal';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -14,70 +17,79 @@ import { Harvest, initialHarvests } from './harvest-planning.data';
 
 /**
  * Harvest planning of a community garden: a list of planned harvests, created and edited in a
- * dialog form, deleted after a confirmation. The table is written with the `table` classes, as
- * most lists of consuming applications are, so its stylesheet loads the table styles itself.
+ * dialog form, deleted after a confirmation. The page is only made of Lucca Front components.
  */
 @Component({
 	selector: 'sb-harvest-planning',
 	template: `
-		<lu-page-header label="Planning des récoltes" description="Récoltes prévues sur les parcelles du jardin partagé.">
-			<button pageHeaderActions type="button" luButton (click)="create()">
-				<lu-icon icon="plus" />
-				Planifier une récolte
-			</button>
-		</lu-page-header>
+		<lu-main-layout>
+			<ng-container mainLayoutHeader>
+				<lu-page-header container label="Planning des récoltes" description="Récoltes prévues sur les parcelles du jardin partagé.">
+					<button pageHeaderActions type="button" luButton (click)="create()">
+						<lu-icon icon="plus" />
+						Planifier une récolte
+					</button>
+				</lu-page-header>
+			</ng-container>
 
-		<main class="harvestPlanning-main">
-			<table class="table">
-				<caption class="pr-u-mask">
-					Récoltes planifiées
-				</caption>
-				<thead class="table-head">
-					<tr class="table-head-row">
-						<th class="table-head-row-cell" scope="col">Responsable</th>
-						<th class="table-head-row-cell" scope="col">Parcelle</th>
-						<th class="table-head-row-cell" scope="col">Variétés</th>
-						<th class="table-head-row-cell" scope="col">Période</th>
-						<th class="table-head-row-cell mod-alignRight" scope="col">Quantité (kg)</th>
-						<th class="table-head-row-cell mod-actions" scope="col"><span class="pr-u-mask">Actions</span></th>
-					</tr>
-				</thead>
-				<tbody class="table-body">
-					@for (harvest of harvests(); track harvest.id) {
-						<tr class="table-body-row">
-							<td class="table-body-row-cell">{{ harvest.gardener | luUserDisplay }}</td>
-							<td class="table-body-row-cell">{{ harvest.plot.name }}</td>
-							<td class="table-body-row-cell">{{ varietyNames(harvest) }}</td>
-							<td class="table-body-row-cell">{{ harvest.period.start | date: 'shortDate' }} – {{ harvest.period.end | date: 'shortDate' }}</td>
-							<td class="table-body-row-cell mod-alignRight">{{ harvest.quantity | number }}</td>
-							<td class="table-body-row-cell mod-actions">
-								<button type="button" luButton="ghost" size="S" [luDropdown]="actions" luTooltip="Actions" luTooltipOnlyForDisplay>
-									<lu-icon icon="menuDots" [alt]="'Actions de la récolte ' + harvest.id" />
-								</button>
-								<ng-template #actions>
-									<lu-dropdown-menu>
-										<lu-dropdown-item>
-											<button lu-dropdown-action type="button" (click)="edit(harvest)">Modifier</button>
-										</lu-dropdown-item>
-										<lu-dropdown-item>
-											<button lu-dropdown-action type="button" critical (click)="delete(harvest)">Supprimer</button>
-										</lu-dropdown-item>
-									</lu-dropdown-menu>
-								</ng-template>
-							</td>
-						</tr>
-					}
-				</tbody>
-			</table>
-		</main>
+			<lu-main-layout-block>
+				<lu-container>
+					<lu-data-table>
+						<thead luDataTableHead>
+							<tr luDataTableRow>
+								<th luDataTableCell>Responsable</th>
+								<th luDataTableCell>Parcelle</th>
+								<th luDataTableCell>Variétés</th>
+								<th luDataTableCell>Période</th>
+								<th luDataTableCell align="end">Quantité (kg)</th>
+								<th luDataTableCell>Actions</th>
+							</tr>
+						</thead>
+						<tbody luDataTableBody>
+							@for (harvest of harvests(); track harvest.id) {
+								<tr luDataTableRow>
+									<td luDataTableCell>{{ harvest.gardener | luUserDisplay }}</td>
+									<td luDataTableCell>{{ harvest.plot.name }}</td>
+									<td luDataTableCell>{{ varietyNames(harvest) }}</td>
+									<td luDataTableCell>{{ harvest.period.start | date: 'shortDate' }} – {{ harvest.period.end | date: 'shortDate' }}</td>
+									<td luDataTableCell align="end">{{ harvest.quantity | number }}</td>
+									<td luDataTableCell actions>
+										<button type="button" luButton [luDropdown]="actions" luTooltip="Actions" luTooltipOnlyForDisplay>
+											<lu-icon icon="menuDots" [alt]="'Actions de la récolte ' + harvest.id" />
+										</button>
+										<ng-template #actions>
+											<lu-dropdown-menu>
+												<lu-dropdown-item>
+													<button lu-dropdown-action type="button" (click)="edit(harvest)">Modifier</button>
+												</lu-dropdown-item>
+												<lu-dropdown-item>
+													<button lu-dropdown-action type="button" critical (click)="delete(harvest)">Supprimer</button>
+												</lu-dropdown-item>
+											</lu-dropdown-menu>
+										</ng-template>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</lu-data-table>
+				</lu-container>
+			</lu-main-layout-block>
+		</lu-main-layout>
 	`,
-	styleUrl: './harvest-planning.component.scss',
-	encapsulation: ViewEncapsulation.None,
 	imports: [
 		DatePipe,
 		DecimalPipe,
 		ButtonComponent,
+		ContainerComponent,
+		DataTableComponent,
+		DataTableHeadComponent,
+		DataTableBodyComponent,
+		DataTableRowComponent,
+		DataTableRowCellHeaderComponent,
+		DataTableRowCellComponent,
 		IconComponent,
+		MainLayoutComponent,
+		MainLayoutBlockComponent,
 		PageHeaderComponent,
 		LuDropdownTriggerDirective,
 		DropdownMenuComponent,

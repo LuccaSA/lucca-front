@@ -15,6 +15,20 @@ export default {
 	...scenario,
 	title: 'Scenarios/HarvestPlanning',
 	tags: ['scenario', '!autodocs'],
+	parameters: {
+		...scenario.parameters,
+		a11y: {
+			...scenario.parameters.a11y,
+			config: {
+				rules: [
+					// axe false positive: `lu-main-layout` is a `role="main"` landmark, so the `<header>` of the page
+					// header it contains has no banner role (HTML-AAM, and axe's own role computation), but the rule
+					// only skips headers inside a native `<main>` element.
+					{ id: 'landmark-banner-is-top-level', enabled: false },
+				],
+			},
+		},
+	},
 	component: HarvestPlanningComponent,
 	loaders: [scenarioHandlers(harvestPlanningHandlers)],
 	decorators: [
