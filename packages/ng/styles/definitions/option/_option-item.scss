@@ -1,3 +1,5 @@
+// Legacy only: used by `lu-option-item` / `lu-tree-option-item` and the `.lu-select-value` of the legacy selects.
+// The listbox-based selects no longer rely on it: it goes away with those components.
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
