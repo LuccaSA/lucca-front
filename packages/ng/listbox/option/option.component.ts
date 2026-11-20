@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, contentChild, Directive, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, Directive, forwardRef, HostAttributeToken, inject, input, ViewEncapsulation } from '@angular/core';
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LISTBOX_INSTANCE, OPTION_INSTANCE } from '../tokens';
@@ -73,7 +73,10 @@ export class OptionComponent {
 
 	readonly multiple = computed(() => this.#listboxRef?.multiple() ?? false);
 	readonly tree = computed(() => this.#listboxRef?.tree() ?? false);
-	readonly empty = computed(() => this.#listboxRef?.state() === 'empty');
+	// Only the status option the listbox renders itself (`<lu-listbox-option empty>`) stands for the empty state:
+	// options projected in the listbox header stay visible and keep their own id while there are no results.
+	readonly #isStatusOption = inject(new HostAttributeToken('empty'), { optional: true }) !== null;
+	readonly empty = computed(() => this.#isStatusOption && this.#listboxRef?.state() === 'empty');
 	readonly id = computed(() => this.#listboxRef?.listboxId ?? null);
 
 	readonly groupLabelId = computed(() => this.groupId() ?? this.#defaultGroupId);
