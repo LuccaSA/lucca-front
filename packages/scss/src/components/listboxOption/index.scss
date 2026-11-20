@@ -138,7 +138,6 @@
 
 		&.mod-checkbox {
 			@include multiple;
-			@include multipleOption;
 		}
 
 		&[aria-selected='true'],
@@ -259,11 +258,16 @@
 			&,
 			.listboxOptionWrapper {
 				@include multiple;
-
-				.listboxOption {
-					@include multipleOption;
-				}
 			}
 		}
+	}
+}
+
+// One rule for both cases, so that the multiple option states are not emitted twice.
+.listboxOptionWrapper.mod-multiple .listboxOption,
+.listboxOptionWrapper.mod-multiple .listboxOptionWrapper .listboxOption,
+.listboxOption.mod-checkbox {
+	@layer mods {
+		@include multipleOption;
 	}
 }
