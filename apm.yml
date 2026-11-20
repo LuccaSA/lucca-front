@@ -1,0 +1,12 @@
+name: lucca-front
+version: 1.0.0
+description: 'Internal AI setup of the lucca-front repo (Claude Code, Copilot review). Not for apps: they install .github/skills/<name>'
+author: Prisme
+targets:
+  - claude
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}

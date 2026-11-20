@@ -1,0 +1,4 @@
+name: lf-select-migration
+version: 1.0.0
+description: Moves a project off the deprecated Lucca Front selects to lu-simple-select and lu-multi-select
+author: Prisme

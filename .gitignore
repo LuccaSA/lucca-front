@@ -58,3 +58,8 @@ scripts/generate-skills/generate-skills-config.json
 /coverage/
 
 *storybook.log
+
+# APM: package cache, rebuilt by `apm install` from apm.yml + apm.lock.yaml.
+apm_modules/
+# APM: vendor-neutral copy of deployed skills, nothing reads it here.
+.agents/

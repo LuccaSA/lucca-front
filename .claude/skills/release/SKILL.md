@@ -331,7 +331,7 @@ Analyse et proposition seulement : **ne rien implémenter sans accord explicite.
 ### Recenser
 
 1. Les entrées `✅ Actions required to update`, `💥` et `💀 Deprecated` du changelog de l'étape 1. Ouvrir chaque PR concernée (`gh pr view <N> --json body,files`) pour connaître l'avant/après exact.
-2. Ce qui existe déjà : `packages/ng/schematics/collection.json`, la section `🤖 Schematics` du changelog, et pour une majeure le skill `lucca-front-migrate-<X-1 → X>` s'il a été amorcé (`.claude/skills/lucca-front-migrate-*`).
+2. Ce qui existe déjà : `packages/ng/schematics/collection.json`, la section `🤖 Schematics` du changelog, et pour une majeure le skill `lucca-front-migrate-<X-1 → X>` s'il a été amorcé (`.github/skills/lucca-front-migrate-*`).
 3. La table des schematics publiée sur zeroheight (`docs/schematics.md`) : `npm run schematics:doc -- --check` sur la branche de release. Le hook pre-commit la régénère à chaque modification de `collection.json` et après chaque nouveau tag, mais laisse passer un schematic sans `documentation`. Si `--check` en signale : rédiger pour chacun, dans `collection.json`, `"documentation": { "description": "…" }` en français, sur le modèle des descriptions existantes (à partir de sa `description` anglaise et de sa PR), ou `"documentation": false` s'il ne doit pas être publié, puis `npm run schematics:doc`. Cette mise à jour part avec la PR du contenu ZeroHeight de l'étape 2. Lister au rapport final les lignes « Prochaine version » : elles prendront le numéro de la version livrée au premier commit qui suit le tag, puis apparaîtront sur zeroheight (synchronisé depuis `master`).
 
 ### Classer chaque changement
@@ -339,7 +339,7 @@ Analyse et proposition seulement : **ne rien implémenter sans accord explicite.
 | Proposition | Quand |
 |---|---|
 | **Schematic** | Transformation mécanique et sans ambiguïté : renommage de classe, de variable CSS, de token, d'input ou de sélecteur, suppression d'un import, remplacement de valeur. Tout ce qu'un `replace` ou un parcours d'AST couvre sans connaître l'intention. S'inspirer des schematics existants (`palettes`, `tokens-*`, `deprecated-resolver`). |
-| **Section du skill de migration** | Changement contextuel : restructuration de template, choix entre plusieurs alternatives, nullabilité à gérer, comportement modifié, résiduel d'un schematic. Pour une majeure, c'est une référence de `lucca-front-migrate-X` (modèle : `lucca-front-migrate-22`, un fichier `references/<Sujet>.md` par refacto). |
+| **Section du skill de migration** | Changement contextuel : restructuration de template, choix entre plusieurs alternatives, nullabilité à gérer, comportement modifié, résiduel d'un schematic. Pour une majeure, c'est une référence de `lucca-front-migrate-X` (modèle : `lucca-front-migrate-22`, un fichier `references/<Sujet>.md` par refacto). Un nouveau `lucca-front-migrate-X` se crée sous `.github/skills/`, avec un `apm.yml` (`name`, `version`, `description`) et une ligne dans `.github/skills/README.md`, que le job CI `APM audit` exige. |
 | **Rien** | La ligne du changelog suffit (ex. montée de peer dependency), ou le changement est déjà couvert. |
 
 Une dépréciation d'une mineure n'appelle pas forcément de migration immédiate : proposer le schematic seulement s'il est simple, sinon noter qu'il faudra le prévoir avant la majeure qui supprimera l'API.

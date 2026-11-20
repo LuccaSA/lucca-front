@@ -87,7 +87,7 @@ En tirer ce qui influence le contrat : comportements (interactions, événements
 |---|---|
 | `contributing.md`, sections `#naming` et `#dx` | Casse des types (`PascalCase`), des constantes (`UPPER_CASE`) et des champs (`camelCase`), collision avec les attributs natifs, booléens à `false`, transforms, noms génériques interdits, unions de strings, contrat publié = breaking change |
 | `CLAUDE.md`, sections « Conventions composants » et « i18n » | Préfixe des sélecteurs, JSDoc obligatoire, composants « dumb », textes statiques via `intl` |
-| `.github/skills/lucca-front-scss/SKILL.md`, sections « Nommage des classes » et « Modifiers et états » | Les valeurs d’input qui deviennent des classes (`mod-<valeur>`, `palette-<valeur>`) doivent produire des noms de classe valides (camelCase) |
+| `.apm/instructions/scss.instructions.md`, sections « Nommage des classes » et « Modifiers et états » | Les valeurs d’input qui deviennent des classes (`mod-<valeur>`, `palette-<valeur>`) doivent produire des noms de classe valides (camelCase) |
 | `docs/portal-content.md` | Ce qu’accepte `PortalContent`, pour choisir entre `PortalContent` et `ng-content` |
 
 Puis appliquer la correspondance et les conventions observées ci-dessous. Chaque choix non évident est justifié en une demi-phrase dans la proposition, en citant la règle qui le fonde.

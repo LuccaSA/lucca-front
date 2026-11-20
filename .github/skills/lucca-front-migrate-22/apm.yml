@@ -1,0 +1,4 @@
+name: lucca-front-migrate-22
+version: 1.0.0
+description: Migrates a project from Lucca Front 21.x to 22.x
+author: Prisme

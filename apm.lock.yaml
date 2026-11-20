@@ -1,0 +1,925 @@
+lockfile_version: '1'
+dependencies: []
+deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/rules/scss.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b69b0fa1cd3ecd28dbd5c0b54313c925e6c4e15b097d0481d1d065e287d58eb9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/analyze-bug-report
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/analyze-bug-report/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:aa92745b7bd0571db80d452d566d8b7bad670eb7310c9db64e28aad279bd89e8
+- kind: project-relative
+  target: claude
+  value: .claude/skills/audit-pr
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/audit-pr/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:3dc1084a667ec4589c61df3c49443f7046210ea733c3bba23538548eb5b5a5e4
+- kind: project-relative
+  target: claude
+  value: .claude/skills/create-feature-issue
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/create-feature-issue/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:5c0678f453811777c20b061dddc1378d6b627c3ac9ea9ea5048380d7cdb12299
+- kind: project-relative
+  target: claude
+  value: .claude/skills/draft-component-api
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/draft-component-api/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:a205c55290f8240eb15597ca7ce0654da3d3cdad74d2e34b125ff918545495fb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-e2e-test
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-e2e-test/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:a2b9936f4418219e213f081842da10d192b1a29e90ee7e75b58276a04a78d752
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-story
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-story-qa
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-story-qa/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:719043bf6135454235e673a4afd2e7b1eed1ba3924cf76af7cd340b5e1111ee5
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-story/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:7833d627812cb886ddd1c374a6fd711e64dcbc51fe4e0bd9b0d96ce9fae55451
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-test
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-test/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:634c59e99f9c001c665b722a520d7578e0a1a833f921eef6160c48b2f69526c7
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-version-changelog-markdown
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-version-changelog-markdown/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b8b896da428099f04be64aaacd4814d8e256ce110e27fbb1abf0e7bd2f0cfc7d
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-version-changelog-markdown/references/breaking.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:cbf7c70c9edc4b3ca4dc4f45e64a9071a9e51d9e466615f3f451707fe9f8e32e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-version-changelog-markdown/references/classification.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:2cb1c4456853026f9b5bab3614137c449a941e926c585e0184ac3dce675d9d6b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-version-changelog-markdown/references/examples.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c92edfa544f46d291bbb46a47599614cead2707fbf981b767129075dfbf926c9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-version-changelog-markdown/references/naming.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:d099b39823566f17aded97e168cbcafe3fb34f7d883d3e61b2f573f7def12088
+- kind: project-relative
+  target: claude
+  value: .claude/skills/generate-version-changelog-markdown/references/writing.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:aab0820b0223143c5700ba423cc1d8f851938c68ccc6ba70281bc2d1e2845a87
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8cca20a3129ef8f424721d980be73f648b52656f34a480a22af1f3eae73cee83
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix/scripts/branch-context.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b1bb3a81895a0f763dacf66c078a2b4452d6abce3af5e0c757db97879f79594f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix/scripts/lib/a11y.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:1a6cbfe49d18481ca0d84dd03e1a5d7838860e1e4633677a5ad9f40a3d47fcfb
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix/scripts/lib/capture.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:3d605530d0af6dadf82c866d3d2e7e52dd616c6332aa11a34e0624c3776edf3a
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix/scripts/lib/storybook.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:f219550af5f5c0888b50865b79f032dfdb5bfc4c29342855d3a0d6ed6ad6217c
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix/scripts/prove.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:90b2bcbdfb09d9b6bf3d3a2f52f7afd1d3505cf38a81db166ce8d2c87b50a0b3
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix/scripts/regression-check.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c46ade835b6e405b63eb353f02a3c80507e085a0234ac98a97830d153a908719
+- kind: project-relative
+  target: claude
+  value: .claude/skills/release
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/release/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:e8bba88c7078d78cc394f0ac68fd67341cc338588f220205eb5eacda043ddc28
+- kind: project-relative
+  target: claude
+  value: .claude/skills/release/scripts/new-inputs.sh
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:983cc2e1c193267d15f70d49258eaa6ba2e809ae1c4cee8bf673abf59573f893
+- kind: project-relative
+  target: claude
+  value: .claude/skills/update-components-changelog
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/update-components-changelog/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:971c3dcdfa5f190f25cf17e105e099a76c13335b955823f2008613f98d245592
+- kind: project-relative
+  target: claude
+  value: .claude/skills/update-deprecated-doc
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/update-deprecated-doc/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:058ac806f85d1a20f09fd542c5c038c42de5258993f90d540e672526763461a0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/update-deprecated-doc/scripts/components.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:a137a939507488be6b64c3765ec6caad17234a18797132274f76295f7f0f12a0
+- kind: project-relative
+  target: claude
+  value: .claude/skills/update-deprecated-doc/scripts/generate.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:14bb1fe32c053946dcd48700d7d41c5166fda1584375281f2f94bea720329126
+- kind: project-relative
+  target: claude
+  value: .claude/skills/update-deprecated-doc/scripts/links.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:83731d537d9ec7959551a5b032ae2f8192f4fdba5ecced07ebd32e77d6d4cc3b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/update-deprecated-doc/scripts/nom.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c717cb123176824db64d932d609ab96c81e9c1e6011bb6c3e22ddaa0b3ff9a04
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/analyze-bug-report
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/analyze-bug-report/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:aa92745b7bd0571db80d452d566d8b7bad670eb7310c9db64e28aad279bd89e8
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/audit-pr
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/audit-pr/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:3dc1084a667ec4589c61df3c49443f7046210ea733c3bba23538548eb5b5a5e4
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/create-feature-issue
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/create-feature-issue/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:5c0678f453811777c20b061dddc1378d6b627c3ac9ea9ea5048380d7cdb12299
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/draft-component-api
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/draft-component-api/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:a205c55290f8240eb15597ca7ce0654da3d3cdad74d2e34b125ff918545495fb
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-e2e-test
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-e2e-test/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:a2b9936f4418219e213f081842da10d192b1a29e90ee7e75b58276a04a78d752
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-story
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-story-qa
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-story-qa/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:719043bf6135454235e673a4afd2e7b1eed1ba3924cf76af7cd340b5e1111ee5
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-story/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:7833d627812cb886ddd1c374a6fd711e64dcbc51fe4e0bd9b0d96ce9fae55451
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-test
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-test/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:634c59e99f9c001c665b722a520d7578e0a1a833f921eef6160c48b2f69526c7
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-version-changelog-markdown
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-version-changelog-markdown/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b8b896da428099f04be64aaacd4814d8e256ce110e27fbb1abf0e7bd2f0cfc7d
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-version-changelog-markdown/references/breaking.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:cbf7c70c9edc4b3ca4dc4f45e64a9071a9e51d9e466615f3f451707fe9f8e32e
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-version-changelog-markdown/references/classification.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:2cb1c4456853026f9b5bab3614137c449a941e926c585e0184ac3dce675d9d6b
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-version-changelog-markdown/references/examples.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c92edfa544f46d291bbb46a47599614cead2707fbf981b767129075dfbf926c9
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-version-changelog-markdown/references/naming.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:d099b39823566f17aded97e168cbcafe3fb34f7d883d3e61b2f573f7def12088
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/generate-version-changelog-markdown/references/writing.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:aab0820b0223143c5700ba423cc1d8f851938c68ccc6ba70281bc2d1e2845a87
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8cca20a3129ef8f424721d980be73f648b52656f34a480a22af1f3eae73cee83
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix/scripts/branch-context.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b1bb3a81895a0f763dacf66c078a2b4452d6abce3af5e0c757db97879f79594f
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix/scripts/lib/a11y.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:1a6cbfe49d18481ca0d84dd03e1a5d7838860e1e4633677a5ad9f40a3d47fcfb
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix/scripts/lib/capture.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:3d605530d0af6dadf82c866d3d2e7e52dd616c6332aa11a34e0624c3776edf3a
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix/scripts/lib/storybook.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:f219550af5f5c0888b50865b79f032dfdb5bfc4c29342855d3a0d6ed6ad6217c
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix/scripts/prove.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:90b2bcbdfb09d9b6bf3d3a2f52f7afd1d3505cf38a81db166ce8d2c87b50a0b3
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix/scripts/regression-check.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c46ade835b6e405b63eb353f02a3c80507e085a0234ac98a97830d153a908719
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/release
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/release/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:e8bba88c7078d78cc394f0ac68fd67341cc338588f220205eb5eacda043ddc28
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/release/scripts/new-inputs.sh
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:983cc2e1c193267d15f70d49258eaa6ba2e809ae1c4cee8bf673abf59573f893
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/update-components-changelog
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/update-components-changelog/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:971c3dcdfa5f190f25cf17e105e099a76c13335b955823f2008613f98d245592
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/update-deprecated-doc
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/update-deprecated-doc/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:058ac806f85d1a20f09fd542c5c038c42de5258993f90d540e672526763461a0
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/update-deprecated-doc/scripts/components.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:a137a939507488be6b64c3765ec6caad17234a18797132274f76295f7f0f12a0
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/update-deprecated-doc/scripts/generate.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:14bb1fe32c053946dcd48700d7d41c5166fda1584375281f2f94bea720329126
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/update-deprecated-doc/scripts/links.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:83731d537d9ec7959551a5b032ae2f8192f4fdba5ecced07ebd32e77d6d4cc3b
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/update-deprecated-doc/scripts/nom.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c717cb123176824db64d932d609ab96c81e9c1e6011bb6c3e22ddaa0b3ff9a04
+- kind: project-relative
+  target: copilot
+  value: .github/instructions/scss.instructions.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:f2e4f1daf0d679f5819229ed1d02fcb3bb32da3de23d16909fca6e4449e2e2a4
+local_deployed_files:
+- .agents/skills/analyze-bug-report
+- .agents/skills/analyze-bug-report/SKILL.md
+- .agents/skills/audit-pr
+- .agents/skills/audit-pr/SKILL.md
+- .agents/skills/create-feature-issue
+- .agents/skills/create-feature-issue/SKILL.md
+- .agents/skills/draft-component-api
+- .agents/skills/draft-component-api/SKILL.md
+- .agents/skills/generate-e2e-test
+- .agents/skills/generate-e2e-test/SKILL.md
+- .agents/skills/generate-story
+- .agents/skills/generate-story-qa
+- .agents/skills/generate-story-qa/SKILL.md
+- .agents/skills/generate-story/SKILL.md
+- .agents/skills/generate-test
+- .agents/skills/generate-test/SKILL.md
+- .agents/skills/generate-version-changelog-markdown
+- .agents/skills/generate-version-changelog-markdown/SKILL.md
+- .agents/skills/generate-version-changelog-markdown/references/breaking.md
+- .agents/skills/generate-version-changelog-markdown/references/classification.md
+- .agents/skills/generate-version-changelog-markdown/references/examples.md
+- .agents/skills/generate-version-changelog-markdown/references/naming.md
+- .agents/skills/generate-version-changelog-markdown/references/writing.md
+- .agents/skills/recette-pr-fix
+- .agents/skills/recette-pr-fix/SKILL.md
+- .agents/skills/recette-pr-fix/scripts/branch-context.mjs
+- .agents/skills/recette-pr-fix/scripts/lib/a11y.mjs
+- .agents/skills/recette-pr-fix/scripts/lib/capture.mjs
+- .agents/skills/recette-pr-fix/scripts/lib/storybook.mjs
+- .agents/skills/recette-pr-fix/scripts/prove.mjs
+- .agents/skills/recette-pr-fix/scripts/regression-check.mjs
+- .agents/skills/release
+- .agents/skills/release/SKILL.md
+- .agents/skills/release/scripts/new-inputs.sh
+- .agents/skills/update-components-changelog
+- .agents/skills/update-components-changelog/SKILL.md
+- .agents/skills/update-deprecated-doc
+- .agents/skills/update-deprecated-doc/SKILL.md
+- .agents/skills/update-deprecated-doc/scripts/components.mjs
+- .agents/skills/update-deprecated-doc/scripts/generate.mjs
+- .agents/skills/update-deprecated-doc/scripts/links.mjs
+- .agents/skills/update-deprecated-doc/scripts/nom.mjs
+- .claude/rules/scss.md
+- .claude/skills/analyze-bug-report
+- .claude/skills/analyze-bug-report/SKILL.md
+- .claude/skills/audit-pr
+- .claude/skills/audit-pr/SKILL.md
+- .claude/skills/create-feature-issue
+- .claude/skills/create-feature-issue/SKILL.md
+- .claude/skills/draft-component-api
+- .claude/skills/draft-component-api/SKILL.md
+- .claude/skills/generate-e2e-test
+- .claude/skills/generate-e2e-test/SKILL.md
+- .claude/skills/generate-story
+- .claude/skills/generate-story-qa
+- .claude/skills/generate-story-qa/SKILL.md
+- .claude/skills/generate-story/SKILL.md
+- .claude/skills/generate-test
+- .claude/skills/generate-test/SKILL.md
+- .claude/skills/generate-version-changelog-markdown
+- .claude/skills/generate-version-changelog-markdown/SKILL.md
+- .claude/skills/generate-version-changelog-markdown/references/breaking.md
+- .claude/skills/generate-version-changelog-markdown/references/classification.md
+- .claude/skills/generate-version-changelog-markdown/references/examples.md
+- .claude/skills/generate-version-changelog-markdown/references/naming.md
+- .claude/skills/generate-version-changelog-markdown/references/writing.md
+- .claude/skills/recette-pr-fix
+- .claude/skills/recette-pr-fix/SKILL.md
+- .claude/skills/recette-pr-fix/scripts/branch-context.mjs
+- .claude/skills/recette-pr-fix/scripts/lib/a11y.mjs
+- .claude/skills/recette-pr-fix/scripts/lib/capture.mjs
+- .claude/skills/recette-pr-fix/scripts/lib/storybook.mjs
+- .claude/skills/recette-pr-fix/scripts/prove.mjs
+- .claude/skills/recette-pr-fix/scripts/regression-check.mjs
+- .claude/skills/release
+- .claude/skills/release/SKILL.md
+- .claude/skills/release/scripts/new-inputs.sh
+- .claude/skills/update-components-changelog
+- .claude/skills/update-components-changelog/SKILL.md
+- .claude/skills/update-deprecated-doc
+- .claude/skills/update-deprecated-doc/SKILL.md
+- .claude/skills/update-deprecated-doc/scripts/components.mjs
+- .claude/skills/update-deprecated-doc/scripts/generate.mjs
+- .claude/skills/update-deprecated-doc/scripts/links.mjs
+- .claude/skills/update-deprecated-doc/scripts/nom.mjs
+- .github/instructions/scss.instructions.md
+local_deployed_file_hashes:
+  .agents/skills/analyze-bug-report/SKILL.md: sha256:aa92745b7bd0571db80d452d566d8b7bad670eb7310c9db64e28aad279bd89e8
+  .agents/skills/audit-pr/SKILL.md: sha256:3dc1084a667ec4589c61df3c49443f7046210ea733c3bba23538548eb5b5a5e4
+  .agents/skills/create-feature-issue/SKILL.md: sha256:5c0678f453811777c20b061dddc1378d6b627c3ac9ea9ea5048380d7cdb12299
+  .agents/skills/draft-component-api/SKILL.md: sha256:a205c55290f8240eb15597ca7ce0654da3d3cdad74d2e34b125ff918545495fb
+  .agents/skills/generate-e2e-test/SKILL.md: sha256:a2b9936f4418219e213f081842da10d192b1a29e90ee7e75b58276a04a78d752
+  .agents/skills/generate-story-qa/SKILL.md: sha256:719043bf6135454235e673a4afd2e7b1eed1ba3924cf76af7cd340b5e1111ee5
+  .agents/skills/generate-story/SKILL.md: sha256:7833d627812cb886ddd1c374a6fd711e64dcbc51fe4e0bd9b0d96ce9fae55451
+  .agents/skills/generate-test/SKILL.md: sha256:634c59e99f9c001c665b722a520d7578e0a1a833f921eef6160c48b2f69526c7
+  .agents/skills/generate-version-changelog-markdown/SKILL.md: sha256:b8b896da428099f04be64aaacd4814d8e256ce110e27fbb1abf0e7bd2f0cfc7d
+  .agents/skills/generate-version-changelog-markdown/references/breaking.md: sha256:cbf7c70c9edc4b3ca4dc4f45e64a9071a9e51d9e466615f3f451707fe9f8e32e
+  .agents/skills/generate-version-changelog-markdown/references/classification.md: sha256:2cb1c4456853026f9b5bab3614137c449a941e926c585e0184ac3dce675d9d6b
+  .agents/skills/generate-version-changelog-markdown/references/examples.md: sha256:c92edfa544f46d291bbb46a47599614cead2707fbf981b767129075dfbf926c9
+  .agents/skills/generate-version-changelog-markdown/references/naming.md: sha256:d099b39823566f17aded97e168cbcafe3fb34f7d883d3e61b2f573f7def12088
+  .agents/skills/generate-version-changelog-markdown/references/writing.md: sha256:aab0820b0223143c5700ba423cc1d8f851938c68ccc6ba70281bc2d1e2845a87
+  .agents/skills/recette-pr-fix/SKILL.md: sha256:8cca20a3129ef8f424721d980be73f648b52656f34a480a22af1f3eae73cee83
+  .agents/skills/recette-pr-fix/scripts/branch-context.mjs: sha256:b1bb3a81895a0f763dacf66c078a2b4452d6abce3af5e0c757db97879f79594f
+  .agents/skills/recette-pr-fix/scripts/lib/a11y.mjs: sha256:1a6cbfe49d18481ca0d84dd03e1a5d7838860e1e4633677a5ad9f40a3d47fcfb
+  .agents/skills/recette-pr-fix/scripts/lib/capture.mjs: sha256:3d605530d0af6dadf82c866d3d2e7e52dd616c6332aa11a34e0624c3776edf3a
+  .agents/skills/recette-pr-fix/scripts/lib/storybook.mjs: sha256:f219550af5f5c0888b50865b79f032dfdb5bfc4c29342855d3a0d6ed6ad6217c
+  .agents/skills/recette-pr-fix/scripts/prove.mjs: sha256:90b2bcbdfb09d9b6bf3d3a2f52f7afd1d3505cf38a81db166ce8d2c87b50a0b3
+  .agents/skills/recette-pr-fix/scripts/regression-check.mjs: sha256:c46ade835b6e405b63eb353f02a3c80507e085a0234ac98a97830d153a908719
+  .agents/skills/release/SKILL.md: sha256:e8bba88c7078d78cc394f0ac68fd67341cc338588f220205eb5eacda043ddc28
+  .agents/skills/release/scripts/new-inputs.sh: sha256:983cc2e1c193267d15f70d49258eaa6ba2e809ae1c4cee8bf673abf59573f893
+  .agents/skills/update-components-changelog/SKILL.md: sha256:971c3dcdfa5f190f25cf17e105e099a76c13335b955823f2008613f98d245592
+  .agents/skills/update-deprecated-doc/SKILL.md: sha256:058ac806f85d1a20f09fd542c5c038c42de5258993f90d540e672526763461a0
+  .agents/skills/update-deprecated-doc/scripts/components.mjs: sha256:a137a939507488be6b64c3765ec6caad17234a18797132274f76295f7f0f12a0
+  .agents/skills/update-deprecated-doc/scripts/generate.mjs: sha256:14bb1fe32c053946dcd48700d7d41c5166fda1584375281f2f94bea720329126
+  .agents/skills/update-deprecated-doc/scripts/links.mjs: sha256:83731d537d9ec7959551a5b032ae2f8192f4fdba5ecced07ebd32e77d6d4cc3b
+  .agents/skills/update-deprecated-doc/scripts/nom.mjs: sha256:c717cb123176824db64d932d609ab96c81e9c1e6011bb6c3e22ddaa0b3ff9a04
+  .claude/rules/scss.md: sha256:b69b0fa1cd3ecd28dbd5c0b54313c925e6c4e15b097d0481d1d065e287d58eb9
+  .claude/skills/analyze-bug-report/SKILL.md: sha256:aa92745b7bd0571db80d452d566d8b7bad670eb7310c9db64e28aad279bd89e8
+  .claude/skills/audit-pr/SKILL.md: sha256:3dc1084a667ec4589c61df3c49443f7046210ea733c3bba23538548eb5b5a5e4
+  .claude/skills/create-feature-issue/SKILL.md: sha256:5c0678f453811777c20b061dddc1378d6b627c3ac9ea9ea5048380d7cdb12299
+  .claude/skills/draft-component-api/SKILL.md: sha256:a205c55290f8240eb15597ca7ce0654da3d3cdad74d2e34b125ff918545495fb
+  .claude/skills/generate-e2e-test/SKILL.md: sha256:a2b9936f4418219e213f081842da10d192b1a29e90ee7e75b58276a04a78d752
+  .claude/skills/generate-story-qa/SKILL.md: sha256:719043bf6135454235e673a4afd2e7b1eed1ba3924cf76af7cd340b5e1111ee5
+  .claude/skills/generate-story/SKILL.md: sha256:7833d627812cb886ddd1c374a6fd711e64dcbc51fe4e0bd9b0d96ce9fae55451
+  .claude/skills/generate-test/SKILL.md: sha256:634c59e99f9c001c665b722a520d7578e0a1a833f921eef6160c48b2f69526c7
+  .claude/skills/generate-version-changelog-markdown/SKILL.md: sha256:b8b896da428099f04be64aaacd4814d8e256ce110e27fbb1abf0e7bd2f0cfc7d
+  .claude/skills/generate-version-changelog-markdown/references/breaking.md: sha256:cbf7c70c9edc4b3ca4dc4f45e64a9071a9e51d9e466615f3f451707fe9f8e32e
+  .claude/skills/generate-version-changelog-markdown/references/classification.md: sha256:2cb1c4456853026f9b5bab3614137c449a941e926c585e0184ac3dce675d9d6b
+  .claude/skills/generate-version-changelog-markdown/references/examples.md: sha256:c92edfa544f46d291bbb46a47599614cead2707fbf981b767129075dfbf926c9
+  .claude/skills/generate-version-changelog-markdown/references/naming.md: sha256:d099b39823566f17aded97e168cbcafe3fb34f7d883d3e61b2f573f7def12088
+  .claude/skills/generate-version-changelog-markdown/references/writing.md: sha256:aab0820b0223143c5700ba423cc1d8f851938c68ccc6ba70281bc2d1e2845a87
+  .claude/skills/recette-pr-fix/SKILL.md: sha256:8cca20a3129ef8f424721d980be73f648b52656f34a480a22af1f3eae73cee83
+  .claude/skills/recette-pr-fix/scripts/branch-context.mjs: sha256:b1bb3a81895a0f763dacf66c078a2b4452d6abce3af5e0c757db97879f79594f
+  .claude/skills/recette-pr-fix/scripts/lib/a11y.mjs: sha256:1a6cbfe49d18481ca0d84dd03e1a5d7838860e1e4633677a5ad9f40a3d47fcfb
+  .claude/skills/recette-pr-fix/scripts/lib/capture.mjs: sha256:3d605530d0af6dadf82c866d3d2e7e52dd616c6332aa11a34e0624c3776edf3a
+  .claude/skills/recette-pr-fix/scripts/lib/storybook.mjs: sha256:f219550af5f5c0888b50865b79f032dfdb5bfc4c29342855d3a0d6ed6ad6217c
+  .claude/skills/recette-pr-fix/scripts/prove.mjs: sha256:90b2bcbdfb09d9b6bf3d3a2f52f7afd1d3505cf38a81db166ce8d2c87b50a0b3
+  .claude/skills/recette-pr-fix/scripts/regression-check.mjs: sha256:c46ade835b6e405b63eb353f02a3c80507e085a0234ac98a97830d153a908719
+  .claude/skills/release/SKILL.md: sha256:e8bba88c7078d78cc394f0ac68fd67341cc338588f220205eb5eacda043ddc28
+  .claude/skills/release/scripts/new-inputs.sh: sha256:983cc2e1c193267d15f70d49258eaa6ba2e809ae1c4cee8bf673abf59573f893
+  .claude/skills/update-components-changelog/SKILL.md: sha256:971c3dcdfa5f190f25cf17e105e099a76c13335b955823f2008613f98d245592
+  .claude/skills/update-deprecated-doc/SKILL.md: sha256:058ac806f85d1a20f09fd542c5c038c42de5258993f90d540e672526763461a0
+  .claude/skills/update-deprecated-doc/scripts/components.mjs: sha256:a137a939507488be6b64c3765ec6caad17234a18797132274f76295f7f0f12a0
+  .claude/skills/update-deprecated-doc/scripts/generate.mjs: sha256:14bb1fe32c053946dcd48700d7d41c5166fda1584375281f2f94bea720329126
+  .claude/skills/update-deprecated-doc/scripts/links.mjs: sha256:83731d537d9ec7959551a5b032ae2f8192f4fdba5ecced07ebd32e77d6d4cc3b
+  .claude/skills/update-deprecated-doc/scripts/nom.mjs: sha256:c717cb123176824db64d932d609ab96c81e9c1e6011bb6c3e22ddaa0b3ff9a04
+  .github/instructions/scss.instructions.md: sha256:f2e4f1daf0d679f5819229ed1d02fcb3bb32da3de23d16909fca6e4449e2e2a4

@@ -1,0 +1,4 @@
+name: lucca-front
+version: 1.0.0
+description: Reads the documentation shipped with the installed @lucca-front/ng before writing code with Lucca Front components
+author: Prisme
