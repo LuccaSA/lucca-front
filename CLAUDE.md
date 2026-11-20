@@ -97,10 +97,11 @@ Attentes détaillées côté relecture : [contributing.md](contributing.md#pull-
 ## Docs & skills
 
 - `docs/*.md` — documents de conception internes de certains composants.
-- **Où ranger un skill** — selon qui s'en sert :
-  - `.claude/skills/` — outillage de l'équipe Prisme dans Claude Code (recette, stories, tests, release). C'est le seul dossier que Claude Code charge.
-  - `.github/skills/` — les skills des projets consommateurs, qu'ils installent avec APM depuis ce chemin.
-- **Où ranger une règle du repo** (convention de code que Claude doit suivre en écrivant et que la relecture Copilot doit appliquer) : `.apm/instructions/<sujet>.instructions.md`, avec un `applyTo` qui borne les fichiers visés. `apm install` la déploie dans `.claude/rules/` et `.github/instructions/` ; ces deux copies sont commitées et ne s'éditent pas à la main. Après toute modification sous `.apm/`, relancer `apm install` (CLI : `brew install apm`) et commiter le diff ; le job CI `APM audit` échoue sinon. Le repo étant public, `apm.yml` ne déclare aucune dépendance vers un dépôt privé.
+- **Où ranger un skill** — selon qui le lance :
+  - Un contributeur de Lucca Front, dans ce repo (recette, stories, tests, release) : `.apm/skills/<nom>/`.
+  - Un développeur d'application, dans son projet (migrations, APIs dépréciées) : `.github/skills/<nom>/`. Les projets l'installent avec APM depuis ce chemin.
+- **Où ranger une règle du repo** (convention de code que Claude doit suivre en écrivant et que la relecture Copilot doit appliquer) : `.apm/instructions/<sujet>.instructions.md`, avec un `applyTo` qui borne les fichiers visés.
+- **`.apm/` est la seule source** des skills et des règles internes au repo. `apm install` les déploie dans `.claude/skills/`, `.claude/rules/` et `.github/instructions/` : ces copies sont commitées et ne s'éditent pas à la main (`.agents/`, la copie pour Copilot, est ignorée par git). Après toute modification sous `.apm/`, relancer `apm install` (CLI : `brew install apm`) et commiter le diff ; le job CI `APM audit` échoue sinon. Le repo étant public, `apm.yml` ne déclare aucune dépendance vers un dépôt privé.
 - `.github/skills/lucca-front/` — skill agent du Design System, écrite à la main, que les projets consommateurs installent avec APM : un pointeur vers la documentation livrée dans `@lucca-front/ng` (`node_modules/@lucca-front/ng/llms.txt`). Cette documentation est générée depuis `scripts/generate-skills/` dans `.github/skills/_lucca-front/llms/`, et régénérée par le hook pre-commit à chaque commit qui touche le code (`npm run skills:update`) (avec les métadonnées du générateur dans `.github/skills/_lucca-front/`), puis copiée dans le package par `scripts/llms-skill`. Les autres dossiers de `.github/skills/` sont écrits à la main.
 - La référence du Design System vit sur zeroheight (Prisme).
 - **Scripts de skills** — tout script embarqué ou appelé par un skill est écrit en **Node** (JS/TS), en **C#/.NET** ou en **shell** — jamais en Python ou autre langage, pour garder une cohérence globale entre les dépôts.

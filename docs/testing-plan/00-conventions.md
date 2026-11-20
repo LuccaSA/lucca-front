@@ -84,7 +84,7 @@ Rules for Jest specs:
 Reference examples to read before writing anything:
 `stories/e2e/_sample/basic.stories.ts`, `stories/e2e/simple-select/simple-select.stories.ts` and
 `stories/helpers/stories.ts` / `stories/helpers/test.ts`. The full convention is in the
-`generate-e2e-test` skill (`.claude/skills/generate-e2e-test/SKILL.md`).
+`generate-e2e-test` skill (`.apm/skills/generate-e2e-test/SKILL.md`).
 
 - Test stories go in `stories/e2e/<component>/`, **never** in `stories/documentation/` or
   `stories/qa/`. The e2e file imports the meta and stories of the documentation file

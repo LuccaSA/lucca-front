@@ -12,4 +12,5 @@ stories/documentation/icons-list.ts linguist-generated
 
 # Déployés par `apm install` depuis .apm/ : ne pas éditer à la main.
 .claude/rules/** linguist-generated
+.claude/skills/** linguist-generated
 .github/instructions/** linguist-generated
