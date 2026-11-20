@@ -19,6 +19,9 @@ import { LU_OPTION_TRANSLATIONS } from './option.translate';
 	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, NgTemplateOutlet, ListboxOptionComponent],
+	host: {
+		class: 'selectOption',
+	},
 })
 export class LuOptionComponent<T> implements OnInit {
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
