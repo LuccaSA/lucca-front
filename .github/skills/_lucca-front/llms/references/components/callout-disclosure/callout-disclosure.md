@@ -49,7 +49,7 @@ import { CalloutDisclosureComponent } from '@lucca-front/ng/callout';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 601 available values
 
 ## Related files
 

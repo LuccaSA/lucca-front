@@ -41,7 +41,7 @@ import { TagComponent } from '@lucca-front/ng/tag';
 ## Type definitions
 
 - [`DecorativePalette`](../../types/DecorativePalette.md) — 12 available values
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 601 available values
 
 ## Related files
 
