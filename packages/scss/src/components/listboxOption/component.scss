@@ -89,12 +89,6 @@
 			transition: all var(--commons-animations-durations-fast) ease;
 		}
 
-		.listboxOption-content-treeActions-action-icon {
-			fill: var(--palettes-neutral-800);
-			inline-size: 1.4rem;
-			block-size: 1.4rem;
-		}
-
 		.listboxOption-content-treeActions-action-icon .lucca-icon::before {
 			background:
 				linear-gradient(

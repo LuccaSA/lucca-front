@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, Injector, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
 import { intlInputOptions, isNil, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn } from 'rxjs';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../panel/panel.instance';
@@ -18,7 +19,7 @@ import { LU_OPTION_TRANSLATIONS } from './option.translate';
 	templateUrl: './option.component.html',
 	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, NgTemplateOutlet, ListboxOptionComponent],
+	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, NgTemplateOutlet, ListboxOptionComponent, IconComponent],
 	host: {
 		class: 'selectOption',
 	},
