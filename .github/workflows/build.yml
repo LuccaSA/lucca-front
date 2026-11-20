@@ -39,8 +39,9 @@ jobs:
       - run: npm install
       - run: npm run skills:check
   apm:
-    # Fails when .claude/rules/ or .github/instructions/ no longer match .apm/ (a deployed file edited by hand,
-    # or a source edited without `apm install`). apm.yml declares no dependency, so the audit needs no token.
+    # Fails when a file of .claude/skills/, .claude/rules/ or .github/instructions/ does not come from .apm/ (edited or
+    # written by hand, or a source edited without `apm install`), or when a skill of .github/skills/ would not install in an application.
+    # apm.yml declares no dependency, so the job needs no token.
     name: APM audit
     runs-on: ubuntu-latest
     steps:
@@ -50,3 +51,7 @@ jobs:
           setup-only: true
           apm-version: 0.36.1
       - run: apm audit --ci
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: 24.22.2
+      - run: node scripts/check-skills-layout.mjs
