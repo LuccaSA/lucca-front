@@ -20,7 +20,7 @@ import {
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
-import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
+import { LuCoreSelectEstablishmentsDirective, LuCoreSelectPublicEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
@@ -482,6 +482,23 @@ export const Establishment = generateStory({
 	},
 });
 
+export const PublicEstablishment = generateStory({
+	name: 'Public Establishment Select',
+	description: 'Pour saisir des établissements depuis l’API publique Lucca, il suffit d’utiliser la directive `publicEstablishments`. Ils sont groupés par entité légale quand il y en a plusieurs.',
+	template: `<lu-multi-select
+	publicEstablishments
+	[(ngModel)]="selectedEstablishments"
+/>
+<pr-story-model-display>{{ selectedEstablishments | json }}</pr-story-model-display>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectPublicEstablishmentsDirective'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
 export const EstablishmentCustomUrl = generateStory({
 	name: 'Establishment Select with custom url',
 	description: 'Une `url` personnalisée qui ignore `legalUnitId` : « Tout sélectionner » sur une unité légale ne doit cocher que ses établissements.',
@@ -902,6 +919,7 @@ const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasI
 				LuCoreSelectApiV4Directive,
 				LuCoreSelectTotalCountDirective,
 				LuCoreSelectEstablishmentsDirective,
+				LuCoreSelectPublicEstablishmentsDirective,
 				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
