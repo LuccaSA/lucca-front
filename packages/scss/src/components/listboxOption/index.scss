@@ -212,6 +212,14 @@
 
 .listboxOption-content-treeActions-action {
 	@layer mods {
+		&.mod-parent {
+			@include treeActionParent;
+		}
+
+		&.mod-children {
+			@include treeActionChildren;
+		}
+
 		&:hover {
 			@include treeActionHover;
 		}

@@ -28,7 +28,7 @@
 	@if (hasChildren() && !selectableItem.disabled) {
 		<div class="listboxOption-content-treeActions">
 			<span
-				class="listboxOption-content-treeActions-action parentOnly"
+				class="listboxOption-content-treeActions-action mod-parent parentOnly"
 				(click)="$event.stopPropagation(); onlyParent.emit()"
 				[luTooltip]="intl().onlyParent"
 				luTooltipOnlyForDisplay
@@ -52,7 +52,7 @@
 				<span class="pr-u-mask">{{ intl().onlyParent }}</span>
 			</span>
 			<span
-				class="listboxOption-content-treeActions-action childrenOnly"
+				class="listboxOption-content-treeActions-action mod-children childrenOnly"
 				(click)="$event.stopPropagation(); onlyChildren.emit()"
 				[luTooltip]="intl().onlyChildren"
 				luTooltipOnlyForDisplay

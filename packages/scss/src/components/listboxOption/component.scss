@@ -95,6 +95,19 @@
 			block-size: 1.4rem;
 		}
 
+		.listboxOption-content-treeActions-action-icon .lucca-icon::before {
+			background:
+				linear-gradient(
+					to bottom,
+					var(--components-listboxOption-content-treeActions-action-icon-colorParent) 0%,
+					var(--components-listboxOption-content-treeActions-action-icon-colorParent) 40%,
+					var(--components-listboxOption-content-treeActions-action-icon-colorChildren) 40%,
+					var(--components-listboxOption-content-treeActions-action-icon-colorChildren) 100%
+				);
+			background-clip: text;
+			color: transparent;
+		}
+
 		.listboxOption-content-checkboxField.checkboxField {
 			margin-block-start: var(--pr-t-spacings-25);
 			display: var(--components-listboxOption-content-checkboxField-display);
