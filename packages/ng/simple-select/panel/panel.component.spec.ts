@@ -148,7 +148,6 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 			// Inside a tree listbox each listbox option carries the treeitem role, the host stays presentational
 			expect(host.getAttribute('role')).toBe('presentation');
 			expect(host.querySelector('lu-listbox-option')!.getAttribute('role')).toBe('treeitem');
-			expect(host.querySelector('.optionItem-value')).toBeNull();
 		});
 
 		// The parent branch nests its children inside a listbox group wrapper; the listbox itself

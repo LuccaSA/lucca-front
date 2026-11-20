@@ -84,7 +84,7 @@ import { BoxDisclosureComponent, BoxComponent } from '@lucca-front/ng/box';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 601 available values
 
 ## Related files
 

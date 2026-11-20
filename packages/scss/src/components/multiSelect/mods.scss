@@ -67,19 +67,6 @@
 			margin-inline-start: auto;
 		}
 	}
-
-	.lu-picker-content {
-		animation: none;
-		box-shadow: none;
-		border-radius: 0;
-		background-color: transparent;
-		padding: var(--pr-t-spacings-50);
-		margin: var(--pr-t-spacings-75) calc(var(--pr-t-spacings-100) * -1) calc(var(--pr-t-spacings-100) * -1);
-
-		lu-simple-select-default-option.pr-u-ellipsis {
-			white-space: normal !important;
-		}
-	}
 }
 
 @mixin select {
@@ -100,13 +87,10 @@
 	// either the tree's onlyParent/onlyChildren buttons or a group's « select all » link: inside a
 	// sheet both are shown for good. The tree buttons also leave their absolute position on the way,
 	// so that being there all the time shortens the option's label instead of covering it.
-	.optionItem-icons {
-		position: static;
-		opacity: 1;
-	}
-
 	.listboxOption-content {
 		--components-listboxOption-content-link-opacity: 1;
+		--components-listboxOption-content-treeActions-opacity: 1;
+		--components-listboxOption-content-treeActions-position: static;
 	}
 }
 
