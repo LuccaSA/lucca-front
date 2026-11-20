@@ -57,6 +57,7 @@ Directory of the names shared across components. Before naming a new input, chec
 | `inlineMessage`      | `PortalContent`                | Adds descriptive text (help, error, etc.) below the form field.                                                                                                       | `helper`, `message`            |
 | `inlineMessageState` | `InlineMessageState`           | Changes the state of the inline message.                                                                                                                              | `messageState`                 |
 | `mixed`              | `boolean`                      | Applies a mixed (indeterminate) selection state (-) to the checkbox.                                                                                                  | `indeterminate`                |
+| `checkbox`           | `boolean`                      | Displays a checkbox in the `<component>`, even outside a multiple selection.                                                                                          | `selected`, `withCheckbox`     |
 | `presentation`       | `boolean`                      | Turns the form field into non-editable text.                                                                                                                          | `readonly` (native attribute)  |
 
 ### Tables

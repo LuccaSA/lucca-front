@@ -31,6 +31,7 @@ export class Treeitem {}
 		'[class.is-disabled]': 'disabled()',
 		'[class.mod-add]': 'add()',
 		'[class.mod-select]': 'select()',
+		'[class.mod-checkbox]': 'checkbox()',
 	},
 	imports: [IconComponent],
 	providers: [{ provide: OPTION_INSTANCE, useExisting: forwardRef(() => OptionComponent) }],
@@ -64,6 +65,11 @@ export class OptionComponent {
 	readonly select = input(false, { transform: luBooleanAttribute });
 
 	readonly selectAll = input<'string' | null>();
+
+	/**
+	 * Displays a checkbox in the option, even outside a multiple listbox.
+	 */
+	readonly checkbox = input(false, { transform: luBooleanAttribute });
 
 	readonly multiple = computed(() => this.#listboxRef?.multiple() ?? false);
 	readonly tree = computed(() => this.#listboxRef?.tree() ?? false);

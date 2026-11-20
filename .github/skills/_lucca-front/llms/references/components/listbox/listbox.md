@@ -56,6 +56,7 @@ import { ListboxComponent, Treeitem, OptionComponent } from '@lucca-front/ng/lis
 | `groupId` | `groupId` | `string \| null` | `null` | — | — | — |
 | `select` | `select` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `selectAll` | `selectAll` | `'string' \| null` | — | — | — | — |
+| `checkbox` | `checkbox` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `treeitemLevel` | `treeitemLevel` | `number \| null` | `null` | — | — | — |
 
 ### Injection tokens

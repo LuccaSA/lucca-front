@@ -3,6 +3,7 @@ import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-inter
 import { FormsModule } from '@angular/forms';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
+import { OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
 
 export interface FormerEmployeesContext {
@@ -14,19 +15,12 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 @Component({
 	selector: 'lu-core-select-former-employees',
 	styleUrl: './former-employees.component.scss',
-	imports: [FormsModule],
+	imports: [FormsModule, ListboxOptionComponent],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	template: `
-		<!-- Rendered as a listbox option but not exposed as one: the checkbox is purely visual -->
-		<div class="listboxOption mod-checkbox" [class.is-selected]="context.includeFormerEmployees()">
-			<div class="listboxOption-content" [class.is-hovered]="selectableItem.isHighlighted()" (mousedown)="onMouseDown($event)">
-				<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
-					<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
-					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
-				</span>
-				<span class="listboxOption-content-value">{{ intl().includeFormerEmployees }}</span>
-			</div>
-		</div>
+		<lu-listbox-option checkbox [checked]="context.includeFormerEmployees()" [hovered]="selectableItem.isHighlighted()" [elementId]="selectableItem.idAttribute()" (mousedown)="onMouseDown($event)">
+			<span class="listboxOption-content-value">{{ intl().includeFormerEmployees }}</span>
+		</lu-listbox-option>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
