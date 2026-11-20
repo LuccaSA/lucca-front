@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, contentChild, Directive, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, Directive, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LISTBOX_INSTANCE, OPTION_INSTANCE } from '../tokens';
@@ -27,6 +27,8 @@ export class Treeitem {}
 		// The empty status option is the target of the listbox `aria-describedby`, so it must
 		// carry the listbox id even though no consumer sets an elementId on it.
 		'[attr.id]': 'empty() ? id() : elementId()',
+		'[class.mod-collapsible]': 'collapsible()',
+		'[class.is-expanded]': 'collapsible() && expanded()',
 		'[class.is-selected]': 'checked()',
 		'[class.is-disabled]': 'disabled()',
 		'[class.mod-add]': 'add()',
@@ -63,6 +65,30 @@ export class OptionComponent {
 
 	readonly select = input(false, { transform: luBooleanAttribute });
 
+	/**
+	 * Lets this option fold the `[treeitem]` children it holds: a chevron is rendered before the
+	 * checkbox and the children are hidden while collapsed. Off by default, so a tree that shows
+	 * every level at once keeps doing so.
+	 *
+	 * Whether a row can hold children is the consumer’s call, not this component’s: with children
+	 * fetched on unfold, an empty row is not a leaf.
+	 */
+	readonly collapsible = input(false, { transform: luBooleanAttribute });
+
+	/**
+	 * Whether the folded children are shown. Two-way: the chevron toggles it, and a consumer can
+	 * drive it — to expand the options a search matched, for instance. Only read when
+	 * `collapsible` is set and the option actually holds children.
+	 */
+	readonly expanded = model(false);
+
+	/**
+	 * Accessible name of the chevron. The icon is decorative and the row name lives in projected
+	 * content this component cannot read, so the consumer composes the whole label — “Unfold Lucca
+	 * SAS” rather than a bare “Unfold”.
+	 */
+	readonly disclosureLabel = input<string | null>(null);
+
 	readonly selectAll = input<'string' | null>();
 
 	readonly multiple = computed(() => this.#listboxRef?.multiple() ?? false);
@@ -89,4 +115,10 @@ export class OptionComponent {
 	readonly hasTreeitems = computed(() => !!this.treeitemContent() || this.treeitemLevel() !== null);
 
 	readonly wrapperLevel = computed(() => this.treeitemLevel() ?? this.level);
+
+	toggleExpanded(event: Event): void {
+		// The row itself toggles the selection, so the chevron must not reach it.
+		event.stopPropagation();
+		this.expanded.set(!this.expanded());
+	}
 }
