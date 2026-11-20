@@ -1,0 +1,13 @@
+// Global stylesheet of the `scenarios` Vitest project.
+// It is the "Basic setup" a consuming application loads (see README), not the `main-all` bundle
+// Storybook loads: a component only gets the style its own `styleUrl` brings, as in a real application,
+// so a missing `@use` in a component stylesheet shows up in these tests.
+
+// Every product palette is compiled, as in the Storybook UI: each scenario page themes itself with
+// its own at runtime (see `scenarioMeta`), so it looks the same here and there.
+@use '@lucca-front/scss/src/commons/config' with (
+	$palettesOtherProduct: 'all'
+);
+@forward '@lucca-front/icons/src/main';
+@forward '@lucca-front/scss/src/main';
+@forward '@lucca-front/ng/styles/main';

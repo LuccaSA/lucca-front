@@ -40,6 +40,7 @@
     "docs:llms-pack": "node scripts/llms-skill/publish-skill.mjs npm",
     "build-storybook": "npm run docs:llms && ng run ng:build-storybook",
     "test-storybook": "npx vitest --config .storybook/vitest.config.ts --project=storybook",
+    "test-scenarios": "npx vitest --config .storybook/vitest.config.ts --project=scenarios",
     "test-storybook:coverage": "test-storybook --url http://localhost:6006 --coverage",
     "lint": "npm run lint:es && npm run lint:style",
     "lint:fix": "npm run lint:es -- --fix && npm run lint:style:fix && npm run lint:ng:fix",

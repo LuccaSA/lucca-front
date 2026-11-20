@@ -10,6 +10,22 @@ import { join } from 'path';
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(dirname, '..');
 
+// Scenario pages (product-like screens) and their tests run in their own `scenarios` project,
+// with the global stylesheet of a consuming application instead of Storybook's (see scenarios/setup.ts).
+const scenarioStories = ['stories/scenarios/**', 'stories/e2e/scenarios/**'];
+
+// A fresh object per project: Vitest names the browser instances it is given after their project.
+const chromium = () => ({
+	enabled: true,
+	headless: true,
+	provider: playwright({}),
+	instances: [
+		{
+			browser: 'chromium' as const,
+		},
+	],
+});
+
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default mergeConfig(
 	defineConfig({
@@ -67,6 +83,7 @@ export default mergeConfig(
 					],
 					test: {
 						name: 'storybook',
+						exclude: ['**/node_modules/**', ...scenarioStories],
 						// The CI runner has 4 vCPUs; more concurrent pages than this starves the workers
 						// and makes even static stories hit the test timeout. Raise it if the suite gets
 						// too slow and the runner gets bigger.
@@ -74,16 +91,34 @@ export default mergeConfig(
 						testTimeout: 30_000,
 						// Last resort so a single browser-level flake doesn't red the whole build.
 						retry: 1,
-						browser: {
-							enabled: true,
-							headless: true,
-							provider: playwright({}),
-							instances: [
-								{
-									browser: 'chromium',
-								},
-							],
-						},
+						browser: chromium(),
+					},
+				},
+				{
+					extends: true,
+					// Scenarios fail on axe violations, so axe-core is always loaded: pre-bundle it, or Vite
+					// discovers it mid-run on a cold cache, reloads the page and fails the first stories.
+					optimizeDeps: {
+						include: ['axe-core'],
+					},
+					plugins: [
+						storybookAngularVitest({}),
+						storybookTest({
+							configDir: dirname,
+							storybookScript: 'npm start --no-open',
+						}),
+					],
+					test: {
+						name: 'scenarios',
+						// storybookTest builds `include` from the `stories` globs of main.ts and ignores
+						// `test.include`: excluding everything but the scenarios is the only way to scope it.
+						exclude: ['**/node_modules/**', 'stories/documentation/**', 'stories/qa/**', 'stories/e2e/!(scenarios)/**'],
+						setupFiles: [join(dirname, 'scenarios/setup.ts')],
+						maxWorkers: 2,
+						testTimeout: 30_000,
+						// No retry: a scenario that only passes on its second run is a bug to look at.
+						retry: 0,
+						browser: chromium(),
 					},
 				},
 			],
