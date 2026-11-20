@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { luBooleanAttribute } from '@lucca/prisme/core';
 import { IconColor, IconSize } from './icon.type';
 import type { LuccaIcon } from './icons';
 
@@ -35,7 +36,7 @@ export class IconComponent {
 	/**
 	 * Display icon in AI mode
 	 */
-	readonly AI = input<boolean, boolean | `${boolean}` | ''>(false, { transform: booleanAttribute });
+	readonly AI = input(false, { transform: luBooleanAttribute });
 
 	readonly iconClasses = computed(() => {
 		const size = this.size();

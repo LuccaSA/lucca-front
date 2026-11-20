@@ -21,6 +21,18 @@ export default mergeConfig(createBaseConfig(__dirname), {
 					exclude: ['**/node_modules/**', '**/schematics/**/*.spec.ts'],
 				},
 			},
+			{
+				test: {
+					name: 'typecheck',
+					globals: true,
+					typecheck: {
+						enabled: true,
+						only: true,
+						include: ['packages/prisme/**/*.spec-d.ts'],
+						tsconfig: './packages/prisme/tsconfig.spec.json',
+					},
+				},
+			},
 			// Schematics project: runs the `ng add`/`ng update` migration specs in a
 			// Node environment with a ts-node loader (see vitest.schematics.config.ts).
 			'./vitest.schematics.config.ts',
