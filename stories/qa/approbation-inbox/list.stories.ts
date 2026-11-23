@@ -16,6 +16,7 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'approbation-inbox-list-stories',
@@ -38,6 +39,8 @@ import { applicationConfig, Meta } from '@storybook/angular-vite';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ApprobationInboxListStory {
+	protected readonly cdnUrl = CDN_URL;
+
 	protected readonly icons: ApprobationInboxIcon[] = [
 		{ icon: 'formatClipperAttachment', alt: 'Contains an attachment' },
 		{ icon: 'bubbleSpeech', alt: 'Contains a comment' },

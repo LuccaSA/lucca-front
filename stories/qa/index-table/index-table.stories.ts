@@ -20,6 +20,7 @@ import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'index-table-stories',
@@ -46,7 +47,9 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class IndexTableStory {}
+class IndexTableStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/IndexTable',

@@ -1,7 +1,9 @@
 import { FormStyle, getLocaleDayNames, getLocaleFirstDayOfWeek, TranslationWidth } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, input, LOCALE_ID, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, isNotNil, LuDateGranularity } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LU_CALENDARINPUT_TRANSLATIONS } from './calendar-input.translate';
 import { LuCalendarItemFactory } from './calendar-item.factory';
@@ -12,7 +14,7 @@ import { ICalendarItem } from './calendar-item.interface';
 	templateUrl: './calendar-input.component.html',
 	styleUrl: './calendar-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	imports: [FormsModule],
+	imports: [FormsModule, ButtonComponent, IconComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

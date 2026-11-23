@@ -78,8 +78,10 @@
 		@include icon.generate('sign_confirm');
 
 		color: var(--palettes-neutral-0);
+		// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 		font-size: calc(1.5 * var(--components-button-font-size));
 		block-size: var(--components-button-line-height);
+		// stylelint-enable declaration-property-value-disallowed-list
 		inset: 0;
 		margin: auto;
 		position: absolute;

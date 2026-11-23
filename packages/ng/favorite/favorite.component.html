@@ -1,0 +1,13 @@
+<button
+	type="button"
+	class="favorite-button button"
+	[attr.aria-pressed]="isFavorite()"
+	[attr.aria-disabled]="disabled() || null"
+	[luTooltip]="tooltipFavorite() ? intl().remove : intl().add"
+	luTooltipOnlyForDisplay
+	(click)="toggle($event)"
+	(mouseenter)="syncTooltip()"
+	(focus)="syncTooltip()"
+>
+	<lu-icon [icon]="isFavorite() ? 'starFilled' : 'star'" [alt]="intl().label" />
+</button>

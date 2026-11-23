@@ -5,6 +5,7 @@ import { HighlightDataComponent } from '@lucca-front/ng/highlight-data';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'highlight-data-stories',
@@ -12,7 +13,9 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	imports: [HighlightDataComponent, ButtonComponent, LinkComponent, LuSafeExternalSvgPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class HighlightDataStory {}
+class HighlightDataStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/HighlightData',

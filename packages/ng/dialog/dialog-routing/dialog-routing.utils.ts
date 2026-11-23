@@ -1,7 +1,7 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { inject } from '@angular/core';
 import { CanActivate, CanDeactivateFn, DeprecatedGuard, Route } from '@angular/router';
-import { firstValueFrom, from, isObservable, Observable, of } from 'rxjs';
+import { defaultIfEmpty, firstValueFrom, from, isObservable, Observable, of } from 'rxjs';
 import { LuDialogData } from '../model';
 import { DialogRoutingContainerComponent } from './dialog-routing.component';
 import { DialogRouteConfig, DialogRouteData, DialogRouteDialogConfig } from './dialog-routing.models';
@@ -40,7 +40,10 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 							return true;
 						}
 
-						return guard(dialogComponentInstance, route, state, nextState);
+						const result = guard(dialogComponentInstance, route, state, nextState);
+
+						// A guard that completes without a value is a veto, as on dismiss: the router would throw `EmptyError` instead.
+						return isObservable(result) ? result.pipe(defaultIfEmpty(false)) : result;
 					}),
 			},
 		],

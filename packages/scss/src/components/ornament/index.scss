@@ -1,0 +1,8 @@
+@use 'exports' as *;
+
+.ornament {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+}

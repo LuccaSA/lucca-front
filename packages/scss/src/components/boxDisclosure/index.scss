@@ -1,0 +1,30 @@
+@use 'exports' as *;
+
+.boxDisclosure {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-neutral {
+			@include neutral;
+		}
+
+		&.mod-sunken {
+			@include sunken;
+		}
+
+		&.mod-fancyLight {
+			@include fancyLight;
+		}
+
+		&.mod-fancyDark {
+			@include fancyDark;
+		}
+
+		&[open] {
+			@include open;
+		}
+	}
+}

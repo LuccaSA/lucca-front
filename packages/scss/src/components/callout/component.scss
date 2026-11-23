@@ -13,8 +13,10 @@
 	gap: var(--components-callout-gap);
 	padding: var(--components-callout-padding);
 	font: var(--components-callout-font);
-	font-size: var(--components-callout-fontSize); // Deprecated
-	line-height: var(--components-callout-lineHeight); // Deprecated
+	// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+	font-size: var(--components-callout-fontSize);
+	line-height: var(--components-callout-lineHeight);
+	// stylelint-enable declaration-property-value-disallowed-list
 
 	&:not([hidden]) {
 		display: var(--components-callout-display);

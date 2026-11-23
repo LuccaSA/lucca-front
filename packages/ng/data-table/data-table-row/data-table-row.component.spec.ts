@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 import { DataTableBodyComponent } from '../data-table-body/data-table-body.component';
+import { DataTableBodyGroupDirective } from '../data-table-body/data-table-body-group.directive';
 import { DataTableHeadComponent } from '../data-table-head/data-table-head.component';
 import { DataTableComponent } from '../data-table.component';
 import { DataTableRowComponent } from './data-table-row.component';
@@ -223,5 +224,61 @@ describe('DataTableRowComponent: nested table', () => {
 		// Assert
 		expect(host.all()).toBe(true);
 		expect(host.rows.map((row) => row.selected())).toEqual([false, true, false]);
+	});
+});
+
+@Component({
+	selector: 'lu-data-table-row-group-slot-test',
+	imports: [DataTableComponent, DataTableBodyComponent, DataTableBodyGroupDirective, DataTableRowComponent],
+	template: `
+		<lu-data-table selectable>
+			<tbody luDataTableBody>
+				<tr luDataTableRow selectedLabel="First row" [(selected)]="first"></tr>
+			</tbody>
+			<tbody luDataTableBody groupButtonAlt="Toggle group">
+				<ng-container luDataTableBodyGroup>Group</ng-container>
+				<tr luDataTableRow selectedLabel="Grouped row" [(selected)]="grouped"></tr>
+			</tbody>
+			<tbody luDataTableBody>
+				<tr luDataTableRow selectedLabel="Last row" [(selected)]="last"></tr>
+			</tbody>
+		</lu-data-table>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class GroupSlotHostComponent {
+	readonly first = signal(false);
+	readonly grouped = signal(false);
+	readonly last = signal(false);
+}
+
+describe('DataTableRowComponent: group projected with luDataTableBodyGroup', () => {
+	let fixture: ComponentFixture<GroupSlotHostComponent>;
+	let host: GroupSlotHostComponent;
+
+	function click(index: number, shiftKey = false) {
+		const checkboxes = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+		checkboxes[index].dispatchEvent(new MouseEvent('click', { bubbles: true, shiftKey }));
+		fixture.detectChanges();
+	}
+
+	beforeEach(async () => {
+		TestBed.configureTestingModule({
+			imports: [GroupSlotHostComponent],
+			providers: [{ provide: LiveAnnouncer, useValue: { announce: vi.fn().mockResolvedValue(undefined) } }],
+		});
+		fixture = TestBed.createComponent(GroupSlotHostComponent);
+		host = fixture.componentInstance;
+		fixture.detectChanges();
+		await fixture.whenStable();
+	});
+
+	it('should leave the rows of a collapsed group unchanged', () => {
+		// Act
+		click(0);
+		click(2, true);
+
+		// Assert
+		expect([host.first(), host.grouped(), host.last()]).toEqual([true, false, true]);
 	});
 });

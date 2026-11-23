@@ -23,10 +23,10 @@ describe(LuUserDisplayPipe.name, () => {
 	const user = users[0];
 	const userFirst = { firstName: user.firstName, lastName: '' };
 	const userLast = { firstName: '', lastName: user.lastName };
-	const userWithNullLastName = { firstName: 'John', lastName: null } as unknown as LuUserDisplayInput;
-	const userWithNullFirstName = { firstName: null, lastName: 'Doe' } as unknown as LuUserDisplayInput;
-	const userWithNoLastName = { firstName: 'John' } as unknown as LuUserDisplayInput;
-	const userWithNoFirstName = { lastName: 'Doe' } as unknown as LuUserDisplayInput;
+	const userWithNullLastName: LuUserDisplayInput = { firstName: 'John', lastName: null };
+	const userWithNullFirstName: LuUserDisplayInput = { firstName: null, lastName: 'Doe' };
+	const userWithNoLastName: LuUserDisplayInput = { firstName: 'John' };
+	const userWithNoFirstName: LuUserDisplayInput = { lastName: 'Doe' };
 
 	describe('luUserDisplay()', () => {
 		describe('fallback when lastName is missing', () => {

@@ -1,0 +1,26 @@
+<header class="pageHeader container mod-withHorizontalNavigation">
+	<h1 class="pageHeader-title">Title</h1>
+</header>
+<main class="main mod-withMenu">
+	<div class="horizontalNavigation">
+		<div class="horizontalNavigation-containerOptional">
+			<ul class="horizontalNavigation-list">
+				<li class="horizontalNavigation-list-item">
+					<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
+						<span class="horizontalNavigation-link-placeholder" data-content-after="Label">Label</span>
+						<span class="numericBadge">3</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="horizontalNavigation-containerOptional"></div>
+	<!-- lucca-ui menu: left untouched -->
+	<div class="lui vertical menu">
+		<a class="item" href="#">Item</a>
+	</div>
+</main>
+<!-- Both classes, during a transition: no duplicate -->
+<nav class="horizontalNavigation mod-header">
+	<a class="horizontalNavigation-list-item-action" href="#">Link</a>
+</nav>

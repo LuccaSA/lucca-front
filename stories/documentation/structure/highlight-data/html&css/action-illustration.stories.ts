@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface ActionIllustrationStory {}
 
@@ -22,11 +23,11 @@ function getTemplate(args: ActionIllustrationStory): string {
 		<dd class="highlightData-content-action"><button type="button" class="button mod-outlined">Action</button></dd>
 	</dl>
 	<div class="highlightData-illustrations">
-		<div class="highlightData-illustrations-back" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
+		<div class="highlightData-illustrations-back" aria-hidden="true" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-data/bubbles/1.svg' | luSafeExternalSvg"></div>
 		<img
 			alt=""
 			class="highlightData-illustrations-front"
-			src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/polaroid-male.svg"
+			src="${CDN_URL}/transverse/prisme/visuals/highlight-data/generic/polaroid-male.svg"
 		/>
 	</div>
 </div>`;

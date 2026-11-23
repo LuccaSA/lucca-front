@@ -28,7 +28,7 @@ Status: accepted
 
 - One file per entrypoint (kebab-case name, like commit scopes) or per cross-cutting topic, in `docs/decisions/`. No README nor index: the file list serves that purpose, and a new entry reuses the structure of an existing one.
 - Dated entries, in chronological order (most recent at the bottom): Context, Decision, Consequences, Rejected options, “Revisit if” when a condition may call the decision into question (mandatory for `deferred`), Sources. Each section starts with a summary sentence, optionally followed by a list. An entry is 10 to 25 lines long.
-- An entry is never edited: a changed decision becomes a new entry, and the previous one becomes `superseded` with a link.
+- An entry is never edited once merged: a changed decision becomes a new entry, and the previous one becomes `superseded` with a link. Until then, it is a draft that the PR can rewrite.
 - Statuses: `proposed`, `accepted`, `deferred`, `superseded`.
 - A component affected by a cross-cutting decision links to it in one line, without copying it.
 

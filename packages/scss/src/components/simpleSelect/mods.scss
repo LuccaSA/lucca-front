@@ -85,3 +85,7 @@
 	--components-dialog-insideContent-paddingInline: var(--pr-t-spacings-50);
 	--components-dialog-insideContent-paddingBlock: var(--pr-t-spacings-50);
 }
+
+@mixin selectNoSearch {
+	--components-dialog-inside-header-content-paddingBlockStart: 0px;
+}

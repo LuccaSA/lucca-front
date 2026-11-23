@@ -109,3 +109,7 @@
 		--components-listboxOption-content-link-opacity: 1;
 	}
 }
+
+@mixin selectNoSearch {
+	--components-dialog-inside-header-content-paddingBlockStart: 0px;
+}

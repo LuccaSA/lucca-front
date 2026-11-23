@@ -18,7 +18,9 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 
 /* eslint-disable @angular-eslint/prefer-signals */
 /**
- * @deprecated prefer SimpleSelect or MultipleSelect with establishments directive
+ * @deprecated since 17.3.2; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * Use the establishments directive.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-establishment-select',

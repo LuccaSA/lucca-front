@@ -73,13 +73,14 @@
 			block-size: var(--components-fancyBox-content-foregroundEndStart-blockSize);
 		}
 
-		// deprecated
+		// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 		.fancyBox-content-foreground {
 			inset-block-start: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
 			inset-inline-end: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);
 			inline-size: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
 			block-size: var(--components-fancyBox-content-foregroundStartEnd-blockSize);
 			background-repeat: no-repeat;
+			// stylelint-disable-next-line declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 			background-image: var(--components-fancyBox-foreground);
 			background-size: contain;
 			position: absolute;
@@ -115,8 +116,10 @@
 				content: '';
 				z-index: -1;
 				position: absolute;
+				// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 				inline-size: var(--components-fancyBox-imageWidth);
 				block-size: var(--components-fancyBox-imageHeight);
+				// stylelint-enable declaration-property-value-disallowed-list
 				background-repeat: no-repeat;
 				background-size: contain;
 				transition-duration: var(--commons-animations-durations-slow);
@@ -126,17 +129,21 @@
 			// deprecated
 			&::before {
 				transition-property: inline-size, block-size, inset-block-end, inset-inline-start;
+				// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 				inset-block-end: var(--components-fancyBox-offsetBlock);
 				inset-inline-start: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-left);
+				// stylelint-enable declaration-property-value-disallowed-list
 			}
 
 			// deprecated
 			&::after {
 				transition-property: inline-size, block-size, inset-block-start, inset-inline-end;
+				// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 				inset-block-start: var(--components-fancyBox-offsetBlock);
 				inset-inline-end: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-right);
+				// stylelint-enable declaration-property-value-disallowed-list
 			}
 		}
 	}

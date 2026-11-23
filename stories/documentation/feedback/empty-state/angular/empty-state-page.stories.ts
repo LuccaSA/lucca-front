@@ -1,18 +1,29 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { EMPTY_STATE_HEADING_LEVEL, EMPTY_STATE_HEADING_STYLE, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
+import { EMPTY_STATE_HEADING_LEVEL, EMPTY_STATE_HEADING_STYLE, EmptyStateDescriptionDirective, EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 export default {
 	title: 'Documentation/Feedback/Empty State/Angular/Page',
 	component: EmptyStatePageComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [EmptyStatePageComponent, ButtonComponent, HttpClientModule],
+			imports: [EmptyStatePageComponent, EmptyStateDescriptionDirective, ButtonComponent, HttpClientModule],
 		}),
 	],
 	render: (args) => {
-		const { heading, description, slotTop } = args;
+		const { heading, slotTop, description } = args;
+		const richContent = args['richContent'];
+		const paramDescription = richContent
+			? ``
+			: `
+	description="${description}"`;
+		const projectedDescription = richContent ? `\n\t<p luEmptyStateDescription>You have <strong>no pending request</strong> yet. New requests will appear here.</p>` : ``;
+		const paramSlotTop = slotTop
+			? `
+	slotTop="${slotTop}"`
+			: ``;
 		const paramHeadingLevel =
 			args['headingLevel'] === 1
 				? ``
@@ -32,27 +43,27 @@ export default {
 			args['icon'] === ''
 				? ``
 				: `
-	icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/${args['icon']}.svg"`;
+	icon="${CDN_URL}/lucca-front/assets/empty-states/message/${args['icon']}.svg"`;
 		const paramTopRightBackground =
 			args['topRightBackground'] === ''
 				? ``
 				: `
-	topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightBackground']}.svg"`;
+	topRightBackground="${CDN_URL}/lucca-front/assets/empty-states/${args['topRightBackground']}.svg"`;
 		const paramTopRightForeground =
 			args['topRightForeground'] === ''
 				? ``
 				: `
-	topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['topRightForeground']}.svg"`;
+	topRightForeground="${CDN_URL}/lucca-front/assets/empty-states/${args['topRightForeground']}.svg"`;
 		const paramBottomLeftBackground =
 			args['bottomLeftBackground'] === ''
 				? ``
 				: `
-	bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftBackground']}.svg"`;
+	bottomLeftBackground="${CDN_URL}/lucca-front/assets/empty-states/${args['bottomLeftBackground']}.svg"`;
 		const paramBottomLeftForeground =
 			args['bottomLeftForeground'] === ''
 				? ``
 				: `
-	bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/${args['bottomLeftForeground']}.svg"`;
+	bottomLeftForeground="${CDN_URL}/lucca-front/assets/empty-states/${args['bottomLeftForeground']}.svg"`;
 		return {
 			styles: [
 				`
@@ -64,10 +75,8 @@ export default {
 `,
 			],
 			template: `<lu-empty-state-page
-	heading="${heading}"
-	slotTop="${slotTop}"
-	description="${description}"${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHeadingLevel}${paramHeadingStyle}
->
+	heading="${heading}"${paramDescription}${paramSlotTop}${paramIcon}${paramTopRightBackground}${paramTopRightForeground}${paramBottomLeftBackground}${paramBottomLeftForeground}${paramContentBackgroundColor}${paramHeadingLevel}${paramHeadingStyle}
+>${projectedDescription}
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-page>`,
@@ -213,11 +222,16 @@ export default {
 			table: { category: 'inputs' },
 		},
 		description: {
-			description: 'Description du composant. [PortalContent]',
+			if: { arg: 'richContent', truthy: false },
+			description: 'Texte affiché sous le titre. Contenu riche : directive <code>luEmptyStateDescription</code> (l’input prévaut).',
 			table: { category: 'inputs' },
 		},
+		richContent: {
+			description: 'Remplace l’input <code>description</code> par un contenu riche projeté avec la directive <code>luEmptyStateDescription</code>.',
+			table: { category: 'story' },
+		},
 		slotTop: {
-			description: 'Ajout d’un slot au dessus du titre. [PortalContent]',
+			description: 'Contenu affiché au-dessus du titre. Contenu riche : directive <code>luEmptyStateSlotTop</code> (l’input prévaut).',
 			table: { category: 'inputs' },
 		},
 		illustration: {
@@ -228,10 +242,10 @@ export default {
 	},
 } as Meta;
 
-export const Page: StoryObj<EmptyStatePageComponent> = {
+export const Page: StoryObj<EmptyStatePageComponent & { richContent: boolean }> = {
 	args: {
 		heading: 'Empty state page',
-		description: 'Description can be a string or a ng-template',
+		description: 'You have no pending request yet. New requests will appear here.',
 		slotTop: '',
 		icon: '',
 		topRightBackground: 'poplee/bubbles-top-right-01',
@@ -241,5 +255,6 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 		contentBackgroundColor: 'var(--pr-t-elevation-surface-default)',
 		headingLevel: 1,
 		headingStyle: 1,
+		richContent: false,
 	},
 };

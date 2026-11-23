@@ -6,11 +6,13 @@
 	// Actions
 	.button,
 	.buttonGroup,
+	.favorite,
 	.link,
 
 	// Icons
 	.bubbleIllustration,
 	.bubbleIcon,
+	.ornament,
 	.softwareIcon,
 	.lucca-icon,
 
@@ -91,7 +93,9 @@
 
 	// Structure
 	.box,
-	.card,
+	.boxDisclosure,
+	.card2,
+	.card2Wrapper,
 	.container,
 	.divider,
 	.emptyState,
@@ -143,11 +147,13 @@
 	// ANGULAR COMPONENTS OUTSIDE
 
 	[luButton],
+	lu-favorite,
 	[luLink],
 
 	// Icons
 	lu-bubble-illustration .bubbleIllustration,
 	lu-bubble-icon,
+	lu-ornament,
 	lu-software-icon .softwareIcon,
 	lu-icon .lucca-icon,
 
@@ -173,6 +179,7 @@
 	lu-index-table,
 	[luindextablerow],
 	lu-sortable-list .sortableList,
+	lu-reorder-handle,
 	lu-listing-item,
 	lu-activity-feed,
 	lu-activity-feed-step,
@@ -229,6 +236,7 @@
 
 	// Structure
 	lu-box,
+	lu-box-disclosure,
 	lu-container,
 	lu-divider,
 	lu-empty-state-page,
@@ -281,6 +289,7 @@
 
 	// DEPRECATED COMPONENTS
 
+	// stylelint-disable selector-disallowed-list -- Deprecated.
 	.checkbox,
 	.switch,
 	.radio,
@@ -297,8 +306,10 @@
 	.header,
 	.filterBarDeprecated,
 	.highlightSection,
+	.card,
 	lu-skeleton-table {
 		outline: 2px solid red;
 		outline-offset: 3px;
 	}
+	// stylelint-enable selector-disallowed-list
 }

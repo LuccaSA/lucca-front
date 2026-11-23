@@ -65,7 +65,7 @@
 			<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-fieldset-arrow" />
 			<div class="textField-input-affix">
 				@if (!isFilterPill) {
-					@if (clearable() && (start.value !== "" || end.value !== "")) {
+					@if (clearable() && !isFilterPillDefault() && (start.value !== "" || end.value !== "")) {
 						<lu-clear class="textField-input-affix-clear" (onClear)="clear(); start.focus()">{{ intl().clear }}</lu-clear>
 					}
 				}

@@ -34,6 +34,7 @@
 
 	@at-root ($atRoot) {
 		.dialog-inside {
+			// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .dialog-formOptional, .dialog-form. Kept for consumer overrides.
 			&:has(> .dialog-inside-formOptional, > .dialog-formOptional, > .dialog-form) {
 				display: contents;
 
@@ -62,6 +63,7 @@
 				}
 			}
 
+			// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .dialog-formOptional, .dialog-form. Kept for consumer overrides.
 			&:not(:has(> .dialog-inside-formOptional, > .dialog-formOptional, > .dialog-form)) {
 				display: grid;
 				grid-template-areas:

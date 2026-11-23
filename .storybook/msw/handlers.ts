@@ -107,6 +107,28 @@ export const handlers = [
 		),
 	),
 
+	// A consumer endpoint that ignores `legalUnitId`, as custom `url` inputs may do
+	http.get(
+		'/custom/api/establishments',
+		genericHandler(
+			mockEstablishments,
+			{
+				page: (p) => parseInt(p),
+				limit: (l) => parseInt(l),
+				search: (s) => s.toLowerCase(),
+				sort: (s) => s,
+				'fields.root': (f) => f,
+			},
+			{
+				search: applyFilter((e, { search }) => e.name.toLowerCase().includes(search)),
+				sort: (items, { sort }) => applyV4Sorting(items, sort),
+				page: applyV4Paging,
+				limit: (items, { limit }) => items.slice(0, limit),
+			},
+			handleFieldsRoot(mockEstablishments.length),
+		),
+	),
+
 	http.get(
 		'/organization/structure/api/job-qualifications',
 		genericHandler(

@@ -1,10 +1,11 @@
 import { ILuUser } from '@lucca-front/ng/user';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 export const finn: ILuUser = {
 	id: 12,
 	firstName: 'Finn',
 	lastName: 'Mertens',
-	pictureHref: 'https://cdn.lucca.fr/lucca-front/avatars/finn.png',
+	pictureHref: `${CDN_URL}/lucca-front/avatars/finn.png`,
 	jobTitle: 'Hero',
 };
 export const marceline: ILuUser = {
@@ -12,7 +13,7 @@ export const marceline: ILuUser = {
 	firstName: 'Marceline',
 	lastName: 'Abadeer',
 	picture: {
-		href: 'https://cdn.lucca.fr/lucca-front/avatars/marceline.jpg',
+		href: `${CDN_URL}/lucca-front/avatars/marceline.jpg`,
 	},
 	jobTitle: 'Vampire',
 };
@@ -27,7 +28,7 @@ export const georges: ILuUser = {
 	firstName: 'Georges',
 	lastName: 'Abitbol',
 	picture: {
-		href: 'https://cdn.lucca.fr/lucca-front/avatars/no-picture.jpg',
+		href: `${CDN_URL}/lucca-front/avatars/no-picture.jpg`,
 	},
 	jobTitle: 'Movie star',
 };

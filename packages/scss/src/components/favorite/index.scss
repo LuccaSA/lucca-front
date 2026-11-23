@@ -1,0 +1,32 @@
+@use 'exports' as *;
+
+.favorite {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&:has(.favorite-button[aria-pressed='true']) {
+			@include favorite;
+
+			&.is-animated {
+				@media (prefers-reduced-motion: no-preference) {
+					@include favoriteAnimated;
+				}
+			}
+		}
+
+		&:has(.favorite-button[aria-disabled='true']) {
+			@include disabled;
+		}
+	}
+}

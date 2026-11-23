@@ -4,6 +4,7 @@ import { EmptyStatePageComponent, EmptyStatePageIllustration } from '@lucca-fron
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 export default {
 	title: 'Documentation/Feedback/Empty State/Angular/Onboarding page',
@@ -98,7 +99,7 @@ lu-empty-state-page {
 export const Page: StoryObj<EmptyStatePageComponent & { src: string; alt: string }> = {
 	args: {
 		heading: 'Augmentez vos collaborateurs en 3 étapes',
-		src: 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/pagga/mealvoucher-icecream.svg',
+		src: `${CDN_URL}/transverse/prisme/visuals/empty-states/pagga/mealvoucher-icecream.svg`,
 		alt: '',
 		headingLevel: 1,
 	},

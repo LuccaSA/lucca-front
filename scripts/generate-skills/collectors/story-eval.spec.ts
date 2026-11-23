@@ -62,4 +62,16 @@ describe('renderStoryTemplates', () => {
 
 		expect(renderStoryTemplates(source, new Map())).toBeNull();
 	});
+
+	it('resolves CDN_URL to the real CDN, not to an empty stub', () => {
+		// Stories build asset URLs from CDN_URL. As a stub it coerced to '' and published
+		// `src="/lucca-front/avatars/finn.png"`, a broken URL, in every page that shows a picture.
+		const source = `
+			import { CDN_URL } from '@lucca-front/ng/core';
+			export default { title: 'X' };
+			export const Basic = { render: () => ({ template: \`<img src="\${CDN_URL}/avatars/finn.png" />\` }) };
+		`;
+
+		expect(renderStoryTemplates(source, new Map())).toEqual(['<img src="https://cdn.lucca.fr/avatars/finn.png" />']);
+	});
 });

@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface PLGPushTitleStory {}
 
@@ -11,7 +12,7 @@ function getTemplate(args: PLGPushTitleStory): string {
 	return `<div class="plgPush">
 	<div class="plgPush-icons">
 		<span aria-hidden="true" class="plgPush-icons-front lucca-icon icon-transportRocket mod-S"></span>
-		<img class="plgPush-icons-back" alt="" src="https://cdn.lucca.fr/lucca-front/assets/plg-push/shape.svg" />
+		<img class="plgPush-icons-back" alt="" src="${CDN_URL}/lucca-front/assets/plg-push/shape.svg" />
 	</div>
 	<div class="plgPush-content">
 		<div class="plgPush-content-title">Connaissez-vous Timmi Office ?</div>

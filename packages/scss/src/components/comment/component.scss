@@ -103,6 +103,6 @@
 	gap: var(--pr-t-spacings-200);
 
 	.comment {
-		--components-comment-max-width: min(66ch, calc(100% - var(--components-comment-content-margin)));
+		--components-comment-max-width: min(50rem, calc(100% - var(--components-comment-content-margin)));
 	}
 }

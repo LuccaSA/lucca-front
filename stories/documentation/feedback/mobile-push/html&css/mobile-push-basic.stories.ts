@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface MobilePushBasicStory {}
 
@@ -12,16 +13,16 @@ function getTemplate(args: MobilePushBasicStory): string {
 	<div class="mobilePush">
 		<div class="mobilePush-icons">
 			<span aria-hidden="true" class="mobilePush-icons-front lucca-icon icon-deviceMobile mod-S"></span>
-			<img class="mobilePush-icons-back" alt="" src="https://cdn.lucca.fr/transverse/prisme/visuals/plg-push/shape.svg" />
+			<img class="mobilePush-icons-back" alt="" src="${CDN_URL}/transverse/prisme/visuals/plg-push/shape.svg" />
 		</div>
 		<div class="mobilePush-content">
 			<div class="mobilePush-content-description">Posez une absence depuis n’importe où avec l’application Lucca.</div>
 				<div class="mobilePush-content-downloadApps">
 					<a href="#" class="mobilePush-content-downloadApps-link">
-						<img class="mobilePush-content-downloadApps-link-badge" alt="Download on the App Store" src="https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-app-store-us-uk.svg" />
+						<img class="mobilePush-content-downloadApps-link-badge" alt="Download on the App Store" src="${CDN_URL}/transverse/prisme/visuals/mobile-push/badge-app-store-us-uk.svg" />
 					</a>
 					<a href="#" class="mobilePush-content-downloadApps-link">
-						<img class="mobilePush-content-downloadApps-link-badge" alt="Get it on Google" src="https://cdn.lucca.fr/transverse/prisme/visuals/mobile-push/badge-google-play-store-us-uk.svg" />
+						<img class="mobilePush-content-downloadApps-link-badge" alt="Get it on Google" src="${CDN_URL}/transverse/prisme/visuals/mobile-push/badge-google-play-store-us-uk.svg" />
 					</a>
 				</div>
 			</div>

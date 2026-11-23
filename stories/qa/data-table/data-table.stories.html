@@ -883,7 +883,8 @@
 							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
-					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires" [group]="samplePortalContent">
+					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires">
+						<ng-container luDataTableBodyGroup>group <lu-numeric-badge [value]="7" /></ng-container>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
@@ -895,7 +896,8 @@
 							<td luDataTableCell>cell</td>
 						</tr>
 					</tbody>
-					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires" expanded [group]="samplePortalContent">
+					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires" [expanded]="true">
+						<ng-container luDataTableBodyGroup>group <lu-numeric-badge [value]="7" /></ng-container>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
@@ -908,10 +910,6 @@
 						</tr>
 					</tbody>
 				</lu-data-table>
-				<ng-template #samplePortalContent>
-					group
-					<lu-numeric-badge [value]="7" />
-				</ng-template>
 			</td>
 		</tr>
 		<tr>
@@ -1199,7 +1197,7 @@
 								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
 								<td class="dataTable-body-row-cell">
 									<span class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+										<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 									</span>
 								</td>
 							</tr>
@@ -1224,7 +1222,7 @@
 							</td>
 							<td luDataTableCell>
 								<span class="avatar mod-XS">
-									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 								</span>
 							</td>
 						</tr>
@@ -1252,7 +1250,7 @@
 								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
 								<td class="dataTable-body-row-cell">
 									<span class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+										<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 									</span>
 								</td>
 							</tr>
@@ -1276,7 +1274,7 @@
 								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
 								<td class="dataTable-body-row-cell">
 									<span class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+										<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 									</span>
 								</td>
 							</tr>
@@ -1300,7 +1298,7 @@
 								<td class="dataTable-body-row-cell"><span class="tag">Tag</span></td>
 								<td class="dataTable-body-row-cell">
 									<span class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+										<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 									</span>
 								</td>
 							</tr>
@@ -1327,7 +1325,7 @@
 							</td>
 							<td luDataTableCell>
 								<span class="avatar mod-XS">
-									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 								</span>
 							</td>
 						</tr>
@@ -1351,7 +1349,7 @@
 							</td>
 							<td luDataTableCell>
 								<span class="avatar mod-XS">
-									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 								</span>
 							</td>
 						</tr>
@@ -1375,7 +1373,7 @@
 							</td>
 							<td luDataTableCell>
 								<span class="avatar mod-XS">
-									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 								</span>
 							</td>
 						</tr>
@@ -1401,7 +1399,7 @@
 								<td class="dataTable-body-row-cell mod-alignCenter"><span class="tag">Tag</span></td>
 								<td class="dataTable-body-row-cell mod-alignEnd">
 									<span class="avatar mod-XS">
-										<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+										<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 									</span>
 								</td>
 							</tr>
@@ -1426,7 +1424,7 @@
 							</td>
 							<td luDataTableCell [align]="'end'">
 								<span class="avatar mod-XS">
-									<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
+									<img alt="" class="avatar-picture" loading="lazy" src="{{ cdnUrl }}/lucca-front/avatars/finn.png" />
 								</span>
 							</td>
 						</tr>

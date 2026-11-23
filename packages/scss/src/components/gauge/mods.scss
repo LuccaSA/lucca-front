@@ -6,6 +6,7 @@
 // @mixin vertical is deprecated
 @mixin vertical {
 	--components-gauge-blockSize: 100%;
+	// stylelint-disable-next-line declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 	--components-gauge-inlineSize: var(--components-gauge-height, var(--pr-t-spacings-100));
 	--components-gauge-before-minInlineSize: var(--components-gauge-inlineSize);
 

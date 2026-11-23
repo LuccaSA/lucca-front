@@ -5,7 +5,7 @@
 	"endOfLine": "auto",
 	"overrides": [
 		{
-			"files": ["packages/ng/formly/**/*.html", "*.component.html", "*.page.html", "*.stories.html"],
+			"files": ["*.component.html", "*.page.html", "*.stories.html"],
 			"options": {
 				"parser": "angular"
 			}

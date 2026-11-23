@@ -13,6 +13,7 @@ export const Template: StoryObj<SkeletonHeaderComponent> = {
 			control: {
 				type: 'boolean',
 			},
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 	},
 

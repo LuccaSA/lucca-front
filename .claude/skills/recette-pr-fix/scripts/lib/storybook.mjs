@@ -31,3 +31,13 @@ export const contextOptions = ({ touch = false } = {}) => ({
 	hasTouch: touch,
 	isMobile: touch,
 });
+
+// Finishes running CSS transitions and animations, so that computed styles read their end state.
+// Infinite or paused animations cannot be finished (finish() throws): they are left to the screenshot's own handling.
+export const settle = (page) =>
+	page.evaluate(() =>
+		document
+			.getAnimations()
+			.filter((animation) => animation.playbackRate !== 0 && Number.isFinite(animation.effect?.getComputedTiming().endTime))
+			.forEach((animation) => animation.finish()),
+	);

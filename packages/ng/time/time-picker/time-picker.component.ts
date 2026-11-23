@@ -99,7 +99,13 @@ export class TimePickerComponent extends BasePickerComponent {
 	});
 	protected readonly separator = computed(() => this.intl().timePickerTimeSeparator);
 
-	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
+	// Pad the hours with a leading zero only when the locale does (e.g. "03:12" in fr-FR, "3:12 PM" in en-US).
+	protected readonly hoursDecimalConf = computed(() => {
+		const hourPart = new Intl.DateTimeFormat(this.localeId, { timeStyle: 'short', hour12: this.enableMeridiemDisplay() ?? false })
+			.formatToParts(new Date(2000, 0, 1, 3))
+			.find(({ type }) => type === 'hour');
+		return hourPart?.value.length === 2 ? DEFAULT_TIME_DECIMAL_PIPE_FORMAT : '1.0-0';
+	});
 
 	protected readonly maxHours = computed(() => {
 		if (this.enableMeridiemDisplay()) {

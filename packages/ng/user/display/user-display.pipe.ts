@@ -6,13 +6,13 @@ function getFirstCharacter(value: string | null | undefined): string {
 	return value?.at(0) ?? '';
 }
 
-function isNotNilAndEmptyString(value: string | null | undefined): boolean {
+function isNotNilAndEmptyString(value: string | null | undefined): value is string {
 	return isNotNil(value) && value.length > 0;
 }
 
 export interface LuUserDisplayInput {
-	firstName: string;
-	lastName: string;
+	firstName?: string | null;
+	lastName?: string | null;
 }
 
 const formatUser: Record<LuDisplayFormat, (user: LuUserDisplayInput) => string> = {

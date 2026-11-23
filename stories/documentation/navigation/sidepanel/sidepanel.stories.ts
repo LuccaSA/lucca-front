@@ -36,6 +36,13 @@ export default {
 	title: 'Documentation/Navigation/Sidepanel',
 	component: SidePanelStory,
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	parameters: {
+		docs: {
+			description: {
+				component: "⚠️ Déprécié : `LuSidepanel` et `LuSidepanelModule` sont dépréciés. Utiliser `LuModal` avec `modal.open(component, data, { mode: 'sidepanel' })` à la place.",
+			},
+		},
+	},
 } as Meta;
 
 const template = (args: SidePanelStory) => ({

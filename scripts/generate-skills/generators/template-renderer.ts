@@ -8,7 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import Handlebars from 'handlebars';
-import { ComponentData, DesignSection, FigmaDesignTokens, SharedTypeDef, StoryExample, StorySnippet } from '../types';
+import { ComponentData, DesignSection, SharedTypeDef, StoryExample, StorySnippet } from '../types';
 
 const TEMPLATES_DIR = path.join(__dirname, '..', 'templates');
 
@@ -28,12 +28,17 @@ Handlebars.registerHelper('escapePipe', (str: string) => {
 // Template cache
 const templateCache = new Map<string, HandlebarsTemplateDelegate>();
 
+// A Windows checkout (`core.autocrlf`) hands templates over with CRLF; the markdown post-processing only knows LF.
+function readTemplate(file: string): string {
+	return fs.readFileSync(path.join(TEMPLATES_DIR, file), 'utf-8').replace(/\r\n/g, '\n');
+}
+
 // Story body partial — shared markup for a story inlined in <slug>.component.md.
-Handlebars.registerPartial('storyBody', fs.readFileSync(path.join(TEMPLATES_DIR, 'story-body.hbs'), 'utf-8'));
+Handlebars.registerPartial('storyBody', readTemplate('story-body.hbs'));
 
 function getTemplate(name: string): HandlebarsTemplateDelegate {
 	if (!templateCache.has(name)) {
-		const src = fs.readFileSync(path.join(TEMPLATES_DIR, `${name}.hbs`), 'utf-8');
+		const src = readTemplate(`${name}.hbs`);
 		templateCache.set(name, Handlebars.compile(src, { noEscape: true }));
 	}
 	return templateCache.get(name)!;
@@ -44,7 +49,7 @@ function getTemplate(name: string): HandlebarsTemplateDelegate {
  */
 export function renderComponentMd(
 	data: ComponentData,
-	opts?: { hasDesign?: boolean; changelog?: string | null; hasFigma?: boolean; hasComponentPage?: boolean },
+	opts?: { hasDesign?: boolean; changelog?: string | null; hasComponentPage?: boolean },
 ): string {
 	const template = getTemplate('component');
 
@@ -67,12 +72,8 @@ export function renderComponentMd(
 		// not merely the presence of ZH data — otherwise the link is dead for components whose ZH
 		// content is code-only. The caller passes the real value (from splitDesignSections).
 		hasDesign: opts?.hasDesign ?? (data.zeroheight !== null),
-		// Emit the Figma link when the .figma.md is generated this run OR already on disk from a
-		// previous run (the caller passes the real value) — a --skip-figma/no-token run must not
-		// silently drop the link.
-		hasFigma: opts?.hasFigma ?? (data.figma != null),
 		// Section-level changelog content appended as the LAST `## Changelog` section — the
-		// aggregate writer relies on it being last to strip it before override comparison.
+		// review changelog relies on it being last to strip it before comparison.
 		// null/empty for CSS-only components with no API history and no ZH prose.
 		changelog: opts?.changelog?.trim() || null,
 		expandedTypeDefs: collectExpandedTypeDefs(data),
@@ -355,21 +356,6 @@ export function renderChangelogMd(data: ComponentData): string | null {
 }
 
 /**
- * Renders the Figma design tokens skill markdown.
- */
-export function renderFigmaMd(slug: string, figmaTokens: FigmaDesignTokens[], figmaFileKey: string): string {
-	const template = getTemplate('component-figma');
-
-	const context = {
-		slug,
-		figma: figmaTokens,
-		figmaFileKey,
-	};
-
-	return cleanOutput(template(context));
-}
-
-/**
  * Splits ZeroHeight content into design guidelines and changelog.
  * The changelog typically starts with a heading containing "changelog".
  * We strip the introductory changelog headings and keep versioned entries.
@@ -491,7 +477,7 @@ export function cleanZeroHeightMarkdown(md: string): string {
 	result = result.replace(/<shortcut_tiles>[\s\S]*?<\/shortcut_tiles>/g, '');
 
 	// Remove <design> embed blocks — empty Figma preview frames carrying only a figma-url
-	// attribute and no text. Figma links belong in the component's .figma.md, not here.
+	// attribute and no text.
 	result = result.replace(/<design\b[^>]*>[\s\S]*?<\/design>/g, '');
 	// Also drop any stray self-closing or unmatched <design> tags.
 	result = result.replace(/<\/?design\b[^>]*>/g, '');

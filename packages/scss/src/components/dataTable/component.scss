@@ -93,6 +93,7 @@
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);
 				inset-inline-start: 0;
+				user-select: var(--components-dataTable-cellFirst-userSelect);
 
 				.checkboxField {
 					--component-checkboxField-top: 0;
@@ -145,16 +146,19 @@
 			}
 		}
 
-		.dataTable-body-row-cell-drag.button {
-			@include button.S;
-			@include button.onlyIcon;
-			@include button.ghost;
-
-			--components-button-padding: var(--pr-t-spacings-50);
-			--components-button-color: var(--palettes-neutral-700);
-
-			cursor: move;
+		.dataTable-body-row-cell-drag {
 			vertical-align: top;
+
+			&.button {
+				@include button.S;
+				@include button.onlyIcon;
+				@include button.ghost;
+
+				--components-button-padding: var(--pr-t-spacings-50);
+				--components-button-color: var(--palettes-neutral-700);
+
+				cursor: move;
+			}
 		}
 	}
 

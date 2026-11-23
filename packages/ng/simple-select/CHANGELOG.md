@@ -1,3 +1,10 @@
+### 22.1.2
+
+#### Fixed
+
+- Typing a letter while the panel is closed no longer inserts it twice in the search field.
+- Bottom sheet without search no longer shows an empty space above the options.
+
 ### 22.1.0
 
 #### Added

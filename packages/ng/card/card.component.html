@@ -1,0 +1,9 @@
+<div class="card2-illustration">
+	@if (bubbleIcon(); as bubbleIcon) {
+		<lu-bubble-icon [icon]="bubbleIcon" />
+	} @else {
+		<ng-content select="[cardHeaderStartSlot]" />
+	}
+</div>
+<div class="card2-heading" role="heading" [attr.aria-level]="headingLevelValue()"><ng-content select="[luCardAction]" /></div>
+<div class="card2-content"><ng-content /></div>

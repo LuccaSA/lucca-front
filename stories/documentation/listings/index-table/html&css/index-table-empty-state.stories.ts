@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface IndexTableEmptyStateStory {}
 
@@ -30,7 +31,7 @@ function getTemplate(args: IndexTableEmptyStateStory): string {
 					<div class="emptyState-container">
 						<div class="emptyState-content">
 							<div class="emptyState-content-icon" aria-hidden="true">
-								<span class="bubbleIllustration mod-L" aria-hidden="true" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/magnifyingGlass.svg' | luSafeExternalSvg"></span>
+								<span class="bubbleIllustration mod-L" aria-hidden="true" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/bubble-illustration/magnifyingGlass.svg' | luSafeExternalSvg"></span>
 							</div>
 							<div class="emptyState-content-text">
 								<h3 class="emptyState-content-heading">Empty State</h3>

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
-import { luBooleanAttribute, LuClass, luOptionalNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { CDN_URL, luBooleanAttribute, LuClass, luOptionalNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { HighlightDataBubble, HighlightDataIllustration, HighlightDataPalette, HighlightDataSize, HighlightDataTheme } from './highlight-data.type';
 
@@ -72,11 +72,9 @@ export class HighlightDataComponent {
 	 */
 	readonly nested = input(false, { transform: luBooleanAttribute });
 
-	readonly illustrationSrc = computed(() =>
-		this.illustration()?.includes('/') ? this.illustration() : `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`,
-	);
+	readonly illustrationSrc = computed(() => (this.illustration()?.includes('/') ? this.illustration() : `${CDN_URL}/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`));
 
-	readonly bubbleSrc = computed(() => `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/bubbles/${this.bubble()}.svg`);
+	readonly bubbleSrc = computed(() => `${CDN_URL}/transverse/prisme/visuals/highlight-data/bubbles/${this.bubble()}.svg`);
 
 	constructor() {
 		effect(() => {

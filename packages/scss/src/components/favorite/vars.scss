@@ -1,0 +1,7 @@
+@mixin vars {
+	--components-favorite-color: var(--palettes-neutral-700);
+	--components-favorite-icon-color: var(--components-favorite-color);
+	--components-favorite-icon-animationName: none;
+	--components-favorite-sparks-animationName: none;
+	--components-favorite-sparks-distance: var(--pr-t-spacings-250);
+}

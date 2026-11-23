@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'avatar-stories',
@@ -15,7 +16,9 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 	imports: [LuUserPictureComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class AvatarStory {}
+class AvatarStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/Avatar',

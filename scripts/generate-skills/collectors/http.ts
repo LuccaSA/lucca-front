@@ -48,8 +48,7 @@
  * loop. A full generation wants it low (a page is deferred and replayed rather than holding a worker
  * for minutes); a `--retry-failed` pass wants it high, since it handles only a few dozen units and
  * its whole purpose is to get them, not to defer them again. Note the guard shape: a plain
- * `Number(env) || default` would silently ignore a legitimate low value of 0 — the mistake already
- * present on the FIGMA_* knobs in figma-connect.ts.
+ * `Number(env) || default` would silently ignore a legitimate low value of 0.
  */
 export const DEFAULT_FETCH_TIMEOUT_MS = readTimeoutEnv(10_000);
 

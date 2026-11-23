@@ -3,6 +3,7 @@ import { DIALOG_FANCY_ILLUSTRATION } from '@lucca-front/ng/dialog';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { setStoryOptions } from '@/helpers/stories';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface DialogFancyStory {
 	size: string;
@@ -18,8 +19,8 @@ function getTemplate(args: DialogFancyStory): string {
 	aria-labelledby="dialogInsideHeaderTitle1"
 	class="dialog mod-fancy ${args.size}"
 >
-	<div class="dialog-inside" [attr.style]="'--components-dialog-inside-backgroundImage: url(https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/foreground-${args.illustration}.svg)'">
-		<div class="dialog-inside-fancyIllustrations" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-dialog/background-bubbles.svg' | luSafeExternalSvg"></div>
+	<div class="dialog-inside" [attr.style]="'--components-dialog-inside-backgroundImage: url(${CDN_URL}/transverse/prisme/visuals/fancy-dialog/foreground-${args.illustration}.svg)'">
+		<div class="dialog-inside-fancyIllustrations" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/fancy-dialog/background-bubbles.svg' | luSafeExternalSvg"></div>
 		<form class="dialog-inside-formOptional">
 			<header class="dialog-inside-header">
 				<button type="button" class="dialog-inside-header-button button">

@@ -1,0 +1,30 @@
+import { Meta, StoryObj } from '@storybook/angular-vite';
+
+interface SizeSStory {}
+
+export default {
+	title: 'Documentation/Structure/Box/HTML&CSS/Size S',
+	argTypes: {},
+} as Meta;
+
+function getTemplate(args: SizeSStory): string {
+	return `<div class="box mod-S">
+	<div class="box-header">
+		<div class="box-header-text">
+			<div class="box-header-text-heading" role="heading" aria-level="2">Title</div>
+			<p class="box-header-text-subheading">Subheading</p>
+		</div>
+	</div>
+	<div class="box-slot">Custom content</div>
+</div>`;
+}
+
+const Template = (args: SizeSStory) => ({
+	props: args,
+	template: getTemplate(args),
+});
+
+export const SizeS: StoryObj<SizeSStory> = {
+	args: {},
+	render: Template,
+};

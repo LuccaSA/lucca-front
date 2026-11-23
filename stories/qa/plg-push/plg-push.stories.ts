@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'plg-push-stories',
@@ -9,7 +10,9 @@ import { Meta, StoryObj } from '@storybook/angular-vite';
 	imports: [PLGPushComponent, LinkComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class PLGPushStory {}
+class PLGPushStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/PLGPush',

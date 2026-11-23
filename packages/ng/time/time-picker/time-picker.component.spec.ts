@@ -317,7 +317,7 @@ describe('TimePickerComponent', () => {
 			const fixture = createLocalizedHost('fr-FR', '13:30:00', true);
 
 			// Assert
-			expect(getDisplayTexts(fixture).hours).toBe('1');
+			expect(getDisplayTexts(fixture).hours).toBe('01');
 			expect((fixture.nativeElement as HTMLElement).querySelector('.timePicker-fieldset-meridiem')).not.toBeNull();
 		});
 
@@ -328,6 +328,22 @@ describe('TimePickerComponent', () => {
 			// Assert
 			expect(getDisplayTexts(fixture).hours).toBe('13');
 			expect((fixture.nativeElement as HTMLElement).querySelector('.timePicker-fieldset-meridiem')).toBeNull();
+		});
+
+		it('should display the hours with two digits in a locale that pads them', () => {
+			// Act
+			const fixture = createLocalizedHost('fr-FR', '03:12:00');
+
+			// Assert
+			expect(getDisplayTexts(fixture)).toEqual({ hours: '03', minutes: '12' });
+		});
+
+		it('should display the hours with a single digit in a locale that does not pad them', () => {
+			// Act
+			const fixture = createLocalizedHost('en-US', '03:12:00');
+
+			// Assert
+			expect(getDisplayTexts(fixture)).toEqual({ hours: '3', minutes: '12' });
 		});
 
 		it('should switch the hours to the afternoon when picking PM', () => {

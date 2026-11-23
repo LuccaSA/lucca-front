@@ -24,6 +24,7 @@
 			@include center;
 		}
 
+		// stylelint-disable-next-line selector-disallowed-list -- Deprecated: .table &. Kept for consumer overrides.
 		.table &,
 		.indexTable &,
 		.dataTable & {

@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface ThemeStory {}
 
@@ -16,8 +17,8 @@ export default {
 
 function getTemplate(args: ThemeStory): string {
 	return `<div class="highlightSection">
-	<div class="highlightSection-bubbleStart" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
-	<div class="highlightSection-bubbleEnd" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleStart" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleEnd" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
 	<div class="highlightSection-content">
 		<div class="highlightSection-content-slot">
 			<p class="pr-u-fontWeightSemiBold">White</p>
@@ -26,8 +27,8 @@ function getTemplate(args: ThemeStory): string {
 </div>
 
 <div class="highlightSection mod-light">
-	<div class="highlightSection-bubbleStart" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
-	<div class="highlightSection-bubbleEnd" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleStart" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleEnd" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
 	<div class="highlightSection-content">
 		<div class="highlightSection-content-slot">
 			<p class="pr-u-fontWeightSemiBold">Light</p>
@@ -36,8 +37,8 @@ function getTemplate(args: ThemeStory): string {
 </div>
 
 <div class="highlightSection mod-dark">
-	<div class="highlightSection-bubbleStart" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
-	<div class="highlightSection-bubbleEnd" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleStart" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
+	<div class="highlightSection-bubbleEnd" [innerHtml]="'${CDN_URL}/transverse/prisme/visuals/highlight-section/bubbles-1.svg' | luSafeExternalSvg"></div>
 	<div class="highlightSection-content">
 		<div class="highlightSection-content-slot">
 			<p class="pr-u-fontWeightSemiBold">Dark</p>

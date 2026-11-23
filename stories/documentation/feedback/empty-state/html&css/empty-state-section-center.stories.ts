@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface EmptyStateSectionCenterStory {}
 
@@ -21,7 +22,7 @@ function getTemplate(args: EmptyStateSectionCenterStory): string {
 			<span
 				class="emptyState-content-icon bubbleIllustration mod-action mod-L"
 				aria-hidden="true"
-				[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/bubble-illustration/calendar.svg' | luSafeExternalSvg"
+				[innerHtml]="'${CDN_URL}/transverse/prisme/visuals/bubble-illustration/calendar.svg' | luSafeExternalSvg"
 			></span>
 			<div class="emptyState-content-text">
 				<h3 class="emptyState-content-heading">Empty State</h3>

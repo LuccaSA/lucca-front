@@ -19,14 +19,14 @@
 			[autocomplete]="autocomplete() ? (autocomplete() === 'off' ? 'off' : 'tel-country-code') : null"
 		>
 			<ng-container *luOption="let prefixOption; select: selectRef"
-				><img class="phoneNumber-option-flag" src="https://cdn.lucca.fr/assets/misc/flags/{{ prefixOption.country }}.svg" alt="" />{{
+				><img class="phoneNumber-option-flag" src="{{ cdnUrl }}/assets/misc/flags/{{ prefixOption.country }}.svg" alt="" />{{
 					prefixOption.name
 				}}
 				(+{{ prefixOption.prefix }})
 			</ng-container>
 			<ng-container *luDisplayer="let prefixOption; select: selectRef"
 				><img
-					src="https://cdn.lucca.fr/assets/misc/flags/{{ prefixOption.country }}.svg"
+					src="{{ cdnUrl }}/assets/misc/flags/{{ prefixOption.country }}.svg"
 					alt="{{ prefixOption.country }} +{{ prefixOption.prefix }}"
 					class="phoneNumber-countryCode-flag"
 				/>

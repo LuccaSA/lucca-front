@@ -8,8 +8,10 @@
 	position: relative;
 	color: var(--components-formLabel-color);
 	font: var(--components-formLabel-font);
-	font-size: var(--components-formLabel-fontSize); // Deprecated
-	line-height: var(--components-formLabel-lineHeight); // Deprecated
+	// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+	font-size: var(--components-formLabel-fontSize);
+	line-height: var(--components-formLabel-lineHeight);
+	// stylelint-enable declaration-property-value-disallowed-list
 	inline-size: var(--components-formLabel-width);
 	padding-inline-end: var(--components-formLabel-paddingRight);
 	cursor: var(--components-formLabel-cursor);

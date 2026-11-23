@@ -7,6 +7,9 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { generateInputs, intlArgType, setStoryOptions } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
+// `TimeChangeEvent` is not exported by `@lucca-front/ng/time`.
+type TimeChangeEvent = Parameters<TimePickerComponent['timeChange']['emit']>[0];
+
 export default {
 	title: 'Documentation/Forms/Time/Angular/Basic',
 	decorators: [
@@ -21,14 +24,14 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie la taille du champ.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessage: {
 			control: {
 				type: 'text',
 			},
 			description: 'Ajoute un texte descriptif (aide, erreur, etc.) sous le champ de formulaire.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		inlineMessageState: {
 			options: setStoryOptions(INLINE_MESSAGE_STATE),
@@ -36,16 +39,16 @@ export default {
 				type: 'select',
 			},
 			description: 'Modifie l’état de l’inline message.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		tooltip: {
 			if: { arg: 'hiddenLabel', truthy: false },
 			description: 'Affiche une icône (?) associée à une info-bulle.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		hiddenLabel: {
 			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écran.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
 		},
 		label: {
 			control: {
@@ -94,12 +97,18 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Force l’affichage de l’indicateur AM/PM',
-			table: { category: 'inputs' },
+			description: 'Force (`true`) ou empêche (`false`) l’affichage de l’indicateur AM/PM. Sans valeur (`null`), l’affichage dépend de la locale.',
+			table: { category: 'inputs', defaultValue: { summary: 'null' } },
 		},
 		presentation: {
 			description: '[v21.1] Transforme le champ de formulaire en donnée textuelle non éditable.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (form-field)' },
+		},
+		timeChange: {
+			description: 'Événement déclenché lorsque l’utilisateur modifie l’heure. Émet la nouvelle et la précédente valeur.',
+			action: 'timeChange',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'TimeChangeEvent' } },
 		},
 		intl: intlArgType(luTimePickerTranslations, 'TimePickerTranslations'),
 	},
@@ -107,11 +116,15 @@ export default {
 
 export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { required: boolean; presentation: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, presentation, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, presentation, timeChange, ...inputArgs } = args;
+		const meridiemArg = forceMeridiemDisplay === true || forceMeridiemDisplay === false ? ` [forceMeridiemDisplay]="${forceMeridiemDisplay}"` : '';
 		return {
+			props: {
+				onTimeChange: (event: TimeChangeEvent) => timeChange?.(event),
+			},
 			template: `
 <lu-form-field [label]="labelID" [rolePresentationLabel]="true"${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, presentation }, argTypes)}>
-	<lu-time-picker label="${label}"${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
+	<lu-time-picker label="${label}"${generateInputs(inputArgs, argTypes)}${meridiemArg} [(ngModel)]="example" (timeChange)="onTimeChange($event)" />
 	<ng-template #labelID>
 		<span aria-hidden="true">${label}</span>
 	</ng-template>
@@ -132,6 +145,7 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		disabled: false,
 		step: 'PT1M',
 		max: '23:59:59',
+		forceMeridiemDisplay: null,
 		presentation: false,
 	},
 };

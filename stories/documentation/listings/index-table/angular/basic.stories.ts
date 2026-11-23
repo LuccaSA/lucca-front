@@ -1,6 +1,6 @@
 import { HiddenArgType } from '@/helpers/common-arg-types';
 import { setStoryOptions } from '@/helpers/stories';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
@@ -10,6 +10,7 @@ import {
 	IndexTableActionComponent,
 	IndexTableActionFileComponent,
 	IndexTableBodyComponent,
+	IndexTableBodyGroupDirective,
 	IndexTableComponent,
 	IndexTableFootComponent,
 	IndexTableHeadComponent,
@@ -29,58 +30,95 @@ export default {
 		bob: HiddenArgType,
 		empty: {
 			description: 'Affiche un empty state à la place des lignes de tableau.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		layoutFixed: {
 			description: 'Applique une largeur fixe aux colonnes.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		responsive: {
+			control: false,
+			description: 'Applique des modificateurs selon la taille de l’écran (ex. : `{ layoutFixedAtMediaMinS: true }`).',
+			table: { category: 'inputs', type: { summary: "ResponsiveConfig<'layoutFixed', true>" }, defaultValue: { summary: '{}' } },
 		},
 		selectable: {
 			description:
 				'Rend les lignes du tableau sélectionnables via des checkbox. <kbd>⇧ Shift</kbd> + clic (ou <kbd>⇧ Shift</kbd> + <kbd>Espace</kbd>) sur une checkbox coche ou décoche toutes les lignes depuis la dernière checkbox de ligne cliquée (« Tout sélectionner » annule ce point de départ), hors lignes désactivées et groupes repliés. La plage est limitée à la page affichée : avec <code>@for (…; track $index)</code>, les lignes sont réutilisées d’une page à l’autre et la dernière checkbox cliquée reste mémorisée, préférer un <code>track</code> sur un identifiant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
+		selected: {
+			name: '↳ selected',
+			if: { arg: 'selectable', truthy: true },
+			control: false,
+			description: 'Indique si la ligne est sélectionnée. Two-way.',
+			table: { category: 'models (tr[luIndexTableRow])', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
+		},
+		selectedLabel: {
+			name: '↳ selectedLabel',
+			if: { arg: 'selectable', truthy: true },
+			control: false,
+			description: 'Libellé de la checkbox de sélection d’une ligne. La checkbox n’est affichée que si ce libellé est renseigné.',
+			table: { category: 'inputs (tr[luIndexTableRow])', type: { summary: 'string | null' }, defaultValue: { summary: 'null' } },
 		},
 		mixed: {
 			name: '↳ mixed',
 			if: { arg: 'selectable', truthy: true },
 			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
-			table: { category: 'inputs' },
+			table: { category: 'inputs (tr[luIndexTableRow])', defaultValue: { summary: 'false' } },
 		},
 		disabled: {
 			name: '↳ disabled',
 			if: { arg: 'selectable', truthy: true },
+			description: 'Désactive la checkbox de sélection d’une ligne.',
+			table: { category: 'inputs (tr[luIndexTableRow])', defaultValue: { summary: 'false' } },
 		},
 		action: {
 			options: ['link', 'button', 'user', 'file'],
 			control: {
 				type: 'select',
 			},
-			description: 'Modifie le type d’élément HTML cliquable.',
-			table: { category: 'inputs' },
+			description: '[Story] Modifie le type d’élément HTML cliquable.',
+			table: { category: 'story' },
 		},
 		hiddenLabel: {
 			description: 'Masque les cellules d’en-tête du tableau.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (th[luIndexTableCell])', defaultValue: { summary: 'false' } },
+		},
+		actions: {
+			control: false,
+			description: 'Indique que la colonne contient les actions secondaires. Son libellé est masqué visuellement.',
+			table: { category: 'inputs (th[luIndexTableCell])', defaultValue: { summary: 'false' } },
+		},
+		inlineSize: {
+			control: false,
+			description: 'Largeur fixe de la colonne, à utiliser avec `layoutFixed`.',
+			table: { category: 'inputs (th[luIndexTableCell])', type: { summary: 'number' }, defaultValue: { summary: '0' } },
 		},
 		group: {
-			description: 'Regroupe des lignes de tableau en les rendant dépliables.',
-			table: { category: 'inputs' },
+			description: 'Libellé d’un groupe de lignes dépliables. Contenu riche : directive <code>luIndexTableBodyGroup</code> (l’input prévaut).',
+			table: { category: 'inputs (tbody[luIndexTableBody])', type: { summary: 'PortalContent | null' }, defaultValue: { summary: 'null' } },
+		},
+		richContent: {
+			if: { arg: 'group', truthy: true },
+			description: 'Remplace l’input <code>group</code> par un contenu riche projeté avec la directive <code>luIndexTableBodyGroup</code>.',
+			table: { category: 'story' },
 		},
 		expanded: {
+			name: '↳ expanded',
 			if: { arg: 'group', truthy: true },
-			description: 'Affiche le groupe dans son état déplié.',
-			table: { category: 'models' },
+			description: 'Affiche le groupe dans son état déplié. Two-way.',
+			table: { category: 'models (tbody[luIndexTableBody])', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } },
 		},
 		groupButtonAlt: {
 			name: '↳ groupButtonAlt',
 			if: { arg: 'group', truthy: true },
 			description: 'Texte restitué par le bouton du groupe.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (tbody[luIndexTableBody])', defaultValue: { summary: 'null' } },
 		},
 		stack: {
 			control: { type: 'range', min: 1, max: 3 },
 			description: 'Affiche une ligne sous la forme d’un empilement d’éléments.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (tr[luIndexTableRow])', defaultValue: { summary: '1' } },
 		},
 		sort: {
 			options: setStoryOptions(INDEX_TABLE_SORT),
@@ -88,18 +126,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Définit l’état de tri d’une cellule d’en-tête.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (th[luIndexTableCell])', type: { summary: 'IndexTableSort | null' }, defaultValue: { summary: 'null' } },
 		},
 		sortWithEllipsis: {
+			name: '↳ sortWithEllipsis',
 			if: { arg: 'sort', truthy: true },
 			description: 'Tronque le libellé du header avec une ellipsis si la colonne n’offre pas assez de largeur.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (th[luIndexTableCell])', defaultValue: { summary: 'false' } },
 		},
 		sortChange: {
 			description: 'Événement déclenché lorsque l’utilisateur change le tri de la cellule d’en-tête.',
 			action: 'sortChange',
 			control: false,
-			table: { category: 'outputs', type: { summary: 'IndexTableSort' } },
+			table: { category: 'outputs (th[luIndexTableCell])', type: { summary: 'IndexTableSort' } },
 		},
 		align: {
 			options: setStoryOptions(INDEX_TABLE_ALIGN),
@@ -107,27 +146,27 @@ export default {
 				type: 'select',
 			},
 			description: 'Aligne le contenu des cellules horizontalement.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (th/td[luIndexTableCell])', defaultValue: { summary: 'null' } },
 		},
-		allowSelection: {
-			description: 'Permet de sélectionner le texte d’une cellule. Désactive l’action principal au clic sur la cellule.',
-			table: { category: 'inputs' },
+		allowTextSelection: {
+			description: 'Permet de sélectionner le texte d’une cellule. Désactive l’action principale au clic sur la cellule.',
+			table: { category: 'inputs (td[luIndexTableCell])', defaultValue: { summary: 'false' } },
 		},
 		allowAction: {
-			description: 'Permet de rendre une cellule cliquable. Désactive l’action principal au clic sur la cellule.',
-			table: { category: 'inputs' },
+			description: '[Story] Permet de rendre une cellule cliquable. Désactive l’action principale au clic sur la cellule.',
+			table: { category: 'story' },
 		},
-		intermediateFooter: {
+		tfoot: {
 			description: 'Présente une ligne de tableau sous la forme d’un footer intermédiaire. Exemple : Sous-total.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs (td[luIndexTableCell])', defaultValue: { summary: 'false' } },
 		},
 		footer: {
-			description: 'Présente le tableau avec un footer.',
-			table: { category: 'inputs' },
+			description: '[Story] Présente le tableau avec un footer.',
+			table: { category: 'story' },
 		},
 		pagination: {
-			description: 'Présente le tableau avec une pagination.',
-			table: { category: 'inputs' },
+			description: '[Story] Présente le tableau avec une pagination.',
+			table: { category: 'story' },
 		},
 	},
 	decorators: [
@@ -135,6 +174,7 @@ export default {
 			imports: [
 				IndexTableComponent,
 				IndexTableBodyComponent,
+				IndexTableBodyGroupDirective,
 				IndexTableRowComponent,
 				IndexTableRowCellComponent,
 				IndexTableRowCellHeaderComponent,
@@ -148,7 +188,6 @@ export default {
 				LuUserPopoverComponent,
 				LuUserPopoverDirective,
 				EmptyStateSectionComponent,
-				HttpClientModule,
 				NumericBadgeComponent,
 			],
 		}),
@@ -163,10 +202,11 @@ export default {
 			mixed,
 			disabled,
 			group,
+			richContent,
 			allowAction,
-			allowSelection,
+			allowTextSelection,
 			groupButtonAlt,
-			intermediateFooter,
+			tfoot,
 			action,
 			hiddenLabel,
 			sort,
@@ -186,16 +226,15 @@ export default {
 		const mixedAttr = mixed ? ` mixed` : ``;
 		const selectableParam = selectable ? ` selectedLabel="Sélectionner cette ligne"` : ``;
 		const selectableAllParam = selectable ? ` selectedLabel="Sélectionner toutes les lignes"` : ``;
-		const groupAttr = group ? ` [group]="samplePortalContent"` : ``;
-		const allowSelectionAttr = allowSelection ? ` allowTextSelection` : ``;
+		const allowTextSelectionAttr = allowTextSelection ? ` allowTextSelection` : ``;
 		const allowActionTpl = allowAction ? `<a href="#">Content</a>` : `Content`;
-		const intermediateFooterAttr = intermediateFooter ? ` tfoot` : ``;
+		const tfootAttr = tfoot ? ` tfoot` : ``;
 		const hiddenLabelAttr = hiddenLabel ? ` hiddenLabel` : ``;
 		const sortAttr = sort ? ` sort="${sort}" (sortChange)="sortChange($event)"` : ``;
 		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
 		const groupExpandedAttr = expanded && group ? ` [expanded]="true"` : ``;
-		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"` : ``;
+		const groupButtonAltAttr = group ? ` groupButtonAlt="${groupButtonAlt}"${richContent ? `` : ` group="Group label"`}` : ``;
 		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
 		const emptyAttr = empty ? ` empty` : ``;
 		const footerTpl = footer
@@ -251,20 +290,18 @@ export default {
 			<td luIndexTableCell>Content</td>
 		</tr>
 		<tr luIndexTableRow${selectableParam}${disabledAttr}>
-			<td luIndexTableCell colspan="3"${alignAttr}${intermediateFooterAttr}>Content</td>
+			<td luIndexTableCell colspan="3"${alignAttr}${tfootAttr}>Content</td>
 		</tr>
 		<tr luIndexTableRow${selectableParam}>
 			<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
-			<td luIndexTableCell${allowSelectionAttr}>${allowActionTpl}</td>
+			<td luIndexTableCell${allowTextSelectionAttr}>${allowActionTpl}</td>
 			<td luIndexTableCell>Content Content Content</td>
 		</tr>`;
-		const samplePortalContentTpl = group
-			? `
-<ng-template #samplePortalContent>
-	Group label
-	<lu-numeric-badge [value]="8" />
-</ng-template>`
-			: ``;
+		const groupTpl =
+			group && richContent
+				? `
+		<ng-container luIndexTableBodyGroup>Group label <lu-numeric-badge [value]="8" /></ng-container>`
+				: ``;
 
 		return {
 			props: { sortChange },
@@ -276,10 +313,10 @@ export default {
 			<th luIndexTableCell${alignAttr}${sortAttr}${sortWithEllipsisAttr}>Label</th>
 		</tr>
 	</thead>
-	<tbody luIndexTableBody${groupAttr}${groupButtonAltAttr}${groupExpandedAttr}>
+	<tbody luIndexTableBody${groupButtonAltAttr}${groupExpandedAttr}>${groupTpl}
 		${tbodyTpl}
 	</tbody>${footerTpl}${paginationTpl}
-</lu-index-table>${samplePortalContentTpl}
+</lu-index-table>
 `,
 		};
 	},
@@ -302,13 +339,14 @@ export const Basic: StoryObj = {
 		stack: 1,
 
 		group: false,
+		richContent: false,
 		groupButtonAlt: 'Afficher X lignes supplémentaires',
 		expanded: false,
 
-		allowSelection: false,
+		allowTextSelection: false,
 		allowAction: false,
 
-		intermediateFooter: false,
+		tfoot: false,
 		footer: false,
 		pagination: false,
 	},

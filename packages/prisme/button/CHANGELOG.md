@@ -51,7 +51,7 @@
 
 - `delete` input — use `critical` instead.
 - `.button.mod-text` class — use `luButton="ghost"`.
-- `.button.mod-deleted` class — use the `critical` input.
+- `.button.mod-delete` class — use the `critical` input.
 - `.button.loading` class — use `state="loading"`.
 
 ### 20.1.0

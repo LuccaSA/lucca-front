@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { HighlightSectionComponent } from '@lucca-front/ng/highlight-section';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'highlight-section-stories',
@@ -10,7 +11,9 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	imports: [HighlightSectionComponent, LuSafeExternalSvgPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class HighlightSectionStory {}
+class HighlightSectionStory {
+	protected readonly cdnUrl = CDN_URL;
+}
 
 export default {
 	title: 'QA/HighlightSection',

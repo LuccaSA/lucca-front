@@ -4,6 +4,7 @@
 		<lu-chip
 			[attr.tabindex]="isDisabled() ? null : $first ? 0 : -1"
 			[disabled]="isDisabled()"
+			[class.mod-clickable]="!isDisabled()"
 			(click)="!isDisabled() ? insertTag(tag) : null"
 			(keyup.space)="!isDisabled() ? insertTag(tag) : null"
 			(keyup.enter)="!isDisabled() ? insertTag(tag) : null"

@@ -98,6 +98,16 @@ export default {
 			description: 'Définit une valeur maximale.',
 			table: { category: 'inputs' },
 		},
+		minimumFractionDigits: {
+			type: 'number',
+			description: '[v22.1.2] Nombre minimal de décimales affichées. Remplace la valeur par défaut du format (et de la devise).',
+			table: { category: 'inputs' },
+		},
+		maximumFractionDigits: {
+			type: 'number',
+			description: '[v22.1.2] Nombre maximal de décimales affichées et conservées à la saisie. Remplace la valeur par défaut du format (et de la devise).',
+			table: { category: 'inputs' },
+		},
 		formatStyle: {
 			options: ['decimal', 'percent', 'currency', 'unit'],
 			control: {
@@ -107,7 +117,7 @@ export default {
 			table: { category: 'inputs', defaultValue: { summary: 'decimal' } },
 		},
 		currency: {
-			options: ['EUR', 'USD', 'CNY', 'JPY'],
+			options: ['EUR', 'USD', 'CNY', 'JPY', 'RSD'],
 			control: {
 				type: 'select',
 			},

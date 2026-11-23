@@ -1,10 +1,13 @@
 @mixin vars {
 	--components-sortableList-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
 	--components-sortableList-handler-size: var(--pr-t-font-body-M-lineHeight);
+	--components-sortableList-handler-cursor: move;
 	--components-sortableList-description-font: var(--pr-t-font-body-M);
 	--components-sortableList-helper-font: var(--pr-t-font-body-S);
+	--components-sortableList-item-userSelect: auto;
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-sortableList-description-fontSize: var(--pr-t-font-body-M-fontSize);
 	--components-sortableList-description-lineHeight: var(--pr-t-font-body-M-lineHeight);
+	// stylelint-enable property-disallowed-list
 }

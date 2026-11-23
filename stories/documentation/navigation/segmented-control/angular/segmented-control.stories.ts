@@ -1,6 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
-import { SegmentedControlComponent, SegmentedControlFilterComponent } from '@lucca-front/ng/segmented-control';
+import { SegmentedControlComponent, SegmentedControlFilterComponent, SegmentedControlFilterLabelDirective } from '@lucca-front/ng/segmented-control';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
@@ -8,6 +7,7 @@ import { StoryModelDisplayComponent } from '@/helpers/story-model-display.compon
 interface segmentedControlBasicStory {
 	small: boolean;
 	withNumericBadge: boolean;
+	richContent: boolean;
 	vertical: boolean;
 	ariaLabel: string;
 }
@@ -15,7 +15,7 @@ interface segmentedControlBasicStory {
 export default {
 	decorators: [
 		moduleMetadata({
-			imports: [NumericBadgeComponent, SegmentedControlComponent, SegmentedControlFilterComponent, FormsModule, StoryModelDisplayComponent],
+			imports: [SegmentedControlComponent, SegmentedControlFilterComponent, SegmentedControlFilterLabelDirective, FormsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -24,8 +24,12 @@ export default {
 			table: { category: 'inputs' },
 		},
 		withNumericBadge: {
-			description: 'Présente un exemple avec un Numeric Badge.',
-			table: { category: 'inputs' },
+			description: 'Ajoute un compteur à la première option, via l’input <code>numericBadge</code>.',
+			table: { category: 'story' },
+		},
+		richContent: {
+			description: 'Remplace l’input <code>label</code> de la première option par un contenu riche.',
+			table: { category: 'story' },
 		},
 		vertical: {
 			description: 'Affiche le composant en vue verticale.',
@@ -35,6 +39,26 @@ export default {
 			description: "Nom accessible du groupe d'options, restitué aux technologies d'assistance.",
 			table: { category: 'inputs' },
 		},
+		label: {
+			control: false,
+			description: 'Libellé du filtre. Contenu riche : directive <code>luSegmentedControlFilterLabel</code> (l’input prévaut).',
+			table: { category: 'inputs (segmented-control-filter)', type: { summary: 'PortalContent' } },
+		},
+		numericBadge: {
+			control: false,
+			description: 'Affiche un Numeric Badge après le libellé, généralement un compteur.',
+			table: { category: 'inputs (segmented-control-filter)', type: { summary: 'number | null' }, defaultValue: { summary: 'null' } },
+		},
+		value: {
+			control: false,
+			description: 'Valeur du filtre (obligatoire).',
+			table: { category: 'inputs (segmented-control-filter)', type: { summary: 'T' } },
+		},
+		disabled: {
+			control: false,
+			description: 'Désactive le filtre.',
+			table: { category: 'inputs (segmented-control-filter)', defaultValue: { summary: 'false' } },
+		},
 	},
 	title: 'Documentation/Navigation/segmentedControl/Angular/Basic',
 } as Meta;
@@ -43,13 +67,15 @@ function getTemplate(args: segmentedControlBasicStory): string {
 	const size = args.small ? ` small` : ``;
 	const vertical = args.vertical ? ` vertical` : ``;
 	const ariaLabel = args.ariaLabel ? ` [ariaLabel]="ariaLabel"` : ``;
-	const numericBadgeComponent = args.withNumericBadge ? ` <lu-numeric-badge value="8" />` : ``;
+	const numericBadge = args.withNumericBadge ? ` [numericBadge]="8"` : ``;
+	const firstFilter = args.richContent
+		? `<lu-segmented-control-filter value="0"${numericBadge}>
+		<span luSegmentedControlFilterLabel><strong>Lorem</strong> ipsum</span>
+	</lu-segmented-control-filter>`
+		: `<lu-segmented-control-filter label="Lorem" value="0"${numericBadge} />`;
 
-	return `<ng-template #label>
-	Lorem${numericBadgeComponent}
-</ng-template>
-<lu-segmented-control${size}${vertical}${ariaLabel} [(ngModel)]="sample">
-	<lu-segmented-control-filter [label]="label" value="0" />
+	return `<lu-segmented-control${size}${vertical}${ariaLabel} [(ngModel)]="sample">
+	${firstFilter}
 	<lu-segmented-control-filter label="Ipsum" value="1" />
 	<lu-segmented-control-filter label="Dolor sit amet" value="2" />
 	<lu-segmented-control-filter label="Consectetur adipisicing elit" value="3" />
@@ -69,6 +95,7 @@ export const Basic: StoryObj<segmentedControlBasicStory> = {
 		withNumericBadge: false,
 		vertical: false,
 		ariaLabel: 'Lorem ipsum',
+		richContent: false,
 	},
 	render: Template,
 };

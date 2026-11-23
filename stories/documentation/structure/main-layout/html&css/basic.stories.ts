@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MAIN_LAYOUT_ILLUSTRATION_END_START, MAIN_LAYOUT_ILLUSTRATION_START_END } from '@lucca-front/ng/main-layout';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface MainLayoutHTMLBasicStory {
 	header: boolean;
@@ -88,7 +89,7 @@ export default {
 		},
 	},
 	render: (args: MainLayoutHTMLBasicStory) => {
-		const domain = 'https://cdn.lucca.fr';
+		const domain = CDN_URL;
 		const path = '/transverse/prisme/visuals/main-layout/';
 		const extension = '.svg';
 

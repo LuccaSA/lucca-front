@@ -1,0 +1,6 @@
+<nav class="container-fullSize menu">
+	<a class="menu-link" routerLink="general" routerLinkActive="is-active">General</a>
+	@for (entry of entries; track entry.link) {
+		<a class="menu-link" [routerLink]="entry.link" routerLinkActive="is-active">{{ entry.name }}</a>
+	}
+</nav>

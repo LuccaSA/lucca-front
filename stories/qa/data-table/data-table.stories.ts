@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	DataTableBodyComponent,
+	DataTableBodyGroupDirective,
 	DataTableComponent,
 	DataTableFootComponent,
 	DataTableHeadComponent,
@@ -23,6 +24,7 @@ import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'data-table-stories',
@@ -31,6 +33,7 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 		DataTableComponent,
 		DataTableHeadComponent,
 		DataTableBodyComponent,
+		DataTableBodyGroupDirective,
 		DataTableFootComponent,
 		DataTableRowComponent,
 		DataTableRowCellComponent,
@@ -64,6 +67,8 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DataTableStory {
+	protected readonly cdnUrl = CDN_URL;
+
 	listItem: Array<{ id: number; header: string; cell: string }> = [
 		{ id: 1, header: 'Header 1', cell: 'cell 1' },
 		{ id: 2, header: 'Header 2', cell: 'cell 2' },

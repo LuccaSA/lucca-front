@@ -10,9 +10,11 @@ import { OpenDateRange } from '../calendar2/open-date-range';
 import { getLocalizedDateFormat } from '../date-format';
 import { DateRangeInputComponent } from './date-range-input.component';
 import localeFr from '@angular/common/locales/fr';
+import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(localeFr, 'fr-FR');
+registerLocaleData(localeDe, 'de');
 
 @Component({
 	template: `<lu-date-range-input [(ngModel)]="selected" (ngModelChange)="ngModelChangeCallback($event)" />`,
@@ -37,12 +39,33 @@ class FormControlHostComponent {
 }
 
 @Component({
+	template: `<lu-date-range-input mode="month" [formControl]="formControl" />`,
+	imports: [ReactiveFormsModule, DateRangeInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class MonthFormControlHostComponent {
+	formControl = new FormControl<DateRange | null>(null);
+}
+
+@Component({
 	template: `<lu-filter-pill label="Période"><lu-date-range-input [formControl]="formControl" /></lu-filter-pill>`,
 	imports: [ReactiveFormsModule, DateRangeInputComponent, FilterPillComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FilterPillHostComponent {
 	formControl = new FormControl<DateRange | null>(null);
+}
+
+const defaultRange: DateRange = { start: new Date(2025, 0, 1), end: new Date(2025, 0, 31) };
+
+@Component({
+	template: `<lu-filter-pill label="Période"><lu-date-range-input [formControl]="formControl" [defaultValue]="defaultValue" /></lu-filter-pill>`,
+	imports: [ReactiveFormsModule, DateRangeInputComponent, FilterPillComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DefaultValueFilterPillHostComponent {
+	readonly defaultValue = { ...defaultRange };
+	readonly formControl = new FormControl<DateRange | null>({ ...defaultRange });
 }
 
 describe('DateRangeInputComponent', () => {
@@ -238,6 +261,30 @@ describe('DateRangeInputComponent', () => {
 			scope: 'day',
 		});
 	});
+
+	for (const { locale, start, end } of [
+		{ locale: 'fr-FR', start: '06/2025', end: '09/2025' },
+		{ locale: 'de', start: '6/2025', end: '9/2025' },
+	]) {
+		it(`should emit the month range when the user types months with a keyboard in month mode in ${locale}`, () => {
+			TestBed.configureTestingModule({
+				imports: [MonthFormControlHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: locale }],
+			});
+
+			const fixture = TestBed.createComponent(MonthFormControlHostComponent);
+			fixture.detectChanges();
+
+			typeInElement(start, getInput(fixture, 'start'), fixture);
+			typeInElement(end, getInput(fixture, 'end'), fixture);
+
+			expect(fixture.componentInstance.formControl.value).toEqual({
+				start: new Date('2025-06-01T00:00:00.000Z'),
+				end: new Date('2025-09-01T00:00:00.000Z'),
+				scope: 'month',
+			});
+		});
+	}
 
 	it('should emit value when the user enters only the end date with a keyboard', () => {
 		// Arrange
@@ -727,6 +774,43 @@ describe('DateRangeInputComponent', () => {
 			const fixture = createFilterPillHost({ end: new Date(2025, 5, 20) });
 
 			expect(getPillValue(fixture)).toBe('jusqu’au 20/06/2025');
+		});
+	});
+
+	describe('defaultValue in a filter pill', () => {
+		function createDefaultValueHost(): { fixture: ComponentFixture<DefaultValueFilterPillHostComponent>; pill: FilterPillComponent; pillButton: HTMLElement } {
+			TestBed.configureTestingModule({
+				imports: [DefaultValueFilterPillHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+			const fixture = TestBed.createComponent(DefaultValueFilterPillHostComponent);
+			fixture.detectChanges();
+			return {
+				fixture,
+				pill: fixture.debugElement.query(By.directive(FilterPillComponent)).componentInstance as FilterPillComponent,
+				pillButton: (fixture.nativeElement as HTMLElement).querySelector('.filterPill') as HTMLElement,
+			};
+		}
+
+		it('should display the pill as neutral while it holds its default value', () => {
+			const { fixture, pillButton } = createDefaultValueHost();
+
+			expect(pillButton.classList).toContain('is-default');
+			expect((fixture.nativeElement as HTMLElement).querySelector('lu-clear')).toBeNull();
+		});
+
+		it('should restore the default value when clearing the pill', () => {
+			const { fixture, pill, pillButton } = createDefaultValueHost();
+			fixture.componentInstance.formControl.setValue({ start: new Date(2025, 5, 1), end: new Date(2025, 5, 30) });
+			fixture.detectChanges();
+
+			expect(pillButton.classList).not.toContain('is-default');
+
+			pill.clear();
+			fixture.detectChanges();
+
+			expect(fixture.componentInstance.formControl.value).toEqual(defaultRange);
+			expect(pillButton.classList).toContain('is-default');
 		});
 	});
 });

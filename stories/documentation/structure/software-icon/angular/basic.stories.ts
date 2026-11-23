@@ -22,16 +22,25 @@ export default {
 			table: { category: 'inputs' },
 		},
 		disabled: {
+			control: {
+				type: 'boolean',
+			},
 			description: 'Marque le produit comme inactif.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		iconAlt: {
+			control: {
+				type: 'text',
+			},
 			description: 'Texte alternatif de l’illustration restitué par les lecteurs d’écran.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: '' } },
 		},
 		withTooltip: {
+			control: {
+				type: 'boolean',
+			},
 			description: 'Ajoute une info-bulle qui reprend l’alternative textuelle de l’icône. (Ce paramètre est automatiquement activé quand l’icône est dans son wrapper.)',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 	},
 	decorators: [

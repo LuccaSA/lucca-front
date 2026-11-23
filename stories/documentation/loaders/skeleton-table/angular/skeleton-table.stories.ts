@@ -8,12 +8,20 @@ export default {
 
 export const Template: StoryObj<SkeletonTableComponent> = {
 	argTypes: {
+		tableBodyOnly: {
+			description: 'N’affiche que les lignes du corps du tableau (sans en-tête), pour un usage à l’intérieur d’un tableau existant.',
+			control: {
+				type: 'boolean',
+			},
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
+		},
 		cols: {
 			description: 'Nombre de colonnes.',
 			control: {
 				type: 'number',
 				min: 1,
 			},
+			table: { category: 'inputs', defaultValue: { summary: '5' } },
 		},
 		rows: {
 			description: 'Nombre de lignes.',
@@ -21,13 +29,16 @@ export const Template: StoryObj<SkeletonTableComponent> = {
 				type: 'number',
 				min: 1,
 			},
+			table: { category: 'inputs', defaultValue: { summary: '8' } },
 		},
 		colsAlign: {
 			description: 'Alignement horizontal du contenu des colonnes. La clé correspond au numéro de la colonne (en partant de 0).',
+			table: { category: 'inputs', type: { summary: "Record<number, 'start' | 'center' | 'end'>" }, defaultValue: { summary: '{}' } },
 		},
 	},
 
 	args: {
+		tableBodyOnly: false,
 		cols: 5,
 		rows: 8,
 		colsAlign: { '3': 'center', '4': 'end' },

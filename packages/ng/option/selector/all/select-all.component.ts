@@ -7,7 +7,8 @@ import { ALuOptionSelector, ILuOptionSelector } from '../option-selector.model';
 import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 
 /**
- * @deprecated
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-option-select-all',

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { CDN_URL } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { FancyBoxBackgroundEndStart, FancyBoxBackgroundStartEnd, FancyBoxForegroundEndStart, FancyBoxForegroundStartEnd, FancyBoxSize } from './fancy-box.type';
 
@@ -16,7 +17,7 @@ import { FancyBoxBackgroundEndStart, FancyBoxBackgroundStartEnd, FancyBoxForegro
 	},
 })
 export class FancyBoxComponent {
-	readonly domain = 'https://cdn.lucca.fr';
+	readonly domain = CDN_URL;
 	readonly path = '/transverse/prisme/visuals/fancy-box/';
 	readonly extension = '.svg';
 

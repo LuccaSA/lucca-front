@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
-import { luNullableNumberAttribute, luNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, inject, input, ViewEncapsulation } from '@angular/core';
+import { CDN_URL, luNullableNumberAttribute, luNumberAttribute, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_MAIN_LAYOUT_INSTANCE } from '@lucca-front/ng/main-layout';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { EmptyStateDescriptionDirective } from '../empty-state-description.directive';
+import { EmptyStateSlotTopDirective } from '../empty-state-slot-top.directive';
 import { EmptyStateHeadingLevel, EmptyStateHeadingStyle } from '../empty-state.type';
 
-const DEFAULT_TOP_RIGHT_BACKGROUND = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg';
-const DEFAULT_TOP_RIGHT_FOREGROUND = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg';
-const DEFAULT_BOTTOM_LEFT_BACKGROUND = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg';
-const DEFAULT_BOTTOM_LEFT_FOREGROUND = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg';
+const DEFAULT_TOP_RIGHT_BACKGROUND = `${CDN_URL}/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg`;
+const DEFAULT_TOP_RIGHT_FOREGROUND = `${CDN_URL}/lucca-front/assets/empty-states/generic/coffee-01.svg`;
+const DEFAULT_BOTTOM_LEFT_BACKGROUND = `${CDN_URL}/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg`;
+const DEFAULT_BOTTOM_LEFT_FOREGROUND = `${CDN_URL}/lucca-front/assets/empty-states/poplee/core-hr-01.svg`;
 
 @Component({
 	selector: 'lu-empty-state-page',
@@ -107,6 +109,10 @@ export class EmptyStatePageComponent {
 	readonly headingLevelValue = computed(() => this.headingLevel() ?? this.hx());
 
 	readonly headingStyleValue = computed(() => this.headingStyle() ?? this.hxStyle());
+
+	protected readonly slotTopSlot = contentChild(EmptyStateSlotTopDirective, { descendants: false });
+
+	protected readonly descriptionSlot = contentChild(EmptyStateDescriptionDirective, { descendants: false });
 
 	public isStringPortalContent(message: PortalContent): message is string {
 		return typeof message === 'string';

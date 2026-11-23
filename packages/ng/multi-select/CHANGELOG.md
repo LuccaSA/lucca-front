@@ -1,3 +1,9 @@
+### 22.1.2
+
+#### Fixed
+
+- Bottom sheet without search no longer shows an empty space above the options.
+
 ### 22.1.0
 
 #### Added

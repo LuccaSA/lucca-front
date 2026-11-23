@@ -53,7 +53,7 @@ export function extractPackageAPI(ngPackage: string, version: VersionConfig, sil
 		const wanted = new Set(selectorFilter);
 		scoped = apis.filter((a) => a.selectors.some((s) => wanted.has(s)));
 		if (scoped.length === 0) {
-			if (!silent) console.warn(`  ⚠️  selectorFilter [${selectorFilter.join(', ')}] matched no class in ${ngPackage} at ${version.tag}`);
+			if (!silent) console.warn(`  ⚠️  selectorFilter [${selectorFilter.join(', ')}] matched no class in ${ngPackage} at ${version.source}`);
 			return null;
 		}
 
@@ -124,7 +124,7 @@ interface CollectedPackage {
 const packageCache = new Map<string, CollectedPackage | null>();
 
 function collectPackage(ngPackage: string, version: VersionConfig, silent: boolean): CollectedPackage | null {
-	const cacheKey = `${ngPackage}@${version.tag}`;
+	const cacheKey = `${ngPackage}@${version.source}`;
 	if (packageCache.has(cacheKey)) return copyCollected(packageCache.get(cacheKey)!);
 
 	const collected = collectPackageUncached(ngPackage, version, silent);
@@ -143,18 +143,18 @@ function copyCollected(c: CollectedPackage | null): CollectedPackage | null {
 function collectPackageUncached(ngPackage: string, version: VersionConfig, silent: boolean): CollectedPackage | null {
 	// Start from the public API entrypoint
 	const publicApiPath = `packages/ng/${ngPackage}/public-api.ts`;
-	const publicApiContent = gitShow(version.tag, publicApiPath);
+	const publicApiContent = gitShow(version.source, publicApiPath);
 
 	if (!publicApiContent) {
-		if (!silent) console.warn(`  ⚠️  No public-api.ts found for ${ngPackage} at ${version.tag}`);
+		if (!silent) console.warn(`  ⚠️  No public-api.ts found for ${ngPackage} at ${version.source}`);
 		return null;
 	}
 
 	// Find all implementation files by following re-exports
-	const implFiles = resolveImplementationFiles(publicApiContent, ngPackage, version.tag);
+	const implFiles = resolveImplementationFiles(publicApiContent, ngPackage, version.source);
 
 	if (implFiles.length === 0) {
-		if (!silent) console.warn(`  ⚠️  No implementation files found for ${ngPackage} at ${version.tag}`);
+		if (!silent) console.warn(`  ⚠️  No implementation files found for ${ngPackage} at ${version.source}`);
 		return null;
 	}
 
@@ -166,10 +166,10 @@ function collectPackageUncached(ngPackage: string, version: VersionConfig, silen
 	let services: ExtractedService[] = [];
 	const deprecatedModules: DeprecatedModule[] = [];
 	for (const filePath of implFiles) {
-		const content = gitShow(version.tag, filePath);
+		const content = gitShow(version.source, filePath);
 		if (!content) continue;
 
-		apis.push(...extractFromFile(content, ngPackage, filePath, version.tag));
+		apis.push(...extractFromFile(content, ngPackage, filePath, version.source));
 		providers.push(...extractProviders(content, filePath));
 		tokens.push(...extractTokens(content, filePath));
 		pipes.push(...extractPipes(content, filePath));

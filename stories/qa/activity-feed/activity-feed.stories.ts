@@ -5,6 +5,7 @@ import { CommentComponent } from '@lucca-front/ng/comment';
 import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { ButtonComponent } from '@lucca/prisme/button';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'activity-feed-stories',
@@ -13,6 +14,8 @@ import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ActivityFeedStory {
+	protected readonly cdnUrl = CDN_URL;
+
 	user = finn;
 	date = new Date();
 }

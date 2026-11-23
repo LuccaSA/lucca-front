@@ -50,7 +50,7 @@ export function readStorySourceFromGit(
 		seen.add(normalizedImport);
 
 		try {
-			const content = gitShowFile(version.tag, normalizedImport);
+			const content = gitShowFile(version.source, normalizedImport);
 			if (!content) continue;
 
 			const extracted = extractStoryEssentials(content);
@@ -79,7 +79,7 @@ export function readStorySourceFromGit(
 
 			// Last resort: the markup lives in a sibling .html file.
 			if (templates.length === 0) {
-				templates = readTemplateUrlFile(content, normalizedImport, version.tag);
+				templates = readTemplateUrlFile(content, normalizedImport, version.source);
 			}
 
 			// A story with no markup has nothing to show: its section would be a heading over an import
@@ -239,7 +239,7 @@ export function readStoryTemplates(importPath: string, version: VersionConfig): 
 	const normalizedImport = importPath.replace(/^[./\\]+/, '');
 	if (/\.\./.test(normalizedImport)) return null;
 
-	const content = gitShowFile(version.tag, normalizedImport);
+	const content = gitShowFile(version.source, normalizedImport);
 	if (!content) return null;
 
 	// Prefer `const code = \`` documentation literals when present:
@@ -257,7 +257,7 @@ export function readStoryTemplates(importPath: string, version: VersionConfig): 
 	if (rendered && rendered.length > 0) return rendered;
 
 	// Last resort: the markup lives in a sibling .html file (templateUrl).
-	const fromFile = readTemplateUrlFile(content, normalizedImport, version.tag);
+	const fromFile = readTemplateUrlFile(content, normalizedImport, version.source);
 	return fromFile.length > 0 ? fromFile : null;
 }
 
@@ -377,7 +377,7 @@ export function resolveStoryFrameworks(stories: StorybookStory[], version: Versi
 		// Several stories share one file — classify it once.
 		let resolved = byPath.get(normalizedImport);
 		if (resolved === undefined) {
-			const content = gitShowFile(version.tag, normalizedImport);
+			const content = gitShowFile(version.source, normalizedImport);
 			if (!content) continue; // absent from this tag — leave the index's default untouched
 			resolved = detectFrameworkFromSource(content);
 			byPath.set(normalizedImport, resolved);
@@ -401,6 +401,22 @@ const IMPORT_EXCLUDE_PATTERNS = [
 	/['"][@./][^'"]*\/helpers(\/|['"])/,
 	/['"]@\/stories\//,          // alias-rooted story assets (e.g. '@/stories/icons-list')
 ];
+
+/** Constants the story evaluator inlines into the markup: their import is story plumbing once resolved. */
+const INLINED_CONSTANTS = new Set(['CDN_URL']);
+
+/** Drops inlined constants from an `@lucca-front/ng/core` import, and the whole line if nothing is left. */
+export function stripInlinedConstants(line: string): string | null {
+	const match = /^import\s*\{([^}]*)\}\s*from\s*(['"])@lucca-front\/ng\/core\2;?$/.exec(line.trim());
+	if (!match) return line;
+	const names = match[1]
+		.split(',')
+		.map((n) => n.trim())
+		.filter(Boolean);
+	const kept = names.filter((n) => !INLINED_CONSTANTS.has(n));
+	if (kept.length === names.length) return line;
+	return kept.length ? `import { ${kept.join(', ')} } from '@lucca-front/ng/core';` : null;
+}
 
 /** Start of an import statement — excludes `import(` and `import.meta`. */
 const IMPORT_START = /^import[\s{'"*]/;
@@ -467,7 +483,10 @@ interface StoryExtraction {
  */
 function extractStoryEssentials(content: string): StoryExtraction | null {
 	// 1. Imports — filter out storybook-related ones
-	const imports = collectImportStatements(content).filter((l) => !IMPORT_EXCLUDE_PATTERNS.some((p) => p.test(l)));
+	const imports = collectImportStatements(content)
+		.filter((l) => !IMPORT_EXCLUDE_PATTERNS.some((p) => p.test(l)))
+		.map(stripInlinedConstants)
+		.filter((l): l is string => l !== null);
 
 	// 2. HTML templates
 	const templates = extractTemplateLiterals(content);
@@ -654,7 +673,7 @@ export function extractBasicUsage(
 	if (/\.\./.test(normalizedImport)) return null;
 
 	try {
-		const content = gitShowFile(version.tag, normalizedImport);
+		const content = gitShowFile(version.source, normalizedImport);
 		if (!content) return null;
 
 		// Prefer the evaluated render — it produces a real, fully-resolved snippet.

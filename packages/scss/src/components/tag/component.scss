@@ -17,8 +17,10 @@
 	white-space: nowrap;
 	border: 0;
 	font: var(--components-tag-font);
-	font-size: var(--components-tag-fontSize); // Deprecated
-	line-height: var(--components-tag-lineHeight); // Deprecated
+	// stylelint-disable declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
+	font-size: var(--components-tag-fontSize);
+	line-height: var(--components-tag-lineHeight);
+	// stylelint-enable declaration-property-value-disallowed-list
 	max-inline-size: 100%;
 	position: var(--components-tag-position);
 

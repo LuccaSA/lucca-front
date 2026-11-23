@@ -26,7 +26,7 @@
 	--components-fancyBox-content-backgroundEndStart-inlineSize: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
 	--components-fancyBox-content-backgroundEndStart-blockSize: var(--components-fancyBox-content-foregroundStartEnd-blockSize);
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-fancyBox-offsetInline: var(--components-fancyBox-content-foregroundStartEnd-insetInlineEnd);
 	--components-fancyBox-offsetBlock: var(--components-fancyBox-content-foregroundStartEnd-insetBlockStart);
 	--components-fancyBox-imageWidth: var(--components-fancyBox-content-foregroundStartEnd-inlineSize);
@@ -34,4 +34,5 @@
 	--components-fancyBox-background-left: none;
 	--components-fancyBox-background-right: none;
 	--components-fancyBox-foreground: none;
+	// stylelint-enable property-disallowed-list
 }

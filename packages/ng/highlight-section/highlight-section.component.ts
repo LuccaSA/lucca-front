@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { LuClass } from '@lucca-front/ng/core';
+import { CDN_URL, LuClass } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { HighlightSectionBubble, HighlightSectionIllustration, HighlightSectionPalette, HighlightSectionTheme } from './highlight-section.type';
 
-const ILLUSTRATION_CDN_PATH = 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-section';
+const ILLUSTRATION_CDN_PATH = `${CDN_URL}/transverse/prisme/visuals/highlight-section`;
 
 /**
- * @deprecated Will be replaced by `lu-box` in v22.2.
+ * @deprecated since 22.1.1; an evolution of BoxComponent will replace it in 22.2.
  */
 @Component({
 	selector: 'lu-highlight-section',

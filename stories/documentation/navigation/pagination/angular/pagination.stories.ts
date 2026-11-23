@@ -11,27 +11,27 @@ export default {
 	],
 	argTypes: {
 		isFirstPage: {
-			type: 'boolean',
+			control: { type: 'boolean' },
 			description: 'Désactive le bouton précédent.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		isLastPage: {
-			type: 'boolean',
+			control: { type: 'boolean' },
 			description: 'Désactive le bouton suivant.',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		from: {
-			type: 'number',
-			description: 'Numéro du dernier élément affiché.',
+			control: { type: 'number' },
+			description: 'Numéro du premier élément affiché.',
 			table: { category: 'inputs' },
 		},
 		to: {
-			type: 'number',
+			control: { type: 'number' },
 			description: 'Numéro du dernier élément affiché.',
 			table: { category: 'inputs' },
 		},
 		itemsCount: {
-			type: 'number',
+			control: { type: 'number' },
 			description: 'Nombre total d’éléments.',
 			table: { category: 'inputs' },
 		},
@@ -41,7 +41,19 @@ export default {
 				type: 'select',
 			},
 			description: 'Affiche la pagination en vue compacte (seulement avec les boutons précédent et suivant).',
-			table: { category: 'inputs' },
+			table: { category: 'inputs', defaultValue: { summary: 'default' } },
+		},
+		previousPage: {
+			description: 'Événement déclenché au clic sur le bouton précédent.',
+			action: 'previousPage',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
+		},
+		nextPage: {
+			description: 'Événement déclenché au clic sur le bouton suivant.',
+			action: 'nextPage',
+			control: false,
+			table: { category: 'outputs', type: { summary: 'void' } },
 		},
 		intl: intlArgType(luPaginationTranslations, 'LuPaginationLabel'),
 	},
@@ -50,7 +62,8 @@ export default {
 export const Basic: StoryObj<PaginationComponent & { isFirstPage: boolean; isLastPage: boolean; from: number; to: number; itemsCount: number; mod: string }> = {
 	render: (args, { argTypes }) => {
 		return {
-			template: cleanupTemplate(`<lu-pagination ${generateInputs(args, argTypes)} />`),
+			props: { ...args },
+			template: cleanupTemplate(`<lu-pagination ${generateInputs(args, argTypes)} (previousPage)="previousPage($event)" (nextPage)="nextPage($event)" />`),
 		};
 	},
 	args: {

@@ -47,6 +47,7 @@ This includes, but not only:
 - Always use `luBooleanAttribute`/`luOptionalBooleanAttribute` transform when creating an input that should take boolean, to make it easier to use for everyone.
 - Boolean inputs must default to `false`: name them after the behavior they enable, so that omitting the attribute gives the default behavior (`hiddenLabel`, not `showLabel` defaulting to `true`). A boolean attribute can't be turned off from a template without a binding (`<lu-x hiddenLabel>` works, `<lu-x [showLabel]="false">` is needed otherwise).
 - Using meaningful input names, common names such as `config`, `param`, etc must be avoided and they're too generic, consumers need to know what your input does!
+- Reusing existing names for existing concepts: check the [property names directory](docs/property-names.md) before naming an input.
 - Properly typings inputs, using union strings when necessary, to provide code completion, this can also be done with a trailing `| string` that will make it become a list of suggestions instead.
 - Always use `luNumberAttribute`/`luOptionalNumberAttribute` transform when creating an input that should take numbers, to make it easier to use for everyone.
 

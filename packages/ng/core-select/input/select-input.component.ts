@@ -61,6 +61,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected abstract intl: Signal<LuCoreSelectLabel>;
 
 	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
+
+	/**
+	 * Whether the search input displays the clue through a binding. If so, the key that opens the panel
+	 * becomes the clue synchronously, and the browser must not insert it a second time.
+	 */
+	protected readonly inputBoundToClue: boolean = false;
+
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
 
@@ -246,6 +253,18 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public readonly valueSignal = signal<TValue | null>(null);
 	readonly isFilterPillEmpty = computed(() => this.valueSignal() === null);
 	readonly isFilterPillClearable = computed(() => this.isClearable());
+	// Overridden by the selects supporting `defaultValue`; concrete so that external subclasses keep compiling
+	readonly isFilterPillDefault: Signal<boolean> = signal(false);
+
+	/**
+	 * Value restored by the clear button, which only shows once the value differs from it.
+	 * It isn't applied on init: initialize the form control with the same value.
+	 * Clearing writes it as is in the form, so it must have the same shape as the form value: with an API select
+	 * (`users`, `departments`, `apiV3`…), the whole option returned by the API, not only its id, or the pill displays it wrong.
+	 * It isn't checked against the options, and matches the selected option through `optionComparer`.
+	 * It isn't supported by a multi-select with `withSelectAll`, which keeps clearing to an empty selection.
+	 */
+	readonly defaultValue = input<NoInfer<TValue> | null>(null);
 
 	public get value(): TValue | null {
 		return this._value;
@@ -432,6 +451,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
 				} else if ($event.key?.length === 1) {
+					if (this.inputBoundToClue) {
+						$event.preventDefault();
+					}
 					this.openPanel($event.key);
 				}
 				break;
@@ -465,7 +487,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (event) {
 			event.stopPropagation();
 		}
-		this.updateValue(null, true);
+		this.updateValue(this.defaultValue(), true);
 		this.inputElementRef()?.nativeElement.focus();
 	}
 

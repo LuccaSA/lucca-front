@@ -19,9 +19,10 @@
 	--components-navSide-fullwidth-palette-selected-alert-text: var(--palettes-brand-800);
 
 	// --components-navSide-fullwidth-palette-alert-color is deprecated
-	// --components-navSide-fullwidth-palette-alert-text is deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-navSide-fullwidth-palette-alert-color: var(--palettes-brand-200);
 	--components-navSide-fullwidth-palette-alert-text: var(--palettes-brand-800);
+	// stylelint-enable property-disallowed-list
 
 	--components-navSide-compact-palette-bg-color: var(--palettes-navigation-800);
 	--components-navSide-compact-palette-text: var(--palettes-neutral-0);

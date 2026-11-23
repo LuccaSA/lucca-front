@@ -1,9 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
-// .viewTabs is deprecated
-.segmentedControl,
-.viewTabs {
+.segmentedControl {
 	@layer components {
 		@include vars;
 		@include component;
@@ -25,9 +23,7 @@
 }
 
 @layer mods {
-	// .viewTabs-item-tab is deprecated
-	.segmentedControl-item-action,
-	.viewTabs-item-tab {
+	.segmentedControl-item-action {
 		.segmentedControl-item-input:checked + &,
 		&[aria-selected='true'] {
 			@include selected;
@@ -39,9 +35,7 @@
 		@include disabled;
 	}
 
-	// .viewTabs_panel is deprecated
-	.segmentedControl_panel,
-	.viewTabs_panel {
+	.segmentedControl_panel {
 		// .active is deprecated
 		&:not(.is-active, .active) {
 			@include panelInactive;

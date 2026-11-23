@@ -1,7 +1,0 @@
-# numbers — Code & Implementation
-
-📖 [Storybook documentation](https://lucca-front.lucca.io/v21.2.5/storybook/?path=/docs/documentation-toolbox-numbers-basic--docs)
-
-## HTML/CSS
-
-### Numbers

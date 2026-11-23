@@ -19,9 +19,10 @@
 		}
 	}
 
-	// Deprecated
+	// stylelint-disable property-disallowed-list -- Deprecated.
 	--components-callout-fontSize: var(--pr-t-font-body-S-fontSize);
 	--components-callout-lineHeight: var(--pr-t-font-body-S-lineHeight);
+	// stylelint-enable property-disallowed-list
 }
 
 @mixin tiny {

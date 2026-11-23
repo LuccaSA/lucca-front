@@ -18,7 +18,8 @@ enum ToggleMode {
 
 /* eslint-disable @angular-eslint/prefer-signals */
 /**
- * @deprecated
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Directive()
 export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
@@ -157,7 +158,9 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 
 /**
  * basic tree option picker panel
- * @deprecated
+ *
+ * @deprecated since 20.2.0; use LuSimpleSelectInputComponent or LuMultiSelectInputComponent.
+ * @see https://prisme.lucca.io/94310e217/p/717b6d-select-deprecated
  */
 @Component({
 	selector: 'lu-tree-option-picker',

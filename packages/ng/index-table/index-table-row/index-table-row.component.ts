@@ -73,7 +73,7 @@ export class IndexTableRowComponent implements LuTooltipAnchorRef, ɵRangeSelect
 
 	isRangeSelectable(): boolean {
 		const body = this.bodyRef;
-		const collapsed = !!body?.group() && !!body.groupButtonAlt() && !body.expanded();
+		const collapsed = !!body?.collapsible() && !body.expanded();
 		return !!this.selectedLabel() && !this.disabled() && !collapsed;
 	}
 }

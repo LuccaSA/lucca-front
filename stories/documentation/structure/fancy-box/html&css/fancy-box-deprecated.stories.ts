@@ -1,5 +1,6 @@
 import { FancyBoxComponent } from '@lucca-front/ng/fancy-box';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface FancyBoxBasicStory {
 	content: string;
@@ -89,9 +90,9 @@ const Template = (args: FancyBoxBasicStory) => ({
 export const Basic: StoryObj<FancyBoxBasicStory> = {
 	args: {
 		content: 'Content<br />Content<br />Content<br />Content<br />Content<br />Content',
-		backgroundLeft: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-left-plant.svg',
-		backgroundRight: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/background-right-candies.svg',
-		foreground: 'https://cdn.lucca.fr/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg',
+		backgroundLeft: `${CDN_URL}/transverse/prisme/visuals/fancy-box/background-left-plant.svg`,
+		backgroundRight: `${CDN_URL}/transverse/prisme/visuals/fancy-box/background-right-candies.svg`,
+		foreground: `${CDN_URL}/transverse/prisme/visuals/fancy-box/foreground-right-pizza.svg`,
 	},
 	render: Template,
 };

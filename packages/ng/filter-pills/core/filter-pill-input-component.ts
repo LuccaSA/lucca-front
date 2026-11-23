@@ -7,6 +7,8 @@ export interface FilterPillInputComponent {
 	parentInput?: FilterPillInputComponent | null;
 	isFilterPillEmpty: Signal<boolean>;
 	isFilterPillClearable: Signal<boolean>;
+	// Whether the input holds its default value: the pill then looks neutral and hides its clear button
+	isFilterPillDefault?: Signal<boolean>;
 	// If this is not here, we'll consider it's using default layout
 	filterPillLayout?: Signal<FilterPillLayout>;
 	hideCombobox?: Signal<boolean>;

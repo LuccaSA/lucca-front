@@ -1,11 +1,12 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
-	ApplicationRef,
+	afterRenderEffect,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
+	contentChild,
 	contentChildren,
 	DoCheck,
 	effect,
@@ -18,6 +19,8 @@ import {
 	Renderer2,
 	signal,
 	TemplateRef,
+	untracked,
+	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
@@ -41,6 +44,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
+import { FormFieldErrorInlineMessageDirective } from './form-field-error-inline-message.directive';
+import { FormFieldInlineMessageDirective } from './form-field-inline-message.directive';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
@@ -73,7 +78,6 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
-	#appRef = inject(ApplicationRef);
 	#renderer = inject(Renderer2);
 	protected parentForm = inject(LU_FORM_INSTANCE, { optional: true });
 
@@ -150,6 +154,12 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	#inputs: InputDirective[] = [];
 
+	// Bumped on every registration/unregistration, read by the `afterRenderEffect` set up in the constructor:
+	// the ids can only be wired once the inputs are in the DOM, and the effect being registered up front means
+	// neither `addInput` nor `removeInput` has to schedule anything — `removeInput` runs while the view is being
+	// torn down, where the injector `afterNextRender` needs may already be destroyed (NG0205).
+	readonly #inputsRevision = signal(0);
+
 	/**
 	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
 	 */
@@ -163,16 +173,26 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	readonly presentationDisplayTpl = signal<TemplateRef<unknown> | null>(null);
 
-	readonly hasInlineMessage = computed(() => !this.presentationMode() && !!(this.inlineMessage() || (this.invalidStatus() ? this.errorInlineMessage() : false)));
+	private readonly inlineMessageSlot = contentChild(FormFieldInlineMessageDirective, { descendants: false });
+	private readonly errorInlineMessageSlot = contentChild(FormFieldErrorInlineMessageDirective, { descendants: false });
+	private readonly inlineMessageSlotTpl = viewChild<TemplateRef<unknown>>('inlineMessageSlotTpl');
+	private readonly errorInlineMessageSlotTpl = viewChild<TemplateRef<unknown>>('errorInlineMessageSlotTpl');
+
+	/**
+	 * The inline message input, or else the projected `luFormFieldInlineMessage` element
+	 */
+	readonly resolvedInlineMessage = computed(() => this.inlineMessage() || (this.inlineMessageSlot() ? (this.inlineMessageSlotTpl() ?? null) : null));
+
+	/**
+	 * The error inline message input, or else the projected `luFormFieldErrorInlineMessage` element
+	 */
+	readonly resolvedErrorInlineMessage = computed(() => this.errorInlineMessage() || (this.errorInlineMessageSlot() ? (this.errorInlineMessageSlotTpl() ?? null) : null));
+
+	readonly hasInlineMessage = computed(() => !this.presentationMode() && !!(this.resolvedInlineMessage() || (this.invalidStatus() ? this.resolvedErrorInlineMessage() : false)));
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
-		afterNextRender(
-			() => {
-				this.prepareInput();
-			},
-			{ injector: this.#injector },
-		);
+		this.#inputsRevision.update((revision) => revision + 1);
 	}
 
 	/**
@@ -183,16 +203,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	 */
 	public removeInput(input: InputDirective): void {
 		this.#inputs = this.#inputs.filter((existing) => existing !== input);
-		// When the whole application is being torn down, its injector is destroyed before the views: there is
-		// nothing left to update, and scheduling a render would throw (NG0205).
-		if (this.#inputs.length > 0 && !this.#appRef.injector.destroyed) {
-			afterNextRender(
-				() => {
-					this.prepareInput();
-				},
-				{ injector: this.#injector },
-			);
-		}
+		this.#inputsRevision.update((revision) => revision + 1);
 	}
 
 	public get inputs(): InputDirective[] {
@@ -231,6 +242,17 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#selfLabelledById: string | null = null;
 
 	constructor() {
+		// `prepareInput` reads the inputs back from the DOM and writes signals the template depends on, so it
+		// runs after render, and untracked: its own reads must not subscribe the effect to the field state.
+		afterRenderEffect(() => {
+			this.#inputsRevision();
+			untracked(() => {
+				if (this.#inputs.length > 0) {
+					this.prepareInput();
+				}
+			});
+		});
+
 		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus], () => {
 			this.updateAria();
 		});

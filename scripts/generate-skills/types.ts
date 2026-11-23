@@ -5,24 +5,15 @@
  * - AST extraction (ts-morph) → Angular API
  * - ZeroHeight .md URLs → design guidelines
  * - Storybook index.json → story links & source code
- * - Figma Code Connect context → design variant tokens
  */
 
 // ─── Config ──────────────────────────────────────────────────────────────────
-
-export interface FigmaConfig {
-	/** Figma Personal Access Token (only needed if Figma collection is enabled). */
-	token?: string;
-	/** Figma file key for the component library. */
-	fileKey: string;
-}
 
 export interface OutputConfig {
 	skillsDir: string;
 }
 
 export interface Config {
-	figma: FigmaConfig;
 	output: OutputConfig;
 	/** Concurrency limit for parallel operations. */
 	concurrency: number;
@@ -33,6 +24,8 @@ export interface Config {
 export interface VersionConfig {
 	/** Full semver tag, e.g. "v21.2.1". */
 	tag: string;
+	/** Git object the code and stories are read from: the tag itself, or the ref given by `--ref`. */
+	source: string;
 	major: number;
 	minor: number;
 	patch: number;
@@ -65,12 +58,6 @@ export interface ComponentEntry {
 	 * differ: `date2` → `dateField`, `input` → `textField`). Set to "" for a component with no SCSS
 	 * counterpart, to silence the resolution warning. */
 	scssComponent?: string;
-	/** Primary Figma component name, e.g. "pr-Button". */
-	figmaName?: string;
-	/** All Figma names that map to this slug (many-to-one). */
-	figmaAliases?: string[];
-	/** Figma node IDs for Code Connect context retrieval. */
-	figmaNodeIds?: string[];
 	/** Additional Storybook story paths to include in examples. */
 	extraStories?: string[];
 	/** Category label, e.g. "Actions", "Forms". */
@@ -364,23 +351,6 @@ export interface ZeroHeightData {
 	sections: Record<string, string>;
 }
 
-// ─── Figma design tokens ─────────────────────────────────────────────────────
-
-export interface FigmaProperty {
-	name: string;
-	type: 'VARIANT' | 'TEXT' | 'INSTANCE_SWAP' | 'BOOLEAN';
-	variantOptions?: string[];
-}
-
-export interface FigmaDesignTokens {
-	/** Figma component name, e.g. "pr-Button". */
-	componentName: string;
-	/** Figma node ID, e.g. "6854:42773". */
-	nodeId: string;
-	/** Structured properties with variant options. */
-	properties: FigmaProperty[];
-}
-
 // ─── Collected data (per component, ready for template rendering) ────────────
 
 export interface ComponentData {
@@ -397,8 +367,6 @@ export interface ComponentData {
 	storyExamples: StoryExample[] | null;
 	/** Minimal working HTML template extracted from the "basic" story. */
 	basicUsage: string | null;
-	/** Figma design tokens (not versioned — current state only). */
-	figma: FigmaDesignTokens | null;
 }
 
 // ─── Skill writer ─────────────────────────────────────────────────────────────
@@ -426,20 +394,27 @@ export interface SharedTypeDef {
 export interface PatchManifestEntry {
 	tag: string;
 	storybookBaseUrl: string;
-	generatedAt: string;
 }
 
-/** One generated minor skill. references/ documents `latestPatch`; fixes/ covers the others. */
-export interface MinorManifestEntry {
+/**
+ * What the committed skill documents: either a minor (references/ documents `latestPatch`, fixes/
+ * covers the others), or, with `followsCode`, the code of the commit it is committed with.
+ */
+export interface SkillManifest {
+	/** The documented minor, e.g. "22.0" — for a skill that follows the code, the last published tag's. */
+	minor: string;
+	/** Regenerated on every commit (`--ref`): the npm package that ships it is its version, the fields below are absent. */
+	followsCode?: true;
+	/** With `followsCode`: the last published tag the changelogs reach. The pre-commit hook regenerates when it moves. */
+	lastTag?: string;
 	/** Latest published patch of the minor, e.g. "21.2.5" — what references/ documents. */
-	latestPatch: string;
-	tag: string;
+	latestPatch?: string;
+	tag?: string;
 	zhReleaseId: number | null;
-	storybookBaseUrl: string;
-	generatedAt: string;
+	storybookBaseUrl?: string;
 	componentCount: number;
 	/** Every published patch of the minor, ascending ("21.2.0" → …). */
-	patches: Record<string, PatchManifestEntry>;
+	patches?: Record<string, PatchManifestEntry>;
 	/** Technical minors covered by this minor's skill (e.g. "21.4" for 21.3), if any. */
 	technicalMinors?: Record<string, TechnicalMinorManifestEntry>;
 }
@@ -451,10 +426,4 @@ export interface TechnicalMinorManifestEntry {
 	latestPatch: string;
 	/** Every published patch of the technical minor, ascending. Patches > .0 have a fixes/ file. */
 	patches: Record<string, PatchManifestEntry>;
-}
-
-export interface VersionManifest {
-	/** Latest generated minor, e.g. "21.3". */
-	latest: string;
-	minors: Record<string, MinorManifestEntry>;
 }

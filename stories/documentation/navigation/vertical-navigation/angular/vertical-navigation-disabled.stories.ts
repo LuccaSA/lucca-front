@@ -12,7 +12,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Désactive le composant.',
+			description: 'Désactive les liens (`luVerticalNavigationLink`) et le groupe (`lu-vertical-navigation-group`).',
 			table: { category: 'inputs' },
 		},
 	},
@@ -37,7 +37,7 @@ export default {
 			${disabledItem}
 		</lu-vertical-navigation-item>
 	</lu-vertical-navigation-group>
-	<lu-vertical-navigation-group label="Group" expanded="false" icon="heartFilled"${disabledArgs}>
+	<lu-vertical-navigation-group label="Group" [expanded]="false" icon="heartFilled"${disabledArgs}>
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 4</a>
 		</lu-vertical-navigation-item>

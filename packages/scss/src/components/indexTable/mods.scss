@@ -96,6 +96,7 @@
 		}
 
 		&::before {
+			// stylelint-disable-next-line declaration-property-value-disallowed-list -- Deprecated. Kept for consumer overrides.
 			background-color: var(--commons-background-base);
 		}
 
@@ -350,6 +351,7 @@
 		padding: 0;
 	}
 
+	// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 	.indexTable-head-row-cell-massSelection {
 		display: flex;
 		align-items: center;

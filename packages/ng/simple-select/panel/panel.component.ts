@@ -35,6 +35,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'selectPanel',
+		'[class.mod-noSearch]': '!searchable',
 		'[class.colorPanel]': 'colorPanel()',
 		'[class.is-pointerNavigation]': 'pointerNavigation()',
 	},

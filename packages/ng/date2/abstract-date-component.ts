@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, linkedSignal, LOCALE_ID, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, isDevMode, linkedSignal, LOCALE_ID, output, signal } from '@angular/core';
 import { intlInputOptions, isNotNil, luBooleanAttribute, luNullableBooleanAttribute } from '@lucca-front/ng/core';
 import { addMonths, addYears, FirstWeekContainsDateOptions, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
 import { WEEK_INFO } from './calendar.token';
@@ -22,8 +22,6 @@ export abstract class AbstractDateComponent {
 	protected get weekOptions(): WeekOptions & FirstWeekContainsDateOptions {
 		return { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo), firstWeekContainsDate: 4 };
 	}
-	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	protected dateFormat = getDateFormat(this.locale);
 	protected separator = getSeparator(this.locale);
 	protected readonly dateFormatWithMode = computed(() => getDateFormat(this.locale, this.mode()));
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
@@ -140,6 +138,13 @@ export abstract class AbstractDateComponent {
 
 	isValidDate(date: Date | null | undefined): date is Date {
 		return isNotNil(date) && !isNaN(date.getTime());
+	}
+
+	// Clearing applies the default value without validating it, so an unselectable one would end up in the form
+	protected warnOnUnselectableDefaultDate(componentName: string, date: Date | null | undefined): void {
+		if (isDevMode() && isNotNil(date) && (!this.isValidDate(date) || !this.isInMinMax(date, this.mode()))) {
+			console.warn(`[${componentName}] \`defaultValue\` should be a valid date between \`min\` and \`max\`, as clearing the field applies it.`);
+		}
 	}
 
 	prev(mode: CalendarMode) {

@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 import { IndexTableBodyComponent } from '../index-table-body/index-table-body.component';
+import { IndexTableBodyGroupDirective } from '../index-table-body/index-table-body-group.directive';
 import { IndexTableHeadComponent } from '../index-table-head/index-table-head.component';
 import { IndexTableComponent } from '../index-table.component';
 import { IndexTableRowComponent } from './index-table-row.component';
@@ -223,5 +224,61 @@ describe('IndexTableRowComponent: nested table', () => {
 		// Assert
 		expect(host.all()).toBe(true);
 		expect(host.rows.map((row) => row.selected())).toEqual([false, true, false]);
+	});
+});
+
+@Component({
+	selector: 'lu-index-table-row-group-slot-test',
+	imports: [IndexTableComponent, IndexTableBodyComponent, IndexTableBodyGroupDirective, IndexTableRowComponent],
+	template: `
+		<lu-index-table selectable>
+			<tbody luIndexTableBody>
+				<tr luIndexTableRow selectedLabel="First row" [(selected)]="first"></tr>
+			</tbody>
+			<tbody luIndexTableBody groupButtonAlt="Toggle group">
+				<ng-container luIndexTableBodyGroup>Group</ng-container>
+				<tr luIndexTableRow selectedLabel="Grouped row" [(selected)]="grouped"></tr>
+			</tbody>
+			<tbody luIndexTableBody>
+				<tr luIndexTableRow selectedLabel="Last row" [(selected)]="last"></tr>
+			</tbody>
+		</lu-index-table>
+	`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class GroupSlotHostComponent {
+	readonly first = signal(false);
+	readonly grouped = signal(false);
+	readonly last = signal(false);
+}
+
+describe('IndexTableRowComponent: group projected with luIndexTableBodyGroup', () => {
+	let fixture: ComponentFixture<GroupSlotHostComponent>;
+	let host: GroupSlotHostComponent;
+
+	function click(index: number, shiftKey = false) {
+		const checkboxes = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+		checkboxes[index].dispatchEvent(new MouseEvent('click', { bubbles: true, shiftKey }));
+		fixture.detectChanges();
+	}
+
+	beforeEach(async () => {
+		TestBed.configureTestingModule({
+			imports: [GroupSlotHostComponent],
+			providers: [{ provide: LiveAnnouncer, useValue: { announce: vi.fn().mockResolvedValue(undefined) } }],
+		});
+		fixture = TestBed.createComponent(GroupSlotHostComponent);
+		host = fixture.componentInstance;
+		fixture.detectChanges();
+		await fixture.whenStable();
+	});
+
+	it('should leave the rows of a collapsed group unchanged', () => {
+		// Act
+		click(0);
+		click(2, true);
+
+		// Assert
+		expect([host.first(), host.grouped(), host.last()]).toEqual([true, false, true]);
 	});
 });

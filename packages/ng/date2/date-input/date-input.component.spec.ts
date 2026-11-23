@@ -57,6 +57,17 @@ class CalendarModeTwoWayHostComponent {
 	readonly calendarMode = signal<CalendarMode | null>(null);
 }
 
+@Component({
+	template: `<lu-date-input [formControl]="formControl" [defaultValue]="defaultValue" [min]="min()" clearable />`,
+	imports: [ReactiveFormsModule, DateInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DefaultValueHostComponent {
+	readonly defaultValue = new Date('2024-01-01T00:00:00.000Z');
+	readonly min = signal<Date | null>(null);
+	readonly formControl = new FormControl<Date | null>(new Date('2024-01-01T00:00:00.000Z'));
+}
+
 describe('DateInputComponent', () => {
 	let fixture: ComponentFixture<HostComponent>;
 
@@ -606,6 +617,75 @@ describe('DateInputComponent', () => {
 
 			expect(host.componentInstance.calendarMode()).toBe('year');
 			expect(dateInput.calendarMode()).toBe('year');
+		});
+	});
+
+	describe('defaultValue', () => {
+		function createDefaultValueHost(): { host: ComponentFixture<DefaultValueHostComponent>; dateInput: DateInputComponent } {
+			TestBed.configureTestingModule({
+				imports: [DefaultValueHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+			const host = TestBed.createComponent(DefaultValueHostComponent);
+			host.detectChanges();
+			return { host, dateInput: host.debugElement.query(By.directive(DateInputComponent)).componentInstance as DateInputComponent };
+		}
+
+		function clearer(host: ComponentFixture<DefaultValueHostComponent>): HTMLElement | null {
+			return (host.nativeElement as HTMLElement).querySelector('lu-clear');
+		}
+
+		it('should not offer to clear the default value', () => {
+			const { host, dateInput } = createDefaultValueHost();
+
+			expect(dateInput.isFilterPillDefault()).toBe(true);
+			expect(clearer(host)).toBeNull();
+		});
+
+		it('should restore the default value when clearing', () => {
+			const { host, dateInput } = createDefaultValueHost();
+			host.componentInstance.formControl.setValue(new Date('2024-02-15T00:00:00.000Z'));
+			host.detectChanges();
+
+			expect(dateInput.isFilterPillDefault()).toBe(false);
+			expect(clearer(host)).not.toBeNull();
+
+			dateInput.clear();
+			host.detectChanges();
+
+			expect(host.componentInstance.formControl.value).toEqual(new Date('2024-01-01T00:00:00.000Z'));
+			expect(dateInput.isFilterPillDefault()).toBe(true);
+			expect(clearer(host)).toBeNull();
+		});
+
+		it('should not warn about a selectable default value', () => {
+			const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+			createDefaultValueHost();
+
+			expect(warn).not.toHaveBeenCalled();
+			warn.mockRestore();
+		});
+
+		it('should warn in dev mode about a default value out of the min and max', () => {
+			const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+			const { host } = createDefaultValueHost();
+
+			host.componentInstance.min.set(new Date('2024-06-01T00:00:00.000Z'));
+			host.detectChanges();
+
+			expect(warn).toHaveBeenCalledExactlyOnceWith(expect.stringContaining('`defaultValue` should be a valid date between `min` and `max`'));
+			warn.mockRestore();
+		});
+
+		it('should not apply the default value when the control is reset to null', () => {
+			const { host, dateInput } = createDefaultValueHost();
+
+			host.componentInstance.formControl.setValue(null);
+			host.detectChanges();
+
+			expect(dateInput.selectedDate()).toBeNull();
+			expect(dateInput.isFilterPillDefault()).toBe(false);
 		});
 	});
 });

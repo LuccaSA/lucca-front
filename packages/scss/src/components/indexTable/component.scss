@@ -90,6 +90,7 @@
 			}
 
 			&:not(:has(.indexTable-body-row-cell-link)) {
+				// stylelint-disable-next-line selector-disallowed-list -- Deprecated. Kept for consumer overrides.
 				&:has(.indexTable-body-row-cell-action) {
 					cursor: pointer;
 				}
@@ -200,7 +201,7 @@
 			margin: var(--pr-t-spacings-50);
 		}
 
-		// .indexTable-body-row-cell-action is deprecated
+		// stylelint-disable-next-line selector-disallowed-list -- Deprecated.
 		.indexTable-body-row-cell-action {
 			@include a11y.mask;
 		}

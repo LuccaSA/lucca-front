@@ -6,6 +6,10 @@ import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '../target/index';
 import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './popover-trigger.model';
 
+/**
+ * @deprecated since 21.0.0; use PopoverDirective.
+ * @see https://prisme.lucca.io/94310e217/p/7693f3-popover
+ */
 @Directive({
 	selector: '[luPopover]',
 	exportAs: 'LuPopoverTrigger',

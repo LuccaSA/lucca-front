@@ -1,0 +1,9 @@
+// The component's template holds a Lucca Front menu: its .menu is that menu
+.menu::after {
+	border-width: 2px;
+}
+
+// ::ng-deep reaches beyond the template: left untouched
+:host ::ng-deep .menu {
+	background: transparent;
+}

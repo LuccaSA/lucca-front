@@ -21,11 +21,13 @@
 			@include disabled;
 		}
 
+		// stylelint-disable selector-disallowed-list -- Deprecated: .textfield-input. Kept for consumer overrides.
 		&[hidden],
 		.filterPill[disabled] &,
 		.filterPill:not(.is-filled) &,
 		.textfield-input[disabled] &,
 		.textfield-input:not(.is-filled) & {
+			// stylelint-enable selector-disallowed-list
 			@include hidden;
 		}
 

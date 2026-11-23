@@ -6,6 +6,7 @@ import { intlInputOptions, luBooleanAttribute, ɵRANGE_SELECTABLE_ITEM, ɵRangeS
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { ReorderDirective, ReorderHandleComponent } from '@lucca-front/ng/reorder';
 import { LU_DATA_TABLE_BODY_INSTANCE } from '../data-table-body/data-table-body.token';
 import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from '../data-table-foot/data-table-foot.token';
@@ -26,7 +27,7 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 		'[class.mod-selectable]': 'tableRef?.selectable() ?? false',
 		'[class.mod-draggable]': 'tableRef?.drag() ?? false',
 	},
-	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, IconComponent, CdkDragHandle, ɵRangeSelectionDirective],
+	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet, IconComponent, CdkDragHandle, ReorderHandleComponent, ɵRangeSelectionDirective],
 	providers: [
 		{
 			provide: LU_DATA_TABLE_ROW_INSTANCE,
@@ -51,6 +52,8 @@ export class DataTableRowComponent implements ɵRangeSelectableItem {
 
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE, { optional: true });
 
+	protected readonly reorder = inject(ReorderDirective, { optional: true });
+
 	readonly selected = model<boolean>(false);
 	readonly selectedLabel = input<string | null>(null);
 	readonly mixed = input(false, { transform: luBooleanAttribute });
@@ -69,7 +72,7 @@ export class DataTableRowComponent implements ɵRangeSelectableItem {
 
 	isRangeSelectable(): boolean {
 		const body = this.bodyRef;
-		const collapsed = !!body?.group() && !!body.groupButtonAlt() && !body.expanded();
+		const collapsed = !!body?.collapsible() && !body.expanded();
 		return !!this.selectedLabel() && !this.disabled() && !collapsed;
 	}
 }

@@ -1,0 +1,6 @@
+<nav class="container-fullSize horizontalNavigation">
+	<a class="horizontalNavigation-list-item-action" routerLink="general" routerLinkActive="is-active">General</a>
+	@for (entry of entries; track entry.link) {
+		<a class="horizontalNavigation-list-item-action" [routerLink]="entry.link" routerLinkActive="is-active">{{ entry.name }}</a>
+	}
+</nav>

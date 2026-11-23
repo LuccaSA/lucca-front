@@ -1,8 +1,6 @@
 @use 'exports' as *;
 
-// lu-user-picture is deprecated
-.avatar,
-.lu-user-picture {
+.avatar {
 	@layer components {
 		@include vars;
 		@include component;

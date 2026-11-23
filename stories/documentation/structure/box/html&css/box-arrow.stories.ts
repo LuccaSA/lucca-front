@@ -72,7 +72,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	<div class="form-field-arrow${neutral}"></div>
 	</div>
 </fieldset>
-	<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
+	<div class="box mod-withArrow${neutral}">Custom content</div>
 `;
 	} else if (args.field === 'checkbox') {
 		return `<div class="form-field mod-withArrow${s}">
@@ -83,7 +83,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	</span>
 	<div class="form-field-arrow${neutral}"></div>
 </div>
-<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
+<div class="box mod-withArrow${neutral}">Custom content</div>`;
 	} else {
 		return `<div class="form-field mod-withArrow${s}">
 	<label class="formLabel" for="ID">Label</label>
@@ -93,7 +93,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	</span>
 	<div class="form-field-arrow${neutral}"></div>
 </div>
-<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
+<div class="box mod-withArrow${neutral}">Custom content</div>`;
 	}
 }
 

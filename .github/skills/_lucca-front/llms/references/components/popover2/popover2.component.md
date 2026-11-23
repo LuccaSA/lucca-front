@@ -1,0 +1,110 @@
+# popover2 — Code & Implementation
+
+**Sommaire**
+
+- Angular
+  - Popover2
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-overlays-popover2-angular--docs)
+
+## Angular
+
+### Popover2
+
+```js
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { DividerComponent } from '@lucca-front/ng/divider';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
+import { configureLuPopover, luPopoverTranslations, PopoverDirective } from '@lucca-front/ng/popover2';
+```
+
+```html
+<div class="demo">
+	<button
+		luButton
+		[luPopover2]="contentRef"
+		luPopoverCloseDelay="100"
+		luPopoverOpenDelay="300"
+		luPopoverPosition="above"
+		(luPopoverOpened)="luPopoverOpened()"
+		(luPopoverClosed)="luPopoverClosed()"
+	>
+		Cliquez-moi !
+	</button>
+	<ng-template #contentRef>
+		<div class="popover-contentOptional">
+			<h3>Title</h3>
+			<lu-divider />
+			<lu-listing checklist palette="success">
+				<lu-listing-item>item item item item item item item item item item item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+				<lu-listing-item>item</lu-listing-item>
+			</lu-listing>
+		</div>
+	</ng-template>
+</div>
+```
+
+```html
+examplePosition:
+<pre>
+	[
+    new ConnectionPositionPair(&#123;originX: 'start', originY: 'bottom' &#125;, &#123; overlayX: 'start', overlayY: 'top' &#125;, -8, 0),
+    new ConnectionPositionPair(
+        &#123; originX: 'start', originY: 'top' &#125;,
+				&#123;
+            overlayX: 'start',
+            overlayY: 'bottom',
+        &#125;,
+        -8,
+        -32,
+    ),
+	]
+	</pre>
+
+<a href="https://github.com/angular/components/blob/main/src/cdk/overlay/position/connected-position.ts#L28-L53">
+	Angular CDK model for
+	<code>ConnectedPosition</code>
+</a>
+<br />
+<br />
+
+<button
+	luButton
+	[luPopover2]="contentRef"
+	[customPositions]="examplePosition"
+	luPopoverCloseDelay="100"
+	luPopoverOpenDelay="300"
+	(luPopoverOpened)="luPopoverOpened()"
+	(luPopoverClosed)="luPopoverClosed()"
+>
+	Cliquez-moi !
+</button>
+<ng-template #contentRef>
+	<div class="popover-contentOptional">
+		<div class="verticalNavigation mod-iconless">
+			<ul class="verticalNavigation-list pr-u-listReset">
+				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item A</a></li>
+				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item B</a></li>
+				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item C</a></li>
+			</ul>
+		</div>
+	</div>
+</ng-template>
+```

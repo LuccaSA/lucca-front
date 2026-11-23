@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChild, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_INDEX_TABLE_INSTANCE } from '../index-table.token';
 import { LU_INDEX_TABLE_BODY_INSTANCE } from './index-table-body.token';
+import { IndexTableBodyGroupDirective } from './index-table-body-group.directive';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -28,6 +29,11 @@ export class IndexTableBodyComponent {
 	readonly groupButtonAlt = input<string | null>(null);
 
 	readonly expanded = model(false);
+
+	protected readonly groupSlot = contentChild(IndexTableBodyGroupDirective, { descendants: false });
+
+	/** Whether the group can be collapsed: it has a heading (`group` input or projected group) and a toggle button. */
+	readonly collapsible = computed(() => (!!this.group() || !!this.groupSlot()) && !!this.groupButtonAlt());
 
 	expandedToggle() {
 		this.expanded.set(!this.expanded());

@@ -5,6 +5,7 @@ import { SOFTWARE_ICON, SoftwareIconComponent } from '@lucca-front/ng/software-i
 import { SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
 import { SoftwareIconWrapperComponent } from '@lucca-front/ng/software-icon-wrapper/software-icon-wrapper.component';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'software-icon-stories',
@@ -13,6 +14,8 @@ import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SoftwareIconStory {
+	protected readonly cdnUrl = CDN_URL;
+
 	softwareIconList = SOFTWARE_ICON;
 }
 

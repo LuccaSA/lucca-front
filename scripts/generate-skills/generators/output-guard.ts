@@ -53,8 +53,25 @@ const SASS_IMPORT_LINE = /^\s*@(forward|use)\b/;
 const TS_IMPORT_LINE = /^\s*import\b[^;]*\bfrom\b/;
 /** A `@forward`/`@use` of an `@lucca-front/scss` component folder, with the folder captured. */
 const LF_SCSS_COMPONENT_IMPORT = /^\s*@(?:forward|use)\s+['"]@lucca-front\/scss\/src\/components\/([A-Za-z0-9_-]+)['"]/;
-/** An import statement that never names the module it imports from. */
+/** An import line that does not name the module it imports from. */
 const IMPORT_WITHOUT_SOURCE = /^\s*import\b(?![^'"]*['"])/;
+/** The line that closes a multi-line import by naming its module. */
+const IMPORT_SOURCE = /\bfrom\s*['"]/;
+const IMPORT_START = /^\s*import\b/;
+
+/**
+ * Whether the import opened at `start` names its module on a following line, as a wrapped import
+ * written by hand does (ZeroHeight pages carry some). A truncated one is followed by another import
+ * or by the end of the fence.
+ */
+function importContinuesToSource(lines: string[], start: number): boolean {
+	for (let i = start + 1; i < lines.length; i++) {
+		if (IMPORT_START.test(lines[i])) return false;
+		if (IMPORT_SOURCE.test(lines[i])) return true;
+		if (lines[i].includes(';')) return false;
+	}
+	return false;
+}
 
 /** Violations detected while generating (rule 1), collected across the run. */
 const inProcess: OutputViolation[] = [];
@@ -181,7 +198,7 @@ function checkFence(rel: string, fence: { lang: string; start: number; body: str
 			});
 		}
 
-		const truncated = content.find((l) => IMPORT_WITHOUT_SOURCE.test(l));
+		const truncated = content.find((l, i) => IMPORT_WITHOUT_SOURCE.test(l) && !importContinuesToSource(content, i));
 		if (truncated) {
 			out.push({
 				rule: 'truncated-import',

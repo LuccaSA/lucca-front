@@ -1,0 +1,61 @@
+# software-icon — Code & Implementation
+
+📖 [Storybook documentation](https://lucca-front.lucca.io/v{version}/storybook/?path=/docs/documentation-structure-software-icon-angular-basic--docs)
+
+## Angular
+
+Component selector : `lu-software-icon`
+
+### Basic
+
+```js
+import { SOFTWARE_ICON, SOFTWARE_ICON_SIZE, SoftwareIconComponent } from '@lucca-front/ng/software-icon';
+```
+
+```html
+<lu-software-icon icon="absences" iconAlt="Absences" />
+```
+
+### Wrapper
+
+```js
+import { SoftwareIconComponent } from '@lucca-front/ng/software-icon';
+import { luSoftwareIconWrapperTranslations, SoftwareIconWrapperComponent, SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+```
+
+```html
+<lu-software-icon-wrapper max="8">
+	<lu-software-icon *SoftwareIconWrapperItem icon="faces" iconAlt="Faces" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="ask-lucca" iconAlt="Ask Lucca" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="office" iconAlt="Office" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="sandbox" iconAlt="Sandbox" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="absences" iconAlt="Absences" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="business-expenses" iconAlt="Expenses" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="mood" iconAlt="Mood" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="invoices" iconAlt="Invoices" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="engagement" iconAlt="Engagement" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="timesheet" iconAlt="Timesheet" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="compensation" iconAlt="Compensation" />
+	<lu-software-icon *SoftwareIconWrapperItem icon="store" iconAlt="Store" />
+</lu-software-icon-wrapper>
+```
+
+## HTML/CSS
+
+Classe CSS : `.softwareIcon`
+
+### Basic
+
+```css
+@forward '@lucca-front/scss/src/components/softwareIcon';
+```
+
+```html
+<span
+	class="softwareIcon"
+	aria-hidden="true"
+	[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/software-icon/absences.svg' | luSafeExternalSvg"
+></span>
+<span class="pr-u-mask">Absences</span>
+```

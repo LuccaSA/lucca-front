@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular-vite';
+import { CDN_URL } from '@lucca-front/ng/core';
 
 interface CommentChatStory {}
 
@@ -104,12 +105,12 @@ const Template = (args: CommentChatStory) => ({
 			inline-size: 1.5rem;
 			block-size: 1.5rem;
 			border-radius: 50%;
-			background: var(--palettes-neutral-100) url("https://cdn.lucca.fr/lucca-front/avatars/finn.png") center;
+			background: var(--palettes-neutral-100) url("${CDN_URL}/lucca-front/avatars/finn.png") center;
 			background-size: cover;
 			flex-shrink: 0;
 		}
 		.mod-answer .avatar {
-			background-image: url("https://cdn.lucca.fr/lucca-front/avatars/bob.jpg");
+			background-image: url("${CDN_URL}/lucca-front/avatars/bob.jpg");
 		}
 		`,
 	],
