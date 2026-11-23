@@ -24,6 +24,20 @@ import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select
 | `uniqueOperationIds` | `uniqueOperationIds` | `readonly number[] \| null` | `null` | — | — | — |
 | `appInstanceId` | `appInstanceId` | `unknown` | `null` | — | `luNullableNumberAttribute` | ⚠️ **Déprécié** : use `uniqueOperationIds` instead  |
 | `searchDelimiter` | `searchDelimiter` | `string` | `' '` | — | — | — |
+| `displayMyEstablishmentOption` | `displayMyEstablishmentOption` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideCoreSelectCurrentEstablishmentId` | `(factory: () => number): Provider` | Provide the establishment of the current user, displayed as "My establishment" by the `establishments` selects that set `displayMyEstablishmentOption`. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CORE_SELECT_ESTABLISHMENT_TRANSLATIONS` | `unknown` | — |
+| `LU_CORE_SELECT_CURRENT_ESTABLISHMENT_ID` | `number` | — |
 
 ### Services
 

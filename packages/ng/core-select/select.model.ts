@@ -55,6 +55,12 @@ export interface LuOptionGroup<T, TGroup> {
 	options: T[];
 }
 
+/**
+ * Group key that a grouping `selector` returns for options belonging to no group: the panels render
+ * them at the top level, without a group header nor a "select all" action (eg. an option pinned above the groups).
+ */
+export const ɵLU_UNGROUPED_OPTIONS = Symbol('LuUngroupedOptions');
+
 export type LuOptionComparer<T> = (a: T, b: T) => boolean;
 
 export type CoreSelectAddOptionStrategy = 'never' | 'always' | 'if-empty-clue' | 'if-not-empty-clue';

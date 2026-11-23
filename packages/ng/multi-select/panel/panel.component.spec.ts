@@ -2,6 +2,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { ɵLU_UNGROUPED_OPTIONS } from '@lucca-front/ng/core-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 
@@ -74,6 +75,19 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		expect(selected.length).toBe(1);
 		expect(selected[0].textContent).toContain('Poireau');
 		expect(selected[0].classList).toContain('is-selected');
+	}));
+
+	it('should render ungrouped options at the top level, without a group header nor a group action', fakeAsync(() => {
+		component.grouping = { selector: (option) => (option.id === 1 ? ɵLU_UNGROUPED_OPTIONS : 'Autres'), content: 'Groupe' };
+		openPanel();
+
+		const groups = overlayContainerElement.querySelectorAll('lu-listbox-option[role="group"]');
+		expect(groups.length).toBe(1);
+		expect(overlayContainerElement.querySelectorAll('[group-action]').length).toBe(1);
+
+		const firstOption = overlayContainerElement.querySelector('lu-listbox-option[role="option"]')!;
+		expect(firstOption.textContent).toContain('Carotte');
+		expect(firstOption.closest('lu-listbox-option[role="group"]')).toBeNull();
 	}));
 
 	it('should toggle the clicked option in the emitted value', fakeAsync(() => {

@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { DestroyRef, Directive, OnInit, computed, forwardRef, inject, input } from '@angular/core';
+import { DestroyRef, Directive, OnInit, computed, forwardRef, inject, input, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { luNullableNumberAttribute } from '@lucca-front/ng/core';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
+import { luBooleanAttribute, luNullableNumberAttribute } from '@lucca-front/ng/core';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter, ɵLU_UNGROUPED_OPTIONS } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, debounceTime, filter, map, of, switchMap } from 'rxjs';
+import { Observable, catchError, combineLatest, debounceTime, filter, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
+import { LuEstablishmentOptionComponent } from './establishment-option.component';
 import { LuCoreSelectEstablishment } from './models';
+import { LU_CORE_SELECT_CURRENT_ESTABLISHMENT_ID } from './my-establishment.provider';
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
@@ -29,6 +31,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	#destroyRef = inject(DestroyRef);
 
 	protected httpClient = inject(HttpClient);
+	public readonly currentEstablishmentId = inject(LU_CORE_SELECT_CURRENT_ESTABLISHMENT_ID, { optional: true });
 
 	readonly url = input<string>('/organization/structure/api/establishments');
 	readonly filters = input<Record<string, string | number | boolean> | null>(null);
@@ -38,8 +41,23 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	/** @deprecated use `uniqueOperationIds` instead */
 	readonly appInstanceId = input(null, { transform: luNullableNumberAttribute });
 	readonly searchDelimiter = input<string>(' ');
+	/**
+	 * Display the establishment of the current user as the first option, out of the legal unit groups, while the search is empty.
+	 * The app must provide it with `provideCoreSelectCurrentEstablishmentId`, otherwise the option is not displayed.
+	 */
+	readonly displayMyEstablishmentOption = input(false, { transform: luBooleanAttribute });
 
 	protected readonly clue = toSignal(this.clue$);
+
+	/**
+	 * Id of the establishment currently displayed as "My establishment", set along with the options page that displays it.
+	 */
+	readonly #myEstablishmentOptionId = signal<number | null>(null);
+
+	constructor() {
+		super();
+		this.select.optionTpl.set(LuEstablishmentOptionComponent);
+	}
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
@@ -49,7 +67,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	protected initGrouping() {
 		this.#groupingService.useGrouping$.pipe(filter(Boolean), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 			this.select.groupingSignal.set({
-				selector: (option) => option.legalUnitId,
+				selector: (option) => (this.isMyEstablishmentOption(option) ? ɵLU_UNGROUPED_OPTIONS : option.legalUnitId),
 				content: LuEstablishmentGroupingComponent,
 			});
 		});
@@ -70,6 +88,65 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 			...(appInstanceId ? { appInstanceId } : {}),
 		};
 	});
+
+	/**
+	 * Lookup of the current user's establishment, with the same restrictions as the options so it is only displayed when selectable.
+	 */
+	readonly #myEstablishment$ = toObservable(
+		computed<Record<string, string | number | boolean>>(() => ({
+			...this.#restrictionParams(),
+			...(this.currentEstablishmentId !== null ? { id: this.currentEstablishmentId } : {}),
+		})),
+	).pipe(
+		switchMap((params) =>
+			this.httpClient.get<T[] | { items: T[] }>(this.url(), { params }).pipe(
+				// A custom `url` may ignore `id`: only keep the expected establishment
+				map((res) => ((Array.isArray(res) ? res : res?.items) ?? []).find((establishment) => establishment.id === this.currentEstablishmentId) ?? null),
+				// A failed lookup must not block the options it is combined with
+				catchError(() => of(null)),
+			),
+		),
+		takeUntilDestroyed(),
+		shareReplay(1),
+	);
+
+	/**
+	 * Whether the option is the one displayed as "My establishment", at the top of the options.
+	 */
+	public isMyEstablishmentOption(option: T): boolean {
+		return option.id === this.#myEstablishmentOptionId();
+	}
+
+	protected override getOptionsPage(params: Record<string, string | number | boolean> | null, page: number): Observable<{ items: T[]; isLastPage: boolean }> {
+		const options$ = super.getOptionsPage(params, page);
+		const displayMyEstablishment = this.displayMyEstablishmentOption() && this.currentEstablishmentId !== null && !params?.['search'];
+
+		if (!displayMyEstablishment) {
+			return options$.pipe(
+				tap(() => {
+					if (page === 0) {
+						this.#myEstablishmentOptionId.set(null);
+					}
+				}),
+			);
+		}
+
+		return combineLatest([this.#myEstablishment$.pipe(take(1)), options$]).pipe(
+			tap(([myEstablishment]) => {
+				if (page === 0) {
+					this.#myEstablishmentOptionId.set(myEstablishment?.id ?? null);
+				}
+			}),
+			map(([myEstablishment, { items, isLastPage }]) => {
+				if (!myEstablishment) {
+					return { items, isLastPage };
+				}
+				// "My establishment" is moved to the top of the options, so it's removed from its legal unit
+				const otherItems = items.filter((establishment) => establishment.id !== myEstablishment.id);
+				return { items: page === 0 ? [myEstablishment, ...otherItems] : otherItems, isLastPage };
+			}),
+		);
+	}
 
 	protected override buildParamsFromClue(clue: string): Observable<Record<string, string | number | boolean>> {
 		// Use the clue parameter directly instead of reading from the async signal

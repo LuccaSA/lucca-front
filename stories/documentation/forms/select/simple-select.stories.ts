@@ -15,8 +15,8 @@ import {
 	TreeGroupingFn,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
-import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
+import { LuCoreSelectDepartmentsDirective, provideCoreSelectCurrentDepartmentId } from '@lucca-front/ng/core-select/department';
+import { LuCoreSelectEstablishmentsDirective, provideCoreSelectCurrentEstablishmentId } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
@@ -557,6 +557,22 @@ export const Establishment = generateStory({
 	},
 });
 
+export const MyEstablishment = generateStory({
+	name: 'Establishment Select with my establishment',
+	description: `Avec \`displayMyEstablishmentOption\`, l’établissement de l’utilisateur connecté est proposé en premier, hors des groupes par unité légale, tant que la recherche est vide.
+
+L’application doit le fournir avec \`provideCoreSelectCurrentEstablishmentId(() => …)\` dans son AppModule ou son app.config.ts, sinon l’option n’est pas affichée.`,
+	template: `<lu-simple-select
+	establishments
+	displayMyEstablishmentOption
+	[(ngModel)]="selectedEstablishment"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective', 'provideCoreSelectCurrentEstablishmentId'],
+	},
+});
+
 export const EstablishmentCustom = generateStory({
 	name: 'Establishment Select (custom)',
 	description: 'Pour saisir un établissement, il suffit d’utiliser la directive `establishments`',
@@ -619,6 +635,22 @@ export const Department = generateStory({
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/department': ['LuCoreSelectDepartmentsDirective'],
+	},
+});
+
+export const MyDepartment = generateStory({
+	name: 'Department Select with my department',
+	description: `Avec \`displayMyDepartmentOption\`, le département de l’utilisateur connecté est proposé en premier tant que la recherche est vide. Il reste aussi à sa place dans l’arbre.
+
+L’application doit le fournir avec \`provideCoreSelectCurrentDepartmentId(() => …)\` dans son AppModule ou son app.config.ts, sinon l’option n’est pas affichée.`,
+	template: `<lu-simple-select
+	departments
+	displayMyDepartmentOption
+	[(ngModel)]="selectedDepartment"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/department': ['LuCoreSelectDepartmentsDirective', 'provideCoreSelectCurrentDepartmentId'],
 	},
 });
 
@@ -836,7 +868,9 @@ const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAlias
 				LuUserPictureComponent,
 			],
 		}),
-		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),
+		applicationConfig({
+			providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66), provideCoreSelectCurrentEstablishmentId(() => 13), provideCoreSelectCurrentDepartmentId(() => 11)],
+		}),
 	],
 	args: {
 		legumes: allLegumes,

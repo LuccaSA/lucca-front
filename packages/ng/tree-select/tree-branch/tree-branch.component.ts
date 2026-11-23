@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
@@ -34,6 +34,9 @@ export class TreeBranchComponent<T> {
 	unselectMany = output<T[]>();
 
 	readonly simpleMode = input(false, { transform: luBooleanAttribute });
+
+	// A collapsed branch keeps its children to select them, but doesn't display them
+	protected readonly displayChildren = computed(() => !!this.branch().children?.length && !this.branch().ɵcollapsed);
 
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {

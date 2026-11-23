@@ -12,7 +12,7 @@
 	(onlyChildren)="selectOnlyChildren(branch())"
 	[hasChildren]="!simpleMode() && (branch().children?.length ?? 0) > 0"
 >
-	@if (branch().children?.length) {
+	@if (displayChildren()) {
 		<ng-container treeitem>
 			@for (child of branch().children; track $index) {
 				<lu-tree-branch

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { LuOptionComparer, TreeGroupingFn } from '@lucca-front/ng/core-select';
+import { LuOptionComparer, TreeGroupingFn, ɵLU_UNGROUPED_OPTIONS } from '@lucca-front/ng/core-select';
 import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 
@@ -113,6 +113,19 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		expect(firstGroup.querySelector(`[id="${labelId}"]`)).toBeTruthy();
 		expect(firstGroup.querySelectorAll('lu-listbox-option[role="option"]').length).toBe(2);
 		expect(firstGroup.querySelector('[optgroup]')!.classList).toContain('listboxOptionWrapper');
+	}));
+
+	it('should render ungrouped options at the top level, without a group header', fakeAsync(() => {
+		component.grouping = { selector: (option) => (option.id === 1 ? ɵLU_UNGROUPED_OPTIONS : 'Autres'), content: 'Groupe' };
+		openPanel();
+
+		const groups = overlayContainerElement.querySelectorAll('lu-listbox-option[role="group"]');
+		expect(groups.length).toBe(1);
+		expect(groups[0].querySelectorAll('lu-listbox-option[role="option"]').length).toBe(2);
+
+		const firstOption = overlayContainerElement.querySelector('lu-listbox-option[role="option"]')!;
+		expect(firstOption.textContent).toContain('Carotte');
+		expect(firstOption.closest('lu-listbox-option[role="group"]')).toBeNull();
 	}));
 
 	it('should render the add option as a listbox option outside the listbox, visible even when empty', fakeAsync(() => {

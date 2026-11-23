@@ -89,6 +89,7 @@ export const handlers = [
 				page: (p) => parseInt(p),
 				limit: (l) => parseInt(l),
 				legalUnitId: (l) => parseInt(l),
+				id: (ids) => ids.split(',').map((id) => parseInt(id)),
 				search: (s) => s.toLowerCase(),
 				sort: (s) => s,
 				'fields.root': (f) => f,
@@ -96,6 +97,7 @@ export const handlers = [
 			{
 				// Apply filters to items
 				legalUnitId: (items, { legalUnitId }) => items.filter((e) => e.legalUnitId === legalUnitId),
+				id: (items, { id }) => items.filter((e) => id.includes(e.id)),
 				search: applyFilter((e, { search }) => e.name.toLowerCase().includes(search)),
 				// Then sorting
 				sort: (items, { sort }) => applyV4Sorting(items, sort),
