@@ -141,7 +141,7 @@ function publish(targetName) {
 	}
 	const outDir = join(root, target.outDir);
 	if (target.pack && !existsSync(join(outDir, 'package.json'))) {
-		throw new Error(`${target.outDir}/package.json not found, run the ng-packagr build first`);
+		throw new Error(`${target.outDir}/package.json not found, run the library build first`);
 	}
 	rmSync(join(outDir, 'llms.txt'), { force: true });
 	rmSync(join(outDir, 'llms'), { recursive: true, force: true });

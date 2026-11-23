@@ -85,13 +85,13 @@ runTask('Lucca Front compilation', async () => {
 			output: OUTPUT_SCHEMATICS,
 		});
 
-		// ng-packagr sets "type": "module" in dist/ng/package.json.
+		// The library builder sets "type": "module" in dist/ng/package.json.
 		// Schematics are compiled as CommonJS, so we need to override the module
 		// type locally to prevent Node.js from treating .js files as ES modules.
 		writeFile(path.join(OUTPUT_SCHEMATICS, 'package.json'), JSON.stringify({ type: 'commonjs' }, null, '\t'));
 
 		const npmIgnoreFile = path.join(OUTPUT_NG, '.npmignore');
-		// ng-packagr generates `.npmignore` with `**/package.json` to strip nested
+		// The library builder generates `.npmignore` with `**/package.json` to strip nested
 		// package.json files used only for development. We need to negate that rule
 		// for the two package.json files that must ship with the published package:
 		// - schematics/package.json  → CommonJS module type override
