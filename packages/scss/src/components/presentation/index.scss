@@ -12,3 +12,16 @@
 		}
 	}
 }
+
+.presentationWrapper {
+	@layer components {
+		@include vars;
+		@include wrapper;
+	}
+
+	@layer mods {
+		&.mod-S {
+			@include wrapperS;
+		}
+	}
+}
