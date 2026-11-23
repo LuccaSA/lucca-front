@@ -211,8 +211,8 @@ describe(`${LuCoreSelectDepartmentsDirective.name} in a multi-select`, () => {
 
 		expect(myDepartment.textContent).toContain('My department:');
 		expect(myDepartment.querySelector('lu-tree-branch')).toBeNull();
-		expect(myDepartment.querySelector('.optionItem-icon.parentOnly')).toBeTruthy();
-		expect(myDepartment.querySelector('.optionItem-icon.childrenOnly')).toBeTruthy();
+		expect(myDepartment.querySelector('.parentOnly')).toBeTruthy();
+		expect(myDepartment.querySelector('.childrenOnly')).toBeTruthy();
 	}));
 
 	it('should select my department and its sub-departments on click', fakeAsync(() => {
@@ -222,13 +222,13 @@ describe(`${LuCoreSelectDepartmentsDirective.name} in a multi-select`, () => {
 	}));
 
 	it('should select only my department', fakeAsync(() => {
-		openPanel().querySelector<HTMLElement>('.optionItem-icon.parentOnly')!.click();
+		openPanel().querySelector<HTMLElement>('.parentOnly')!.click();
 
 		expect(lastEmittedIds()).toEqual([2]);
 	}));
 
 	it('should select only the sub-departments of my department', fakeAsync(() => {
-		openPanel().querySelector<HTMLElement>('.optionItem-icon.childrenOnly')!.click();
+		openPanel().querySelector<HTMLElement>('.childrenOnly')!.click();
 
 		expect(lastEmittedIds()).toEqual([3]);
 	}));
