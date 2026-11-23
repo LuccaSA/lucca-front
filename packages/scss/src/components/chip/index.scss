@@ -19,16 +19,16 @@
 			@include clickable;
 		}
 
+		&.is-disabled {
+			@include disabled;
+		}
+
 		&:has(.chip-content:focus-visible) {
 			@include focusVisible;
 		}
 
 		&.mod-product {
 			@include product;
-		}
-
-		&.is-disabled {
-			@include disabled;
 		}
 	}
 }
