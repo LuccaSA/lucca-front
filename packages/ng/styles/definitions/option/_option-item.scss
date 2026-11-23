@@ -106,7 +106,11 @@
 		}
 	}
 
-	:host-context(.mod-multiple) {
+	// `.formerEmployeeDisplayer` and `.archivedLegalUnitsDisplayer` are no longer rendered by Lucca Front, but kept
+	// until v23 for consumers that reuse this markup with this mixin.
+	:host-context(.mod-multiple),
+	.formerEmployeeDisplayer,
+	.archivedLegalUnitsDisplayer {
 		.optionItem-value {
 			@layer mods {
 				position: relative;

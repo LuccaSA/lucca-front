@@ -23,7 +23,14 @@
 		</lu-dialog-content>
 	</lu-dialog>
 } @else {
-	<lu-select-panel-layout data-testid="dialog-panel" [loading]="loading()" [contentTabIndex]="0" (scrolled)="onScroll($event)">
+	<!-- `lu-option-picker-panel` is kept until v23 for consumers that hook on it: prefer `.selectPanel` -->
+	<lu-select-panel-layout
+		class="lu-option-picker-panel"
+		data-testid="dialog-panel"
+		[loading]="loading()"
+		[contentTabIndex]="0"
+		(scrolled)="onScroll($event)"
+	>
 		<ng-container [ngTemplateOutlet]="panelContent" />
 	</lu-select-panel-layout>
 }

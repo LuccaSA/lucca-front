@@ -26,7 +26,8 @@
 	</div>
 
 	@if (hasChildren() && !selectableItem.disabled) {
-		<div class="listboxOption-content-treeActions">
+		<!-- `optionItem-icons` is kept until v23 for consumers that hook on it: prefer `.listboxOption-content-treeActions` -->
+		<div class="listboxOption-content-treeActions optionItem-icons">
 			<span
 				class="listboxOption-content-treeActions-action mod-parent parentOnly"
 				(click)="$event.stopPropagation(); onlyParent.emit()"

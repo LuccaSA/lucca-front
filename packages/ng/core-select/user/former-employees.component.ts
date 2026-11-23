@@ -18,8 +18,16 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 	imports: [FormsModule, ListboxOptionComponent],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	template: `
-		<lu-listbox-option checkbox [checked]="context.includeFormerEmployees()" [hovered]="selectableItem.isHighlighted()" [elementId]="selectableItem.idAttribute()" (mousedown)="onMouseDown($event)">
-			<span class="listboxOption-content-value">{{ intl().includeFormerEmployees }}</span>
+		<!-- formerEmployeeDisplayer and optionItem-value are kept until v23 for consumers that query them -->
+		<lu-listbox-option
+			class="formerEmployeeDisplayer"
+			checkbox
+			[checked]="context.includeFormerEmployees()"
+			[hovered]="selectableItem.isHighlighted()"
+			[elementId]="selectableItem.idAttribute()"
+			(mousedown)="onMouseDown($event)"
+		>
+			<span class="listboxOption-content-value optionItem-value">{{ intl().includeFormerEmployees }}</span>
 		</lu-listbox-option>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -40,4 +40,14 @@ describe(LuCoreSelectFormerEmployeesComponent.name, () => {
 		expect(option!.getAttribute('aria-selected')).toBe('true');
 		expect(option!.querySelectorAll('.checkboxField').length).toBe(1);
 	});
+
+	it('should still toggle through the legacy selectors kept until v23', () => {
+		const fixture = TestBed.createComponent(LuCoreSelectFormerEmployeesComponent);
+		fixture.detectChanges();
+
+		// Consumers query this pair to toggle the row in their own specs
+		(fixture.nativeElement as HTMLElement).querySelector('.formerEmployeeDisplayer .optionItem-value')!.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+
+		expect(includeFormerEmployees()).toBe(true);
+	});
 });

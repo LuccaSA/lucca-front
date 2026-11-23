@@ -21,6 +21,8 @@
 		}
 	}
 
+	// `.lu-picker-content-option-group` is no longer rendered by Lucca Front, but kept until v23 for consumer markup.
+	.lu-picker-content-option-group,
 	.lu-picker-content-option {
 		display: flex;
 		flex-direction: column;
@@ -30,6 +32,14 @@
 	.lu-picker-content-option-emptyState {
 		color: var(--palettes-neutral-600);
 		padding-inline: var(--pr-t-spacings-100);
+	}
+
+	.lu-picker-content-option-group {
+		margin-block-end: var(--pr-t-spacings-50);
+
+		.optionItem-value {
+			--components-options-item-padding-horizontal: var(--pr-t-spacings-250) var(--pr-t-spacings-100);
+		}
 	}
 
 	.lu-picker-content-add {
