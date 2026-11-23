@@ -38,11 +38,9 @@
 }
 
 @mixin focusVisible {
-	// Always product, whatever the palette
 	@include a11y.focusVisible($color: var(--palettes-product-700));
 }
 
 @mixin product {
-	// Product is the only palette a chip can pick, states then follow it like any other palette
 	@include color.palette('product');
 }
