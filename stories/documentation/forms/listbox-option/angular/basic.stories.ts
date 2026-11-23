@@ -80,6 +80,11 @@ export default {
 			description: 'Présente l’option comme une action « Tout sélectionner », sans checkbox.',
 			table: { category: 'inputs (listbox-option)', defaultValue: { summary: 'false' } },
 		},
+		checkbox: {
+			control: false,
+			description: 'Affiche une checkbox dans l’option, même hors d’une listbox multiple (voir la story Checkbox).',
+			table: { category: 'inputs (listbox-option)', defaultValue: { summary: 'false' } },
+		},
 		selectAll: {
 			control: false,
 			description: 'Libellé de l’option « Tout sélectionner » affichée dans un groupe (voir la story Group).',

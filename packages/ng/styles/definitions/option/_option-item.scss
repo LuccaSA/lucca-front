@@ -1,3 +1,5 @@
+// Legacy only: used by `lu-option-item` / `lu-tree-option-item` and the `.lu-select-value` of the legacy selects.
+// The listbox-based selects no longer rely on it: it goes away with those components.
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
@@ -23,16 +25,6 @@
 
 			display: block;
 			scroll-margin: var(--pr-t-spacings-50);
-
-			.listboxOption[role='group'] & {
-				scroll-margin-block-start: var(--pr-t-spacings-400);
-			}
-		}
-
-		@layer mods {
-			&.withAddOption {
-				scroll-margin-block-end: var(--pr-t-spacings-600);
-			}
 		}
 	}
 
@@ -114,6 +106,8 @@
 		}
 	}
 
+	// `.formerEmployeeDisplayer` and `.archivedLegalUnitsDisplayer` are no longer rendered by Lucca Front, but kept
+	// until v23 for consumers that reuse this markup with this mixin.
 	:host-context(.mod-multiple),
 	.formerEmployeeDisplayer,
 	.archivedLegalUnitsDisplayer {
