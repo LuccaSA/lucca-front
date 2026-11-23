@@ -1,7 +1,18 @@
 import { createTestStory } from '@/helpers/stories';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { ensurePickerPanelStyles, getPanelScrollContainer, isFullyVisibleInPanel, waitForAngular } from '@/helpers/test';
-import meta, { Basic, ScrollOnOpen, Minimal, WithDisplayer, WithClue, WithPagination, WithClearer, AddOption, CustomPanelHeader } from '@/stories/forms/select/simple-select.stories';
+import meta, {
+	Basic,
+	ScrollOnOpen,
+	Minimal,
+	WithDisplayer,
+	WithClue,
+	WithPagination,
+	WithClearer,
+	WithDisabledOptions,
+	AddOption,
+	CustomPanelHeader,
+} from '@/stories/forms/select/simple-select.stories';
 
 export default {
 	...meta,
@@ -33,12 +44,13 @@ const basePlay = async ({ canvasElement, step }) => {
 		await waitForAngular();
 		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
 		await expect(input).toHaveFocus();
-		// await userEvent.keyboard('{Space}');
-		// await waitForAngular();
-		// await expect(screen.getByRole('listbox')).toBeVisible();
-		// await userEvent.keyboard('{Escape}');
-		// await waitForAngular();
+		await userEvent.keyboard(' ');
 		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
+		await expect(input).toHaveFocus();
 	});
 };
 
@@ -150,15 +162,22 @@ export const ScrollToSelectedTEST = {
 	name: 'Scroll to selected TEST',
 };
 
-// export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, async (context) => {
-// 	await basePlay(context);
-// 	const input = within(context.canvasElement).getByRole('combobox');
-// 	await userEvent.click(input);
-// 	await waitForAngular();
-// 	const panel = within(screen.getByRole('listbox'));
-// 	const options = await panel.findAllByRole('option');
-// 	await expect(options[1].firstChild).toHaveClass('is-disabled');
-// });
+export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, async (context) => {
+	await basePlay(context);
+	const input = within(context.canvasElement).getByRole('combobox');
+	await userEvent.click(input);
+	await waitForAngular();
+	const panel = within(screen.getByRole('listbox'));
+	const options = await panel.findAllByRole('option');
+	// Legumes with an even index are disabled: Asperge is the second one
+	await expect(options[1]).toHaveTextContent('Asperge');
+	await waitFor(() => expect(options[1]).toHaveAttribute('aria-disabled', 'true'));
+	await userEvent.click(options[1]);
+	await waitForAngular();
+	// A disabled option can't be picked: the panel stays open and the value doesn't change
+	await expect(screen.getByRole('listbox')).toBeVisible();
+	await expect(input.parentElement).not.toHaveTextContent('Asperge');
+});
 
 export const AddOptionTEST = createTestStory(AddOption, async (context) => {
 	await basePlay(context);

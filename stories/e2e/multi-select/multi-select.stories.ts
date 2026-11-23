@@ -1,6 +1,6 @@
 import { createTestStory } from '@/helpers/stories';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
-import { ensurePickerPanelStyles, findPanelOptions, getPanelScrollContainer, isFullyVisibleInPanel, isSelectAllOption, waitForAngular } from '@/helpers/test';
+import { ensurePickerPanelStyles, findPanelOptions, getPanelScrollContainer, isFullyVisibleInPanel, isSelectAllOption, pressArrowKey, waitForAngular } from '@/helpers/test';
 import meta, { SelectAll, Basic, WithClue, ScrollOnOpen, Establishment } from '@/stories/forms/select/multi-select.stories';
 
 export default {
@@ -86,19 +86,26 @@ const basePlay = async ({ canvasElement, step }) => {
 		});
 		await waitForAngular();
 		await expect(input).toHaveFocus();
-		// Broken but fixed in current master, TODO uncomment
-		// await userEvent.keyboard('{Space}');
-		// await waitForAngular();
-		// await expect(screen.getByRole('listbox')).toBeVisible();
-		// await userEvent.keyboard('{Escape}');
+		await userEvent.keyboard(' ');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('listbox')).not.toBeInTheDocument());
 		input.focus();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
-		// For some reason, this arrowdown is not being handled properly, even tho it reaches the key manager
-		// I'm keeping it as commented for now as it only happens in test env and I want to test more stuff and not get stuck on this
-		// await userEvent.keyboard('{ArrowDown}');
+		// The panel opens with its first option highlighted, that the arrows move away from and back to
+		await findPanelOptions();
+		await waitFor(() => expect(input.getAttribute('aria-activedescendant')).toBeTruthy());
+		const firstHighlighted = input.getAttribute('aria-activedescendant');
+		await pressArrowKey('ArrowDown');
+		await waitFor(() => expect(input.getAttribute('aria-activedescendant')).not.toBe(firstHighlighted));
+		await expect(input.getAttribute('aria-activedescendant')).toBeTruthy();
+		await pressArrowKey('ArrowUp');
+		await waitFor(() => expect(input).toHaveAttribute('aria-activedescendant', firstHighlighted));
 		await userEvent.keyboard('{Enter}');
-		// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
+		// The next options are picked with the mouse
 		const allOptions = await findPanelOptions();
 		const options = allOptions.filter((el) => !isSelectAllOption(el));
 		const optionValues = options.slice(0, 4).map((option) => option.textContent);

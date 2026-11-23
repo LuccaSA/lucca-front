@@ -19,8 +19,8 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await waitForAngular();
 		await expect(screen.getByRole('list')).toBeVisible();
 		await userEvent.click(button);
-		await expect(screen.queryByText('list')).toBeNull();
 		await waitForAngular();
+		await expect(screen.queryByRole('list')).toBeNull();
 	});
 
 	await step('Keyboard interactions', async () => {
@@ -30,7 +30,8 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await waitForAngular();
 		await expect(screen.getByRole('list')).toBeVisible();
 		await userEvent.keyboard('{Escape}');
-		await expect(screen.queryByText('list')).toBeNull();
+		await waitForAngular();
+		await expect(screen.queryByRole('list')).toBeNull();
 	});
 });
 
