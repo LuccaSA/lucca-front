@@ -1,5 +1,21 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, contentChild, ElementRef, inject, Injector, input, OnInit, output, TemplateRef, Type, untracked, viewChild } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	contentChild,
+	ElementRef,
+	inject,
+	Injector,
+	input,
+	model,
+	OnInit,
+	output,
+	TemplateRef,
+	Type,
+	untracked,
+	viewChild,
+} from '@angular/core';
 import { intlInputOptions, isNil, luBooleanAttribute, luOptionalNumberAttribute, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { OptionComponent as ListboxOptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -36,6 +52,22 @@ export class LuOptionComponent<T> implements OnInit {
 	readonly grouping = input<LuOptionGrouping<T, unknown>>();
 
 	readonly hasChildren = input(false, { transform: luBooleanAttribute });
+
+	/** Folds the projected `[treeitem]` children behind a chevron. See `lu-listbox-option`. */
+	readonly collapsable = input(false, { transform: luBooleanAttribute });
+
+	/** Whether the folded children are shown. The chevron of the listbox option toggles it. */
+	readonly expanded = model(false);
+
+	/**
+	 * Position of this row among its siblings in a tree, from 1. Set, the row also exposes its
+	 * depth and sibling count: a tree loaded page by page or unfolded on demand is not wholly in
+	 * the DOM, so assistive technologies cannot work them out from the nesting alone.
+	 */
+	readonly treeitemPosition = input<number | null>(null);
+
+	/** Number of siblings of this row in a tree, itself included. Read with `treeitemPosition`. */
+	readonly treeitemSetSize = input<number | null>(null);
 
 	readonly onlyParent = output<void>();
 

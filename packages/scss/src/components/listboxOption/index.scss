@@ -132,6 +132,14 @@
 			}
 		}
 
+		&.mod-collapsable:not(.is-expanded) {
+			@include collapsed;
+		}
+
+		&.is-expanded {
+			@include expanded;
+		}
+
 		&[aria-hidden='true'] {
 			@include empty;
 		}

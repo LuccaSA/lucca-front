@@ -109,6 +109,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	override readonly selectParent$ = new Subject<void>();
 	override readonly selectChildren$ = new Subject<void>();
+	override readonly expandOption$ = new Subject<void>();
+	override readonly collapseOption$ = new Subject<void>();
 
 	public get filterPillClass() {
 		return this.filterPillMode;

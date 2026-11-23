@@ -39,11 +39,12 @@ Directory of the names shared across components. Before naming a new input, chec
 
 ### Behavior
 
-| Input      | Type             | Description                        | Avoid                         |
-| ---------- | ---------------- | ---------------------------------- | ----------------------------- |
-| `disabled` | `boolean`        | Disables the `<component>`.        | `isDisabled`, `disable`       |
-| `loading`  | `boolean`        | Applies the loading state.         | `isLoading`, `pending`        |
-| `expanded` | `model<boolean>` | Expands the `<component>` content. | `open`, `opened`, `collapsed` |
+| Input         | Type             | Description                                          | Avoid                         |
+| ------------- | ---------------- | ---------------------------------------------------- | ----------------------------- |
+| `disabled`    | `boolean`        | Disables the `<component>`.                          | `isDisabled`, `disable`       |
+| `loading`     | `boolean`        | Applies the loading state.                           | `isLoading`, `pending`        |
+| `expanded`    | `model<boolean>` | Expands the `<component>` content.                   | `open`, `opened`, `collapsed` |
+| `collapsable` | `boolean`        | Lets the `<component>` content fold behind a toggle. | `collapsible`, `foldable`     |
 
 ### Form fields
 

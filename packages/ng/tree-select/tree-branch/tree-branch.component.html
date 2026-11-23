@@ -5,26 +5,40 @@
 	[optionTpl]="optionTpl()"
 	[optionIndex]="optionIndex()"
 	[scrollIntoViewOptions]="{ block: 'nearest' }"
-	[isSelected]="branch().node | luIsOptionSelected: optionComparer() : selectedOptions()"
+	[isSelected]="coveredByRule() || (branch().node | luIsOptionSelected: optionComparer() : selectedOptions())"
+	[collapsable]="collapsable() && (branch().expandable ?? (branch().children?.length ?? 0) > 0)"
+	[expanded]="isExpanded()"
+	(expandedChange)="reportExpanded($event)"
+	[isHidden]="hiddenByCollapse()"
+	[treeitemPosition]="treeitemPosition()"
+	[treeitemSetSize]="treeitemSetSize()"
 	(selected)="toggle(branch())"
 	(click)="toggle(branch(), $event)"
 	(onlyParent)="toggleOne.emit(branch().node)"
 	(onlyChildren)="selectOnlyChildren(branch())"
-	[hasChildren]="!simpleMode() && (branch().children?.length ?? 0) > 0"
+	[hasChildren]="!simpleMode() && !parentStandsForChildren() && (branch().children?.length ?? 0) > 0"
 >
 	@if (branch().children?.length) {
 		<ng-container treeitem>
 			@for (child of branch().children; track $index) {
 				<lu-tree-branch
 					[branch]="child"
+					[treeitemPosition]="$index + 1"
+					[treeitemSetSize]="$count"
 					[optionTpl]="optionTpl()"
 					[optionIndex]="optionIndex() + '-' + $index"
 					[optionComparer]="optionComparer()"
 					[selectedOptions]="selectedOptions()"
 					[simpleMode]="simpleMode()"
+					[collapsable]="collapsable()"
+					[hiddenByCollapse]="childrenHiddenByCollapse()"
+					[parentStandsForChildren]="parentStandsForChildren()"
+					[coveredByRule]="childrenCoveredByRule()"
 					(toggleOne)="toggleOne.emit($event)"
 					(selectMany)="selectMany.emit($event)"
 					(unselectMany)="unselectMany.emit($event)"
+					(coveredUnselect)="onCoveredUnselect($event)"
+					(parentSelectionSwapped)="parentSelectionSwapped.emit($event)"
 				/>
 			}
 		</ng-container>

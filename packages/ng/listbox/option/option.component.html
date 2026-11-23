@@ -1,4 +1,11 @@
 <div class="listboxOption-content" [class.is-hovered]="hovered()" [attr.id]="group() ? groupLabelId() : null">
+	@if (collapsable()) {
+		<span class="listboxOption-content-disclosure" aria-hidden="true" (click)="toggleExpanded($event)">
+			<lu-icon class="listboxOption-content-disclosure-icon" icon="arrowChevronRight" size="XS" />
+		</span>
+	} @else if (disclosureSlot()) {
+		<span class="listboxOption-content-disclosure" aria-hidden="true"></span>
+	}
 	@if ((multiple() || checkbox()) && !add() && !selectAll() && !select()) {
 		<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
 			<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>

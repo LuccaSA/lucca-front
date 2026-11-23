@@ -14,7 +14,7 @@ import { LuMultiSelectContentDisplayerComponent } from './content-displayer/cont
 		class: 'multipleSelect-displayer-search',
 		'[class.mod-button]': 'isButton',
 		'[attr.role]': 'isButton ? null : "combobox"',
-		'[attr.aria-haspopup]': 'isButton ? "dialog" : "listbox"',
+		'[attr.aria-haspopup]': 'isButton ? "dialog" : select.treeGenerator ? "tree" : "listbox"',
 		'[attr.aria-expanded]': 'panelOpen',
 		'[attr.aria-activedescendant]': 'isButton ? null : activeDescendant',
 		'[attr.aria-controls]': 'controls',

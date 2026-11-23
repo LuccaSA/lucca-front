@@ -17,6 +17,8 @@ import { TreeSelectDirective, TreeBranchComponent } from '@lucca-front/ng/tree-s
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `groupingFnInput` | `treeSelect` | `TreeGroupingFn<T>` | — | ✅ | — | — |
+| `collapsableInput` | `collapsable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `parentStandsForChildrenInput` | `parentStandsForChildren` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 ### TreeBranchComponent (component)
 
@@ -26,12 +28,18 @@ import { TreeSelectDirective, TreeBranchComponent } from '@lucca-front/ng/tree-s
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
+| `treeitemPosition` | `treeitemPosition` | `number \| null` | `null` | — | — | — |
+| `treeitemSetSize` | `treeitemSetSize` | `number \| null` | `null` | — | — | — |
 | `branch` | `branch` | `TreeNode<T>` | — | ✅ | — | — |
 | `optionTpl` | `optionTpl` | `TemplateRef<LuOptionContext<T>> \| Type<unknown> \| undefined` | — | ✅ | — | — |
 | `optionIndex` | `optionIndex` | `unknown` | — | ✅ | — | — |
 | `optionComparer` | `optionComparer` | `LuOptionComparer<T>` | — | ✅ | — | — |
 | `selectedOptions` | `selectedOptions` | `T[]` | `[]` | — | — | — |
 | `simpleMode` | `simpleMode` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `parentStandsForChildren` | `parentStandsForChildren` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `collapsable` | `collapsable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `hiddenByCollapse` | `hiddenByCollapse` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `coveredByRule` | `coveredByRule` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 #### Outputs
 
@@ -40,6 +48,8 @@ import { TreeSelectDirective, TreeBranchComponent } from '@lucca-front/ng/tree-s
 | `toggleOne` | `toggleOne` | `T` | — |
 | `selectMany` | `selectMany` | `T[]` | — |
 | `unselectMany` | `unselectMany` | `T[]` | — |
+| `coveredUnselect` | `coveredUnselect` | `T` | — |
+| `parentSelectionSwapped` | `parentSelectionSwapped` | `{ select: T[]; unselect: T[] }` | — |
 
 ## Related files
 

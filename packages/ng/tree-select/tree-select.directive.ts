@@ -1,4 +1,5 @@
 import { Directive, inject, input, linkedSignal } from '@angular/core';
+import { luBooleanAttribute } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, TreeGenerator, TreeGroupingFn, TreeNode } from '@lucca-front/ng/core-select';
 
 @Directive({
@@ -11,6 +12,18 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 	readonly groupingFnInput = input.required<TreeGroupingFn<T>>({ alias: 'treeSelect' });
 
 	readonly groupingFn = linkedSignal(() => this.groupingFnInput());
+
+	readonly collapsableInput = input(false, { alias: 'collapsable', transform: luBooleanAttribute });
+
+	get collapsable(): boolean {
+		return this.collapsableInput();
+	}
+
+	readonly parentStandsForChildrenInput = input(false, { alias: 'parentStandsForChildren', transform: luBooleanAttribute });
+
+	get parentStandsForChildren(): boolean {
+		return this.parentStandsForChildrenInput();
+	}
 
 	constructor() {
 		this.#select.treeGenerator = this;

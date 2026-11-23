@@ -1,10 +1,16 @@
 <lu-listbox-option
 	[checked]="selectableItem.isSelected()"
+	[mixed]="selectableItem.isMixed()"
 	[hovered]="selectableItem.isHighlighted()"
 	[disabled]="selectableItem.disabled"
 	(click)="selectOption($event)"
 	[elementId]="selectableItem.idAttribute()"
 	[treeitemLevel]="treeitemContent() ? level : null"
+	[collapsable]="collapsable()"
+	[(expanded)]="expanded"
+	[attr.aria-level]="treeitemPosition() === null ? null : level"
+	[attr.aria-posinset]="treeitemPosition()"
+	[attr.aria-setsize]="treeitemPosition() === null ? null : treeitemSetSize()"
 >
 	<ng-container [ngTemplateOutlet]="optionContent" />
 	<!-- Re-projected into the option's own wrapper, so the tree rows are stacked by the listbox

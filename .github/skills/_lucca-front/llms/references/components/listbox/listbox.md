@@ -31,6 +31,7 @@ import { ListboxComponent, Treeitem, OptionComponent } from '@lucca-front/ng/lis
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `multiple` | `multiple` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `tree` | `tree` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `collapsable` | `collapsable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `state` | `state` | `ListboxState \| null` | `null` | — | — | — |
 | `statusMsg` | `statusMsg` | `string \| null` | `null` | — | — | — |
 
@@ -55,9 +56,16 @@ import { ListboxComponent, Treeitem, OptionComponent } from '@lucca-front/ng/lis
 | `group` | `group` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `groupId` | `groupId` | `string \| null` | `null` | — | — | — |
 | `select` | `select` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `collapsable` | `collapsable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `selectAll` | `selectAll` | `'string' \| null` | — | — | — | — |
 | `checkbox` | `checkbox` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `treeitemLevel` | `treeitemLevel` | `number \| null` | `null` | — | — | — |
+
+#### Models (two-way binding)
+
+| Property | Type | Required | Notes |
+|----------|------|----------|-------|
+| `expanded` | `unknown` | — | — |
 
 ### Injection tokens
 

@@ -24,6 +24,7 @@ import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select
 | `uniqueOperationIds` | `uniqueOperationIds` | `readonly number[] \| null` | `null` | — | — | — |
 | `appInstanceId` | `appInstanceId` | `unknown` | `null` | — | `luNullableNumberAttribute` | ⚠️ **Déprécié** : use `uniqueOperationIds` instead  |
 | `searchDelimiter` | `searchDelimiter` | `string` | `' '` | — | — | — |
+| `legalUnitId` | `legalUnitId` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
 
 ### Services
 
