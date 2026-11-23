@@ -1,6 +1,6 @@
 import { UPDATE_STORY_ARGS } from 'storybook/internal/core-events';
 import { addons } from 'storybook/preview-api';
-import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
+import { expect, fireEvent, screen, userEvent, waitFor, within } from 'storybook/test';
 
 export async function sleep(ms: number) {
 	await new Promise((resolve) => setTimeout(resolve, ms));
@@ -115,6 +115,20 @@ export async function findPanelOptions(): Promise<HTMLElement[]> {
  */
 export function isSelectAllOption(option: HTMLElement): boolean {
 	return option.id.includes('select-all') || option.classList.contains('multiSelectAllDisplayer');
+}
+
+const arrowKeyCodes = { ArrowLeft: 37, ArrowUp: 38, ArrowRight: 39, ArrowDown: 40 } as const;
+
+/**
+ * Presses an arrow key on the focused element with the `keyCode` a browser sends. user-event leaves
+ * it to 0, and the CDK key managers that move the highlight in select panels or menus only read `keyCode`.
+ */
+export async function pressArrowKey(key: keyof typeof arrowKeyCodes): Promise<void> {
+	const target = document.activeElement ?? document.body;
+	const init = { key, code: key, keyCode: arrowKeyCodes[key], bubbles: true, cancelable: true };
+	await fireEvent.keyDown(target, init);
+	await fireEvent.keyUp(target, init);
+	await waitForAngular();
 }
 
 export async function clearInputs(inputs: HTMLElement[]) {

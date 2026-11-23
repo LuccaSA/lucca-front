@@ -1,6 +1,6 @@
-import { expect, screen, userEvent, within } from 'storybook/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { createTestStory } from '@/helpers/stories';
-import { waitForAngular } from '@/helpers/test';
+import { pressArrowKey, waitForAngular } from '@/helpers/test';
 import meta, { Basic } from '@/stories/forms/select/tree-select.stories';
 
 export default {
@@ -48,7 +48,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 	await userEvent.click(options[3]);
 	await userEvent.keyboard('{Escape}');
 	await waitForAngular();
-	await expect(screen.queryByText('listbox')).toBeNull();
+	await waitFor(() => expect(screen.queryByRole('tree')).not.toBeInTheDocument());
 	await checkValues(input, optionValues);
 	if (isBadgeDisplayer) {
 		await step('Clear and remove values using mouse', async () => {
@@ -62,7 +62,7 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 			await userEvent.click(options[1]);
 			await userEvent.keyboard('{Escape}');
 			await waitForAngular();
-			await expect(screen.queryByText('listbox')).toBeNull();
+			await waitFor(() => expect(screen.queryByRole('tree')).not.toBeInTheDocument());
 			await expect(input.parentElement).not.toHaveTextContent(optionValues[1]);
 		});
 	}
@@ -78,22 +78,28 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await expect(screen.getByRole('tree')).toBeVisible();
 		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
-		await expect(screen.queryByText('listbox')).toBeNull();
+		await waitFor(() => expect(screen.queryByRole('tree')).not.toBeInTheDocument());
 		await waitForAngular();
 		await expect(input).toHaveFocus();
-		// Broken but fixed in current master, TODO uncomment
-		// await userEvent.keyboard('{Space}');
-		// await waitForAngular();
-		// await expect(screen.getByRole('tree')).toBeVisible();
-		// await userEvent.keyboard('{Escape}');
+		await userEvent.keyboard(' ');
+		await waitForAngular();
+		await expect(screen.getByRole('tree')).toBeVisible();
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await waitFor(() => expect(screen.queryByRole('tree')).not.toBeInTheDocument());
 		input.focus();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
-		// For some reason, this arrowdown is not being handled properly, even tho it reaches the key manager
-		// I'm keeping it as commented for now as it only happens in test env and I want to test more stuff and not get stuck on this
-		// await userEvent.keyboard('{ArrowDown}');
+		// The panel opens with its first option highlighted, that the arrows move away from and back to
+		await waitFor(() => expect(input.getAttribute('aria-activedescendant')).toBeTruthy());
+		const firstHighlighted = input.getAttribute('aria-activedescendant');
+		await pressArrowKey('ArrowDown');
+		await waitFor(() => expect(input.getAttribute('aria-activedescendant')).not.toBe(firstHighlighted));
+		await expect(input.getAttribute('aria-activedescendant')).toBeTruthy();
+		await pressArrowKey('ArrowUp');
+		await waitFor(() => expect(input).toHaveAttribute('aria-activedescendant', firstHighlighted));
 		await userEvent.keyboard('{Enter}');
-		// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
+		// The next options are picked with the mouse
 		const panel = within(screen.getByRole('tree'));
 		const options = await panel.findAllByRole('treeitem').then((options) => options.filter((el) => !el.id.includes('select-all')));
 		const optionValues = ['Artichaut', 'Brocoli', 'Céleri', 'Chou chinois', 'Laitue'];
