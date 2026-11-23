@@ -1,0 +1,124 @@
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<th></th>
+			@for (size of sizes; track size) {
+				<th>HTML {{ size }}</th>
+				<th>Angular {{ size }}</th>
+			}
+		</tr>
+		<tr>
+			<th>Empty</th>
+			@for (size of sizes; track size) {
+				<td>
+					<div class="form-field" [class.mod-S]="size === 'S'">
+						<label class="formLabel" for="html-empty-{{ size }}">Destinataires</label>
+						<div class="chipsField">
+							<div class="chipsField-content">
+								<input type="text" id="html-empty-{{ size }}" class="chipsField-input" placeholder="Placeholder" />
+							</div>
+						</div>
+						<div class="inlineMessage">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Helper text</p>
+						</div>
+					</div>
+				</td>
+				<td>
+					<lu-form-field label="Destinataires" inlineMessage="Helper text" [size]="size">
+						<lu-chips-input placeholder="Placeholder" [formControl]="empty[size]" />
+					</lu-form-field>
+				</td>
+			}
+		</tr>
+		<tr>
+			<th>Filled (error + unkillable chips)</th>
+			@for (size of sizes; track size) {
+				<td>
+					<div class="form-field" [class.mod-S]="size === 'S'">
+						<label class="formLabel" for="html-filled-{{ size }}">Destinataires</label>
+						<div class="chipsField">
+							<div class="chipsField-content">
+								<span class="chipsField-chip chip"
+									><span class="chip-content pr-u-ellipsis">marie.dupont&#64;example.com</span
+									><button type="button" class="chip-kill"><span class="pr-u-mask">Supprimer</span></button></span
+								>
+								<span class="chipsField-chip chip palette-critical"
+									><span aria-hidden="true" class="lucca-icon icon-signError"></span
+									><span class="chip-content pr-u-ellipsis">paul.martin&#64;example</span
+									><button type="button" class="chip-kill"><span class="pr-u-mask">Supprimer</span></button></span
+								>
+								<span class="chipsField-chip chip"><span class="chip-content pr-u-ellipsis">contact&#64;example.com</span></span>
+								<input type="text" id="html-filled-{{ size }}" class="chipsField-input" />
+							</div>
+							<button type="button" class="chipsField-clear clear"><span class="pr-u-mask">Effacer</span></button>
+						</div>
+					</div>
+				</td>
+				<td>
+					<lu-form-field label="Destinataires" [size]="size">
+						<lu-chips-input hasClearer [chipValidator]="isEmail" [unkillableValues]="unkillableValues" [formControl]="filled[size]" />
+					</lu-form-field>
+				</td>
+			}
+		</tr>
+		<tr>
+			<th>Invalid</th>
+			@for (size of sizes; track size) {
+				<td>
+					<div class="form-field" [class.mod-S]="size === 'S'">
+						<label class="formLabel is-error" for="html-invalid-{{ size }}">Destinataires</label>
+						<div class="chipsField">
+							<div class="chipsField-content">
+								<input type="text" id="html-invalid-{{ size }}" class="chipsField-input" aria-invalid="true" />
+							</div>
+						</div>
+						<div class="inlineMessage is-error">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+							<p class="inlineMessage-content">Error message</p>
+						</div>
+					</div>
+				</td>
+				<td>
+					<lu-form-field label="Destinataires" errorInlineMessage="Error message" [size]="size">
+						<lu-chips-input [formControl]="invalid[size]" />
+					</lu-form-field>
+				</td>
+			}
+		</tr>
+		<tr>
+			<th>Disabled</th>
+			@for (size of sizes; track size) {
+				<td>
+					<div class="form-field" [class.mod-S]="size === 'S'">
+						<label class="formLabel" for="html-disabled-{{ size }}">Destinataires</label>
+						<div class="chipsField">
+							<div class="chipsField-content">
+								<span class="chipsField-chip chip is-disabled"
+									><span class="chip-content pr-u-ellipsis">marie.dupont&#64;example.com</span></span
+								>
+								<span class="chipsField-chip chip is-disabled"
+									><span class="chip-content pr-u-ellipsis">contact&#64;example.com</span></span
+								>
+								<input type="text" id="html-disabled-{{ size }}" class="chipsField-input" disabled />
+							</div>
+						</div>
+					</div>
+				</td>
+				<td>
+					<lu-form-field label="Destinataires" [size]="size">
+						<lu-chips-input hasClearer [formControl]="disabled[size]" />
+					</lu-form-field>
+				</td>
+			}
+		</tr>
+		<tr>
+			<th>Presentation</th>
+			<td colspan="4">
+				<lu-form-field label="Destinataires" presentation>
+					<lu-chips-input [formControl]="presentation" />
+				</lu-form-field>
+			</td>
+		</tr>
+	</tbody>
+</table>

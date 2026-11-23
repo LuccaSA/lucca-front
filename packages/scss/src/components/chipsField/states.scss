@@ -1,0 +1,20 @@
+@use '@lucca-front/scss/src/components/chip/exports' as chip;
+
+@mixin invalid {
+	--components-chipsField-border: var(--pr-t-color-input-border-critical);
+	--components-chipsField-borderHover: var(--pr-t-color-input-border-critical-hover);
+	--components-chipsField-background: var(--pr-t-color-input-background-critical);
+	--components-chipsField-placeholder: var(--pr-t-color-input-text-placeholder-critical);
+}
+
+@mixin disabled {
+	--components-chipsField-background: var(--pr-t-color-input-background-disabled);
+	--components-chipsField-borderHover: var(--components-chipsField-border);
+	--components-chipsField-color: var(--pr-t-color-input-text-disabled);
+
+	cursor: default;
+}
+
+@mixin chipSelected {
+	@include chip.focusVisible;
+}

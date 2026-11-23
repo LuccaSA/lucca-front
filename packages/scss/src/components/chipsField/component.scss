@@ -1,0 +1,66 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/chip/exports' as chip;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	align-items: flex-end;
+	gap: var(--components-chipsField-gap);
+	padding: var(--components-chipsField-padding);
+	border-radius: var(--components-chipsField-borderRadius);
+	background-color: var(--components-chipsField-background);
+	box-shadow: 0 0 0 1px var(--components-chipsField-border);
+	cursor: text;
+
+	&:hover {
+		--components-chipsField-border: var(--components-chipsField-borderHover);
+	}
+
+	&:has(.chipsField-input:focus-visible) {
+		@include a11y.focusVisible($offset: 3px);
+	}
+
+	@at-root ($atRoot) {
+		.chipsField-content {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: var(--pr-t-spacings-50);
+			flex: 1;
+			min-inline-size: 0;
+		}
+
+		.chipsField-chip.chip {
+			@include chip.product;
+
+			min-inline-size: 0;
+			max-inline-size: 100%;
+			cursor: default;
+		}
+
+		.chipsField-chip .chip-content {
+			max-inline-size: var(--components-chipsField-chip-maxWidth);
+		}
+
+		.chipsField-input {
+			flex: 1;
+			min-inline-size: var(--pr-t-spacings-400);
+			inline-size: auto;
+			border: 0;
+			padding: 0;
+			outline: none;
+			background-color: transparent;
+			color: var(--components-chipsField-color);
+			font: var(--components-chipsField-font);
+			text-overflow: ellipsis;
+
+			&::placeholder {
+				color: var(--components-chipsField-placeholder);
+			}
+		}
+
+		.chipsField-clear {
+			margin-block-end: var(--pr-t-spacings-50);
+		}
+	}
+}
