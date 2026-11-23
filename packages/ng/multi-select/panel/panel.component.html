@@ -63,7 +63,13 @@
 </ng-template>
 
 <ng-template #panelContent>
-	<lu-listbox multiple [tree]="!!treeGenerator" [collapsable]="!!treeGenerator?.collapsable" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
+	<lu-listbox
+		multiple
+		[tree]="!!treeGenerator"
+		[collapsable]="!!treeGenerator?.collapsable"
+		[state]="listboxState()"
+		[statusMsg]="listboxStatusMsg()"
+	>
 		<!-- The header is projected inside the listbox because it can contain selectable elements
 		(e.g. the select-all checkbox) that are referenced by aria-activedescendant -->
 		<ng-container ngProjectAs="[listbox-header]">
