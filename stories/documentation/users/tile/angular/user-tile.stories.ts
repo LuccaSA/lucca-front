@@ -1,9 +1,8 @@
 import { finn, jake, marceline } from '@/stories/users/user.mocks';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpInterceptorFn, HttpResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser, LuUserTileComponent } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { LuUserPopoverStore } from '@lucca-front/ng/user-popover/service/user-popover.store';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular-vite';
 import { of } from 'rxjs';
 
@@ -43,6 +42,12 @@ function getDisplayFormat(args: Pick<UserTileStoryArgs, 'firstNameFormat' | 'las
 	return args.lastNameFirst ? `${lastNameToken}${firstNameToken}` : `${firstNameToken}${lastNameToken}`;
 }
 
+const employeeProfileCardInterceptor: HttpInterceptorFn = (req) => {
+	const id = Number(req.url.split('/').pop());
+	const user = Object.values(users).find((u) => u.id === id) ?? finn;
+	return of(new HttpResponse({ body: { ...user, leaveEndIsFirstHalfDay: false, pictureHref: user.pictureHref ?? user.picture?.href } }));
+};
+
 const meta: Meta<UserTileStoryArgs> = {
 	title: 'Documentation/Users/Tile/Angular/Basic',
 	component: LuUserTileComponent,
@@ -51,21 +56,7 @@ const meta: Meta<UserTileStoryArgs> = {
 			imports: [LuUserTileComponent, LuUserPopoverDirective],
 		}),
 		applicationConfig({
-			providers: [
-				provideAnimations(),
-				provideHttpClient(),
-				{
-					provide: LuUserPopoverStore,
-					useValue: {
-						get: (id: number) =>
-							of({
-								...(Object.values(users).find((user) => user.id === id) ?? finn),
-								leaveEndIsFirstHalfDay: false,
-								pictureHref: (Object.values(users).find((user) => user.id === id) ?? finn).pictureHref ?? (Object.values(users).find((user) => user.id === id) ?? finn).picture?.href,
-							}),
-					},
-				},
-			],
+			providers: [provideAnimations(), provideHttpClient(withInterceptors([employeeProfileCardInterceptor]))],
 		}),
 	],
 	render: (args) => {
