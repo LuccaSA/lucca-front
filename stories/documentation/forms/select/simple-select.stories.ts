@@ -14,13 +14,13 @@ import {
 	LuOptionGroupDirective,
 	TreeGroupingFn,
 } from '@lucca-front/ng/core-select';
-import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
-import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
-import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive, LuCoreSelectApiV5Directive, LuCoreSelectPublicApiDirective } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectDepartmentsDirective, LuCoreSelectPublicDepartmentsDirective } from '@lucca-front/ng/core-select/department';
+import { LuCoreSelectEstablishmentsDirective, LuCoreSelectPublicEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
+import { LuCoreSelectJobQualificationsDirective, LuCoreSelectPublicJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
-import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
-import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { LuCoreSelectOccupationCategoriesDirective, LuCoreSelectPublicOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
+import { LuCoreSelectPublicEmployeesDirective, LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSimpleSelectInputComponent, luSimpleSelectTranslations } from '@lucca-front/ng/simple-select';
@@ -379,6 +379,45 @@ export const ApiV4 = generateStory({
 	},
 });
 
+export const ApiV5 = generateStory({
+	name: 'Api V5',
+	description: `Pour récupérer automatiquement les options depuis une api V5 avec pagination et recherche, il suffit d'utiliser la directive \`apiV5\`.
+
+	Il n'y a pas de tri par défaut : chaque endpoint liste les clés de tri qu'il accepte, à passer dans l'input \`sort\`.`,
+	template: `<lu-simple-select
+	apiV5="/api/v5/departments"
+	sort="name"
+	[(ngModel)]="selectedDepartment"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV5Directive'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
+export const PublicApi = generateStory({
+	name: 'Public Api',
+	description: `Pour récupérer automatiquement les options depuis l'[API publique Lucca](https://developers.luccasoftware.com/api-reference/latest/introduction), il suffit d'utiliser la directive \`publicApi\`.
+
+	L'input \`apiVersion\` est obligatoire : il est envoyé dans l'en-tête \`Api-Version\` de chaque requête.`,
+	template: `<lu-simple-select
+	publicApi="/lucca-api/departments"
+	apiVersion="2024-11-01"
+	sort="name"
+	[(ngModel)]="selectedDepartment"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/api': ['LuCoreSelectPublicApiDirective'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
 export const ApiV4NoCLue = generateStory({
 	name: 'Api V4 (no clue)',
 	description: `Il est possible de désactiver la recherche ajoutée par les directives apiV3 et apiV4 en utilisant la directive \`noClue\`.`,
@@ -580,6 +619,89 @@ export const EstablishmentCustom = generateStory({
 		args: {
 			selectedLegume: allLegumes[4],
 		},
+	},
+});
+
+export const PublicEmployee = generateStory({
+	name: 'Public Employee Select',
+	description:
+		'Pour saisir un collaborateur depuis l’API publique Lucca, il suffit d’utiliser la directive `publicEmployees`. Seuls les collaborateurs actifs sont proposés par défaut, avec le collaborateur connecté en premier (`provideCoreSelectCurrentUserId`). `enableFormerEmployees` permet d’inclure les collaborateurs partis, et les homonymes sont distingués par leur département.',
+	template: `<lu-simple-select
+	publicEmployees
+	enableFormerEmployees
+	[(ngModel)]="selectedUser"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectPublicEmployeesDirective', 'provideCoreSelectCurrentUserId'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
+export const PublicEstablishment = generateStory({
+	name: 'Public Establishment Select',
+	description:
+		'Pour saisir un établissement depuis l’API publique Lucca, il suffit d’utiliser la directive `publicEstablishments`. Seuls les établissements non archivés sont proposés par défaut, groupés par entité légale quand il y en a plusieurs.',
+	template: `<lu-simple-select
+	publicEstablishments
+	[(ngModel)]="selectedEstablishment"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectPublicEstablishmentsDirective'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
+export const PublicDepartment = generateStory({
+	name: 'Public Department Select',
+	description: 'Pour saisir un département depuis l’API publique Lucca, il suffit d’utiliser la directive `publicDepartments`. Les départements non archivés sont proposés en arbre.',
+	template: `<lu-simple-select
+	publicDepartments
+	[(ngModel)]="selectedDepartment"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/department': ['LuCoreSelectPublicDepartmentsDirective'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
+export const PublicJobQualification = generateStory({
+	name: 'Public JobQualification Select',
+	description: 'Pour saisir une qualification depuis l’API publique Lucca, il suffit d’utiliser la directive `publicJobQualifications`. Les qualifications sont groupées par métier.',
+	template: `<lu-simple-select
+	publicJobQualifications
+	[(ngModel)]="selectedJobQualifications"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/job-qualification': ['LuCoreSelectPublicJobQualificationsDirective'],
+	},
+	storyPartial: {
+		play: null,
+	},
+});
+
+export const PublicOccupationCategory = generateStory({
+	name: 'Public OccupationCategory Select',
+	description: 'Pour saisir une catégorie socioprofessionnelle (CSP) depuis l’API publique Lucca, il suffit d’utiliser la directive `publicOccupationCategories`.',
+	template: `<lu-simple-select
+	publicOccupationCategories
+	[(ngModel)]="selectedOccupationCategory"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/occupation-category': ['LuCoreSelectPublicOccupationCategoriesDirective'],
+	},
+	storyPartial: {
+		play: null,
 	},
 });
 
@@ -815,6 +937,13 @@ const meta: Meta<InputAlias<LuSimpleSelectInputStoryComponent, SelectCommonAlias
 				SlicePipe,
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
+				LuCoreSelectApiV5Directive,
+				LuCoreSelectPublicApiDirective,
+				LuCoreSelectPublicEmployeesDirective,
+				LuCoreSelectPublicEstablishmentsDirective,
+				LuCoreSelectPublicDepartmentsDirective,
+				LuCoreSelectPublicJobQualificationsDirective,
+				LuCoreSelectPublicOccupationCategoriesDirective,
 				LuCoreSelectNoClueDirective,
 				LuCoreSelectEstablishmentsDirective,
 				LuCoreSelectCustomEstablishmentsDirective,
