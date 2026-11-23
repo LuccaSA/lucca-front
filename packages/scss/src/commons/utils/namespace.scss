@@ -1,23 +1,9 @@
-@use '@lucca-front/scss/src/commons/config';
-
 $defaultAtRoot: 'without: rule';
 
-@if (config.$isNamespaced) {
-	// When namespaced, we need to keep the surrounding selector
-	$defaultAtRoot: 'with: rule';
-}
-
 @mixin appendRootVars {
-	@if config.$isNamespaced {
-		// stylelint-disable-next-line block-no-redundant-nested-style-rules -- & references the selector calling this mixin.
-		& {
-			@content;
-		}
-	} @else {
-		// :host applies the variables inside a shadow root, where :root matches nothing
-		:root,
-		:host {
-			@content;
-		}
+	// :host applies the variables inside a shadow root, where :root matches nothing
+	:root,
+	:host {
+		@content;
 	}
 }

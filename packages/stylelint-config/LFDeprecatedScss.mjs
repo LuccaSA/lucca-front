@@ -60,4 +60,10 @@ export default [
 		versionDeprecated: '22.2.0',
 		actions: `Retirer l’appel au mixin \`massSelection\` de l’Index table, sans remplacement.`,
 	},
+	{
+		// Namespaced mode of the scss and icons configs, replaced by the embedded mode
+		objectPattern: /\$isNamespaced(?![\w-])/,
+		versionDeleted: '22.2.0',
+		actions: `Une application intégrée dans un shadow root passe au mode embarqué : \`$isEmbedded: true\` sur les configs scss et icons, et \`provideLuEmbedded\` de \`@lucca-front/ng/embedded\`.`,
+	},
 ];

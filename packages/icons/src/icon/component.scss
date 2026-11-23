@@ -1,9 +1,7 @@
 @use '@lucca-front/icons/src/commons/config';
 @use '@lucca-front/icons/src/commons/core';
 
-$defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
-
-@mixin component($atRoot: $defaultAtRoot) {
+@mixin component($atRoot: 'without: rule') {
 	font-weight: var(--pr-t-font-fontWeight-regular);
 	font-size: var(--icon-size, var(--icon-sizeDefault));
 	direction: ltr;

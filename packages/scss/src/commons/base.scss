@@ -67,13 +67,7 @@
 			text-rendering: geometricPrecision;
 		}
 
-		@if config.$isNamespaced {
-			// stylelint-disable-next-line block-no-redundant-nested-style-rules -- & references the selector calling this mixin.
-			& {
-				@include body;
-				@include html;
-			}
-		} @else if config.$isEmbedded {
+		@if config.$isEmbedded {
 			// The host element sits in the page layout: it only takes the typography of the body
 			:host {
 				color: var(--pr-t-color-text);

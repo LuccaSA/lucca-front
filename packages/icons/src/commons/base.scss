@@ -4,16 +4,7 @@
 // stylelint-disable-next-line layer-name-pattern
 @layer #{config.$layers};
 
-@if config.$isNamespaced {
-	@layer base {
-		// stylelint-disable-next-line block-no-redundant-nested-style-rules, nesting-selector-no-missing-scoping-root -- & references the selector calling this mixin.
-		& {
-			-moz-osx-font-smoothing: grayscale;
-
-			--icon-fontFamily: '#{config.$font-name}';
-		}
-	}
-} @else if config.$isEmbedded {
+@if config.$isEmbedded {
 	@layer base {
 		:host {
 			-moz-osx-font-smoothing: grayscale;
