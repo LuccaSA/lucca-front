@@ -15,12 +15,10 @@
 			@include unkillable;
 		}
 
+		// .mod-clickable is kept for elements that are neither links nor buttons
+		&:is(a[href], button),
 		&.mod-clickable {
 			@include clickable;
-		}
-
-		&.is-disabled {
-			@include disabled;
 		}
 
 		&:has(.chip-content:focus-visible) {
@@ -29,6 +27,11 @@
 
 		&.mod-product {
 			@include product;
+		}
+
+		// After product so that a disabled product chip stays neutral
+		&.is-disabled {
+			@include disabled;
 		}
 	}
 }

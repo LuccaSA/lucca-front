@@ -1,6 +1,9 @@
 @mixin disabled {
-	--components-chip-backgroundColor: var(--palettes-neutral-200);
+	--components-chip-backgroundColor: var(--palettes-neutral-100);
+	--components-chip-hover-backgroundColor: var(--palettes-neutral-100);
+	--components-chip-active-backgroundColor: var(--palettes-neutral-100);
 	--components-chip-color: var(--pr-t-color-text-subtle);
+	--components-chip-cursor: default;
 
 	.chip-kill {
 		display: none;

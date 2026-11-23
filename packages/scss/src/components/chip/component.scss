@@ -64,15 +64,15 @@
 			}
 
 			&:hover {
-				--components-chip-kill-disk-color: var(--palettes-700, var(--palettes-neutral-700));
+				--components-chip-kill-disk-color: var(--components-chip-kill-disk-hover-color);
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible($offset: -4px, $borderRadius: var(--pr-t-border-radius-full));
+				@include a11y.focusVisible($offset: -4px, $borderRadius: var(--pr-t-border-radius-full), $color: var(--components-chip-focus-color));
 			}
 
 			&:active {
-				--components-chip-kill-disk-color: var(--palettes-900, var(--palettes-neutral-900));
+				--components-chip-kill-disk-color: var(--components-chip-kill-disk-active-color);
 			}
 		}
 	}
