@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { HttpRequest, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component, Directive, forwardRef, signal, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
@@ -74,17 +74,20 @@ describe(LuCoreSelectEstablishmentsDirective.name, () => {
 		const result = { options: [] as readonly LuCoreSelectEstablishment[] };
 		const dataSource = host.multiSelect().dataSource() as SelectDataSource<LuCoreSelectEstablishment, unknown>;
 		dataSource.getOptions({ clue, page }).subscribe((options) => (result.options = options));
-		// Runs the effect emitting the params of the "My establishment" lookup
-		TestBed.tick();
 		return result;
 	}
 
 	function expectOptionsPage(page: number) {
-		return httpTestingController.expectOne((req) => req.url === establishmentsUrl && !req.params.has('id') && req.params.get('page') === `${page}`);
+		return httpTestingController.expectOne((req) => req.url === establishmentsUrl && req.params.get('page') === `${page}`);
+	}
+
+	/** The lookup is the only establishments call filtered by `id` without paging. */
+	function isMyEstablishmentLookup(req: HttpRequest<unknown>): boolean {
+		return req.url === establishmentsUrl && req.params.has('id') && !req.params.has('page');
 	}
 
 	function expectMyEstablishmentLookup() {
-		return httpTestingController.expectOne((req) => req.url === establishmentsUrl && req.params.has('id'));
+		return httpTestingController.expectOne(isMyEstablishmentLookup);
 	}
 
 	beforeEach(() => {
@@ -206,6 +209,54 @@ describe(LuCoreSelectEstablishmentsDirective.name, () => {
 			tick();
 		}));
 
+		it('should look my establishment up again when the restrictions change', fakeAsync(() => {
+			loadOptions('', 0);
+			expectMyEstablishmentLookup().flush([establishment(3, 2)]);
+			expectOptionsPage(1).flush([establishment(1, 1), establishment(3, 2)]);
+			tick();
+
+			host.filters.set({ legalUnitId: 1 });
+			fixture.detectChanges();
+			const result = loadOptions('', 0);
+
+			const lookup = expectMyEstablishmentLookup();
+			expect(lookup.request.params.get('legalUnitId')).toBe('1');
+			lookup.flush([]);
+			expectOptionsPage(1).flush([establishment(1, 1)]);
+			tick();
+
+			expect(result.options.map((option) => option.id)).toEqual([1]);
+			expect(host.establishmentsDirective().isMyEstablishmentOption(establishment(3, 2))).toBe(false);
+		}));
+
+		it('should not look my establishment up when an `id` filter excludes it', fakeAsync(() => {
+			host.filters.set({ id: '1,2' });
+			fixture.detectChanges();
+
+			const result = loadOptions('', 0);
+
+			httpTestingController.expectNone(isMyEstablishmentLookup);
+			expectOptionsPage(1).flush([establishment(1, 1), establishment(2, 1)]);
+			tick();
+
+			expect(result.options.map((option) => option.id)).toEqual([1, 2]);
+		}));
+
+		it('should look my establishment up when an `id` filter includes it', fakeAsync(() => {
+			host.filters.set({ id: '2,3' });
+			fixture.detectChanges();
+
+			const result = loadOptions('', 0);
+
+			const lookup = expectMyEstablishmentLookup();
+			expect(lookup.request.params.get('id')).toBe('3');
+			lookup.flush([establishment(3, 2)]);
+			expectOptionsPage(1).flush([establishment(2, 1), establishment(3, 2)]);
+			tick();
+
+			expect(result.options.map((option) => option.id)).toEqual([3, 2]);
+		}));
+
 		it('should leave the options untouched when my establishment is out of the restrictions', fakeAsync(() => {
 			const result = loadOptions('', 0);
 
@@ -235,6 +286,20 @@ describe(LuCoreSelectEstablishmentsDirective.name, () => {
 			tick();
 
 			expect(result.options.map((option) => option.id)).toEqual([1, 3]);
+		}));
+
+		it('should look my establishment up again after a failed lookup', fakeAsync(() => {
+			loadOptions('', 0);
+			expectMyEstablishmentLookup().flush('Error', { status: 500, statusText: 'Internal Server Error' });
+			expectOptionsPage(1).flush([establishment(1, 1), establishment(3, 2)]);
+			tick();
+
+			const result = loadOptions('', 0);
+			expectMyEstablishmentLookup().flush([establishment(3, 2)]);
+			expectOptionsPage(1).flush([establishment(1, 1), establishment(3, 2)]);
+			tick();
+
+			expect(result.options.map((option) => option.id)).toEqual([3, 1]);
 		}));
 
 		it('should not display my establishment while searching', fakeAsync(() => {

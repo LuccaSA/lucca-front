@@ -4,7 +4,7 @@ import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-i
 import { luBooleanAttribute, luNullableNumberAttribute } from '@lucca-front/ng/core';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter, ɵLU_UNGROUPED_OPTIONS } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, catchError, combineLatest, debounceTime, filter, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
+import { Observable, catchError, combineLatest, debounceTime, filter, map, of, shareReplay, switchMap, tap } from 'rxjs';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuEstablishmentOptionComponent } from './establishment-option.component';
@@ -90,25 +90,39 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	});
 
 	/**
-	 * Lookup of the current user's establishment, with the same restrictions as the options so it is only displayed when selectable.
+	 * Last lookup of the current user's establishment, reused as long as it was made with the same url and restrictions.
 	 */
-	readonly #myEstablishment$ = toObservable(
-		computed<Record<string, string | number | boolean>>(() => ({
-			...this.#restrictionParams(),
-			...(this.currentEstablishmentId !== null ? { id: this.currentEstablishmentId } : {}),
-		})),
-	).pipe(
-		switchMap((params) =>
-			this.httpClient.get<T[] | { items: T[] }>(this.url(), { params }).pipe(
-				// A custom `url` may ignore `id`: only keep the expected establishment
-				map((res) => ((Array.isArray(res) ? res : res?.items) ?? []).find((establishment) => establishment.id === this.currentEstablishmentId) ?? null),
-				// A failed lookup must not block the options it is combined with
-				catchError(() => of(null)),
-			),
-		),
-		takeUntilDestroyed(),
-		shareReplay(1),
-	);
+	#myEstablishmentLookup: { key: string; establishment$: Observable<T | null> } | null = null;
+
+	/**
+	 * Looks up the current user's establishment with the same restrictions as the options, so it is only displayed when selectable.
+	 */
+	#getMyEstablishment(currentEstablishmentId: number): Observable<T | null> {
+		const restrictionParams = this.#restrictionParams();
+		// An `id` filter restricts the selectable establishments too: the lookup must not override it
+		const idFilter = restrictionParams['id'];
+		if (idFilter !== undefined && !`${idFilter}`.split(',').some((id) => id.trim() === `${currentEstablishmentId}`)) {
+			return of(null);
+		}
+
+		const url = this.url();
+		const params = { ...restrictionParams, id: currentEstablishmentId };
+		// Keyed on its params: when the restrictions change, the previous establishment may no longer be selectable
+		const key = JSON.stringify({ url, params });
+		if (this.#myEstablishmentLookup?.key !== key) {
+			this.#myEstablishmentLookup = {
+				key,
+				establishment$: this.httpClient.get<T[] | { items: T[] }>(url, { params }).pipe(
+					// A custom `url` may ignore `id`: only keep the expected establishment
+					map((res) => ((Array.isArray(res) ? res : res?.items) ?? []).find((establishment) => establishment.id === currentEstablishmentId) ?? null),
+					shareReplay(1),
+				),
+			};
+		}
+
+		// A failed lookup must not block the options it is combined with. Caught after the cache, so it is retried on the next first page
+		return this.#myEstablishmentLookup.establishment$.pipe(catchError(() => of(null)));
+	}
 
 	/**
 	 * Whether the option is the one displayed as "My establishment", at the top of the options.
@@ -119,9 +133,9 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 
 	protected override getOptionsPage(params: Record<string, string | number | boolean> | null, page: number): Observable<{ items: T[]; isLastPage: boolean }> {
 		const options$ = super.getOptionsPage(params, page);
-		const displayMyEstablishment = this.displayMyEstablishmentOption() && this.currentEstablishmentId !== null && !params?.['search'];
+		const currentEstablishmentId = this.currentEstablishmentId;
 
-		if (!displayMyEstablishment) {
+		if (!this.displayMyEstablishmentOption() || currentEstablishmentId === null || params?.['search']) {
 			return options$.pipe(
 				tap(() => {
 					if (page === 0) {
@@ -131,7 +145,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 			);
 		}
 
-		return combineLatest([this.#myEstablishment$.pipe(take(1)), options$]).pipe(
+		return combineLatest([this.#getMyEstablishment(currentEstablishmentId), options$]).pipe(
 			tap(([myEstablishment]) => {
 				if (page === 0) {
 					this.#myEstablishmentOptionId.set(myEstablishment?.id ?? null);
