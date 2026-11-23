@@ -17,6 +17,7 @@ import {
 	ɵinjectPointerNavigation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
+	ɵLU_UNGROUPED_OPTIONS,
 } from '@lucca-front/ng/core-select';
 import { DialogComponent, DialogContentComponent, DialogHeaderComponent } from '@lucca-front/ng/dialog';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -73,6 +74,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 
 	readonly dataSourceOptions = this.selectInput.dataSourceOptions;
 	readonly grouping = this.selectInput.groupingSignal;
+	protected readonly ungroupedOptions = ɵLU_UNGROUPED_OPTIONS;
 	treeGenerator = this.selectInput.treeGenerator;
 	readonly loading = this.selectInput.loading;
 	searchable = this.selectInput.searchable;

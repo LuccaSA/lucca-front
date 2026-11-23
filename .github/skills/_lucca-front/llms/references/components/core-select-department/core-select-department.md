@@ -25,6 +25,20 @@ import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/de
 | `uniqueOperationIds` | `uniqueOperationIds` | `readonly number[] \| null` | `null` | — | — | — |
 | `appInstanceId` | `appInstanceId` | `unknown` | `null` | — | `luNullableNumberAttribute` | ⚠️ **Déprécié** : use `uniqueOperationIds` instead  |
 | `searchDelimiter` | `searchDelimiter` | `string` | `' '` | — | — | — |
+| `displayMyDepartmentOption` | `displayMyDepartmentOption` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+
+### Providers
+
+| Fonction | Signature | Description |
+|----------|-----------|-------------|
+| `provideCoreSelectCurrentDepartmentId` | `(factory: () => number): Provider` | Provide the department of the current user, displayed as "My department" by the `departments` selects that set `displayMyDepartmentOption`. |
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CORE_SELECT_DEPARTMENT_TRANSLATIONS` | `unknown` | — |
+| `LU_CORE_SELECT_CURRENT_DEPARTMENT_ID` | `number` | — |
 
 ## Related files
 

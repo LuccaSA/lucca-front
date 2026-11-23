@@ -19,8 +19,8 @@ import {
 	luCoreSelectTranslations,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
-import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
+import { LuCoreSelectDepartmentsDirective, provideCoreSelectCurrentDepartmentId } from '@lucca-front/ng/core-select/department';
+import { LuCoreSelectEstablishmentsDirective, provideCoreSelectCurrentEstablishmentId } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectArchivedLegalUnitsComponent, LuCoreSelectLegalUnitsDirective } from '@lucca-front/ng/core-select/legal-units';
 import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
@@ -482,6 +482,28 @@ export const Establishment = generateStory({
 	},
 });
 
+export const MyEstablishment = generateStory({
+	name: 'Establishment Select with my establishment',
+	description: `Avec \`displayMyEstablishmentOption\`, l’établissement de l’utilisateur connecté est proposé en premier, hors des groupes par unité légale, tant que la recherche est vide.
+
+L’application doit le fournir avec \`provideCoreSelectCurrentEstablishmentId(() => …)\` dans son AppModule ou son app.config.ts, sinon l’option n’est pas affichée.`,
+	template: `<lu-multi-select
+	establishments
+	displayMyEstablishmentOption
+	[(ngModel)]="selectedEstablishments"
+/>
+<pr-story-model-display>{{ selectedEstablishments | json }}</pr-story-model-display>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective', 'provideCoreSelectCurrentEstablishmentId'],
+	},
+	storyPartial: {
+		args: {
+			selectedEstablishment: { mode: 'none' },
+		},
+	},
+});
+
 export const EstablishmentCustomUrl = generateStory({
 	name: 'Establishment Select with custom url',
 	description: 'Une `url` personnalisée qui ignore `legalUnitId` : « Tout sélectionner » sur une unité légale ne doit cocher que ses établissements.',
@@ -513,6 +535,30 @@ export const Department = generateStory({
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/departments': ['LuCoreSelectDepartmentsDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedDepartments: { mode: 'none' },
+		},
+	},
+});
+
+export const MyDepartment = generateStory({
+	name: 'Department Select with my department',
+	description: `Avec \`displayMyDepartmentOption\`, le département de l’utilisateur connecté est proposé en premier tant que la recherche est vide. Il reste aussi à sa place dans l’arbre.
+
+Comme les autres départements parents, il sélectionne au clic ses sous-départements, qui ne sont pas réaffichés, et ses actions permettent de ne sélectionner que lui ou que ses sous-départements.
+
+L’application doit le fournir avec \`provideCoreSelectCurrentDepartmentId(() => …)\` dans son AppModule ou son app.config.ts, sinon l’option n’est pas affichée.`,
+	template: `<lu-multi-select
+	departments
+	displayMyDepartmentOption
+	[(ngModel)]="selectedDepartements"
+/>
+<pr-story-model-display>{{ selectedDepartements | json }}</pr-story-model-display>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/department': ['LuCoreSelectDepartmentsDirective', 'provideCoreSelectCurrentDepartmentId'],
 	},
 	storyPartial: {
 		args: {
@@ -920,7 +966,13 @@ const meta: Meta<InputAlias<LuMultiSelectInputStoryComponent, SelectCommonAliasI
 			],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)],
+			providers: [
+				provideAnimations(),
+				provideHttpClient(),
+				provideCoreSelectCurrentUserId(() => 66),
+				provideCoreSelectCurrentEstablishmentId(() => 13),
+				provideCoreSelectCurrentDepartmentId(() => 11),
+			],
 		}),
 	],
 	args: {
