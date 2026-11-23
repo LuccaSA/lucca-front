@@ -234,7 +234,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:8cca20a3129ef8f424721d980be73f648b52656f34a480a22af1f3eae73cee83
+  content_hash: sha256:ad19eb1ecfdbd803635d81409e1a6b9185bbd5433bdc2093905a11912f2f31e3
 - kind: project-relative
   target: claude
   value: .claude/skills/recette-pr-fix/scripts/branch-context.mjs
@@ -244,6 +244,15 @@ deployments:
   - .
   active_owner: .
   content_hash: sha256:b1bb3a81895a0f763dacf66c078a2b4452d6abce3af5e0c757db97879f79594f
+- kind: project-relative
+  target: claude
+  value: .claude/skills/recette-pr-fix/scripts/gate.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b47d17b6631e25de1b1996a8a0f3273468b73136af7eda183073abd8db0e5c2a
 - kind: project-relative
   target: claude
   value: .claude/skills/recette-pr-fix/scripts/lib/a11y.mjs
@@ -612,7 +621,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:8cca20a3129ef8f424721d980be73f648b52656f34a480a22af1f3eae73cee83
+  content_hash: sha256:ad19eb1ecfdbd803635d81409e1a6b9185bbd5433bdc2093905a11912f2f31e3
 - kind: project-relative
   target: copilot
   value: .agents/skills/recette-pr-fix/scripts/branch-context.mjs
@@ -622,6 +631,15 @@ deployments:
   - .
   active_owner: .
   content_hash: sha256:b1bb3a81895a0f763dacf66c078a2b4452d6abce3af5e0c757db97879f79594f
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/recette-pr-fix/scripts/gate.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:b47d17b6631e25de1b1996a8a0f3273468b73136af7eda183073abd8db0e5c2a
 - kind: project-relative
   target: copilot
   value: .agents/skills/recette-pr-fix/scripts/lib/a11y.mjs
@@ -802,6 +820,7 @@ local_deployed_files:
 - .agents/skills/recette-pr-fix
 - .agents/skills/recette-pr-fix/SKILL.md
 - .agents/skills/recette-pr-fix/scripts/branch-context.mjs
+- .agents/skills/recette-pr-fix/scripts/gate.mjs
 - .agents/skills/recette-pr-fix/scripts/lib/a11y.mjs
 - .agents/skills/recette-pr-fix/scripts/lib/capture.mjs
 - .agents/skills/recette-pr-fix/scripts/lib/storybook.mjs
@@ -845,6 +864,7 @@ local_deployed_files:
 - .claude/skills/recette-pr-fix
 - .claude/skills/recette-pr-fix/SKILL.md
 - .claude/skills/recette-pr-fix/scripts/branch-context.mjs
+- .claude/skills/recette-pr-fix/scripts/gate.mjs
 - .claude/skills/recette-pr-fix/scripts/lib/a11y.mjs
 - .claude/skills/recette-pr-fix/scripts/lib/capture.mjs
 - .claude/skills/recette-pr-fix/scripts/lib/storybook.mjs
@@ -877,8 +897,9 @@ local_deployed_file_hashes:
   .agents/skills/generate-version-changelog-markdown/references/examples.md: sha256:c92edfa544f46d291bbb46a47599614cead2707fbf981b767129075dfbf926c9
   .agents/skills/generate-version-changelog-markdown/references/naming.md: sha256:d099b39823566f17aded97e168cbcafe3fb34f7d883d3e61b2f573f7def12088
   .agents/skills/generate-version-changelog-markdown/references/writing.md: sha256:aab0820b0223143c5700ba423cc1d8f851938c68ccc6ba70281bc2d1e2845a87
-  .agents/skills/recette-pr-fix/SKILL.md: sha256:8cca20a3129ef8f424721d980be73f648b52656f34a480a22af1f3eae73cee83
+  .agents/skills/recette-pr-fix/SKILL.md: sha256:ad19eb1ecfdbd803635d81409e1a6b9185bbd5433bdc2093905a11912f2f31e3
   .agents/skills/recette-pr-fix/scripts/branch-context.mjs: sha256:b1bb3a81895a0f763dacf66c078a2b4452d6abce3af5e0c757db97879f79594f
+  .agents/skills/recette-pr-fix/scripts/gate.mjs: sha256:b47d17b6631e25de1b1996a8a0f3273468b73136af7eda183073abd8db0e5c2a
   .agents/skills/recette-pr-fix/scripts/lib/a11y.mjs: sha256:1a6cbfe49d18481ca0d84dd03e1a5d7838860e1e4633677a5ad9f40a3d47fcfb
   .agents/skills/recette-pr-fix/scripts/lib/capture.mjs: sha256:3d605530d0af6dadf82c866d3d2e7e52dd616c6332aa11a34e0624c3776edf3a
   .agents/skills/recette-pr-fix/scripts/lib/storybook.mjs: sha256:f219550af5f5c0888b50865b79f032dfdb5bfc4c29342855d3a0d6ed6ad6217c
@@ -907,8 +928,9 @@ local_deployed_file_hashes:
   .claude/skills/generate-version-changelog-markdown/references/examples.md: sha256:c92edfa544f46d291bbb46a47599614cead2707fbf981b767129075dfbf926c9
   .claude/skills/generate-version-changelog-markdown/references/naming.md: sha256:d099b39823566f17aded97e168cbcafe3fb34f7d883d3e61b2f573f7def12088
   .claude/skills/generate-version-changelog-markdown/references/writing.md: sha256:aab0820b0223143c5700ba423cc1d8f851938c68ccc6ba70281bc2d1e2845a87
-  .claude/skills/recette-pr-fix/SKILL.md: sha256:8cca20a3129ef8f424721d980be73f648b52656f34a480a22af1f3eae73cee83
+  .claude/skills/recette-pr-fix/SKILL.md: sha256:ad19eb1ecfdbd803635d81409e1a6b9185bbd5433bdc2093905a11912f2f31e3
   .claude/skills/recette-pr-fix/scripts/branch-context.mjs: sha256:b1bb3a81895a0f763dacf66c078a2b4452d6abce3af5e0c757db97879f79594f
+  .claude/skills/recette-pr-fix/scripts/gate.mjs: sha256:b47d17b6631e25de1b1996a8a0f3273468b73136af7eda183073abd8db0e5c2a
   .claude/skills/recette-pr-fix/scripts/lib/a11y.mjs: sha256:1a6cbfe49d18481ca0d84dd03e1a5d7838860e1e4633677a5ad9f40a3d47fcfb
   .claude/skills/recette-pr-fix/scripts/lib/capture.mjs: sha256:3d605530d0af6dadf82c866d3d2e7e52dd616c6332aa11a34e0624c3776edf3a
   .claude/skills/recette-pr-fix/scripts/lib/storybook.mjs: sha256:f219550af5f5c0888b50865b79f032dfdb5bfc4c29342855d3a0d6ed6ad6217c
