@@ -65,6 +65,11 @@
               {
                 "glob": "formly/style/**/*.scss",
                 "input": "packages/ng"
+              },
+              {
+                "glob": "**/README.md",
+                "input": "packages/ng",
+                "ignore": ["**/node_modules/**"]
               }
             ],
             "stylePreprocessorOptions": {
