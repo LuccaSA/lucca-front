@@ -1,9 +1,10 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/core';
+import { ApplicationRef, ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { SELECT_RESPONSIVE_DIALOG } from '@lucca-front/ng/core-select';
+import { DialogComponent, LuDialogService } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { vi } from 'vitest';
@@ -139,6 +140,42 @@ class PaginatedHostComponent {
 		this.nextPageCount++;
 		this.options = this.allOptions.slice(0, this.options.length + 10);
 	}
+}
+
+@Component({
+	selector: 'lu-simple-select-stacked-dialog-host',
+	imports: [FormsModule, LuSimpleSelectInputComponent, DialogComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-dialog stacked>
+			<lu-simple-select [ngModel]="selected" [options]="options" />
+		</lu-dialog>
+	`,
+})
+class StackedDialogHostComponent {
+	readonly select = viewChild.required(LuSimpleSelectInputComponent<Entity>);
+
+	selected: Entity | null = null;
+
+	options: Entity[] = options;
+}
+
+@Component({
+	selector: 'lu-simple-select-dialog-host',
+	imports: [FormsModule, LuSimpleSelectInputComponent, DialogComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	template: `
+		<lu-dialog>
+			<lu-simple-select [ngModel]="selected" [options]="options" />
+		</lu-dialog>
+	`,
+})
+class DialogHostComponent {
+	readonly select = viewChild.required(LuSimpleSelectInputComponent<Entity>);
+
+	selected: Entity | null = null;
+
+	options: Entity[] = options;
 }
 
 describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
@@ -763,6 +800,70 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 
 			// Assert: the popover caps its content at 20rem, which a page of options always overflows.
 			expect(fixture.componentInstance.nextPageCount).toBe(0);
+		});
+	});
+	describe('stacked dialog underneath', () => {
+		function openDialog(content: typeof StackedDialogHostComponent | typeof DialogHostComponent): LuSimpleSelectInputComponent<Entity> {
+			const dialogRef = TestBed.inject(LuDialogService).open({ content });
+			TestBed.inject(ApplicationRef).tick();
+			return dialogRef.instance!.select();
+		}
+
+		function sheetWrapper(): Element | null {
+			return document.querySelector('.dialog.mod-select')?.closest('.cdk-global-overlay-wrapper') ?? null;
+		}
+
+		beforeEach(() => {
+			breakpointObserver.belowExtraSmallBreakpoint.next(true);
+			TestBed.configureTestingModule({ providers: [LuDialogService] });
+		});
+
+		// The levels themselves come from `:has()` rules on these classes, which happy-dom does not compute: see the e2e story.
+		it('should join the stack when the dialog underneath is stacked', () => {
+			// Arrange
+			const select = openDialog(StackedDialogHostComponent);
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(sheetWrapper()).toHaveClass('mod-stacked');
+		});
+
+		it('should join the stack over two stacked dialogs', () => {
+			// Arrange
+			openDialog(StackedDialogHostComponent);
+			const select = openDialog(StackedDialogHostComponent);
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(document.querySelectorAll('.cdk-global-overlay-wrapper.mod-stacked')).toHaveLength(3);
+		});
+
+		it('should stay flat over a dialog that is not stacked', () => {
+			// Arrange
+			const select = openDialog(DialogHostComponent);
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(sheetWrapper()).not.toBeNull();
+			expect(sheetWrapper()).not.toHaveClass('mod-stacked');
+		});
+
+		it('should stay flat with no dialog underneath', () => {
+			// Arrange
+			const fixture = createHost(BareHostComponent, true);
+
+			// Act
+			selectOf(fixture).openPanel();
+
+			// Assert
+			expect(sheetWrapper()).not.toBeNull();
+			expect(sheetWrapper()).not.toHaveClass('mod-stacked');
 		});
 	});
 });
