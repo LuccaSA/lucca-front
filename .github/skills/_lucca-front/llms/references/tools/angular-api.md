@@ -9,6 +9,8 @@
   - Injection tokens
   - Pipes
   - Services
+- core-select/legal-unit-establishment (`@lucca-front/ng/core-select/legal-unit-establishment`)
+  - Injection tokens
 - core-select/legal-units (`@lucca-front/ng/core-select/legal-units`)
   - Injection tokens
 - department (`@lucca-front/ng/department`)
@@ -144,6 +146,14 @@ bind to a string with iso 26001 format YYYY-MM-DD
 - `getDate(d: string): number`
 - `getDay(d: string): number`
 - `add(d: string, count: number, granularity: LuDateGranularity): string`
+
+## core-select/legal-unit-establishment (`@lucca-front/ng/core-select/legal-unit-establishment`)
+
+### Injection tokens
+
+| Token | Type | Description |
+|-------|------|-------------|
+| `LU_CORE_SELECT_LEGAL_UNIT_ESTABLISHMENT_TRANSLATIONS` | `unknown` | — |
 
 ## core-select/legal-units (`@lucca-front/ng/core-select/legal-units`)
 

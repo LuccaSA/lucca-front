@@ -199,7 +199,7 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 	@Component({
 		template: `<lu-multi-select
 			[treeSelect]="groupingFn"
-			[collapsible]="collapsible"
+			[collapsable]="collapsable"
 			[parentStandsForChildren]="parentStandsForChildren"
 			[options]="options"
 			[optionKey]="optionKey"
@@ -213,7 +213,7 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 		readonly optionKey = (node: TreeNodeEntity) => node.id;
 		readonly groupingFn = (node: TreeNodeEntity): TreeNodeEntity | null => tree.find((candidate) => candidate.id === node.parentId) ?? null;
 		value: TreeNodeEntity[] = [];
-		collapsible = false;
+		collapsable = false;
 		parentStandsForChildren = false;
 	}
 
@@ -240,10 +240,6 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 		tick();
 		fixture.detectChanges();
 		return event;
-	}
-
-	function disclosureOf(row: HTMLElement): HTMLElement {
-		return row.querySelector<HTMLElement>('.listboxOption-content-disclosure')!;
 	}
 
 	function rootRow(): HTMLElement {
@@ -279,37 +275,76 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 		expect(fixture.componentInstance.value).toEqual([]);
 	}));
 
-	it('should fold a branch that holds children when the tree select is collapsible', fakeAsync(() => {
-		fixture.componentInstance.collapsible = true;
+	it('should fold a branch that holds children when the tree select is collapsable', fakeAsync(() => {
+		fixture.componentInstance.collapsable = true;
 		openPanel();
 
 		const options = overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option');
 		const root = options[0].querySelector('lu-listbox-option')!;
-		expect(disclosureOf(root).getAttribute('aria-expanded')).toBe('false');
+		expect(root.getAttribute('aria-expanded')).toBe('false');
 		expect(root.querySelector('.listboxOption-content-disclosure')).toBeTruthy();
 
-		// A leaf has nothing to fold, so it gets neither the state nor the chevron
+		// A leaf has nothing to fold, so it gets neither the state nor a chevron: only the empty slot
+		// that keeps it aligned with the rows that have one
 		const leaf = options[1].querySelector('lu-listbox-option')!;
-		expect(leaf.querySelector('[aria-expanded]')).toBeNull();
-		expect(leaf.querySelector('.listboxOption-content-disclosure')).toBeNull();
+		expect(leaf.hasAttribute('aria-expanded')).toBe(false);
+		expect(leaf.querySelector('.listboxOption-content-disclosure')).toBeTruthy();
+		expect(leaf.querySelector('.listboxOption-content-disclosure-icon')).toBeNull();
 	}));
 
 	it('should unfold and fold the highlighted branch with the arrow keys', fakeAsync(() => {
-		fixture.componentInstance.collapsible = true;
+		fixture.componentInstance.collapsable = true;
 		openPanel();
 
 		// The first row is highlighted as soon as the panel opens
-		expect(disclosureOf(rootRow()).getAttribute('aria-expanded')).toBe('false');
+		expect(rootRow().getAttribute('aria-expanded')).toBe('false');
 
 		expect(pressKey('ArrowRight').defaultPrevented).toBe(true);
-		expect(disclosureOf(rootRow()).getAttribute('aria-expanded')).toBe('true');
+		expect(rootRow().getAttribute('aria-expanded')).toBe('true');
 
 		pressKey('ArrowLeft');
-		expect(disclosureOf(rootRow()).getAttribute('aria-expanded')).toBe('false');
+		expect(rootRow().getAttribute('aria-expanded')).toBe('false');
+	}));
+
+	function activeRowName(): string {
+		const input = fixture.debugElement.children[0].nativeElement.querySelector('input') as HTMLInputElement;
+		const active = document.getElementById(input.getAttribute('aria-activedescendant') ?? '');
+		return active?.querySelector(':scope > .listboxOption-content .listboxOption-content-value')?.textContent?.trim() ?? '';
+	}
+
+	it('should move to the first child, then back to the parent, with the arrow keys', fakeAsync(() => {
+		fixture.componentInstance.collapsable = true;
+		openPanel();
+
+		pressKey('ArrowRight');
+		expect(rootRow().getAttribute('aria-expanded')).toBe('true');
+		expect(activeRowName()).toBe('Red');
+
+		// Already unfolded: the next press goes down into it
+		pressKey('ArrowRight');
+		expect(activeRowName()).toBe('Tomato');
+
+		// A leaf has nothing to fold, so ArrowLeft climbs to its parent and leaves it unfolded
+		pressKey('ArrowLeft');
+		expect(activeRowName()).toBe('Red');
+		expect(rootRow().getAttribute('aria-expanded')).toBe('true');
+	}));
+
+	it('should expose the depth and position of every row, and announce a tree', fakeAsync(() => {
+		fixture.componentInstance.collapsable = true;
+		openPanel();
+		pressKey('ArrowRight');
+
+		const rows = [...overlayContainerElement.querySelectorAll<HTMLElement>('lu-listbox-option[role="treeitem"]')];
+		const describe = (row: HTMLElement) => ['aria-level', 'aria-posinset', 'aria-setsize'].map((name) => row.getAttribute(name)).join('/');
+		expect(rows.map(describe)).toEqual(['1/1/2', '2/1/2', '2/2/2', '1/2/2']);
+
+		const input = fixture.debugElement.children[0].nativeElement.querySelector('input') as HTMLInputElement;
+		expect(input.getAttribute('aria-haspopup')).toBe('tree');
 	}));
 
 	it('should leave the arrow keys to the caret while a clue is typed', fakeAsync(() => {
-		fixture.componentInstance.collapsible = true;
+		fixture.componentInstance.collapsable = true;
 		openPanel();
 
 		const select = fixture.debugElement.children[0].componentInstance as LuMultiSelectInputComponent<TreeNodeEntity>;
@@ -321,11 +356,11 @@ describe('LuMultiSelectPanelComponent (tree mode)', () => {
 		expect(select.isPanelOpen).toBe(true);
 		// Not consumed: the caret must stay free to move through the text that was typed
 		expect(pressKey('ArrowRight').defaultPrevented).toBe(false);
-		expect(disclosureOf(rootRow()).getAttribute('aria-expanded')).toBe('false');
+		expect(rootRow().getAttribute('aria-expanded')).toBe('false');
 	}));
 
 	it('should skip the rows a folded branch hides when navigating down', fakeAsync(() => {
-		fixture.componentInstance.collapsible = true;
+		fixture.componentInstance.collapsable = true;
 		openPanel();
 
 		const hosts = overlayContainerElement.querySelectorAll<HTMLElement>('lu-select-option');

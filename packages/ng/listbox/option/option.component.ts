@@ -23,12 +23,13 @@ export class Treeitem {}
 		'[attr.aria-selected]': 'add() || group() || mixed() ? null : checked()',
 		'[attr.aria-checked]': '!group() && mixed() ? "mixed" : null',
 		'[attr.aria-disabled]': 'disabled()',
+		'[attr.aria-expanded]': 'collapsable() ? expanded() : null',
 		'[attr.aria-hidden]': 'empty()',
 		// The empty status option is the target of the listbox `aria-describedby`, so it must
 		// carry the listbox id even though no consumer sets an elementId on it.
 		'[attr.id]': 'empty() ? id() : elementId()',
-		'[class.mod-collapsible]': 'collapsible()',
-		'[class.is-expanded]': 'collapsible() && expanded()',
+		'[class.mod-collapsable]': 'collapsable()',
+		'[class.is-expanded]': 'collapsable() && expanded()',
 		'[class.is-selected]': 'checked()',
 		'[class.is-disabled]': 'disabled()',
 		'[class.mod-add]': 'add()',
@@ -70,30 +71,29 @@ export class OptionComponent {
 	 * checkbox and the children are hidden while collapsed. Off by default, so a tree that shows
 	 * every level at once keeps doing so.
 	 *
+	 * The chevron is a mouse affordance only: the option carries `aria-expanded`, and the keyboard
+	 * folds it through the host listbox, as the tree pattern asks.
+	 *
 	 * Whether a row can hold children is the consumer’s call, not this component’s: with children
 	 * fetched on unfold, an empty row is not a leaf.
 	 */
-	readonly collapsible = input(false, { transform: luBooleanAttribute });
+	readonly collapsable = input(false, { transform: luBooleanAttribute });
 
 	/**
 	 * Whether the folded children are shown. Two-way: the chevron toggles it, and a consumer can
 	 * drive it — to expand the options a search matched, for instance. Only read when
-	 * `collapsible` is set and the option actually holds children.
+	 * `collapsable` is set and the option actually holds children.
 	 */
 	readonly expanded = model(false);
-
-	/**
-	 * Accessible name of the chevron. The icon is decorative and the row name lives in projected
-	 * content this component cannot read, so the consumer composes the whole label — “Unfold Lucca
-	 * SAS” rather than a bare “Unfold”.
-	 */
-	readonly disclosureLabel = input<string | null>(null);
 
 	readonly selectAll = input<'string' | null>();
 
 	readonly multiple = computed(() => this.#listboxRef?.multiple() ?? false);
 	readonly tree = computed(() => this.#listboxRef?.tree() ?? false);
 	readonly empty = computed(() => this.#listboxRef?.state() === 'empty');
+
+	/** An option with nothing to fold, in a tree whose other options can: it keeps the chevron’s place. */
+	readonly disclosureSlot = computed(() => !this.collapsable() && !!this.#listboxRef?.collapsable() && !this.add() && !this.select() && !this.group() && !this.empty());
 	readonly id = computed(() => this.#listboxRef?.listboxId ?? null);
 
 	readonly groupLabelId = computed(() => this.groupId() ?? this.#defaultGroupId);

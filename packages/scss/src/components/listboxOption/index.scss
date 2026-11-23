@@ -66,7 +66,7 @@
 			}
 		}
 
-		&.mod-collapsible:not(.is-expanded) {
+		&.mod-collapsable:not(.is-expanded) {
 			@include collapsed;
 		}
 

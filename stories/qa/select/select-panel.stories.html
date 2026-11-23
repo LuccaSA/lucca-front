@@ -314,6 +314,144 @@
 			</td>
 		</tr>
 		<tr>
+			<td>Collapsable options</td>
+			<td>
+				<div class="selectPanel">
+					<lu-select-panel-layout>
+						<lu-listbox tree collapsable>
+							<lu-listbox-option><div class="listboxOption-content-value">Lucca Software Iberia</div></lu-listbox-option>
+							<lu-listbox-option collapsable>
+								<div class="listboxOption-content-value">Lucca SAS</div>
+								<ng-container treeitem>
+									<lu-listbox-option><div class="listboxOption-content-value">Lucca Brest</div></lu-listbox-option>
+									<lu-listbox-option collapsable>
+										<div class="listboxOption-content-value">Lucca Nantes</div>
+										<ng-container treeitem>
+											<lu-listbox-option><div class="listboxOption-content-value">Lucca Nantes Sud</div></lu-listbox-option>
+										</ng-container>
+									</lu-listbox-option>
+									<lu-listbox-option>
+										<div class="listboxOption-content-value">
+											Lucca Saint-Herblain, établissement secondaire rattaché au siège social de Nantes
+										</div>
+									</lu-listbox-option>
+								</ng-container>
+							</lu-listbox-option>
+							<lu-listbox-option collapsable checked>
+								<div class="listboxOption-content-value">Lucca Software GMBH</div>
+								<ng-container treeitem>
+									<lu-listbox-option><div class="listboxOption-content-value">Lucca Berlin</div></lu-listbox-option>
+									<lu-listbox-option><div class="listboxOption-content-value">Lucca Munich</div></lu-listbox-option>
+								</ng-container>
+							</lu-listbox-option>
+						</lu-listbox>
+					</lu-select-panel-layout>
+				</div>
+			</td>
+			<td>
+				<div class="selectPanel">
+					<lu-select-panel-layout class="lu-option-picker-panel mod-multiple">
+						<lu-listbox multiple tree collapsable>
+							<lu-listbox-option><div class="listboxOption-content-value">Lucca Software Iberia</div></lu-listbox-option>
+							<lu-listbox-option collapsable>
+								<div class="listboxOption-content-value">Lucca SAS</div>
+								<ng-container treeitem>
+									<lu-listbox-option checked><div class="listboxOption-content-value">Lucca Brest</div></lu-listbox-option>
+									<lu-listbox-option collapsable>
+										<div class="listboxOption-content-value">Lucca Nantes</div>
+										<ng-container treeitem>
+											<lu-listbox-option><div class="listboxOption-content-value">Lucca Nantes Sud</div></lu-listbox-option>
+										</ng-container>
+									</lu-listbox-option>
+									<lu-listbox-option>
+										<div class="listboxOption-content-value">
+											Lucca Saint-Herblain, établissement secondaire rattaché au siège social de Nantes
+										</div>
+									</lu-listbox-option>
+								</ng-container>
+							</lu-listbox-option>
+							<lu-listbox-option collapsable checked>
+								<div class="listboxOption-content-value">Lucca Software GMBH</div>
+								<ng-container treeitem>
+									<lu-listbox-option checked><div class="listboxOption-content-value">Lucca Berlin</div></lu-listbox-option>
+									<lu-listbox-option checked><div class="listboxOption-content-value">Lucca Munich</div></lu-listbox-option>
+								</ng-container>
+							</lu-listbox-option>
+						</lu-listbox>
+					</lu-select-panel-layout>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Collapsable options expanded</td>
+			<td>
+				<div class="selectPanel">
+					<lu-select-panel-layout>
+						<lu-listbox tree collapsable>
+							<lu-listbox-option><div class="listboxOption-content-value">Lucca Software Iberia</div></lu-listbox-option>
+							<lu-listbox-option collapsable [expanded]="true">
+								<div class="listboxOption-content-value">Lucca SAS</div>
+								<ng-container treeitem>
+									<lu-listbox-option><div class="listboxOption-content-value">Lucca Brest</div></lu-listbox-option>
+									<lu-listbox-option collapsable [expanded]="true">
+										<div class="listboxOption-content-value">Lucca Nantes</div>
+										<ng-container treeitem>
+											<lu-listbox-option><div class="listboxOption-content-value">Lucca Nantes Sud</div></lu-listbox-option>
+										</ng-container>
+									</lu-listbox-option>
+									<lu-listbox-option>
+										<div class="listboxOption-content-value">
+											Lucca Saint-Herblain, établissement secondaire rattaché au siège social de Nantes
+										</div>
+									</lu-listbox-option>
+								</ng-container>
+							</lu-listbox-option>
+							<lu-listbox-option collapsable checked [expanded]="true">
+								<div class="listboxOption-content-value">Lucca Software GMBH</div>
+								<ng-container treeitem>
+									<lu-listbox-option><div class="listboxOption-content-value">Lucca Berlin</div></lu-listbox-option>
+									<lu-listbox-option><div class="listboxOption-content-value">Lucca Munich</div></lu-listbox-option>
+								</ng-container>
+							</lu-listbox-option>
+						</lu-listbox>
+					</lu-select-panel-layout>
+				</div>
+			</td>
+			<td>
+				<div class="selectPanel">
+					<lu-select-panel-layout class="lu-option-picker-panel mod-multiple">
+						<lu-listbox multiple tree collapsable>
+							<lu-listbox-option><div class="listboxOption-content-value">Lucca Software Iberia</div></lu-listbox-option>
+							<lu-listbox-option collapsable [expanded]="true">
+								<div class="listboxOption-content-value">Lucca SAS</div>
+								<ng-container treeitem>
+									<lu-listbox-option checked><div class="listboxOption-content-value">Lucca Brest</div></lu-listbox-option>
+									<lu-listbox-option collapsable [expanded]="true">
+										<div class="listboxOption-content-value">Lucca Nantes</div>
+										<ng-container treeitem>
+											<lu-listbox-option><div class="listboxOption-content-value">Lucca Nantes Sud</div></lu-listbox-option>
+										</ng-container>
+									</lu-listbox-option>
+									<lu-listbox-option>
+										<div class="listboxOption-content-value">
+											Lucca Saint-Herblain, établissement secondaire rattaché au siège social de Nantes
+										</div>
+									</lu-listbox-option>
+								</ng-container>
+							</lu-listbox-option>
+							<lu-listbox-option collapsable checked [expanded]="true">
+								<div class="listboxOption-content-value">Lucca Software GMBH</div>
+								<ng-container treeitem>
+									<lu-listbox-option checked><div class="listboxOption-content-value">Lucca Berlin</div></lu-listbox-option>
+									<lu-listbox-option checked><div class="listboxOption-content-value">Lucca Munich</div></lu-listbox-option>
+								</ng-container>
+							</lu-listbox-option>
+						</lu-listbox>
+					</lu-select-panel-layout>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Avatars</td>
 			<td>
 				<div class="selectPanel">

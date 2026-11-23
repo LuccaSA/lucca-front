@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal, TemplateRef, Type, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { luBooleanAttribute } from '@lucca-front/ng/core';
 import {
 	ALuSelectInputComponent,
+	CoreSelectKeyManager,
 	LuIsOptionSelectedPipe,
 	LuOptionComparer,
 	LuOptionContext,
@@ -20,11 +21,28 @@ import { Treeitem } from '@lucca-front/ng/listbox';
 	styleUrl: './tree-branch.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		// WebKit only exposes a tree whose descendants, down to each treeitem, are treeitems, groups
+		// or presentational: one host without a role and VoiceOver reads every row as a mere group.
+		role: 'presentation',
+	},
 })
 export class TreeBranchComponent<T> {
 	readonly selectInputComponent = inject(ALuSelectInputComponent);
 
 	readonly rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
+
+	private readonly childBranches = viewChildren(TreeBranchComponent);
+
+	readonly #parentBranch = inject<TreeBranchComponent<T>>(TreeBranchComponent, { skipSelf: true, optional: true });
+
+	readonly #keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager, { optional: true });
+
+	/** Position of this row among its siblings, from 1. Exposed as `aria-posinset`. */
+	readonly treeitemPosition = input<number | null>(null);
+
+	/** Number of siblings this row has, itself included. Exposed as `aria-setsize`. */
+	readonly treeitemSetSize = input<number | null>(null);
 
 	readonly branch = input.required<TreeNode<T>>();
 
@@ -60,13 +78,10 @@ export class TreeBranchComponent<T> {
 	readonly parentStandsForChildren = input(false, { transform: luBooleanAttribute });
 
 	/** Folds this branch’s children behind a chevron, and every branch below it. */
-	readonly collapsible = input(false, { transform: luBooleanAttribute });
+	readonly collapsable = input(false, { transform: luBooleanAttribute });
 
 	/** Set when an ancestor branch keeps this one folded, so its row is hidden. */
 	readonly hiddenByCollapse = input(false, { transform: luBooleanAttribute });
-
-	/** Accessible name of this branch’s chevron, composed by the tree generator. */
-	readonly disclosureLabel = input<string | null>(null);
 
 	/**
 	 * Set when an ancestor is selected and stands for what it holds: this row is then covered by
@@ -92,7 +107,7 @@ export class TreeBranchComponent<T> {
 	/** Passed to the children: a rule covers them as soon as it is selected, or already covered. */
 	readonly childrenCoveredByRule = computed(() => this.parentStandsForChildren() && (this.coveredByRule() || this.#isSelectedInOwnRight()));
 
-	readonly childrenHiddenByCollapse = computed(() => this.hiddenByCollapse() || (this.collapsible() && !this.isExpanded()));
+	readonly childrenHiddenByCollapse = computed(() => this.hiddenByCollapse() || (this.collapsable() && !this.isExpanded()));
 
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {
@@ -108,8 +123,8 @@ export class TreeBranchComponent<T> {
 			});
 		}
 
-		this.selectInputComponent.expandOption$?.pipe(takeUntilDestroyed()).subscribe(() => this.#reportIfHighlighted(true));
-		this.selectInputComponent.collapseOption$?.pipe(takeUntilDestroyed()).subscribe(() => this.#reportIfHighlighted(false));
+		this.selectInputComponent.expandOption$?.pipe(takeUntilDestroyed()).subscribe(() => this.#onArrowRight());
+		this.selectInputComponent.collapseOption$?.pipe(takeUntilDestroyed()).subscribe(() => this.#onArrowLeft());
 	}
 
 	/** The chevron asks; the generator decides and hands the answer back through `branch().expanded`. */
@@ -118,9 +133,44 @@ export class TreeBranchComponent<T> {
 		this.selectInputComponent.optionExpandedChange$.next({ option: this.branch().node, expanded });
 	}
 
-	#reportIfHighlighted(expanded: boolean): void {
-		if (this.collapsible() && this.rootOptionRef()?.isHighlighted()) {
-			this.reportExpanded(expanded);
+	/** Tree pattern: unfolds a folded row, or moves to the first child of an unfolded one. */
+	#onArrowRight(): void {
+		if (!this.collapsable() || !this.rootOptionRef()?.isHighlighted()) {
+			return;
+		}
+		if (!this.#canFold()) {
+			return;
+		}
+		if (!this.isExpanded()) {
+			this.reportExpanded(true);
+			return;
+		}
+		this.#highlight(this.childBranches()[0]?.rootOptionRef());
+	}
+
+	/** Tree pattern: folds an unfolded row, or moves from a row to its parent. */
+	#onArrowLeft(): void {
+		if (!this.collapsable() || !this.rootOptionRef()?.isHighlighted()) {
+			return;
+		}
+		if (this.#canFold() && this.isExpanded()) {
+			this.reportExpanded(false);
+			return;
+		}
+		this.#highlight(this.#parentBranch?.rootOptionRef());
+	}
+
+	#canFold(): boolean {
+		return this.branch().expandable ?? (this.branch().children?.length ?? 0) > 0;
+	}
+
+	/**
+	 * Every branch hears the same key press, one after the other. Moving the highlight right away
+	 * would let the branch it lands on act on that same press too, so the move waits for them all.
+	 */
+	#highlight(target: ɵCoreSelectPanelElement<T> | undefined): void {
+		if (target) {
+			queueMicrotask(() => this.#keyManager?.setActiveItemByElement(target));
 		}
 	}
 

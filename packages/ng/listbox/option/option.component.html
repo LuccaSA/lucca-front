@@ -1,14 +1,10 @@
 <div class="listboxOption-content" [class.is-hovered]="hovered()" [attr.id]="group() ? groupLabelId() : null">
-	@if (collapsible()) {
-		<button
-			type="button"
-			class="listboxOption-content-disclosure"
-			[attr.aria-expanded]="expanded()"
-			[attr.aria-label]="disclosureLabel()"
-			(click)="toggleExpanded($event)"
-		>
-			<lu-icon icon="arrowChevronRight" size="XS" />
-		</button>
+	@if (collapsable()) {
+		<span class="listboxOption-content-disclosure" aria-hidden="true" (click)="toggleExpanded($event)">
+			<lu-icon class="listboxOption-content-disclosure-icon" icon="arrowChevronRight" size="XS" />
+		</span>
+	} @else if (disclosureSlot()) {
+		<span class="listboxOption-content-disclosure" aria-hidden="true"></span>
 	}
 	@if (multiple() && !add() && !selectAll() && !select()) {
 		<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">

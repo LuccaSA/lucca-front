@@ -36,6 +36,12 @@ export class ListboxComponent {
 	readonly tree = input(false, { transform: luBooleanAttribute });
 
 	/**
+	 * Declares a tree whose options can fold their children: an option with no children then keeps
+	 * an empty chevron slot, so it stays aligned with the options that have one.
+	 */
+	readonly collapsable = input(false, { transform: luBooleanAttribute });
+
+	/**
 	 * Listbox state
 	 */
 	readonly state = input<ListboxState | null>(null);

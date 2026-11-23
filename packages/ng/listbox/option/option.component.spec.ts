@@ -53,9 +53,9 @@ describe(OptionComponent.name, () => {
 	describe('disclosure', () => {
 		// treeitemLevel is what tells the option it holds children when none are projected,
 		// which is also how lu-select-option declares them.
-		function withChildren(collapsible: boolean): void {
+		function withChildren(collapsable: boolean): void {
 			fixture.componentRef.setInput('treeitemLevel', 1);
-			fixture.componentRef.setInput('collapsible', collapsible);
+			fixture.componentRef.setInput('collapsable', collapsable);
 			fixture.detectChanges();
 		}
 
@@ -63,11 +63,14 @@ describe(OptionComponent.name, () => {
 			return host.querySelector('.listboxOption-content-disclosure');
 		}
 
-		it('should start collapsed and render a chevron once collapsible', () => {
+		it('should start collapsed and render a chevron once collapsable', () => {
 			withChildren(true);
 
-			expect(chevron()!.getAttribute('aria-expanded')).toBe('false');
+			expect(host.getAttribute('aria-expanded')).toBe('false');
 			expect(chevron()).toBeTruthy();
+			// A visual affordance only: the focus never leaves the combobox, so the row carries the state
+			expect(chevron()!.getAttribute('aria-hidden')).toBe('true');
+			expect(chevron()!.tagName).not.toBe('BUTTON');
 		});
 
 		it('should expand and collapse again when the chevron is clicked', () => {
@@ -75,11 +78,11 @@ describe(OptionComponent.name, () => {
 
 			chevron()!.click();
 			fixture.detectChanges();
-			expect(chevron()!.getAttribute('aria-expanded')).toBe('true');
+			expect(host.getAttribute('aria-expanded')).toBe('true');
 
 			chevron()!.click();
 			fixture.detectChanges();
-			expect(chevron()!.getAttribute('aria-expanded')).toBe('false');
+			expect(host.getAttribute('aria-expanded')).toBe('false');
 		});
 
 		it('should keep a chevron click away from the row, which toggles the selection', () => {
@@ -92,10 +95,10 @@ describe(OptionComponent.name, () => {
 			expect(onRowClick).not.toHaveBeenCalled();
 		});
 
-		it('should leave an always-open tree untouched when collapsible is not set', () => {
+		it('should leave an always-open tree untouched when collapsable is not set', () => {
 			withChildren(false);
 
-			expect(host.querySelector('[aria-expanded]')).toBeNull();
+			expect(host.hasAttribute('aria-expanded')).toBe(false);
 			expect(chevron()).toBeNull();
 			expect(host.querySelector('.listboxOptionWrapper')).toBeTruthy();
 		});

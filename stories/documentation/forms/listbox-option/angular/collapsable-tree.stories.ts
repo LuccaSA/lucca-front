@@ -1,10 +1,9 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ListboxComponent, OptionComponent, Treeitem } from '@lucca-front/ng/listbox';
 import { Meta, moduleMetadata } from '@storybook/angular-vite';
-import { cleanupTemplate } from '@/helpers/stories';
 
 export default {
-	title: 'Documentation/Forms/Listbox Option/Angular/Collapsible tree',
+	title: 'Documentation/Forms/Listbox Option/Angular/Collapsable tree',
 	decorators: [
 		moduleMetadata({
 			imports: [ListboxComponent, OptionComponent, IconComponent, Treeitem],
@@ -24,14 +23,14 @@ export default {
 		const multiple = args['multiple'] ? ` multiple` : ``;
 		const expanded = args['expanded'] ? ` [expanded]="true"` : ``;
 		return {
-			template: cleanupTemplate(`<lu-listbox tree${multiple}>
+			template: `<lu-listbox tree collapsable${multiple}>
 	<lu-listbox-option>Lucca Software Iberia</lu-listbox-option>
-	<lu-listbox-option collapsible${expanded}>
+	<lu-listbox-option collapsable${expanded}>
 		Lucca SAS
 		<ng-container treeitem>
 			<lu-listbox-option>Lucca Brest</lu-listbox-option>
 			<lu-listbox-option>Lucca Marseille</lu-listbox-option>
-			<lu-listbox-option collapsible${expanded}>
+			<lu-listbox-option collapsable${expanded}>
 				Lucca Nantes
 				<ng-container treeitem>
 					<lu-listbox-option>Lucca Nantes Sud</lu-listbox-option>
@@ -39,7 +38,7 @@ export default {
 			</lu-listbox-option>
 		</ng-container>
 	</lu-listbox-option>
-</lu-listbox>`),
+</lu-listbox>`,
 		};
 	},
 } as Meta;

@@ -7,7 +7,6 @@ import { LuCoreSelectLegalUnitEstablishmentDirective, LuLegalUnitEstablishmentSe
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular-vite';
-import { cleanupTemplate } from '@/helpers/stories';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
 
 interface LegalUnitEstablishmentBasicStory {
@@ -45,10 +44,10 @@ export default {
 	],
 	render: (args: LegalUnitEstablishmentBasicStory) => ({
 		props: { ...args },
-		template: cleanupTemplate(`<lu-form-field [label]="label">
+		template: `<lu-form-field [label]="label">
 	<lu-multi-select legalUnitEstablishment [maxValuesShown]="20" [clearable]="clearable" [(ngModel)]="selection" />
 </lu-form-field>
-<pr-story-model-display>{{ selection | json }}</pr-story-model-display>`),
+<pr-story-model-display>{{ selection | json }}</pr-story-model-display>`,
 	}),
 } as Meta;
 

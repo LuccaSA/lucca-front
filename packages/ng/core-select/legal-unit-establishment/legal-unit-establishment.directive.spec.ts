@@ -271,7 +271,7 @@ describe(LuCoreSelectLegalUnitEstablishmentDirective.name, () => {
 			luEstablishmentOption({ id: 'be-20', name: 'Lucca Munich', legalUnitId: 'le-2' }),
 		]);
 
-		expect(directive.collapsible).toBe(true);
+		expect(directive.collapsable).toBe(true);
 		expect(trees.map((tree) => tree.node.name)).toEqual(['Lucca SAS']);
 		expect(trees[0].children?.map((child) => child.node.name)).toEqual(['Lucca Brest']);
 	}));

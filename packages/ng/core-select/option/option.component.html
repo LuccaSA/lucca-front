@@ -6,9 +6,11 @@
 	(click)="selectOption($event)"
 	[elementId]="selectableItem.idAttribute()"
 	[treeitemLevel]="treeitemContent() ? level : null"
-	[collapsible]="collapsible()"
+	[collapsable]="collapsable()"
 	[(expanded)]="expanded"
-	[disclosureLabel]="disclosureLabel()"
+	[attr.aria-level]="treeitemPosition() === null ? null : level"
+	[attr.aria-posinset]="treeitemPosition()"
+	[attr.aria-setsize]="treeitemPosition() === null ? null : treeitemSetSize()"
 >
 	<ng-container [ngTemplateOutlet]="optionContent" />
 	<!-- Re-projected into the option's own wrapper, so the tree rows are stacked by the listbox

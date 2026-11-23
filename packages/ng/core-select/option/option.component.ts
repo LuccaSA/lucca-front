@@ -50,13 +50,20 @@ export class LuOptionComponent<T> implements OnInit {
 	readonly hasChildren = input(false, { transform: luBooleanAttribute });
 
 	/** Folds the projected `[treeitem]` children behind a chevron. See `lu-listbox-option`. */
-	readonly collapsible = input(false, { transform: luBooleanAttribute });
+	readonly collapsable = input(false, { transform: luBooleanAttribute });
 
 	/** Whether the folded children are shown. The chevron of the listbox option toggles it. */
 	readonly expanded = model(false);
 
-	/** Accessible name of the chevron. See `lu-listbox-option`. */
-	readonly disclosureLabel = input<string | null>(null);
+	/**
+	 * Position of this row among its siblings in a tree, from 1. Set, the row also exposes its
+	 * depth and sibling count: a tree loaded page by page or unfolded on demand is not wholly in
+	 * the DOM, so assistive technologies cannot work them out from the nesting alone.
+	 */
+	readonly treeitemPosition = input<number | null>(null);
+
+	/** Number of siblings of this row in a tree, itself included. Read with `treeitemPosition`. */
+	readonly treeitemSetSize = input<number | null>(null);
 
 	readonly onlyParent = output<void>();
 

@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Directive, OnInit, computed, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { getIntl } from '@lucca-front/ng/core';
 import { TreeGenerator, TreeNode, applySearchDelimiter, luAccumulatePages } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { BehaviorSubject, Observable, map, takeUntil } from 'rxjs';
 import { LuLegalUnitEstablishmentDisplayerComponent } from './legal-unit-establishment-displayer.component';
-import { LU_CORE_SELECT_LEGAL_UNIT_ESTABLISHMENT_TRANSLATIONS } from './legal-unit-establishment.translate';
 import {
 	LuEstablishmentOption,
 	LuLegalUnitEstablishmentOption,
@@ -83,7 +81,7 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 	 * contract: without it the list would have to load every establishment of every legal unit up
 	 * front, which is what this field exists to avoid.
 	 */
-	readonly collapsible = true;
+	readonly collapsable = true;
 
 	/**
 	 * A legal unit is a rule: selecting it covers the establishments it holds today and those added
@@ -91,11 +89,6 @@ export class LuCoreSelectLegalUnitEstablishmentDirective
 	 * selection to the ones that exist now, which is the opposite of what the field is for.
 	 */
 	readonly parentStandsForChildren = true;
-
-	readonly #intl = getIntl(LU_CORE_SELECT_LEGAL_UNIT_ESTABLISHMENT_TRANSLATIONS);
-
-	/** Names what the chevron acts on, the icon inside it being decorative. */
-	readonly disclosureLabel = (node: LuLegalUnitEstablishmentOption, expanded: boolean): string => `${expanded ? this.#intl.collapse : this.#intl.expand} ${node.name}`;
 
 	/**
 	 * What the panel renders under each legal unit. A `BehaviorSubject` rather than a plain map

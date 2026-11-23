@@ -41,12 +41,12 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 
 	await step('Unfolds a legal unit and loads its establishments', async () => {
 		const legalUnit = rowOf(tree, 'Lucca FR');
-		await expect(disclosureOf(legalUnit).getAttribute('aria-expanded')).toBe('false');
+		await expect(legalUnit.getAttribute('aria-expanded')).toBe('false');
 
 		await userEvent.click(disclosureOf(legalUnit));
 		await waitForAngular();
 
-		await expect(disclosureOf(rowOf(tree, 'Lucca FR')).getAttribute('aria-expanded')).toBe('true');
+		await expect(rowOf(tree, 'Lucca FR').getAttribute('aria-expanded')).toBe('true');
 		await expect(await panel.findByText('Lucca Paris')).toBeVisible();
 	});
 

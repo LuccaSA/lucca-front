@@ -13,10 +13,10 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 
 	readonly groupingFn = linkedSignal(() => this.groupingFnInput());
 
-	readonly collapsibleInput = input(false, { alias: 'collapsible', transform: luBooleanAttribute });
+	readonly collapsableInput = input(false, { alias: 'collapsable', transform: luBooleanAttribute });
 
-	get collapsible(): boolean {
-		return this.collapsibleInput();
+	get collapsable(): boolean {
+		return this.collapsableInput();
 	}
 
 	readonly parentStandsForChildrenInput = input(false, { alias: 'parentStandsForChildren', transform: luBooleanAttribute });

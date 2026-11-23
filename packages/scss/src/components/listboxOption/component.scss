@@ -98,25 +98,31 @@
 		}
 
 		.listboxOption-content-disclosure {
-			@include reset.button;
-
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			align-self: start;
 			inline-size: var(--components-listboxOption-content-disclosure-size);
 			block-size: var(--components-listboxOption-content-disclosure-size);
+			flex-shrink: 0;
+			margin-inline: calc(var(--pr-t-spacings-50) * -1);
 			border-radius: var(--pr-t-border-radius-default);
 			background-color: var(--components-listboxOption-content-disclosure-backgroundColor);
 			color: var(--components-listboxOption-content-disclosure-color);
 			cursor: pointer;
-			rotate: var(--components-listboxOption-content-disclosure-rotate);
-			transition-property: rotate, background-color;
+			transition-property: background-color;
 			transition-duration: var(--commons-animations-durations-fast);
 
-			&:hover {
+			&:hover:has(.listboxOption-content-disclosure-icon) {
 				--components-listboxOption-content-disclosure-backgroundColor: var(--palettes-neutral-200);
 			}
+		}
+
+		.listboxOption-content-disclosure-icon {
+			display: flex;
+			rotate: var(--components-listboxOption-content-disclosure-icon-rotate);
+			transition-property: rotate;
+			transition-duration: var(--commons-animations-durations-fast);
 		}
 
 		.listboxOption-content-group {

@@ -44,7 +44,7 @@
 				class="textField-input-value"
 				type="text"
 				role="combobox"
-				aria-haspopup="listbox"
+				[attr.aria-haspopup]="treeGenerator ? 'tree' : 'listbox'"
 				[attr.aria-expanded]="true"
 				[attr.aria-controls]="selectId"
 				[attr.placeholder]="intl().placeholder"
@@ -62,7 +62,7 @@
 </ng-template>
 
 <ng-template #panelContent>
-	<lu-listbox multiple [tree]="!!treeGenerator" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
+	<lu-listbox multiple [tree]="!!treeGenerator" [collapsable]="!!treeGenerator?.collapsable" [state]="listboxState()" [statusMsg]="listboxStatusMsg()">
 		<!-- The header is projected inside the listbox because it can contain selectable elements
 		(e.g. the select-all checkbox) that are referenced by aria-activedescendant -->
 		<ng-container ngProjectAs="[listbox-header]">
@@ -111,16 +111,17 @@
 		}
 		<ng-template #optionsList let-options let-groupIndex="groupIndex">
 			@if (treeGenerator) {
-				@for (branch of options | luTreeDisplay: treeGenerator; let index = $index; track optionKey()(branch.node)) {
+				@for (branch of options | luTreeDisplay: treeGenerator; let index = $index; let count = $count; track optionKey()(branch.node)) {
 					<lu-tree-branch
 						[branch]="branch"
+						[treeitemPosition]="index + 1"
+						[treeitemSetSize]="count"
 						[optionTpl]="optionTpl()"
 						[selectedOptions]="selectedOptions"
 						[optionComparer]="optionComparer()"
 						[optionIndex]="index"
-						[collapsible]="!!treeGenerator.collapsible"
+						[collapsable]="!!treeGenerator.collapsable"
 						[parentStandsForChildren]="!!treeGenerator.parentStandsForChildren"
-						[disclosureLabel]="treeGenerator.disclosureLabel?.(branch.node, !!branch.expanded) ?? null"
 						(toggleOne)="toggleOption($event)"
 						(selectMany)="toggleOptions($event, [])"
 						(unselectMany)="toggleOptions([], $event)"
