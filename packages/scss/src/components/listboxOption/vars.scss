@@ -31,6 +31,11 @@
 	--components-listboxOption-content-disclosure-backgroundColor: transparent;
 	--components-listboxOption-content-disclosure-size: 1.5rem;
 	--components-listboxOption-content-disclosure-icon-rotate: 0deg;
+	--components-listboxOption-content-treeActions-opacity: 0;
+	--components-listboxOption-content-treeActions-position: absolute;
+	--components-listboxOption-content-treeActions-action-opacity: 0.66;
+	--components-listboxOption-content-treeActions-action-icon-colorParent: var(--palettes-neutral-800);
+	--components-listboxOption-content-treeActions-action-icon-colorChildren: var(--palettes-neutral-800);
 }
 
 @mixin varsWrapper {

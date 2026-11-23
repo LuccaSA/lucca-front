@@ -311,6 +311,10 @@ Une dépréciation d'une mineure n'appelle pas forcément de migration immédiat
 
 Un tableau, une ligne par changement : composant, changement, PR, proposition (schematic / skill / rien), justification en une phrase, effort estimé (S/M/L). Finir par une recommandation : quoi faire en priorité, puis demander lesquels implémenter.
 
+### Skill de migration
+
+Une fois le choix fait, lancer le skill `generate-migration-skill` pour la version, avec la liste retenue : chaque schematic, existant ou à écrire, devient une étape « schematic » du skill `lucca-front-migrate-X-Y`, et chaque section devient une étape « manuelle ». Lui transmettre aussi ce qui a été écarté pour plus tard.
+
 ---
 
 ## Rapport final

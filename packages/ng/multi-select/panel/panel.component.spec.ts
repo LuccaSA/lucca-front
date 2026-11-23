@@ -55,7 +55,7 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		expect(overlayContainerElement.querySelectorAll('lu-select-option').length).toBe(3);
 	}));
 
-	it('should render a single checkbox per option and no legacy markup', fakeAsync(() => {
+	it('should render a single checkbox per option', fakeAsync(() => {
 		openPanel();
 
 		const optionHost = overlayContainerElement.querySelector('lu-select-option')!;
@@ -63,7 +63,6 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		expect(optionHost.getAttribute('role')).toBe('presentation');
 		expect(optionHost.querySelector('lu-listbox-option')!.getAttribute('role')).toBe('option');
 		expect(optionHost.querySelectorAll('.checkboxField').length).toBe(1);
-		expect(optionHost.querySelector('.optionItem-value')).toBeNull();
 	}));
 
 	it('should reflect selection on aria-selected and is-selected class of the listbox option', fakeAsync(() => {

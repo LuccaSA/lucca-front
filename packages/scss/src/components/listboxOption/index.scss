@@ -1,5 +1,71 @@
 @use 'exports' as *;
 
+// Option rendered with a checkbox: every option of a multiple listbox, or a lone `.mod-checkbox` option.
+@mixin multipleOption {
+	&:hover,
+	&.is-hovered,
+	&:has(> .listboxOption-content.is-hovered) {
+		@include multipleHover;
+	}
+
+	&:active {
+		@include multipleActive;
+	}
+
+	&[aria-selected='true'],
+	&[aria-checked='true'],
+	&.is-selected {
+		> .listboxOption-content {
+			@include multipleSelected;
+
+			&:hover,
+			&.is-hovered {
+				@include multipleSelectedHover;
+			}
+
+			&:active {
+				@include multipleSelectedActive;
+			}
+		}
+	}
+
+	&[aria-checked='mixed'] {
+		> .listboxOption-content {
+			@include multipleMixed;
+
+			&:hover,
+			&.is-hovered {
+				@include multipleMixedHover;
+			}
+
+			&:active {
+				@include multipleMixedActive;
+			}
+		}
+	}
+
+	&[aria-disabled='true'],
+	&.is-disabled {
+		> .listboxOption-content {
+			@include multipleDisabled;
+		}
+
+		&[aria-selected='true'],
+		&[aria-checked='true'],
+		&.is-selected {
+			> .listboxOption-content {
+				@include multipleSelectedDisabled;
+			}
+		}
+
+		&[aria-checked='mixed'] {
+			> .listboxOption-content {
+				@include multipleMixedDisabled;
+			}
+		}
+	}
+}
+
 .listboxOption {
 	@layer components {
 		@include vars;
@@ -78,6 +144,10 @@
 			@include empty;
 		}
 
+		&.mod-checkbox {
+			@include multiple;
+		}
+
 		&[aria-selected='true'],
 		&[aria-checked='true'],
 		&.is-selected {
@@ -147,6 +217,22 @@
 	}
 }
 
+.listboxOption-content-treeActions-action {
+	@layer mods {
+		&.mod-parent {
+			@include treeActionParent;
+		}
+
+		&.mod-children {
+			@include treeActionChildren;
+		}
+
+		&:hover {
+			@include treeActionHover;
+		}
+	}
+}
+
 .listboxOptionWrapper {
 	@layer components {
 		@include varsWrapper;
@@ -180,72 +266,16 @@
 			&,
 			.listboxOptionWrapper {
 				@include multiple;
-
-				.listboxOption {
-					&:hover,
-					&.is-hovered,
-					&:has(> .listboxOption-content.is-hovered) {
-						@include multipleHover;
-					}
-
-					&:active {
-						@include multipleActive;
-					}
-
-					&[aria-selected='true'],
-					&[aria-checked='true'],
-					&.is-selected {
-						> .listboxOption-content {
-							@include multipleSelected;
-
-							&:hover,
-							&.is-hovered {
-								@include multipleSelectedHover;
-							}
-
-							&:active {
-								@include multipleSelectedActive;
-							}
-						}
-					}
-
-					&[aria-checked='mixed'] {
-						> .listboxOption-content {
-							@include multipleMixed;
-
-							&:hover,
-							&.is-hovered {
-								@include multipleMixedHover;
-							}
-
-							&:active {
-								@include multipleMixedActive;
-							}
-						}
-					}
-
-					&[aria-disabled='true'],
-					&.is-disabled {
-						> .listboxOption-content {
-							@include multipleDisabled;
-						}
-
-						&[aria-selected='true'],
-						&[aria-checked='true'],
-						&.is-selected {
-							> .listboxOption-content {
-								@include multipleSelectedDisabled;
-							}
-						}
-
-						&[aria-checked='mixed'] {
-							> .listboxOption-content {
-								@include multipleMixedDisabled;
-							}
-						}
-					}
-				}
 			}
 		}
+	}
+}
+
+// One rule for both cases, so that the multiple option states are not emitted twice.
+.listboxOptionWrapper.mod-multiple .listboxOption,
+.listboxOptionWrapper.mod-multiple .listboxOptionWrapper .listboxOption,
+.listboxOption.mod-checkbox {
+	@layer mods {
+		@include multipleOption;
 	}
 }

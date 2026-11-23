@@ -27,7 +27,7 @@ Component selector : `lu-input-framed`
 
 ```js
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, INPUT_FRAMED_SIZE, InputFramedComponent, InputFramedContentDirective } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
 import { IconComponent } from '@lucca-front/ng/icon';

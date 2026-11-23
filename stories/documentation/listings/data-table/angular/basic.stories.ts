@@ -5,6 +5,7 @@ import {
 	DATA_TABLE_SORT,
 	DATA_TABLE_VERTICAL_ALIGN,
 	DataTableBodyComponent,
+	DataTableBodyGroupDirective,
 	DataTableComponent,
 	DataTableFootComponent,
 	DataTableHeadComponent,
@@ -170,7 +171,13 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Présente un groupe de lignes dans la story, via l’input <code>group</code> (<code>PortalContent</code>) de <code>tbody[luDataTableBody]</code>.',
+			description: 'Présente un groupe de lignes dans la story, avec son libellé passé par l’input <code>group</code>.',
+			table: { category: 'story' },
+		},
+		richContent: {
+			name: '↳ richContent',
+			if: { arg: 'group', truthy: true },
+			description: 'Remplace l’input <code>group</code> par un contenu riche projeté avec la directive <code>luDataTableBodyGroup</code>.',
 			table: { category: 'story' },
 		},
 		editable: {
@@ -210,6 +217,7 @@ export default {
 				DataTableComponent,
 				DataTableHeadComponent,
 				DataTableBodyComponent,
+				DataTableBodyGroupDirective,
 				DataTableFootComponent,
 				DataTableRowComponent,
 				DataTableRowCellComponent,
@@ -235,6 +243,7 @@ export default {
 			verticalAlign,
 			align,
 			group,
+			richContent,
 			expanded,
 			groupButtonAlt,
 			tfoot,
@@ -274,7 +283,7 @@ export default {
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
 		const mixedAttr = mixed ? ` mixed` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
-		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" [group]="samplePortalContent"` : ``;
+		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}"${richContent ? `` : ` group="Group"`}` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 		const emptyAttr = empty ? ` empty` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
@@ -326,13 +335,11 @@ export default {
 				</lu-form-field>
 			`
 			: text;
-		const samplePortalContentTpl = group
-			? `
-<ng-template #samplePortalContent>
-	Group
-	<lu-numeric-badge [value]="${lines}" />
-</ng-template>`
-			: ``;
+		const groupTpl =
+			group && richContent
+				? `
+		<ng-container luDataTableBodyGroup>Group <lu-numeric-badge [value]="${lines}" /></ng-container>`
+				: ``;
 		const tfootTpl = tfoot
 			? `
 	<tfoot luDataTableFoot>
@@ -372,11 +379,11 @@ export default {
 			<th luDataTableCell${inlineSizeAttr}${sortAttr}${sortWithEllipsisAttr}${alignAttr}>${textHeader}</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody${groupAttr}${expandedAttr}>
+	<tbody luDataTableBody${groupAttr}${expandedAttr}>${groupTpl}
 		${tbodyTpl}
 	</tbody>${tfootTpl}${paginationTpl}
 </lu-data-table>
-${samplePortalContentTpl}${modelEditableDisplayer}`,
+${modelEditableDisplayer}`,
 		};
 	},
 } as Meta;
@@ -403,6 +410,7 @@ export const Basic: StoryObj = {
 		selectedLabel: 'Sélectionner cette ligne',
 		selectedLabelHead: 'Sélectionner toutes les lignes',
 		group: false,
+		richContent: false,
 		groupButtonAlt: 'Afficher X lignes supplémentaires',
 		expanded: false,
 		editable: false,

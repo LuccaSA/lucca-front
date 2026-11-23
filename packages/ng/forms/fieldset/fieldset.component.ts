@@ -1,8 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChild, input, model, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective, luBooleanAttribute } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ButtonComponent } from '@lucca/prisme/button';
+import { FieldsetActionDirective } from './fieldset-action.directive';
 import { FieldsetSize } from './fieldset.type';
 
 let nextId = 0;
@@ -25,6 +26,8 @@ export class FieldsetComponent {
 	readonly hiddenLegend = input(false, { transform: luBooleanAttribute });
 
 	readonly expanded = model(false);
+
+	protected readonly actionSlot = contentChild(FieldsetActionDirective, { descendants: false });
 
 	id = `fieldsetTitleContent${nextId++}`;
 }

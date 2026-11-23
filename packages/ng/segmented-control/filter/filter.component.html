@@ -11,5 +11,10 @@
 <label [attr.for]="id" class="segmentedControl-item-action">
 	@if (label(); as label) {
 		<ng-container *luPortal="label" />
+	} @else {
+		<ng-content select="[luSegmentedControlFilterLabel]" />
+	}
+	@if (numericBadge() !== null) {
+		<lu-numeric-badge [value]="numericBadge()!" />
 	}
 </label>

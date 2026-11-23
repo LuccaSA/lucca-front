@@ -1,8 +1,7 @@
 import { computed, Directive, effect, forwardRef, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { getIntlPluralLabel, isNil, LOCALE_PLURAL_RULES, LuPluralForms } from '@lucca-front/ng/core';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
-import { LuOptionComparer } from '@lucca-front/ng/option';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, LuOptionComparer, ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 import { LuMultiSelection, LuMultiSelectionMode } from '../../select.model';
 import { LuMultiSelectInputComponent } from '../select-input.component';
 import { LuMultiSelectAllDisplayerComponent } from './multi-select-all-displayer.component';

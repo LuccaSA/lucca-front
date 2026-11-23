@@ -6,7 +6,7 @@
 	} @else if (disclosureSlot()) {
 		<span class="listboxOption-content-disclosure" aria-hidden="true"></span>
 	}
-	@if (multiple() && !add() && !selectAll() && !select()) {
+	@if ((multiple() || checkbox()) && !add() && !selectAll() && !select()) {
 		<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
 			<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 			<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>

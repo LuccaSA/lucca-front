@@ -82,6 +82,23 @@ Prototypes have no API: the card shows the data of the user given to the trigger
 </script>
 ```
 
+## Impersonation
+
+Prototypes have no API: `lu-impersonation` searches the `users` given by the page, and shows first the one whose id is `currentUserId`, which is read once. `selectedUser` defaults to that user, and changes are dispatched as `selectedUserChange`. A `department` tells homonyms apart.
+
+```html
+<lu-impersonation id="impersonation"></lu-impersonation>
+<script>
+  impersonation.currentUserId = 1;
+  impersonation.users = [
+    { id: 1, firstName: 'Marie', lastName: 'Durand' },
+    { id: 2, firstName: 'Jean', lastName: 'Martin', department: { name: 'Finance' } },
+    { id: 3, firstName: 'Jean', lastName: 'Martin', department: { name: 'Sales' } },
+  ];
+  impersonation.addEventListener('selectedUserChange', (event) => console.log(event.detail));
+</script>
+```
+
 ## Available elements
 
 Forms: `lu-color-input`, `lu-date-input`, `lu-date-range-input`, `lu-duration-picker`, `lu-filter-bar`, `lu-filter-pill`, `lu-form-field`, `lu-listbox`, `lu-listbox-option`, `lu-multi-select`, `lu-multilanguage-input`, `lu-phone-number-input`, `lu-rich-text-input` (and its `lu-rich-text-input-toolbar` child), `lu-simple-select`, `lu-time-picker`, `lu-time-range-picker`.
@@ -89,6 +106,8 @@ Forms: `lu-color-input`, `lu-date-input`, `lu-date-range-input`, `lu-duration-pi
 Files: `lu-file-entry`, `lu-multi-file-upload`, `lu-single-file-upload`.
 
 Structure and content: `lu-empty-state-page`, `lu-empty-state-section`, `lu-grid`, `lu-grid-column`, `lu-read-more`, `lu-scroll-box`, `lu-skip-links`.
+
+Navigation: `lu-impersonation`.
 
 Overlays: `lu-dialog`, `lu-dialog-header`, `lu-dialog-content`, `lu-dialog-footer` (in a dialog template), `lu-toasts` (added by `Prisme.toasts` if missing).
 

@@ -317,6 +317,7 @@ export const IconsList = [
 	{ icon: 'listChecklist', deprecated: false },
 	{ icon: 'listTodo', deprecated: true },
 	{ icon: 'listMultipleChoices', deprecated: false },
+	{ icon: 'listTree', deprecated: false },
 	{ icon: 'lockClose', deprecated: false },
 	{ icon: 'lock', deprecated: true },
 	{ icon: 'lockKey', deprecated: false },

@@ -31,7 +31,6 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 @Component({
 	selector: 'lu-select-panel',
 	templateUrl: './panel.component.html',
-	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
 		class: 'selectPanel',

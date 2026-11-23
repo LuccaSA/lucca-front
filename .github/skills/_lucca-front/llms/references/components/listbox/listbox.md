@@ -58,6 +58,7 @@ import { ListboxComponent, Treeitem, OptionComponent } from '@lucca-front/ng/lis
 | `select` | `select` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `collapsable` | `collapsable` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `selectAll` | `selectAll` | `'string' \| null` | — | — | — | — |
+| `checkbox` | `checkbox` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `treeitemLevel` | `treeitemLevel` | `number \| null` | `null` | — | — | — |
 
 #### Models (two-way binding)

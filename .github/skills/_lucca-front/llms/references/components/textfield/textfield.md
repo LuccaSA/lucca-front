@@ -58,7 +58,7 @@ import { TextInputComponent } from '@lucca-front/ng/forms';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 601 available values
 
 ## Related files
 

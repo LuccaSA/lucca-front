@@ -4,6 +4,7 @@
 
 - Import
 - API Reference
+  - SegmentedControlFilterLabelDirective (directive)
   - SegmentedControlFilterComponent (component)
   - SegmentedControlComponent (component)
 - Related files
@@ -15,10 +16,14 @@
 ## Import
 
 ```typescript
-import { SegmentedControlFilterComponent, SegmentedControlComponent } from '@lucca-front/ng/segmented-control';
+import { SegmentedControlFilterLabelDirective, SegmentedControlFilterComponent, SegmentedControlComponent } from '@lucca-front/ng/segmented-control';
 ```
 
 ## API Reference
+
+### SegmentedControlFilterLabelDirective (directive)
+
+**Selector:** `[luSegmentedControlFilterLabel]`
 
 ### SegmentedControlFilterComponent (component)
 
@@ -28,9 +33,10 @@ import { SegmentedControlFilterComponent, SegmentedControlComponent } from '@luc
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le filtre. |
-| `value` | `value` | `T` | — | ✅ | — | Valeur de l’onglet (obligatoire). |
-| `label` | `label` | `PortalContent` | — | — | — | Libellé de l’onglet. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `value` | `value` | `T` | — | ✅ | — | Valeur du filtre (obligatoire). |
+| `label` | `label` | `PortalContent` | — | — | — | Libellé de l’onglet. Contenu riche : directive luSegmentedControlTabsPanelLabel (l’input prévaut). |
+| `numericBadge` | `numericBadge` | `unknown` | `null` | — | `luNullableNumberAttribute` | Affiche un Numeric Badge après le libellé, généralement un compteur. |
 
 ### SegmentedControlComponent (component)
 

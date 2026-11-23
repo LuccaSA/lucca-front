@@ -3,6 +3,7 @@ import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-inter
 import { FormsModule } from '@angular/forms';
 import { intlInputOptions } from '@lucca-front/ng/core';
 import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
+import { OptionComponent as ListboxOptionComponent } from '@lucca-front/ng/listbox';
 import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
 
 export interface FormerEmployeesContext {
@@ -14,25 +15,31 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 @Component({
 	selector: 'lu-core-select-former-employees',
 	styleUrl: './former-employees.component.scss',
-	imports: [FormsModule],
+	imports: [FormsModule, ListboxOptionComponent],
 	hostDirectives: [ɵCoreSelectPanelElement],
 	template: `
-		<div class="formerEmployeeDisplayer optionItem">
-			<div class="optionItem-value" [class.is-selected]="context.includeFormerEmployees()" (mousedown)="onMouseDown($event)">
-				{{ intl().includeFormerEmployees }}
-			</div>
-		</div>
+		<!-- formerEmployeeDisplayer and optionItem-value are kept until v23 for consumers that query them -->
+		<lu-listbox-option
+			class="formerEmployeeDisplayer"
+			checkbox
+			[checked]="context.includeFormerEmployees()"
+			[hovered]="selectableItem.isHighlighted()"
+			[elementId]="selectableItem.idAttribute()"
+			(mousedown)="onMouseDown($event)"
+		>
+			<span class="listboxOption-content-value optionItem-value">{{ intl().includeFormerEmployees }}</span>
+		</lu-listbox-option>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuCoreSelectFormerEmployeesComponent {
 	readonly intl = input(...intlInputOptions(LU_CORE_SELECT_USER_TRANSLATIONS));
 	readonly context = inject(FORMER_EMPLOYEES_CONTEXT);
-	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
+	protected readonly selectableItem = inject(ɵCoreSelectPanelElement);
 
 	constructor() {
-		this.#selectableItem.id.set('select-former-employees');
-		outputToObservable(this.#selectableItem.selected)
+		this.selectableItem.id.set('select-former-employees');
+		outputToObservable(this.selectableItem.selected)
 			.pipe(takeUntilDestroyed())
 			.subscribe(() => {
 				this.context.includeFormerEmployees.set(!this.context.includeFormerEmployees());

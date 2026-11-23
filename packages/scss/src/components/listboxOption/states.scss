@@ -120,6 +120,7 @@
 
 @mixin hover {
 	--components-listboxOption-content-backgroundColor: var(--palettes-neutral-50);
+	--components-listboxOption-content-treeActions-opacity: 1;
 
 	.listboxOption-content-checkboxField-input {
 		@include checkboxField.hover;
@@ -180,4 +181,8 @@
 	> .listboxOption-content {
 		--components-listboxOption-content-color: var(--palettes-product-800);
 	}
+}
+
+@mixin treeActionHover {
+	--components-listboxOption-content-treeActions-action-opacity: 1;
 }

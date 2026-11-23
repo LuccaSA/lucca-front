@@ -883,7 +883,8 @@
 							<th luDataTableCell>header</th>
 						</tr>
 					</thead>
-					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires" [group]="samplePortalContent">
+					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires">
+						<ng-container luDataTableBodyGroup>group <lu-numeric-badge [value]="7" /></ng-container>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
@@ -895,7 +896,8 @@
 							<td luDataTableCell>cell</td>
 						</tr>
 					</tbody>
-					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires" expanded [group]="samplePortalContent">
+					<tbody luDataTableBody groupButtonAlt="Afficher 2 lignes supplémentaires" [expanded]="true">
+						<ng-container luDataTableBodyGroup>group <lu-numeric-badge [value]="7" /></ng-container>
 						<tr luDataTableRow>
 							<th luDataTableCell>header</th>
 							<td luDataTableCell>cell</td>
@@ -908,10 +910,6 @@
 						</tr>
 					</tbody>
 				</lu-data-table>
-				<ng-template #samplePortalContent>
-					group
-					<lu-numeric-badge [value]="7" />
-				</ng-template>
 			</td>
 		</tr>
 		<tr>

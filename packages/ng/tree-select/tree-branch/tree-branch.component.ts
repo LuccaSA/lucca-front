@@ -18,7 +18,6 @@ import { Treeitem } from '@lucca-front/ng/listbox';
 	selector: 'lu-tree-branch',
 	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent, Treeitem],
 	templateUrl: './tree-branch.component.html',
-	styleUrl: './tree-branch.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {

@@ -17,6 +17,7 @@ import { SegmentedControlTabsPanelComponent, SegmentedControlTabsComponent } fro
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `label` | `label` | `PortalContent` | — | — | — | — |
+| `numericBadge` | `numericBadge` | `unknown` | `null` | — | `luNullableNumberAttribute` | — |
 | `icon` | `icon` | `LuccaIcon` | — | — | — | — |
 | `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `value` | `value` | `T` | — | ✅ | — | — |
@@ -41,7 +42,7 @@ import { SegmentedControlTabsPanelComponent, SegmentedControlTabsComponent } fro
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 601 available values
 
 ## Related files
 
