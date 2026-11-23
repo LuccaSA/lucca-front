@@ -16,8 +16,7 @@
 		}
 
 		// .mod-clickable is kept for elements that are neither links nor buttons
-		&:is(a[href], button),
-		&.mod-clickable {
+		&:is(a[href], button, .mod-clickable) {
 			@include clickable;
 		}
 
