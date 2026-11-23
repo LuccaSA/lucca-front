@@ -42,7 +42,10 @@ function getDisplayFormat(args: Pick<UserTileStoryArgs, 'firstNameFormat' | 'las
 	return args.lastNameFirst ? `${lastNameToken}${firstNameToken}` : `${firstNameToken}${lastNameToken}`;
 }
 
-const employeeProfileCardInterceptor: HttpInterceptorFn = (req) => {
+const employeeProfileCardInterceptor: HttpInterceptorFn = (req, next) => {
+	if (!req.url.startsWith('/work-locations/api/employee-profile-card/')) {
+		return next(req);
+	}
 	const id = Number(req.url.split('/').pop());
 	const user = Object.values(users).find((u) => u.id === id) ?? finn;
 	return of(new HttpResponse({ body: { ...user, leaveEndIsFirstHalfDay: false, pictureHref: user.pictureHref ?? user.picture?.href } }));
