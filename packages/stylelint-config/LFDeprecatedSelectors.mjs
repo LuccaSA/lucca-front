@@ -1153,6 +1153,26 @@ export default [
 		versionDeprecated: '22.2.0',
 		actions: `Retirer la ligne \`.indexTable-head-row.mod-massSelection\` et sa cellule \`.indexTable-head-row-cell-massSelection\`, sans remplacement.`,
 	},
+	{
+		// Legacy option picker classes, still set on the select panels until v23 for the consumers that hook on them
+		// SEE https://github.com/LuccaSA/lucca-front/pull/5747.
+		objectPattern: [/\.lu-option-picker-panel(?![\w-])/, /\.optionItem-icons(?![\w-])/],
+		versionDeprecated: '22.2.0',
+		actions: `
+			* \`.lu-option-picker-panel\` => \`.selectPanel\`
+			* \`.optionItem-icons\` => \`.listboxOption-content-treeActions\`
+		`,
+	},
+	{
+		// Legacy select rows and option groups, no longer rendered by Lucca Front, styled until v23
+		// SEE https://github.com/LuccaSA/lucca-front/pull/5747.
+		objectPattern: [/\.(formerEmployee|archivedLegalUnits)Displayer(?![\w-])/, /\.lu-picker-content-option-group(?![\w-])/],
+		versionDeprecated: '22.2.0',
+		actions: `
+			* \`.formerEmployeeDisplayer\`, \`.archivedLegalUnitsDisplayer\` => option à case à cocher \`<lu-listbox-option checkbox>\` (\`.listboxOption.mod-checkbox\`)
+			* \`.lu-picker-content-option-group\` : sans remplacement, utiliser les groupes de \`lu-simple-select\` / \`lu-multi-select\`
+		`,
+	},
 
 	// Deprecated components, including their children (`.textfield-input`…)
 	// Keep them after the entries targeting their children, so those messages win.
