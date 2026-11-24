@@ -48,6 +48,51 @@ deployments:
   content_hash: sha256:3dc1084a667ec4589c61df3c49443f7046210ea733c3bba23538548eb5b5a5e4
 - kind: project-relative
   target: claude
+  value: .claude/skills/bump-qa
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/bump-qa/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c74b4284c6f6053536f16d487ee664777910823df9ff1372b6ec7afa03b030ce
+- kind: project-relative
+  target: claude
+  value: .claude/skills/bump-qa/scripts/bump-qa.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8cabb5a03e1576005a959e6ac0a38477a67d586a8dae04fd130513156425ff1e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/bump-qa/scripts/bump-qa.test.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8e652428810e799f69c4020acd844288aa4d2e68bfd367cb0302d08ef6b05dec
+- kind: project-relative
+  target: claude
+  value: .claude/skills/bump-qa/scripts/lib.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8cc01f0d7c60cc6915722bc7c13e47648065fed8583b2cf4f9b90f5207ccc821
+- kind: project-relative
+  target: claude
   value: .claude/skills/create-feature-issue
   runtime: null
   scope: project
@@ -435,6 +480,51 @@ deployments:
   content_hash: sha256:3dc1084a667ec4589c61df3c49443f7046210ea733c3bba23538548eb5b5a5e4
 - kind: project-relative
   target: copilot
+  value: .agents/skills/bump-qa
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/bump-qa/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:c74b4284c6f6053536f16d487ee664777910823df9ff1372b6ec7afa03b030ce
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/bump-qa/scripts/bump-qa.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8cabb5a03e1576005a959e6ac0a38477a67d586a8dae04fd130513156425ff1e
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/bump-qa/scripts/bump-qa.test.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8e652428810e799f69c4020acd844288aa4d2e68bfd367cb0302d08ef6b05dec
+- kind: project-relative
+  target: copilot
+  value: .agents/skills/bump-qa/scripts/lib.mjs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:8cc01f0d7c60cc6915722bc7c13e47648065fed8583b2cf4f9b90f5207ccc821
+- kind: project-relative
+  target: copilot
   value: .agents/skills/create-feature-issue
   runtime: null
   scope: project
@@ -798,6 +888,11 @@ local_deployed_files:
 - .agents/skills/analyze-bug-report/SKILL.md
 - .agents/skills/audit-pr
 - .agents/skills/audit-pr/SKILL.md
+- .agents/skills/bump-qa
+- .agents/skills/bump-qa/SKILL.md
+- .agents/skills/bump-qa/scripts/bump-qa.mjs
+- .agents/skills/bump-qa/scripts/bump-qa.test.mjs
+- .agents/skills/bump-qa/scripts/lib.mjs
 - .agents/skills/create-feature-issue
 - .agents/skills/create-feature-issue/SKILL.md
 - .agents/skills/draft-component-api
@@ -842,6 +937,11 @@ local_deployed_files:
 - .claude/skills/analyze-bug-report/SKILL.md
 - .claude/skills/audit-pr
 - .claude/skills/audit-pr/SKILL.md
+- .claude/skills/bump-qa
+- .claude/skills/bump-qa/SKILL.md
+- .claude/skills/bump-qa/scripts/bump-qa.mjs
+- .claude/skills/bump-qa/scripts/bump-qa.test.mjs
+- .claude/skills/bump-qa/scripts/lib.mjs
 - .claude/skills/create-feature-issue
 - .claude/skills/create-feature-issue/SKILL.md
 - .claude/skills/draft-component-api
@@ -885,6 +985,10 @@ local_deployed_files:
 local_deployed_file_hashes:
   .agents/skills/analyze-bug-report/SKILL.md: sha256:aa92745b7bd0571db80d452d566d8b7bad670eb7310c9db64e28aad279bd89e8
   .agents/skills/audit-pr/SKILL.md: sha256:3dc1084a667ec4589c61df3c49443f7046210ea733c3bba23538548eb5b5a5e4
+  .agents/skills/bump-qa/SKILL.md: sha256:c74b4284c6f6053536f16d487ee664777910823df9ff1372b6ec7afa03b030ce
+  .agents/skills/bump-qa/scripts/bump-qa.mjs: sha256:8cabb5a03e1576005a959e6ac0a38477a67d586a8dae04fd130513156425ff1e
+  .agents/skills/bump-qa/scripts/bump-qa.test.mjs: sha256:8e652428810e799f69c4020acd844288aa4d2e68bfd367cb0302d08ef6b05dec
+  .agents/skills/bump-qa/scripts/lib.mjs: sha256:8cc01f0d7c60cc6915722bc7c13e47648065fed8583b2cf4f9b90f5207ccc821
   .agents/skills/create-feature-issue/SKILL.md: sha256:5c0678f453811777c20b061dddc1378d6b627c3ac9ea9ea5048380d7cdb12299
   .agents/skills/draft-component-api/SKILL.md: sha256:a205c55290f8240eb15597ca7ce0654da3d3cdad74d2e34b125ff918545495fb
   .agents/skills/generate-e2e-test/SKILL.md: sha256:a2b9936f4418219e213f081842da10d192b1a29e90ee7e75b58276a04a78d752
@@ -916,6 +1020,10 @@ local_deployed_file_hashes:
   .claude/rules/scss.md: sha256:b69b0fa1cd3ecd28dbd5c0b54313c925e6c4e15b097d0481d1d065e287d58eb9
   .claude/skills/analyze-bug-report/SKILL.md: sha256:aa92745b7bd0571db80d452d566d8b7bad670eb7310c9db64e28aad279bd89e8
   .claude/skills/audit-pr/SKILL.md: sha256:3dc1084a667ec4589c61df3c49443f7046210ea733c3bba23538548eb5b5a5e4
+  .claude/skills/bump-qa/SKILL.md: sha256:c74b4284c6f6053536f16d487ee664777910823df9ff1372b6ec7afa03b030ce
+  .claude/skills/bump-qa/scripts/bump-qa.mjs: sha256:8cabb5a03e1576005a959e6ac0a38477a67d586a8dae04fd130513156425ff1e
+  .claude/skills/bump-qa/scripts/bump-qa.test.mjs: sha256:8e652428810e799f69c4020acd844288aa4d2e68bfd367cb0302d08ef6b05dec
+  .claude/skills/bump-qa/scripts/lib.mjs: sha256:8cc01f0d7c60cc6915722bc7c13e47648065fed8583b2cf4f9b90f5207ccc821
   .claude/skills/create-feature-issue/SKILL.md: sha256:5c0678f453811777c20b061dddc1378d6b627c3ac9ea9ea5048380d7cdb12299
   .claude/skills/draft-component-api/SKILL.md: sha256:a205c55290f8240eb15597ca7ce0654da3d3cdad74d2e34b125ff918545495fb
   .claude/skills/generate-e2e-test/SKILL.md: sha256:a2b9936f4418219e213f081842da10d192b1a29e90ee7e75b58276a04a78d752
