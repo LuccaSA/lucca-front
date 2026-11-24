@@ -18,10 +18,34 @@ class LoopTestComponent {
 	icons = Array.from({ length: 7 }, (_, i) => `Icon ${i + 1}`);
 }
 
+@Component({
+	selector: 'lu-software-icon-wrapper-deprecated-selector-test',
+	template: `
+		<lu-software-icon-wrapper max="5" data-testid="wrapper">
+			@for (icon of icons; track icon) {
+				<span *luSoftwareIconWrapperItem>{{ icon }}</span>
+			}
+		</lu-software-icon-wrapper>
+	`,
+	imports: [SoftwareIconWrapperComponent, SoftwareIconWrapperItemDirective],
+})
+class DeprecatedSelectorTestComponent {
+	icons = Array.from({ length: 7 }, (_, i) => `Icon ${i + 1}`);
+}
+
 describe(SoftwareIconWrapperComponent.name, () => {
 	describe('items declared in a loop', () => {
 		it('should render max items and count only the hidden ones', async () => {
 			const { container } = await render(LoopTestComponent);
+
+			expect(container.querySelectorAll('.softwareIconWrapper-list-item')).toHaveLength(5);
+			expect(screen.getByTestId('wrapper')).toHaveTextContent('See the 2 additional software programs');
+		});
+	});
+
+	describe('items declared with the deprecated luSoftwareIconWrapperItem selector', () => {
+		it('should still be rendered and counted', async () => {
+			const { container } = await render(DeprecatedSelectorTestComponent);
 
 			expect(container.querySelectorAll('.softwareIconWrapper-list-item')).toHaveLength(5);
 			expect(screen.getByTestId('wrapper')).toHaveTextContent('See the 2 additional software programs');
