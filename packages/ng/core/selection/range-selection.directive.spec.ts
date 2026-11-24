@@ -23,6 +23,10 @@ class TestItemComponent implements ɵRangeSelectableItem {
 	isRangeSelectable(): boolean {
 		return true;
 	}
+
+	isRangeHidden(): boolean {
+		return false;
+	}
 }
 
 @Component({

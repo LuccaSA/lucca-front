@@ -118,6 +118,7 @@ import { DataTableBodyGroupDirective, DataTableBodyComponent, DataTableRowCellHe
 | `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | Texte alternatif restitué à la sélection d’une ligne. La checkbox n’est affichée que s’il est renseigné. |
 | `mixed` | `mixed` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `autoSelectAllOnPage` | `autoSelectAllOnPage` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 #### Models (two-way binding)
 
@@ -161,7 +162,7 @@ import { DataTableBodyGroupDirective, DataTableBodyComponent, DataTableRowCellHe
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 

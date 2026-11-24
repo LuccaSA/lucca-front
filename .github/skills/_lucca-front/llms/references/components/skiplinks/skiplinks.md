@@ -56,7 +56,7 @@ import { SkipLinkDirective, LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 
 ## Changelog
 
-_Aucun changement d'API entre v21.4.4 et v22.1.1._
+_Aucun changement d'API entre v21.4.4 et v22.1.2._
 
 ### Notes de release (ZeroHeight)
 

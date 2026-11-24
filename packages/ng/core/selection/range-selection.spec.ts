@@ -7,6 +7,7 @@ import { ɵRangeSelectableItem, ɵRangeSelection } from './range-selection';
 interface FakeItem extends ɵRangeSelectableItem {
 	selected: WritableSignal<boolean>;
 	selectable: WritableSignal<boolean>;
+	hidden: WritableSignal<boolean>;
 	element: HTMLElement;
 	checkbox: HTMLInputElement;
 }
@@ -24,13 +25,16 @@ function createItems(count: number): FakeItem[] {
 
 		const selected = signal(false);
 		const selectable = signal(true);
+		const hidden = signal(false);
 		return {
 			selected,
 			selectable,
+			hidden,
 			element,
 			checkbox,
 			getRangeSelected: () => selected,
 			isRangeSelectable: () => selectable(),
+			isRangeHidden: () => hidden(),
 		};
 	});
 }
@@ -166,10 +170,10 @@ describe('ɵRangeSelection', () => {
 		expect(items.map((item) => item.selected())).toEqual([true, true, true, true, false]);
 	});
 
-	it('should not select a range after the anchor has been reset', () => {
+	it('should ignore an anchor which cannot start a range anymore (disabled)', () => {
 		// Arrange
 		clickItem(rangeSelection, items[0]);
-		rangeSelection.resetAnchor();
+		items[0].selectable.set(false);
 
 		// Act
 		const count = clickItem(rangeSelection, items[3], true);
@@ -177,7 +181,220 @@ describe('ɵRangeSelection', () => {
 		// Assert
 		expect(count).toBe(0);
 		expect(items.map((item) => item.selected())).toEqual([true, false, false, true, false]);
-		expect(announce).not.toHaveBeenCalled();
+	});
+
+	it('should ignore an anchor which became hidden (in a collapsed group…)', () => {
+		// Arrange
+		clickItem(rangeSelection, items[0]);
+		items[0].hidden.set(true);
+
+		// Act
+		const count = clickItem(rangeSelection, items[3], true);
+
+		// Assert
+		expect(count).toBe(0);
+		expect(items.map((item) => item.selected())).toEqual([true, false, false, true, false]);
+	});
+
+	it('should change the hidden items of the range (in a collapsed group…)', () => {
+		// Arrange
+		items[1].hidden.set(true);
+		items[2].hidden.set(true);
+
+		// Act
+		clickItem(rangeSelection, items[0]);
+		const count = clickItem(rangeSelection, items[3], true);
+
+		// Assert
+		expect(count).toBe(3);
+		expect(items.map((item) => item.selected())).toEqual([true, true, true, true, false]);
+	});
+
+	describe('preview', () => {
+		function pressShift(type: 'keydown' | 'keyup', shiftKey: boolean) {
+			document.dispatchEvent(new KeyboardEvent(type, { key: 'Shift', shiftKey }));
+		}
+
+		function preview(): (boolean | null)[] {
+			return items.map((item) => rangeSelection.getPreview(item));
+		}
+
+		it('should preview the items a Shift + click on the target would select, only while Shift is held', () => {
+			// Arrange
+			clickItem(rangeSelection, items[1]);
+			rangeSelection.setTarget(items[3]);
+
+			// Act & Assert
+			expect(preview()).toEqual([null, null, null, null, null]);
+			pressShift('keydown', true);
+			expect(preview()).toEqual([null, null, true, true, null]);
+			pressShift('keyup', false);
+			expect(preview()).toEqual([null, null, null, null, null]);
+		});
+
+		it('should follow the target, upwards too', () => {
+			// Arrange
+			clickItem(rangeSelection, items[2]);
+			pressShift('keydown', true);
+
+			// Act
+			rangeSelection.setTarget(items[0]);
+
+			// Assert
+			expect(preview()).toEqual([true, true, null, null, null]);
+		});
+
+		it('should preview the unselection when the target is selected', () => {
+			// Arrange
+			items.forEach((item) => {
+				item.selected.set(true);
+				item.checkbox.checked = true;
+			});
+			clickItem(rangeSelection, items[0]);
+			pressShift('keydown', true);
+
+			// Act
+			rangeSelection.setTarget(items[3]);
+
+			// Assert
+			expect(preview()).toEqual([null, false, false, false, null]);
+		});
+
+		it('should only preview the items whose state would change', () => {
+			// Arrange
+			items[2].selected.set(true);
+			items[3].selectable.set(false);
+			clickItem(rangeSelection, items[0]);
+			pressShift('keydown', true);
+
+			// Act
+			rangeSelection.setTarget(items[4]);
+
+			// Assert
+			expect(preview()).toEqual([null, true, null, null, true]);
+		});
+
+		it('should not preview anything when the target cannot be selected', () => {
+			// Arrange
+			clickItem(rangeSelection, items[0]);
+			items[3].selectable.set(false);
+			pressShift('keydown', true);
+
+			// Act
+			rangeSelection.setTarget(items[3]);
+
+			// Assert
+			expect(preview()).toEqual([null, null, null, null, null]);
+		});
+
+		it('should keep the preview while going back with Shift + Tab', () => {
+			// Arrange
+			clickItem(rangeSelection, items[3]);
+			pressShift('keydown', true);
+
+			// Act
+			document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true }));
+			rangeSelection.setTarget(items[1]);
+
+			// Assert
+			expect(preview()).toEqual([null, true, true, null, null]);
+		});
+
+		it('should follow the hovered checkbox area, then the focused one, and hide the preview outside of them', () => {
+			// Arrange
+			clickItem(rangeSelection, items[0]);
+			items.forEach((item) => rangeSelection.listenTarget(item, item.element));
+			pressShift('keydown', true);
+
+			// Act
+			items[3].element.dispatchEvent(new FocusEvent('focusin'));
+			const focused = preview();
+			items[2].element.dispatchEvent(new PointerEvent('pointerenter'));
+			const hovered = preview();
+			items[2].element.dispatchEvent(new PointerEvent('pointerleave'));
+			const leftHovered = preview();
+			items[3].element.dispatchEvent(new FocusEvent('focusout'));
+			const leftFocused = preview();
+
+			// Assert
+			expect(focused).toEqual([null, true, true, true, null]);
+			expect(hovered).toEqual([null, true, true, null, null]);
+			expect(leftHovered).toEqual([null, true, true, true, null]);
+			expect(leftFocused).toEqual([null, null, null, null, null]);
+		});
+
+		it('should hide the preview when the window loses the focus while Shift is held', () => {
+			// Arrange
+			clickItem(rangeSelection, items[1]);
+			rangeSelection.setTarget(items[3]);
+			pressShift('keydown', true);
+
+			// Act
+			window.dispatchEvent(new Event('blur'));
+
+			// Assert
+			expect(preview()).toEqual([null, null, null, null, null]);
+		});
+
+		it('should preview the state of a checkbox reflecting several items', () => {
+			// Arrange
+			clickItem(rangeSelection, items[0]);
+			pressShift('keydown', true);
+
+			// Act
+			rangeSelection.setTarget(items[2]);
+
+			// Assert
+			expect(rangeSelection.getAggregatePreview([items[0], items[1], items[2]])).toBe(true);
+			expect(rangeSelection.getAggregatePreview([items[2], items[3]])).toBe('mixed');
+			expect(rangeSelection.getAggregatePreview([items[0], items[1]])).toBe(true);
+			expect(rangeSelection.getAggregatePreview([items[3], items[4]])).toBeNull();
+			expect(rangeSelection.getAggregatePreview([])).toBeNull();
+		});
+
+		it('should preview the unselection of a checkbox reflecting several items', () => {
+			// Arrange
+			items.forEach((item) => {
+				item.selected.set(true);
+				item.checkbox.checked = true;
+			});
+			clickItem(rangeSelection, items[0]);
+			pressShift('keydown', true);
+
+			// Act
+			rangeSelection.setTarget(items[1]);
+
+			// Assert
+			expect(rangeSelection.getAggregatePreview([items[0], items[1]])).toBe(false);
+			expect(rangeSelection.getAggregatePreview(items)).toBeNull();
+		});
+
+		it('should preview from the first item after the anchor has been set at the start', () => {
+			// Arrange
+			clickItem(rangeSelection, items[3]);
+			rangeSelection.setTarget(items[2]);
+			rangeSelection.setAnchorAtStart();
+
+			// Act
+			pressShift('keydown', true);
+
+			// Assert
+			expect(preview()).toEqual([true, true, true, null, null]);
+		});
+	});
+
+	it('should select a range from the first item after the anchor has been set at the start', () => {
+		// Arrange
+		clickItem(rangeSelection, items[4]);
+		rangeSelection.setAnchorAtStart();
+
+		// Act
+		const count = clickItem(rangeSelection, items[2], true);
+
+		// Assert
+		expect(count).toBe(3);
+		expect(items.map((item) => item.selected())).toEqual([true, true, true, false, true]);
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 3 items', 'polite');
 	});
 
 	it('should sort items in document order whatever their registration order', () => {

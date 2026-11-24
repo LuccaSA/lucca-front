@@ -1,5 +1,10 @@
 @if (items().length > 0) {
-	<div class="approbationInbox-list-content-groupOptional-header">
+	<div
+		class="approbationInbox-list-content-groupOptional-header"
+		[class.is-rangeWillCheck]="rangePreview() === true"
+		[class.is-rangeWillUncheck]="rangePreview() === false"
+		[class.is-rangeWillMix]="rangePreview() === 'mixed'"
+	>
 		@if (selectable()) {
 			<lu-form-field
 				[label]="intl().selectGroup | intlParams: { label: label() }"
@@ -11,6 +16,7 @@
 					[ngModelOptions]="{ standalone: true }"
 					[mixed]="groupMixed()"
 					(ngModelChange)="onGroupChange($event)"
+					[luRangeSelection]="list.rangeSelection"
 				/>
 			</lu-form-field>
 		}

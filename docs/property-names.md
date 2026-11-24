@@ -63,10 +63,11 @@ Directory of the names shared across components. Before naming a new input, chec
 
 ### Tables
 
-| Input        | Type                               | Description                                   | Avoid               |
-| ------------ | ---------------------------------- | --------------------------------------------- | ------------------- |
-| `align`      | `'start'` \| `'center'` \| `'end'` | Horizontally aligns the content of the cells. | `textAlign`, `left` |
-| `selectable` | `boolean`                          | Makes table rows selectable via checkboxes.   | `checkable`         |
+| Input                 | Type                               | Description                                                                                                                                                                                                | Avoid                                    |
+| --------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `align`               | `'start'` \| `'center'` \| `'end'` | Horizontally aligns the content of the cells.                                                                                                                                                              | `textAlign`, `left`                      |
+| `selectable`          | `boolean`                          | Makes table rows selectable via checkboxes.                                                                                                                                                                | `checkable`                              |
+| `autoSelectAllOnPage` | `boolean`                          | Lets the table manage the "select all" checkbox of the head row for the rows of the page: `selected` and `mixed` of the head row are then ignored. Leave it unset when "select all" acts on several pages. | `autoSelectAll`, `selectAllPage` (scope) |
 
 ### Known deviations
 

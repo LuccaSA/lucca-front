@@ -86,7 +86,7 @@ describe(ApprobationInboxItemComponent.name, () => {
 		expect(itemStates()).toEqual([false, false, true, true, true, true]);
 	});
 
-	it('should leave the items of a collapsed group unchanged', () => {
+	it('should change the items of a collapsed group', () => {
 		// Arrange
 		host.groupBExpanded.set(false);
 		fixture.detectChanges();
@@ -96,42 +96,109 @@ describe(ApprobationInboxItemComponent.name, () => {
 		click(8, true);
 
 		// Assert
-		expect(itemStates()).toEqual([true, true, true, false, false, true]);
+		expect(itemStates()).toEqual([true, true, true, true, true, true]);
 	});
 
-	it('should not use the group checkbox as an anchor', () => {
+	it('should start a range from a group checkbox, at its position', () => {
 		// Act
 		click(1);
-		click(6, true);
+		click(7, true);
 
 		// Assert
-		expect(itemStates()).toEqual([true, true, true, true, false, false]);
-		expect(announce).not.toHaveBeenCalled();
+		expect(itemStates()).toEqual([true, true, true, true, true, false]);
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 2 items', 'polite');
 	});
 
-	it('should not start a range from an item clicked before a group checkbox', () => {
+	it('should start a range upwards from a group checkbox', () => {
+		// Act
+		click(5);
+		click(2, true);
+
+		// Assert
+		expect(itemStates()).toEqual([true, true, true, true, true, false]);
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 3 items', 'polite');
+	});
+
+	it('should end a range on a group checkbox, which also changes its own items', () => {
 		// Act
 		click(2);
-		click(5);
+		click(5, true);
+
+		// Assert
+		expect(itemStates()).toEqual([true, true, true, true, true, false]);
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 4 items', 'polite');
+	});
+
+	it('should preview on the checkboxes the items a Shift + click on the hovered item would change, while Shift is held', () => {
+		// Arrange
+		click(3);
+		const items = Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('lu-approbation-inbox-list-item'));
+		// Indexes of the items whose checkbox previews a selection
+		const previewed = () => items.flatMap((item, index) => (item.classList.contains('is-rangeWillCheck') ? [index] : []));
+		items[3].querySelector('lu-form-field')?.dispatchEvent(new PointerEvent('pointerenter'));
+
+		// Act
+		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', shiftKey: true }));
+		fixture.detectChanges();
+		const whileShiftHeld = previewed();
+		document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Shift', shiftKey: false }));
+		fixture.detectChanges();
+
+		// Assert
+		expect(whileShiftHeld).toEqual([2, 3]);
+		expect(previewed()).toEqual([]);
+		expect((fixture.nativeElement as HTMLElement).querySelector('.is-rangeWillUncheck')).toBeNull();
+	});
+
+	it('should preview the state the group and "select all" checkboxes would get from their items', () => {
+		// Arrange
+		click(2);
+		click(3);
+		click(4);
+		const element = fixture.nativeElement as HTMLElement;
+		const items = Array.from(element.querySelectorAll('lu-approbation-inbox-list-item'));
+		const preview = (selector: string) =>
+			Array.from(element.querySelectorAll(selector)).map((checkbox) =>
+				checkbox.classList.contains('is-rangeWillCheck') ? 'check' : checkbox.classList.contains('is-rangeWillMix') ? 'mix' : checkbox.classList.contains('is-rangeWillUncheck') ? 'uncheck' : null,
+			);
+		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', shiftKey: true }));
+
+		// Act
+		items[5].querySelector('lu-form-field')?.dispatchEvent(new PointerEvent('pointerenter'));
+		fixture.detectChanges();
+		const toLastItem = [preview('.approbationInbox-list-formSelectionOptional-formfield'), preview('.approbationInbox-list-content-groupOptional-header')];
+		items[3].querySelector('lu-form-field')?.dispatchEvent(new PointerEvent('pointerenter'));
+		fixture.detectChanges();
+		const toFirstItemOfGroupB = [preview('.approbationInbox-list-formSelectionOptional-formfield'), preview('.approbationInbox-list-content-groupOptional-header')];
+		document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Shift', shiftKey: false }));
+
+		// Assert
+		expect(toLastItem).toEqual([['check'], [null, 'check']]);
+		expect(toFirstItemOfGroupB).toEqual([[null], [null, 'mix']]);
+	});
+
+	it('should start a range from the last clicked group checkbox, its items included downwards', () => {
+		// Act
+		click(2);
+		click(1);
+		click(1);
 		click(8, true);
 
 		// Assert
-		expect(itemStates()).toEqual([true, false, false, true, true, true]);
-		expect(announce).not.toHaveBeenCalled();
+		expect(itemStates()).toEqual([true, true, true, true, true, true]);
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just selected 6 items', 'polite');
 	});
 
-	it('should not start a range from an item clicked before the "select all" checkbox', async () => {
+	it('should start a range from the first item after the "select all" checkbox, not from an item clicked before it', async () => {
 		// Act
-		click(2);
-		click(0);
-		await fixture.whenStable();
+		click(7);
 		click(0);
 		// ngModel writes the new state of the item checkboxes asynchronously
 		await fixture.whenStable();
 		click(4, true);
 
 		// Assert
-		expect(itemStates()).toEqual([false, false, true, false, false, false]);
-		expect(announce).not.toHaveBeenCalled();
+		expect(itemStates()).toEqual([false, false, false, true, true, true]);
+		expect(announce).toHaveBeenCalledExactlyOnceWith('You just unselected 3 items', 'polite');
 	});
 });

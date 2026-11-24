@@ -4,7 +4,7 @@
 > Source : `packages/ng/schematics/collection.json`. Liste cumulative.
 > Guidance prose (étapes manuelles, contexte) : `./documentation/deprecated/deprecated.md`.
 
-## 🆕 Nouveaux codemods depuis v22.1.1
+## 🆕 Nouveaux codemods depuis v22.1.2
 
 À envisager en montant **vers** cette version :
 

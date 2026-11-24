@@ -121,6 +121,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive la checkbox de sélection d’une ligne. |
 | `mixed` | `mixed` | `boolean` | `false` | — | `luBooleanAttribute` | Applique un état de sélection mixte (-) à la checkbox d'une ligne. |
 | `stack` | `stack` | `number` | `1` | — | `luNumberAttribute` | — |
+| `autoSelectAllOnPage` | `autoSelectAllOnPage` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 #### Models (two-way binding)
 
@@ -155,7 +156,7 @@ import { IndexTableActionFileComponent, IndexTableActionComponent, IndexTableBod
 
 ## Changelog
 
-> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.1`. Les versions sans changement d'API sont omises.
+> Diff structurel de l'API (selectors, inputs, outputs, models) entre versions stables, depuis `v21.4.4` jusqu'à `v22.1.2`. Les versions sans changement d'API sont omises.
 
 ### 22.1.0
 

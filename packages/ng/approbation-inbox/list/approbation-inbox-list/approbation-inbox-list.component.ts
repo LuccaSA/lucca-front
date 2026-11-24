@@ -2,7 +2,18 @@ import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, output, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BubbleIllustration, BubbleIllustrationComponent } from '@lucca-front/ng/bubble-illustration';
-import { generateId, getIntl, getIntlPluralLabel, intlInputOptions, IntlParamsPipe, LOCALE_PLURAL_RULES, PortalContent, PortalDirective, ɵRangeSelection } from '@lucca-front/ng/core';
+import {
+	generateId,
+	getIntl,
+	getIntlPluralLabel,
+	intlInputOptions,
+	IntlParamsPipe,
+	LOCALE_PLURAL_RULES,
+	PortalContent,
+	PortalDirective,
+	ɵRangeSelectableItem,
+	ɵRangeSelection,
+} from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
@@ -11,7 +22,7 @@ import { ApprobationInboxDetailComponent } from '../../detail/approbation-inbox-
 import { LU_APPROBATION_INBOX_LIST_TRANSLATIONS } from './approbation-inbox-list.translate';
 import { APPROBATION_INBOX_LIST_INSTANCE } from './token';
 
-interface SelectableItem {
+interface SelectableItem extends ɵRangeSelectableItem {
 	checked: WritableSignal<boolean>;
 }
 
@@ -73,6 +84,9 @@ export class ApprobationInboxListComponent {
 		return 'mixed' as const;
 	});
 
+	/** New state of the "select all" checkbox with a Shift + click on the hovered or focused item, shown while Shift is held */
+	protected readonly selectAllRangePreview = computed(() => this.rangeSelection.getAggregatePreview(this.items()));
+
 	register(item: SelectableItem): void {
 		this.items.update((items) => [...items, item]);
 	}
@@ -82,7 +96,7 @@ export class ApprobationInboxListComponent {
 	}
 
 	toggleSelectAll(): void {
-		this.rangeSelection.resetAnchor();
+		this.rangeSelection.setAnchorAtStart();
 		const newValue = this.selectAllState() !== true;
 		this.items().forEach((item) => item.checked.set(newValue));
 	}

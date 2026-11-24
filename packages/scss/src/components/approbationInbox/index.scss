@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .approbationInbox-detail,
@@ -68,6 +69,24 @@
 		&:has(.approbationInbox-list-content-items-item-content-action[aria-current='page']),
 		&:has(.approbationInbox-list-content-items-item-content-action.is-current) {
 			@include current;
+		}
+	}
+}
+
+// Preview of a range selection, only where the pointer or the focus is in the list: not while typing in a field elsewhere on the page
+// The group and "select all" checkboxes preview the state they would get from their items
+.approbationInbox-list:is(:hover, :focus-within) :is(.approbationInbox-list-content-items-item, .approbationInbox-list-content-groupOptional-header, .approbationInbox-list-formSelectionOptional-formfield) {
+	@layer mods {
+		&.is-rangeWillCheck .checkboxField-input {
+			@include checkboxField.rangeWillCheck;
+		}
+
+		&.is-rangeWillUncheck .checkboxField-input {
+			@include checkboxField.rangeWillUncheck;
+		}
+
+		&.is-rangeWillMix .checkboxField-input {
+			@include checkboxField.rangeWillMix;
 		}
 	}
 }

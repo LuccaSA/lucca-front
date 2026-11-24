@@ -31,6 +31,8 @@ import { LU_APPROBATION_INBOX_LIST_ITEM_TRANSLATIONS } from './approbation-inbox
 	host: {
 		class: 'approbationInbox-list-content-items-item',
 		role: 'listitem',
+		'[class.is-rangeWillCheck]': 'rangePreview() === true',
+		'[class.is-rangeWillUncheck]': 'rangePreview() === false',
 	},
 	providers: [
 		{
@@ -60,12 +62,21 @@ export class ApprobationInboxItemComponent implements OnInit, ɵRangeSelectableI
 		});
 	}
 
+	/** New state a Shift + click on the hovered or focused item would give to this item, shown on its checkbox while Shift is held */
+	protected rangePreview(): boolean | null {
+		return this.list?.rangeSelection.getPreview(this) ?? null;
+	}
+
 	getRangeSelected() {
 		return this.checked;
 	}
 
 	isRangeSelectable(): boolean {
-		return this.group?.expanded() ?? true;
+		return true;
+	}
+
+	isRangeHidden(): boolean {
+		return !(this.group?.expanded() ?? true);
 	}
 
 	ngOnInit(): void {

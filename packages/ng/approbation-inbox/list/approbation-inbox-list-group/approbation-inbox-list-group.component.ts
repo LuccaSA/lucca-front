@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { intlInputOptions, IntlParamsPipe } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, ɵRANGE_SELECTABLE_ITEM, ɵRangeSelectableGroup, ɵRangeSelectionDirective } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca/prisme/icon';
@@ -13,7 +13,7 @@ import { APPROBATION_INBOX_LIST_GROUP_INSTANCE } from './token';
 	selector: 'lu-approbation-inbox-list-group',
 	templateUrl: './approbation-inbox-list-group.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, FormFieldComponent, CheckboxInputComponent, FormsModule, IntlParamsPipe],
+	imports: [IconComponent, FormFieldComponent, CheckboxInputComponent, FormsModule, IntlParamsPipe, ɵRangeSelectionDirective],
 	host: {
 		class: 'approbationInbox-list-content-groupOptional',
 		role: 'listitem',
@@ -23,13 +23,17 @@ import { APPROBATION_INBOX_LIST_GROUP_INSTANCE } from './token';
 			provide: APPROBATION_INBOX_LIST_GROUP_INSTANCE,
 			useExisting: forwardRef(() => ApprobationInboxGroupComponent),
 		},
+		{
+			provide: ɵRANGE_SELECTABLE_ITEM,
+			useExisting: forwardRef(() => ApprobationInboxGroupComponent),
+		},
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApprobationInboxGroupComponent {
+export class ApprobationInboxGroupComponent implements ɵRangeSelectableGroup {
 	readonly intl = input(...intlInputOptions(LU_APPROBATION_INBOX_LIST_GROUP_TRANSLATIONS));
 
-	private readonly list = inject(ApprobationInboxListComponent);
+	protected readonly list = inject(ApprobationInboxListComponent);
 
 	readonly selectable = computed(() => this.list?.selectable() ?? false);
 
@@ -42,13 +46,22 @@ export class ApprobationInboxGroupComponent {
 	readonly allChecked = computed(() => this.items().length > 0 && this.items().every((item) => item.checked()));
 	readonly anyChecked = computed(() => this.items().some((item) => item.checked()));
 	readonly groupMixed = computed(() => this.anyChecked() && !this.allChecked());
+	/** New state of the group checkbox with a Shift + click on the hovered or focused item, shown while Shift is held */
+	protected readonly rangePreview = computed(() => this.list.rangeSelection.getAggregatePreview(this.items()));
 
 	expandedToggle() {
 		this.expanded.set(!this.expanded());
 	}
 
 	onGroupChange(value: boolean) {
-		this.list.rangeSelection.resetAnchor();
 		this.items().forEach((item) => item.checked.set(value));
+	}
+
+	getRangeItems() {
+		return this.items();
+	}
+
+	isRangeSelectable(): boolean {
+		return this.items().length > 0;
 	}
 }
