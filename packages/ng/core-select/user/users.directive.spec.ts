@@ -28,7 +28,15 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 @Component({
 	selector: 'lu-users-directive-host',
 	imports: [LuSimpleSelectInputComponent, TestUsersDirective],
-	template: `<lu-simple-select luTestUsers [filters]="filters" [operationIds]="operationIds" [uniqueOperationIds]="uniqueOperationIds" [appInstanceId]="appInstanceId" />`,
+	template: `<lu-simple-select
+		luTestUsers
+		[filters]="filters"
+		[operationIds]="operationIds"
+		[uniqueOperationIds]="uniqueOperationIds"
+		[appInstanceId]="appInstanceId"
+		[orderBy]="orderBy"
+		[searchDelimiter]="searchDelimiter"
+	/>`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class LuUsersDirectiveHostComponent {
@@ -36,6 +44,8 @@ class LuUsersDirectiveHostComponent {
 	operationIds: number[] | null = null;
 	uniqueOperationIds: number[] | null = null;
 	appInstanceId: number | null = null;
+	orderBy: string | null = null;
+	searchDelimiter = ' ';
 	readonly simpleSelect = viewChild.required<LuSimpleSelectInputComponent<LuCoreSelectUser>>(LuSimpleSelectInputComponent);
 	readonly usersDirective = viewChild.required<TestUsersDirective>(TestUsersDirective);
 }
@@ -277,6 +287,96 @@ describe('LuCoreSelectUsersDirective', () => {
 
 		// Assert
 		httpTestingController.expectOne(`/api/v3/users/scopedsearch?foo=bar&uniqueOperations=1,2&operations=3&appInstanceId=4&fields=collection.count`);
+		httpTestingController.verify();
+	}));
+
+	it('should search the scoped users, "me" included, when unique operations are given', fakeAsync(() => {
+		// Arrange
+		fixture.componentInstance.uniqueOperationIds = [1, 2];
+		fixture.detectChanges();
+
+		// Act
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick();
+
+		// Assert
+		httpTestingController.expectOne(`/api/v3/users/scopedsearch?fields=${fields}&uniqueOperations=1,2&id=${CURRENT_USER_ID}`);
+		httpTestingController.expectOne(`/api/v3/users/scopedsearch?fields=${fields}&uniqueOperations=1,2&paging=0,20`);
+		httpTestingController.verify();
+	}));
+
+	it('should search the scoped users with the deprecated operations and app instance', fakeAsync(() => {
+		// Arrange
+		fixture.componentInstance.operationIds = [3];
+		fixture.componentInstance.appInstanceId = 4;
+		fixture.detectChanges();
+
+		// Act
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick();
+
+		// Assert
+		httpTestingController.expectOne(`/api/v3/users/scopedsearch?fields=${fields}&operations=3&appInstanceId=4&id=${CURRENT_USER_ID}`);
+		httpTestingController.expectOne(`/api/v3/users/scopedsearch?fields=${fields}&operations=3&appInstanceId=4&paging=0,20`);
+		httpTestingController.verify();
+	}));
+
+	it('should sort the list by `orderBy`, but not the "me" lookup', fakeAsync(() => {
+		// Arrange
+		fixture.componentInstance.orderBy = 'lastName,asc';
+		fixture.detectChanges();
+
+		// Act
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick();
+
+		// Assert
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&orderBy=lastName,asc&paging=0,20`);
+		httpTestingController.verify();
+	}));
+
+	it('should join the words of the clue with the search delimiter', fakeAsync(() => {
+		// Arrange
+		fixture.componentInstance.searchDelimiter = ',';
+		fixture.detectChanges();
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick(MAGIC_DEBOUNCE_DURATION);
+
+		// Act
+		simpleSelect.clueChanged('jean pierre');
+		fixture.detectChanges();
+		tick(MAGIC_DEBOUNCE_DURATION);
+		fixture.detectChanges();
+
+		// Assert (Me + Initial list + Search with clue)
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`);
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,20`);
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&clue=jean,pierre&paging=0,20`);
+		httpTestingController.verify();
+	}));
+
+	it('should reload the list with the former employees once they are included, without looking "me" up again', fakeAsync(() => {
+		// Arrange
+		simpleSelect.openPanel();
+		fixture.detectChanges();
+		tick();
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&id=${CURRENT_USER_ID}`).flush(usersResponse([createUser(CURRENT_USER_ID)]));
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&paging=0,20`).flush(usersResponse([createUser(1)]));
+		fixture.detectChanges();
+		tick();
+
+		// Act: what the "former employees" option of the panel header does
+		usersDirective.includeFormerEmployees.set(true);
+		fixture.detectChanges();
+		tick();
+
+		// Assert
+		httpTestingController.expectOne(`/api/v3/users/search?fields=${fields}&formerEmployees=true&paging=0,20`);
 		httpTestingController.verify();
 	}));
 
