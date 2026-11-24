@@ -129,7 +129,7 @@ import { ApprobationInboxDetailMainBlockComponent, ApprobationInboxHeaderCompone
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `intl` | `intl` | `unknown` | — | — | — | — |
 | `label` | `label` | `PortalContent` | `getIntl(LU_APPROBATION_INBOX_LIST_TRANSLATIONS).label` | — | — | Titre affiché dans l’en-tête du composant. Requis. |
-| `selectable` | `selectable` | `boolean` | `false` | — | `booleanAttribute` | Active la sélection multiple |
+| `selectable` | `selectable` | `boolean` | `false` | — | `booleanAttribute` | — |
 | `detailsComponent` | `detailsComponent` | `ApprobationInboxDetailComponent` | — | ✅ | — | Référence du composant lu-approbation-inbox-detail associé, affiché dans une modale lorsqu’un élément est ouvert sous le… |
 | `emptyIllustration` | `emptyIllustration` | `BubbleIllustration \| string` | `'magnifyingGlass'` | — | — | Illustration affichée lorsque la liste est vide. |
 | `emptyResetButton` | `emptyResetButton` | `boolean` | `false` | — | `booleanAttribute` | Affiche un bouton de réinitialisation lorsque la liste est vide. |

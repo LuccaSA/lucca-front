@@ -7,7 +7,13 @@
 	</header>
 	<div class="approbationInbox-list-content">
 		@if (selectable() && !empty()) {
-			<lu-form-field [label]="intl().selectAll" class="approbationInbox-list-formSelectionOptional-formfield">
+			<lu-form-field
+				[label]="intl().selectAll"
+				class="approbationInbox-list-formSelectionOptional-formfield"
+				[class.is-rangeWillCheck]="selectAllRangePreview() === true"
+				[class.is-rangeWillUncheck]="selectAllRangePreview() === false"
+				[class.is-rangeWillMix]="selectAllRangePreview() === 'mixed'"
+			>
 				<lu-checkbox-input
 					[ngModel]="selectAllState() === true"
 					[ngModelOptions]="{ standalone: true }"

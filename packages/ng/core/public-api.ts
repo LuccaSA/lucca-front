@@ -8,6 +8,7 @@ export * from './overlay/index';
 export * from './portal/index';
 export * from './random';
 export * from './route';
+export * from './selection/index';
 export * from './signal';
 export * from './string';
 export * from './tools/class';

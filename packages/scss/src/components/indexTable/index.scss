@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .indexTable {
@@ -12,6 +13,21 @@
 			@include selectable;
 			@include selectableSelectedRow;
 			@include selectableHoveredRow;
+
+			// Preview of a range selection, only where the pointer or the focus is in the table: not while typing in a field elsewhere on the page
+			&:is(:hover, :focus-within) :is(.indexTable-head-row, .indexTable-body-row) {
+				&.is-rangeWillCheck .checkboxField-input {
+					@include checkboxField.rangeWillCheck;
+				}
+
+				&.is-rangeWillUncheck .checkboxField-input {
+					@include checkboxField.rangeWillUncheck;
+				}
+
+				&.is-rangeWillMix .checkboxField-input {
+					@include checkboxField.rangeWillMix;
+				}
+			}
 		}
 
 		&:has(.mod-stack2, .mod-stack3),

@@ -98,6 +98,7 @@
 |-------|------|-------------|
 | `LU_NATIVE_DATE_ADAPTER_OPTIONS` | `ILuNativeDateAdapterOptions` | — |
 | `PORTAL_CONTEXT` | `unknown` | — |
+| `LU_RANGE_SELECTION_TRANSLATIONS` | `unknown` | — |
 | `LOCALE_PLURAL_RULES` | `unknown` | — |
 
 ### Pipes

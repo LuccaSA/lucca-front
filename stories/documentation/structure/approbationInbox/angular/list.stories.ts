@@ -39,7 +39,8 @@ export default {
 			table: { category: 'inputs', type: { summary: 'ApprobationInboxDetailComponent' } },
 		},
 		selectable: {
-			description: 'Active la sélection multiple',
+			description:
+				'Active la sélection multiple. <kbd>⇧ Shift</kbd> + clic (ou <kbd>⇧ Shift</kbd> + <kbd>Espace</kbd>) sur une checkbox coche ou décoche toutes les demandes depuis la dernière checkbox cliquée, case de groupe comprise (après « Tout sélectionner », le point de départ est la première demande), demandes des groupes repliés comprises. Tant que <kbd>⇧ Shift</kbd> est enfoncé, les checkbox que changerait un clic sur la checkbox survolée ou focalisée affichent leur état futur. La plage est limitée à la page affichée : avec <code>@for (…; track $index)</code>, les éléments sont réutilisés d’une page à l’autre et la dernière checkbox cliquée reste mémorisée, préférer un <code>track</code> sur un identifiant.',
 			table: { category: 'inputs' },
 		},
 		selected: {

@@ -118,6 +118,7 @@ import { DataTableBodyGroupDirective, DataTableBodyComponent, DataTableRowCellHe
 | `selectedLabel` | `selectedLabel` | `string \| null` | `null` | — | — | Texte alternatif restitué à la sélection d’une ligne. La checkbox n’est affichée que s’il est renseigné. |
 | `mixed` | `mixed` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `autoSelectAllOnPage` | `autoSelectAllOnPage` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 #### Models (two-way binding)
 

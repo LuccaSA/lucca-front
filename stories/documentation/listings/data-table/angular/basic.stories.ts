@@ -86,9 +86,16 @@ export default {
 			description: 'Texte alternatif restitué à la sélection de l’ensemble des lignes (input <code>selectedLabel</code> de la ligne d’en-tête).',
 			table: { category: 'story' },
 		},
+		autoSelectAllOnPage: {
+			name: '↳ autoSelectAllOnPage',
+			if: { arg: 'selectable', truthy: true },
+			description:
+				'Confie la checkbox de la ligne d’en-tête au tableau : son état suit toutes les lignes de la page (groupes repliés et lignes désactivées compris) ; un clic décoche les lignes actives si elles sont toutes cochées, et les coche sinon. <code>selected</code> et <code>mixed</code> sont alors ignorés sur la ligne d’en-tête. À ne pas utiliser quand « Tout sélectionner » agit sur plusieurs pages : relier alors <code>selected</code> et <code>mixed</code>.',
+			table: { category: 'inputs (tr[luDataTableRow])', defaultValue: { summary: 'false' } },
+		},
 		mixed: {
 			name: '↳ mixed',
-			if: { arg: 'selectable', truthy: true },
+			if: { arg: 'autoSelectAllOnPage', truthy: false },
 			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
 			table: { category: 'inputs (tr[luDataTableRow])' },
 		},
@@ -164,7 +171,8 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+			description:
+				'Rend les lignes du tableau sélectionnables via des checkbox. <kbd>⇧ Shift</kbd> + clic (ou <kbd>⇧ Shift</kbd> + <kbd>Espace</kbd>) sur une checkbox coche ou décoche toutes les lignes depuis la dernière checkbox de ligne cliquée (après « Tout sélectionner », le point de départ est la première ligne), hors lignes désactivées et groupes repliés. Tant que <kbd>⇧ Shift</kbd> est enfoncé, les checkbox que changerait un clic sur la checkbox survolée ou focalisée affichent leur état futur. La plage est limitée à la page affichée : avec <code>@for (…; track $index)</code>, les lignes sont réutilisées d’une page à l’autre et la dernière checkbox cliquée reste mémorisée, préférer un <code>track</code> sur un identifiant.',
 			table: { category: 'inputs' },
 		},
 		group: {
@@ -258,6 +266,7 @@ export default {
 			inlineSize,
 			inlineSizeValue,
 			mixed,
+			autoSelectAllOnPage,
 			selectable,
 			lines,
 			nested,
@@ -282,6 +291,7 @@ export default {
 		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
 		const mixedAttr = mixed ? ` mixed` : ``;
+		const autoSelectAllOnPageAttr = selectable && autoSelectAllOnPage ? ` autoSelectAllOnPage` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
 		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}"${richContent ? `` : ` group="Group"`}` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
@@ -374,7 +384,7 @@ export default {
 			props: { example: text, sortChange },
 			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}${draggable}${emptyAttr}>
 	<thead luDataTableHead>
-		<tr luDataTableRow${selectableLabelHeadAttr}${mixedAttr}>
+		<tr luDataTableRow${selectableLabelHeadAttr}${autoSelectAllOnPageAttr}${mixedAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
 			<th luDataTableCell${inlineSizeAttr}${sortAttr}${sortWithEllipsisAttr}${alignAttr}>${textHeader}</th>
 		</tr>
@@ -406,6 +416,7 @@ export const Basic: StoryObj = {
 		selectable: false,
 		selected: false,
 		mixed: false,
+		autoSelectAllOnPage: true,
 		disabled: false,
 		selectedLabel: 'Sélectionner cette ligne',
 		selectedLabelHead: 'Sélectionner toutes les lignes',

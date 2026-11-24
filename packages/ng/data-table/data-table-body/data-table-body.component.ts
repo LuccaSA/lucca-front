@@ -31,6 +31,9 @@ export class DataTableBodyComponent {
 
 	protected readonly groupSlot = contentChild(DataTableBodyGroupDirective, { descendants: false });
 
+	/** Whether the group can be collapsed: it has a heading (`group` input or projected group) and a toggle button. */
+	readonly collapsible = computed(() => (!!this.group() || !!this.groupSlot()) && !!this.groupButtonAlt());
+
 	expandedToggle() {
 		this.expanded.set(!this.expanded());
 	}

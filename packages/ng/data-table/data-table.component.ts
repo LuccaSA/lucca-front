@@ -15,7 +15,7 @@ import {
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { luBooleanAttribute, luNumberAttribute, ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { luBooleanAttribute, luNumberAttribute, ResponsiveConfig, ɵeffectWithDeps, ɵRangeSelection } from '@lucca-front/ng/core';
 import { ReorderDirective } from '@lucca-front/ng/reorder';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
@@ -69,6 +69,8 @@ export class DataTableComponent implements OnInit {
 	readonly reorderable = computed(() => this.reorderLists().length > 0);
 
 	readonly stickyHeader = computed(() => this.header()?.sticky());
+
+	readonly rangeSelection = new ɵRangeSelection();
 
 	readonly stickyColsStart = input(0, { transform: luNumberAttribute });
 	readonly stickyColsEnd = input(0, { transform: luNumberAttribute });

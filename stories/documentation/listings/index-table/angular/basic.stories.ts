@@ -42,7 +42,8 @@ export default {
 			table: { category: 'inputs', type: { summary: "ResponsiveConfig<'layoutFixed', true>" }, defaultValue: { summary: '{}' } },
 		},
 		selectable: {
-			description: 'Rend les lignes du tableau sélectionnables via des checkbox.',
+			description:
+				'Rend les lignes du tableau sélectionnables via des checkbox. <kbd>⇧ Shift</kbd> + clic (ou <kbd>⇧ Shift</kbd> + <kbd>Espace</kbd>) sur une checkbox coche ou décoche toutes les lignes depuis la dernière checkbox de ligne cliquée (après « Tout sélectionner », le point de départ est la première ligne), hors lignes désactivées et groupes repliés. Tant que <kbd>⇧ Shift</kbd> est enfoncé, les checkbox que changerait un clic sur la checkbox survolée ou focalisée affichent leur état futur. La plage est limitée à la page affichée : avec <code>@for (…; track $index)</code>, les lignes sont réutilisées d’une page à l’autre et la dernière checkbox cliquée reste mémorisée, préférer un <code>track</code> sur un identifiant.',
 			table: { category: 'inputs', defaultValue: { summary: 'false' } },
 		},
 		selected: {
@@ -59,9 +60,16 @@ export default {
 			description: 'Libellé de la checkbox de sélection d’une ligne. La checkbox n’est affichée que si ce libellé est renseigné.',
 			table: { category: 'inputs (tr[luIndexTableRow])', type: { summary: 'string | null' }, defaultValue: { summary: 'null' } },
 		},
+		autoSelectAllOnPage: {
+			name: '↳ autoSelectAllOnPage',
+			if: { arg: 'selectable', truthy: true },
+			description:
+				'Confie la checkbox de la ligne d’en-tête au tableau : son état suit toutes les lignes de la page (groupes repliés et lignes désactivées compris) ; un clic décoche les lignes actives si elles sont toutes cochées, et les coche sinon. <code>selected</code> et <code>mixed</code> sont alors ignorés sur la ligne d’en-tête. À ne pas utiliser quand « Tout sélectionner » agit sur plusieurs pages : relier alors <code>selected</code> et <code>mixed</code>.',
+			table: { category: 'inputs (tr[luIndexTableRow])', defaultValue: { summary: 'false' } },
+		},
 		mixed: {
 			name: '↳ mixed',
-			if: { arg: 'selectable', truthy: true },
+			if: { arg: 'autoSelectAllOnPage', truthy: false },
 			description: "Applique un état de sélection mixte (-) à la checkbox d'une ligne.",
 			table: { category: 'inputs (tr[luIndexTableRow])', defaultValue: { summary: 'false' } },
 		},
@@ -167,6 +175,11 @@ export default {
 			description: '[Story] Présente le tableau avec une pagination.',
 			table: { category: 'story' },
 		},
+		lines: {
+			control: { type: 'range', min: 3, max: 8 },
+			description: '[Story] Modifie le nombre de lignes dans la story.',
+			table: { category: 'story' },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -199,6 +212,7 @@ export default {
 			stack,
 			selectable,
 			mixed,
+			autoSelectAllOnPage,
 			disabled,
 			group,
 			richContent,
@@ -217,18 +231,29 @@ export default {
 			layoutFixed,
 			empty,
 			footer,
+			lines,
 		} = args;
 
 		const stackParam = stack >= 2 ? ` stack="${stack}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
 		const mixedAttr = mixed ? ` mixed` : ``;
+		const autoSelectAllOnPageAttr = selectable && autoSelectAllOnPage ? ` autoSelectAllOnPage` : ``;
 		const selectableParam = selectable ? ` selectedLabel="Sélectionner cette ligne"` : ``;
 		const selectableAllParam = selectable ? ` selectedLabel="Sélectionner toutes les lignes"` : ``;
 		const allowTextSelectionAttr = allowTextSelection ? ` allowTextSelection` : ``;
 		const allowActionTpl = allowAction ? `<a href="#">Content</a>` : `Content`;
 		const tfootAttr = tfoot ? ` tfoot` : ``;
 		const hiddenLabelAttr = hiddenLabel ? ` hiddenLabel` : ``;
+		const extraLinesTpl = Array.from(
+			{ length: Math.max(lines - 3, 0) },
+			() => `
+		<tr luIndexTableRow${selectableParam}>
+			<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
+			<td luIndexTableCell>Content</td>
+			<td luIndexTableCell>Content</td>
+		</tr>`,
+		).join('');
 		const sortAttr = sort ? ` sort="${sort}" (sortChange)="sortChange($event)"` : ``;
 		const sortWithEllipsisAttr = sortWithEllipsis ? ` sortWithEllipsis` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
@@ -295,7 +320,7 @@ export default {
 			<th luIndexTableCell><a href="#" luIndexTableAction>Content</a></th>
 			<td luIndexTableCell${allowTextSelectionAttr}>${allowActionTpl}</td>
 			<td luIndexTableCell>Content Content Content</td>
-		</tr>`;
+		</tr>${extraLinesTpl}`;
 		const groupTpl =
 			group && richContent
 				? `
@@ -306,7 +331,7 @@ export default {
 			props: { sortChange },
 			template: `<lu-index-table${selectableAttr}${layoutFixedAttr}${emptyAttr}>
 	<thead luIndexTableHead>
-		<tr luIndexTableRow${selectableAllParam}${mixedAttr}>
+		<tr luIndexTableRow${selectableAllParam}${autoSelectAllOnPageAttr}${mixedAttr}>
 			<th luIndexTableCell>Label</th>
 			<th luIndexTableCell${hiddenLabelAttr}>Label</th>
 			<th luIndexTableCell${alignAttr}${sortAttr}${sortWithEllipsisAttr}>Label</th>
@@ -328,6 +353,7 @@ export const Basic: StoryObj = {
 		selectable: false,
 		disabled: false,
 		mixed: false,
+		autoSelectAllOnPage: true,
 
 		sort: '',
 		sortWithEllipsis: false,
@@ -348,5 +374,6 @@ export const Basic: StoryObj = {
 		tfoot: false,
 		footer: false,
 		pagination: false,
+		lines: 3,
 	},
 };
