@@ -159,7 +159,7 @@ describe(IndexTableRowComponent.name, () => {
 		const rows = Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('tbody tr'));
 		// Indexes of the rows whose checkbox previews a selection
 		const previewed = () => rows.flatMap((row, index) => (row.classList.contains('is-rangeWillCheck') ? [index] : []));
-		rows[3].querySelector('lu-checkbox-input')?.closest('td, th')?.dispatchEvent(new PointerEvent('pointerenter'));
+		rows[3].querySelector('lu-checkbox-input')?.dispatchEvent(new PointerEvent('pointerenter'));
 
 		// Act
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', shiftKey: true }));
@@ -467,7 +467,7 @@ describe('IndexTableRowComponent: autoSelectAllOnPage', () => {
 
 		// Act
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', shiftKey: true }));
-		rows[3].querySelector('lu-checkbox-input')?.closest('td, th')?.dispatchEvent(new PointerEvent('pointerenter'));
+		rows[3].querySelector('lu-checkbox-input')?.dispatchEvent(new PointerEvent('pointerenter'));
 		fixture.detectChanges();
 		const preview = [head?.classList.contains('is-rangeWillMix'), head?.classList.contains('is-rangeWillCheck'), rows.map((row) => row.classList.contains('is-rangeWillCheck'))];
 		document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Shift', shiftKey: false }));

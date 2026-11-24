@@ -150,7 +150,7 @@ class BasicStory {
 		},
 	];
 
-	static readonly notes = [`Pendant l’appui sur ${SHIFT}, l’aperçu suit la case survolée : survoler sa cellule suffit. Il n’apparaît que si le pointeur est dans le tableau.`];
+	static readonly notes = [`Pendant l’appui sur ${SHIFT}, l’aperçu suit la case survolée. Il n’apparaît que si le pointeur est dans le tableau.`];
 }
 
 // Keyboard
@@ -557,7 +557,7 @@ class IndexTableLinksStory {
 			expected: 'Pas d’aperçu : un clic à cet endroit ouvre le lien de la ligne, il ne coche pas.',
 		},
 		{
-			try: `${SHIFT} enfoncé, survoler la cellule de la case de la ligne 6.`,
+			try: `${SHIFT} enfoncé, survoler la case de la ligne 6.`,
 			expected: 'L’aperçu apparaît : les lignes 3 à 6 montrent une coche pâle.',
 		},
 	];

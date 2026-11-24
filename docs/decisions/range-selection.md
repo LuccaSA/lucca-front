@@ -77,7 +77,7 @@ Status: accepted · PR #5437
 
 **Decision** — While ⇧ Shift is held, the checkboxes that a click on the hovered or focused checkbox would change show their future state:
 
-- the preview follows the last hovered or focused checkbox, in real time; hovering its table cell is enough;
+- the preview follows the hovered or focused checkbox, in real time, the hovered one winning; only the checkbox itself counts, as a click elsewhere in its cell does not toggle it;
 - only the checkboxes whose state would change are marked, the anchor is not: it keeps its state;
 - the checkboxes whose state follows the items preview it too, mixed state included: “Select all” and group checkboxes of `lu-approbation-inbox-list`, and “Select all” of the tables when the table manages it (`autoSelectAllOnPage`);
 - a checkbox about to be checked shows a pale check (`product-100` background, `product-700` border), a checkbox about to be unchecked becomes an empty grey box (`neutral-100` background, `neutral-600` border): the borders keep a 3:1 contrast with the background;

@@ -135,7 +135,7 @@ describe(ApprobationInboxItemComponent.name, () => {
 		const items = Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('lu-approbation-inbox-list-item'));
 		// Indexes of the items whose checkbox previews a selection
 		const previewed = () => items.flatMap((item, index) => (item.classList.contains('is-rangeWillCheck') ? [index] : []));
-		items[3].querySelector('lu-form-field')?.dispatchEvent(new PointerEvent('pointerenter'));
+		items[3].querySelector('lu-checkbox-input')?.dispatchEvent(new PointerEvent('pointerenter'));
 
 		// Act
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', shiftKey: true }));
@@ -164,10 +164,10 @@ describe(ApprobationInboxItemComponent.name, () => {
 		document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Shift', shiftKey: true }));
 
 		// Act
-		items[5].querySelector('lu-form-field')?.dispatchEvent(new PointerEvent('pointerenter'));
+		items[5].querySelector('lu-checkbox-input')?.dispatchEvent(new PointerEvent('pointerenter'));
 		fixture.detectChanges();
 		const toLastItem = [preview('.approbationInbox-list-formSelectionOptional-formfield'), preview('.approbationInbox-list-content-groupOptional-header')];
-		items[3].querySelector('lu-form-field')?.dispatchEvent(new PointerEvent('pointerenter'));
+		items[3].querySelector('lu-checkbox-input')?.dispatchEvent(new PointerEvent('pointerenter'));
 		fixture.detectChanges();
 		const toFirstItemOfGroupB = [preview('.approbationInbox-list-formSelectionOptional-formfield'), preview('.approbationInbox-list-content-groupOptional-header')];
 		document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Shift', shiftKey: false }));
