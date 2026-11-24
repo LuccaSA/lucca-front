@@ -4,6 +4,7 @@ import { LU_SOFTWARE_ICON_WRAPPER } from '@lucca-front/ng/software-icon';
 
 import { intlInputOptions, IntlParamsPipe, IntlPluralLabelPipe, luNumberAttribute } from '@lucca-front/ng/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { SoftwareIconWrapperItemDirective } from './software-icon-wrapper-item.directive';
 import { LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS } from './software-icon-wrapper.translate';
 
 @Component({
@@ -24,7 +25,7 @@ export class SoftwareIconWrapperComponent {
 	readonly size = input<'XS' | 'S' | ''>('');
 	readonly intl = input(...intlInputOptions(LU_SOFTWARE_ICON_WRAPPER_TRANSLATIONS));
 
-	protected readonly items = contentChildren(TemplateRef, { descendants: true });
+	protected readonly items = contentChildren(SoftwareIconWrapperItemDirective, { descendants: true, read: TemplateRef });
 
 	readonly hiddenIcons = computed<readonly TemplateRef<unknown>[]>(() => {
 		return this.max() == null || this.max() <= 0 || this.items().length < this.max() ? [] : this.items().slice(this.max());

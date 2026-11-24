@@ -17,6 +17,8 @@ class SoftwareIconStory {
 	protected readonly cdnUrl = CDN_URL;
 
 	softwareIconList = SOFTWARE_ICON;
+
+	wrapperLoopIcons = ['invoices', 'absences', 'payslip', 'benefits', 'office', 'faces', 'store'] as const;
 }
 
 export default {
