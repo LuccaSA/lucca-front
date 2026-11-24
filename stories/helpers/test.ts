@@ -35,9 +35,10 @@ export async function expectNgModelDisplay(canvas: HTMLElement, expectedValue: s
 
 /**
  * The vitest browser environment doesn't load the global component styles (packages/ng/styles),
- * so select panels have no max-height nor opening animation there. This re-creates the production
- * constraints (copied from packages/ng/styles/components/_picker.scss and
- * packages/scss/src/commons/utils/keyframe.scss) so scroll-related assertions are meaningful.
+ * so options have no row height there, and the panel's opening animation (from
+ * packages/ng/core-select/panel/panel-layout/panel-layout.component.scss) is too short to be relied on.
+ * This stretches the animation and restores a realistic option height so scroll-related assertions
+ * are meaningful.
  */
 export function ensurePickerPanelStyles(): void {
 	if (document.getElementById('test-picker-panel-styles')) {
@@ -49,14 +50,11 @@ export function ensurePickerPanelStyles(): void {
 		/* Hold at scale(0) for the first half: production's scaleIn starts at scale(0) for a frame,
 		   widening that window makes the "scroll during opening animation" regression deterministic */
 		@keyframes testScaleIn { 0% { transform: scale(0); } 50% { transform: scale(0); } 100% { transform: scale(1); } }
-		.lu-picker-content {
-			max-block-size: 20rem;
-			overflow-y: auto;
-			display: block;
+		.lu-select-panel-layout-content {
 			animation: testScaleIn 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
 		}
 		/* Realistic option row height (production ~2.75rem), so long lists actually overflow */
-		.lu-picker-content [role='option'] {
+		.lu-select-panel-layout-content [role='option'] {
 			display: block;
 			min-block-size: 2.75rem;
 		}

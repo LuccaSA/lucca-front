@@ -33,10 +33,6 @@
 }
 
 @mixin childrenReset {
-	.lu-picker-content {
-		padding: 0;
-	}
-
 	.listboxOption-content {
 		padding: 0;
 		background-color: transparent !important;

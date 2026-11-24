@@ -23,8 +23,9 @@
 		</lu-dialog-content>
 	</lu-dialog>
 } @else {
+	<!-- `lu-option-picker-panel` is kept until v23 for consumers that hook on it: prefer `.selectPanel` -->
 	<lu-select-panel-layout
-		class="lu-option-picker-panel mod-multiple"
+		class="lu-option-picker-panel"
 		data-testid="dialog-panel"
 		[loading]="loading()"
 		[contentTabIndex]="0"
@@ -137,7 +138,7 @@
 						[isSelected]="option | luIsOptionSelected: optionComparer() : selectedOptions"
 						(selected)="toggleOption(option)"
 						(click)="toggleOption(option)"
-						[class.withAddOption]="shouldDisplayAddOption()"
+						[class.mod-withAddOption]="shouldDisplayAddOption()"
 					/>
 				}
 			}

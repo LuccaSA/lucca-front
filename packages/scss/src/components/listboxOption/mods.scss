@@ -62,3 +62,11 @@
 		--components-listboxOption-content-checkboxField-display: none;
 	}
 }
+
+@mixin treeActionParent {
+	--components-listboxOption-content-treeActions-action-icon-colorChildren: color-mix(in srgb, var(--palettes-neutral-800) 20%, transparent);
+}
+
+@mixin treeActionChildren {
+	--components-listboxOption-content-treeActions-action-icon-colorParent: color-mix(in srgb, var(--palettes-neutral-800) 20%, transparent);
+}

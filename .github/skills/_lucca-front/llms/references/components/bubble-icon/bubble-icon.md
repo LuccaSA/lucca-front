@@ -53,7 +53,7 @@ import { BubbleIconComponent } from '@lucca-front/ng/bubble-icon';
 
 ## Type definitions
 
-- [`LuccaIcon`](../../types/LuccaIcon.md) — 600 available values
+- [`LuccaIcon`](../../types/LuccaIcon.md) — 601 available values
 - [`DecorativePalette`](../../types/DecorativePalette.md) — 16 available values
 
 ## Related files

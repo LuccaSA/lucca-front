@@ -317,6 +317,7 @@ export type LuccaIcon =
 	| 'listChecklist'
 	| 'listTodo'
 	| 'listMultipleChoices'
+	| 'listTree'
 	| 'lockClose'
 	| 'lock'
 	| 'lockKey'

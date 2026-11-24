@@ -21,7 +21,7 @@
 		}
 	}
 
-	lu-tree-branch,
+	// `.lu-picker-content-option-group` is no longer rendered by Lucca Front, but kept until v23 for consumer markup.
 	.lu-picker-content-option-group,
 	.lu-picker-content-option {
 		display: flex;
@@ -39,10 +39,6 @@
 
 		.optionItem-value {
 			--components-options-item-padding-horizontal: var(--pr-t-spacings-250) var(--pr-t-spacings-100);
-		}
-
-		lu-tree-branch .optionItem-value {
-			--components-options-item-padding-horizontal: calc(var(--pr-t-spacings-250) + var(--pr-t-spacings-100) * calc(var(--components-treeBranch-level) - 1)) var(--pr-t-spacings-100);
 		}
 	}
 
