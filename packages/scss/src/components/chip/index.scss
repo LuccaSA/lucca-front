@@ -15,7 +15,7 @@
 			@include unkillable;
 		}
 
-		&.mod-clickable {
+		&:is(a[href], button, .mod-clickable) {
 			@include clickable;
 		}
 
