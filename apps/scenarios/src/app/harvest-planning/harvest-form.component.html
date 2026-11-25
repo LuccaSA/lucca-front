@@ -1,0 +1,67 @@
+<lu-dialog>
+	<form luForm focusInvalidOnSubmit [formGroup]="form" (ngSubmit)="save()">
+		<lu-dialog-header>
+			<h1>{{ title }}</h1>
+		</lu-dialog-header>
+
+		<lu-dialog-content>
+			<!-- Prisme form layout: 4 columns, two fields per line at most, full width for the multi-select and the textarea -->
+			<lu-grid mode="form">
+				<lu-grid-column colspan="4" [responsive]="halfWidth">
+					<lu-form-field label="Jardinier ou jardinière" errorInlineMessage="Sélectionnez un jardinier ou une jardinière.">
+						<lu-simple-select appGardeners formControlName="gardener" />
+					</lu-form-field>
+				</lu-grid-column>
+
+				<lu-grid-column colspan="4" [responsive]="halfWidth">
+					<lu-form-field label="Parcelle" errorInlineMessage="Sélectionnez une parcelle.">
+						<lu-simple-select formControlName="plot" [options]="plotOptions()" (clueChange)="plotClue.set($event)" />
+					</lu-form-field>
+				</lu-grid-column>
+
+				<lu-grid-column colspan="4">
+					<lu-form-field label="Variétés" errorInlineMessage="Sélectionnez une ou plusieurs variétés.">
+						<lu-multi-select #varietySelect formControlName="varieties" [options]="varietyOptions()" (clueChange)="varietyClue.set($event)">
+							<ng-container *luOptionGroup="let group; by: varietyKind; select: varietySelect">{{
+								varietyKindLabel(group.key)
+							}}</ng-container>
+						</lu-multi-select>
+					</lu-form-field>
+				</lu-grid-column>
+
+				<lu-grid-column colspan="4" [responsive]="halfWidth">
+					<lu-form-field label="Période de récolte" errorInlineMessage="Indiquez la période de récolte.">
+						<lu-date-range-input formControlName="period" />
+					</lu-form-field>
+				</lu-grid-column>
+
+				<lu-grid-column colspan="4" [responsive]="halfWidth">
+					<lu-form-field label="Quantité estimée (kg)" [errorInlineMessage]="quantityError()">
+						<lu-number-input formControlName="quantity" />
+					</lu-form-field>
+				</lu-grid-column>
+
+				<lu-grid-column colspan="4">
+					<lu-form-field label="Commentaire">
+						<lu-textarea-input formControlName="comment" />
+					</lu-form-field>
+				</lu-grid-column>
+			</lu-grid>
+		</lu-dialog-content>
+
+		<lu-dialog-footer>
+			<!-- Once the form has been submitted, the footer counts the errors left to fix -->
+			@if (submitted() && errorCount() > 0) {
+				<div class="footer-content">
+					<lu-callout-popover state="error" [buttonLabel]="errorCount()" [buttonAlt]="errorSummary()">{{
+						errorSummary()
+					}}</lu-callout-popover>
+				</div>
+			}
+			<div class="footer-actions">
+				<button type="submit" luButton>{{ submitLabel }}</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Annuler</button>
+			</div>
+		</lu-dialog-footer>
+	</form>
+</lu-dialog>

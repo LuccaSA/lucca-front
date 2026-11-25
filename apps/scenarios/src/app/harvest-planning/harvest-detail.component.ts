@@ -18,46 +18,7 @@ import { HarvestStore } from './harvest.store';
  */
 @Component({
 	selector: 'app-harvest-detail',
-	template: `
-		@if (harvest(); as harvest) {
-			<lu-main-layout>
-				<ng-container mainLayoutHeader>
-					<lu-page-header container [label]="varietyNames(harvest)" [description]="harvest.comment || null">
-						<!-- Prisme: a single level of depth takes a back button, not breadcrumbs -->
-						<ng-container pageHeaderBackAction>
-							<a luButton routerLink="/harvests">
-								<lu-icon icon="arrowLeft" alt="Retour au planning des récoltes" />
-							</a>
-						</ng-container>
-						<a pageHeaderActions luButton routerLink="edit">Modifier</a>
-					</lu-page-header>
-				</ng-container>
-
-				<lu-main-layout-block>
-					<lu-container>
-						<!-- Prisme: the fields of a record read as label and value (DataPresentation), HighlightData is for key figures -->
-						<lu-grid columns="4">
-							<lu-grid-column>
-								<lu-data-presentation label="Jardinier ou jardinière">{{ harvest.gardener | luUserDisplay }}</lu-data-presentation>
-							</lu-grid-column>
-							<lu-grid-column>
-								<lu-data-presentation label="Parcelle">{{ harvest.plot.name }}</lu-data-presentation>
-							</lu-grid-column>
-							<lu-grid-column>
-								<lu-data-presentation label="Période de récolte">{{ harvest.period.start | date: 'shortDate' }} – {{ harvest.period.end | date: 'shortDate' }}</lu-data-presentation>
-							</lu-grid-column>
-							<lu-grid-column>
-								<lu-data-presentation label="Quantité estimée">{{ harvest.quantity | number }} kg</lu-data-presentation>
-							</lu-grid-column>
-						</lu-grid>
-					</lu-container>
-				</lu-main-layout-block>
-			</lu-main-layout>
-		}
-
-		<!-- Outlet of the routed edit dialog -->
-		<router-outlet />
-	`,
+	templateUrl: './harvest-detail.component.html',
 	imports: [
 		DatePipe,
 		DecimalPipe,

@@ -9,7 +9,7 @@ import { Harvest, varietyNames } from './harvest-planning.data';
  */
 @Component({
 	selector: 'app-harvest-delete',
-	template: `Si vous supprimez la récolte de {{ varietyNames(harvest) }} sur la parcelle {{ harvest.plot.name }}, elle disparaîtra du planning.`,
+	templateUrl: './harvest-delete.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HarvestDeleteComponent implements ILuModalContent<true> {

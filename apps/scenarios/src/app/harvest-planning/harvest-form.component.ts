@@ -23,6 +23,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { map, Observable } from 'rxjs';
 import { GardenersDirective } from './gardeners.directive';
+import { HarvestDiscardChangesComponent } from './harvest-discard-changes.component';
 import { Gardener, Harvest, HarvestDraft, Plot, plots, Variety, varieties, varietyKind, varietyKindLabel } from './harvest-planning.data';
 
 /** Data of the harvest form: the harvest to edit, `null` to plan a new one. */
@@ -47,71 +48,7 @@ const filterByName = <T extends { name: string }>(items: readonly T[], clue: str
  */
 @Component({
 	selector: 'app-harvest-form',
-	template: `
-		<lu-dialog>
-			<form luForm focusInvalidOnSubmit [formGroup]="form" (ngSubmit)="save()">
-				<lu-dialog-header>
-					<h1>{{ title }}</h1>
-				</lu-dialog-header>
-
-				<lu-dialog-content>
-					<!-- Prisme form layout: 4 columns, two fields per line at most, full width for the multi-select and the textarea -->
-					<lu-grid mode="form">
-						<lu-grid-column colspan="4" [responsive]="halfWidth">
-							<lu-form-field label="Jardinier ou jardinière" errorInlineMessage="Sélectionnez un jardinier ou une jardinière.">
-								<lu-simple-select appGardeners formControlName="gardener" />
-							</lu-form-field>
-						</lu-grid-column>
-
-						<lu-grid-column colspan="4" [responsive]="halfWidth">
-							<lu-form-field label="Parcelle" errorInlineMessage="Sélectionnez une parcelle.">
-								<lu-simple-select formControlName="plot" [options]="plotOptions()" (clueChange)="plotClue.set($event)" />
-							</lu-form-field>
-						</lu-grid-column>
-
-						<lu-grid-column colspan="4">
-							<lu-form-field label="Variétés" errorInlineMessage="Sélectionnez une ou plusieurs variétés.">
-								<lu-multi-select #varietySelect formControlName="varieties" [options]="varietyOptions()" (clueChange)="varietyClue.set($event)">
-									<ng-container *luOptionGroup="let group; by: varietyKind; select: varietySelect">{{ varietyKindLabel(group.key) }}</ng-container>
-								</lu-multi-select>
-							</lu-form-field>
-						</lu-grid-column>
-
-						<lu-grid-column colspan="4" [responsive]="halfWidth">
-							<lu-form-field label="Période de récolte" errorInlineMessage="Indiquez la période de récolte.">
-								<lu-date-range-input formControlName="period" />
-							</lu-form-field>
-						</lu-grid-column>
-
-						<lu-grid-column colspan="4" [responsive]="halfWidth">
-							<lu-form-field label="Quantité estimée (kg)" [errorInlineMessage]="quantityError()">
-								<lu-number-input formControlName="quantity" />
-							</lu-form-field>
-						</lu-grid-column>
-
-						<lu-grid-column colspan="4">
-							<lu-form-field label="Commentaire">
-								<lu-textarea-input formControlName="comment" />
-							</lu-form-field>
-						</lu-grid-column>
-					</lu-grid>
-				</lu-dialog-content>
-
-				<lu-dialog-footer>
-					<!-- Once the form has been submitted, the footer counts the errors left to fix -->
-					@if (submitted() && errorCount() > 0) {
-						<div class="footer-content">
-							<lu-callout-popover state="error" [buttonLabel]="errorCount()" [buttonAlt]="errorSummary()">{{ errorSummary() }}</lu-callout-popover>
-						</div>
-					}
-					<div class="footer-actions">
-						<button type="submit" luButton>{{ submitLabel }}</button>
-						<button type="button" luButton="ghost" luDialogDismiss>Annuler</button>
-					</div>
-				</lu-dialog-footer>
-			</form>
-		</lu-dialog>
-	`,
+	templateUrl: './harvest-form.component.html',
 	imports: [
 		ReactiveFormsModule,
 		ButtonComponent,
@@ -201,31 +138,6 @@ export class HarvestFormComponent {
 		if (this.form.pristine) {
 			return true;
 		}
-		return this.#dialog.open({ content: DiscardChangesComponent, alert: true, size: 'S' }).closed$.pipe(map((discard) => discard === true));
+		return this.#dialog.open({ content: HarvestDiscardChangesComponent, alert: true, size: 'S' }).closed$.pipe(map((discard) => discard === true));
 	}
-}
-
-@Component({
-	selector: 'app-harvest-discard-changes',
-	template: `
-		<lu-dialog stacked>
-			<lu-dialog-header>
-				<h1>Quitter sans enregistrer ?</h1>
-			</lu-dialog-header>
-			<lu-dialog-content>Si vous quittez ce parcours, les modifications non enregistrées seront définitivement perdues.</lu-dialog-content>
-			<lu-dialog-footer>
-				<!-- Wording and buttons of the Prisme "unsaved changes" confirmation -->
-				<div class="footer-actions">
-					<button type="button" luButton (click)="dialogRef.close(true)">Quitter sans enregistrer</button>
-					<!-- An alert can't be dismissed (luDialogDismiss does nothing in it): going back is a choice too -->
-					<button type="button" luButton="outlined" palette="neutral" (click)="dialogRef.close(false)">Reprendre les modifications</button>
-				</div>
-			</lu-dialog-footer>
-		</lu-dialog>
-	`,
-	imports: [ButtonComponent, DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent],
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class DiscardChangesComponent {
-	readonly dialogRef = injectDialogRef<boolean>();
 }

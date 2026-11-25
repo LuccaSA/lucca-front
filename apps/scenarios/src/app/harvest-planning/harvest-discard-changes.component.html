@@ -1,0 +1,14 @@
+<lu-dialog stacked>
+	<lu-dialog-header>
+		<h1>Quitter sans enregistrer ?</h1>
+	</lu-dialog-header>
+	<lu-dialog-content>Si vous quittez ce parcours, les modifications non enregistrées seront définitivement perdues.</lu-dialog-content>
+	<lu-dialog-footer>
+		<!-- Wording and buttons of the Prisme "unsaved changes" confirmation -->
+		<div class="footer-actions">
+			<button type="button" luButton (click)="dialogRef.close(true)">Quitter sans enregistrer</button>
+			<!-- An alert can't be dismissed (luDialogDismiss does nothing in it): going back is a choice too -->
+			<button type="button" luButton="outlined" palette="neutral" (click)="dialogRef.close(false)">Reprendre les modifications</button>
+		</div>
+	</lu-dialog-footer>
+</lu-dialog>
