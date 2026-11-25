@@ -334,6 +334,34 @@ describe(`${LuTooltipTriggerDirective.name}: trigger hidden from under the point
 		expect(directive.overlayRef?.hasAttached()).toBe(true);
 	}));
 
+	it('stays open on a notification that leaves its trigger in the viewport, in a browser without checkVisibility (Safari < 17.4)', fakeAsync(() => {
+		const fixture = TestBed.createComponent(PlainHostComponent);
+		fixture.detectChanges();
+		const directive = directiveOf(fixture);
+		const host = fixture.nativeElement.querySelector('span') as HTMLElement;
+		Object.defineProperty(host, 'checkVisibility', { value: undefined });
+		hover(fixture);
+
+		expect(() => {
+			notifyIntersection?.(true);
+			tick(150);
+		}).not.toThrow();
+		expect(directive.overlayRef?.hasAttached()).toBe(true);
+	}));
+
+	it('closes when its trigger is moved out of the viewport, in a browser without checkVisibility (Safari < 17.4)', fakeAsync(() => {
+		const fixture = TestBed.createComponent(PlainHostComponent);
+		fixture.detectChanges();
+		const directive = directiveOf(fixture);
+		const host = fixture.nativeElement.querySelector('span') as HTMLElement;
+		Object.defineProperty(host, 'checkVisibility', { value: undefined });
+		hover(fixture);
+
+		notifyIntersection?.(false);
+		tick(150);
+		expect(directive.overlayRef?.hasAttached()).toBe(false);
+	}));
+
 	it('closes when its trigger is moved out of the viewport while displayed, as the CDK drag does with the dragged element', fakeAsync(() => {
 		const fixture = TestBed.createComponent(PlainHostComponent);
 		fixture.detectChanges();

@@ -505,7 +505,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 		this.#triggerVisibilityObserver = new IntersectionObserver((entries) => {
 			// A `display: contents` trigger never intersects: it has no box of its own
 			const outOfViewport = !entries.at(-1)?.isIntersecting && trigger.getClientRects().length > 0;
-			if (outOfViewport || !trigger.checkVisibility()) {
+			if (outOfViewport || trigger.checkVisibility?.() === false) {
 				this.#action.set(null);
 				this.closeTooltip();
 			}
