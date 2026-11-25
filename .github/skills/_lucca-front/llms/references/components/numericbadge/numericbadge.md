@@ -19,9 +19,9 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 | `value` | `value` | `number \| string` | — | ✅ | — | Valeur affichée par le composant. Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "999+", etc.) |
 | `size` | `size` | `'XS' \| 'S' \| 'M'` | — | — | — | Modifie la taille du composant. |
 | `palette` | `palette` | `'success' \| 'warning' \| 'error' \| 'product' \| 'neutral' \| 'none' \| 'brand'` | `'none'` | — | — | Applique une palette de couleurs au composant. |
-| `loading` | `loading` | `boolean` | `false` | — | `booleanAttribute` | Applique l’état de chargement. |
-| `maxValue` | `maxValue` | `number` | `999` | — | `numberAttribute` | Valeur maximale affichée au format "999+". |
-| `disableTooltip` | `disableTooltip` | `boolean` | `false` | — | `booleanAttribute` | Empêche le déclenchement d’une tooltip si la valeur est supérieure à maxValue. |
+| `loading` | `loading` | `boolean` | `false` | — | `luBooleanAttribute` | Applique l’état de chargement. |
+| `maxValue` | `maxValue` | `number` | `999` | — | `luNumberAttribute` | Valeur maximale affichée au format "999+". |
+| `disableTooltip` | `disableTooltip` | `boolean` | `false` | — | `luBooleanAttribute` | Empêche le déclenchement d’une tooltip si la valeur est supérieure à maxValue. |
 
 ## Related files
 

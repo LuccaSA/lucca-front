@@ -35,11 +35,11 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `size` | `size` | `'M' \| 'S' \| 'XS'` | — | — | — | Modifie la taille du composant. |
-| `block` | `block` | `boolean, boolean \| `${boolean}` \| ''` | `false` | — | `booleanAttribute` | Applique display: block. |
-| `disabled` | `disabled` | `boolean, boolean \| `${boolean}` \| ''` | `false` | — | `booleanAttribute` | — |
-| `critical` | `critical` | `boolean, boolean \| `${boolean}` \| ''` | `false` | — | `booleanAttribute` | [v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec ou… |
-| `delete` | `delete` | `boolean, boolean \| `${boolean}` \| ''` | `false` | — | `booleanAttribute` | ⚠️ **Déprécié** : use `critical` input instead [Deprecated] Remplacé par critical. |
-| `disclosure` | `disclosure` | `boolean, boolean \| `${boolean}` \| ''` | `false` | — | `booleanAttribute` | Indique la présence d’un menu. |
+| `block` | `block` | `boolean` | `false` | — | `luBooleanAttribute` | Applique display: block. |
+| `disabled` | `disabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `critical` | `critical` | `boolean` | `false` | — | `luBooleanAttribute` | [v20.2] Marque une action aux conséquences importantes ou irréversibles au survol et focus. Seulement compatible avec ou… |
+| `delete` | `delete` | `boolean` | `false` | — | `luBooleanAttribute` | ⚠️ **Déprécié** : use `critical` input instead [Deprecated] Remplacé par critical. |
+| `disclosure` | `disclosure` | `boolean` | `false` | — | `luBooleanAttribute` | Indique la présence d’un menu. |
 | `palette` | `palette` | `'success' \| 'warning' \| 'error' \| 'product' \| 'neutral' \| 'none' \| 'brand'` | `'none'` | — | — | Applique une palette de couleurs au bouton. |
 | `state` | `state` | `'default' \| 'loading' \| 'error' \| 'success'` | `'default'` | — | — | Modifie l’état du bouton. |
 | `luButton` | `luButton` | `'' \| 'outlined' \| 'AI' \| 'AI-invert' \| 'ghost' \| 'ghost-invert' \| 'text' \| 'text-invert'` | `''` | — | — | Modifie la hierarchie ou le style du bouton.[v20.3] AI |

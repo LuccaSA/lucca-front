@@ -31,7 +31,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 | `alt` | `alt` | `string` | — | — | — | Information restituée par le lecteur d’écran. |
 | `size` | `size` | `'XXS' \| 'XS' \| 'S' \| 'M' \| 'L' \| 'XL' \| 'XXL'` | — | — | — | Modifie la taille de l'icône. |
 | `color` | `color` | `'product' \| 'error' \| 'warning' \| 'success' \| 'light' \| 'placeholder' \| 'inherit'` | `'inherit'` | — | — | Modifie la couleur de l’icône. |
-| `AI` | `AI` | `boolean, boolean \| `${boolean}` \| ''` | `false` | — | `booleanAttribute` | [v20.3] Applique les couleurs IA. |
+| `AI` | `AI` | `boolean` | `false` | — | `luBooleanAttribute` | [v20.3] Applique les couleurs IA. |
 
 ## Type definitions
 
