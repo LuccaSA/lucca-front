@@ -28,6 +28,7 @@ export const harvestPlanningRoutes: Routes = [
 			{
 				path: ':id',
 				title: harvestTitle,
+				runGuardsAndResolvers: 'always',
 				canActivate: [harvestExists],
 				component: HarvestDetailComponent,
 				children: [
