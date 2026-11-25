@@ -30,6 +30,10 @@ demo/ng
 documentation.json
 storybook-static
 
+# scenarios app: Playwright outputs
+apps/scenarios/test-results
+apps/scenarios/playwright-report
+
 # copied from .github/skills by `npm run docs:llms`
 .storybook/public/llms.txt
 .storybook/public/llms/

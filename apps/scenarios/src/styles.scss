@@ -1,0 +1,10 @@
+// Global stylesheet of the scenarios app, written the way a consuming application writes it (the
+// "Basic setup" of the README) rather than the `main-all` bundle of Storybook: a component only gets
+// the styles its own stylesheet brings, so a component that forgets its `@use` shows up here.
+// The app compiles the palette of a product, as every consuming application does.
+@use '@lucca-front/scss/src/commons/config' with (
+	$product: 'poplee'
+);
+@forward '@lucca-front/icons/src/main';
+@forward '@lucca-front/scss/src/main';
+@forward '@lucca-front/ng/styles/main';

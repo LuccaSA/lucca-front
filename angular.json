@@ -130,6 +130,61 @@
           }
         }
       }
+    },
+    "scenarios": {
+      "root": "apps/scenarios",
+      "sourceRoot": "apps/scenarios/src",
+      "projectType": "application",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/scenarios",
+            "browser": "apps/scenarios/src/main.ts",
+            "index": "apps/scenarios/src/index.html",
+            "tsConfig": "apps/scenarios/tsconfig.app.json",
+            "polyfills": ["zone.js"],
+            "assets": [
+              {
+                "glob": "mockServiceWorker.js",
+                "input": "node_modules/msw/lib",
+                "output": "/"
+              }
+            ],
+            "styles": ["apps/scenarios/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules"]
+            }
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "port": 4300
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "scenarios:build:production"
+            },
+            "development": {
+              "buildTarget": "scenarios:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
     }
   }
 }
