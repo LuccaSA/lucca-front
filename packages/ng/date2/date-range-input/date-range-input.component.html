@@ -19,6 +19,7 @@
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[ngModel]="startLabel()"
+					[ngModelOptions]="{ standalone: true }"
 					(input)="textInputChange(start.value, 'start')"
 					(blur)="inputBlur($event)"
 					(focus)="inputFocused.set(true); editedField.set(0); highlightedField.set(0)"
@@ -46,6 +47,7 @@
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[ngModel]="endLabel()"
+					[ngModelOptions]="{ standalone: true }"
 					(input)="textInputChange(end.value, 'end')"
 					(blur)="inputBlur($event)"
 					(focus)="inputFocused.set(true); editedField.set(1); highlightedField.set(1)"

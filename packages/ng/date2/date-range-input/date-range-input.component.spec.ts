@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -54,6 +54,15 @@ class MonthFormControlHostComponent {
 })
 class FilterPillHostComponent {
 	formControl = new FormControl<DateRange | null>(null);
+}
+
+@Component({
+	template: `<form [formGroup]="form"><lu-date-range-input formControlName="range" /></form>`,
+	imports: [ReactiveFormsModule, DateRangeInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class FormGroupHostComponent {
+	form = new FormGroup({ range: new FormControl<DateRange | null>(null) });
 }
 
 describe('DateRangeInputComponent', () => {
@@ -762,6 +771,28 @@ describe('DateRangeInputComponent', () => {
 			const fixture = createFilterPillHost({ end: new Date(2025, 5, 20) });
 
 			expect(getPillValue(fixture)).toBe('jusqu’au 20/06/2025');
+		});
+	});
+
+	describe('inside a form group', () => {
+		afterEach(() => {
+			vi.restoreAllMocks();
+		});
+
+		it('should not warn about its inner inputs registering with the parent form', () => {
+			// Arrange
+			const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+			TestBed.configureTestingModule({
+				imports: [FormGroupHostComponent],
+				providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+			});
+
+			// Act
+			const fixture = TestBed.createComponent(FormGroupHostComponent);
+			fixture.detectChanges();
+
+			// Assert
+			expect(warn).not.toHaveBeenCalledWith(expect.stringContaining('NG01354'));
 		});
 	});
 });

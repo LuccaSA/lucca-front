@@ -2,7 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import localesFr from '@angular/common/locales/fr';
 import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TimePickerComponent } from './time-picker.component';
@@ -44,6 +44,16 @@ class TimePickerFormControlTestComponent {
 class TimePickerStandaloneTestComponent {
 	control = new FormControl<string | null>(null);
 	forceMeridiemDisplay: boolean | null = null;
+}
+
+@Component({
+	selector: 'lu-time-picker-form-group-test',
+	imports: [TimePickerComponent, ReactiveFormsModule],
+	template: `<form [formGroup]="form"><lu-time-picker formControlName="time" [forceMeridiemDisplay]="true" /></form>`,
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class TimePickerFormGroupTestComponent {
+	form = new FormGroup({ time: new FormControl<string | null>(null) });
 }
 
 registerLocaleData(localesFr);
@@ -357,6 +367,25 @@ describe('TimePickerComponent', () => {
 
 			// Assert
 			expect(fixture.componentInstance.control.value).toBe('13:30:00');
+		});
+	});
+
+	describe('inside a form group', () => {
+		afterEach(() => {
+			vi.restoreAllMocks();
+		});
+
+		it('should not warn about its meridiem inputs registering with the parent form', () => {
+			// Arrange
+			const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+			// Act
+			const fixture = TestBed.createComponent(TimePickerFormGroupTestComponent);
+			fixture.detectChanges();
+
+			// Assert
+			expect((fixture.nativeElement as HTMLElement).querySelector('.timePicker-fieldset-meridiem')).not.toBeNull();
+			expect(warn).not.toHaveBeenCalledWith(expect.stringContaining('NG01354'));
 		});
 	});
 
