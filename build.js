@@ -89,15 +89,6 @@ runTask('Lucca Front compilation', async () => {
 		// Schematics are compiled as CommonJS, so we need to override the module
 		// type locally to prevent Node.js from treating .js files as ES modules.
 		writeFile(path.join(OUTPUT_SCHEMATICS, 'package.json'), JSON.stringify({ type: 'commonjs' }, null, '\t'));
-
-		const npmIgnoreFile = path.join(OUTPUT_NG, '.npmignore');
-		// The library builder generates `.npmignore` with `**/package.json` to strip nested
-		// package.json files used only for development. We need to negate that rule
-		// for the two package.json files that must ship with the published package:
-		// - schematics/package.json  → CommonJS module type override
-		// - schematics/lib/local-deps/package.json  → runtime dependency manifest for `npm ci`
-		addLineToFile(npmIgnoreFile, '!/schematics/package.json');
-		addLineToFile(npmIgnoreFile, '!/schematics/lib/local-deps/package.json');
 	});
 });
 
@@ -203,25 +194,4 @@ async function runTask(taskName, func) {
 	const from = Date.now();
 	await func();
 	console.log(`[${taskName}] Done in ${new Intl.NumberFormat().format(Date.now() - from)}ms`);
-}
-
-/**
- *
- * @param {string} file
- * @param {string} line
- */
-function addLineToFile(file, line) {
-	if (!fs.existsSync(file)) {
-		return;
-	}
-
-	let fileContent = fs.readFileSync(file, 'utf-8');
-
-	if (!fileContent.includes(line)) {
-		fileContent += '\n';
-		fileContent += line;
-		fileContent += '\n';
-
-		fs.writeFileSync(file, fileContent);
-	}
 }
