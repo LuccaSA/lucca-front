@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, input, numberAttribute } from '@angular/core';
-import { ɵinjectRandomPercent } from '@lucca/prisme/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { luNumberAttribute, ɵinjectRandomPercent } from '@lucca/prisme/core';
 
 @Component({
 	selector: 'lu-skeleton-card',
@@ -11,7 +11,7 @@ export class SkeletonCardComponent {
 	/**
 	 * Defines the number of description lines in card
 	 */
-	readonly descriptionLines = input(1, { transform: numberAttribute });
+	readonly descriptionLines = input(1, { transform: luNumberAttribute });
 
 	readonly lines = computed(() => Array.from({ length: this.descriptionLines() }));
 

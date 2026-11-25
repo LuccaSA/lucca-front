@@ -38,18 +38,18 @@ import { LuTooltipPanelComponent, LuTooltipTriggerDirective } from '@lucca-front
 |----------|-------------|------|---------|----------|-----------|-------------|
 | `luTooltipInput` | `luTooltip` | `string \| SafeHtml` | `''` | — | — | — |
 | `prTooltipInput` | `prTooltip` | `string \| SafeHtml` | `''` | — | — | — |
-| `luTooltipEnterDelay` | `luTooltipEnterDelay` | `number` | `0` | — | `numberAttribute` | Délai d’apparition du tooltip (en ms). La valeur `0` (valeur par défaut de l’input) applique le délai par défaut de 300 … |
-| `prTooltipEnterDelay` | `prTooltipEnterDelay` | `number` | `300` | — | `numberAttribute` | — |
-| `luTooltipLeaveDelay` | `luTooltipLeaveDelay` | `number` | `0` | — | `numberAttribute` | — |
-| `prTooltipLeaveDelay` | `prTooltipLeaveDelay` | `number` | `100` | — | `numberAttribute` | — |
-| `luTooltipDisabled` | `luTooltipDisabled` | `boolean` | `false` | — | `booleanAttribute` | Désactive le tooltip. |
-| `prTooltipDisabled` | `prTooltipDisabled` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `luTooltipOnlyForDisplay` | `luTooltipOnlyForDisplay` | `boolean` | `false` | — | `booleanAttribute` | Affiche un tooltip non restituée par les lecteurs d’écran. À utiliser si la réstitution est déjà portée par l’élément dé… |
-| `prTooltipOnlyForDisplay` | `prTooltipOnlyForDisplay` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `luTooltipEnterDelay` | `luTooltipEnterDelay` | `number` | `0` | — | `luNumberAttribute` | Délai d’apparition du tooltip (en ms). La valeur `0` (valeur par défaut de l’input) applique le délai par défaut de 300 … |
+| `prTooltipEnterDelay` | `prTooltipEnterDelay` | `number` | `300` | — | `luNumberAttribute` | — |
+| `luTooltipLeaveDelay` | `luTooltipLeaveDelay` | `number` | `0` | — | `luNumberAttribute` | — |
+| `prTooltipLeaveDelay` | `prTooltipLeaveDelay` | `number` | `100` | — | `luNumberAttribute` | — |
+| `luTooltipDisabled` | `luTooltipDisabled` | `boolean` | `false` | — | `luBooleanAttribute` | Désactive le tooltip. |
+| `prTooltipDisabled` | `prTooltipDisabled` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `luTooltipOnlyForDisplay` | `luTooltipOnlyForDisplay` | `boolean` | `false` | — | `luBooleanAttribute` | Affiche un tooltip non restituée par les lecteurs d’écran. À utiliser si la réstitution est déjà portée par l’élément dé… |
+| `prTooltipOnlyForDisplay` | `prTooltipOnlyForDisplay` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `luTooltipPosition` | `luTooltipPosition` | `TooltipPosition \| null` | `null` | — | — | Position du tooltip par rapport à son élément déclencheur. |
 | `prTooltipPosition` | `prTooltipPosition` | `'above' \| 'below' \| 'before' \| 'after'` | `'above'` | — | — | — |
-| `luTooltipWhenEllipsisInput` | `luTooltipWhenEllipsis` | `boolean` | `false` | — | `booleanAttribute` | N’affiche le tooltip que lorsque le contenu de l’élément déclencheur est tronqué par une ellipse. |
-| `prTooltipWhenEllipsisInput` | `prTooltipWhenEllipsis` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `luTooltipWhenEllipsisInput` | `luTooltipWhenEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | N’affiche le tooltip que lorsque le contenu de l’élément déclencheur est tronqué par une ellipse. |
+| `prTooltipWhenEllipsisInput` | `prTooltipWhenEllipsis` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `luTooltipAnchor` | `luTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | Élément par rapport auquel le tooltip est positionné, à la place de l’élément déclencheur (voir l’exemple « Tooltip affi… |
 | `prTooltipAnchor` | `prTooltipAnchor` | `FlexibleConnectedPositionStrategyOrigin \| LuTooltipAnchorRef \| null \| undefined` | `this.#host` | — | — | — |
 | `luTooltipTriggerAnchor` | `luTooltipTriggerAnchor` | `ElementRef<HTMLElement> \| HTMLElement \| LuTooltipAnchorRef \| null \| undefined` | `null` | — | — | Élément dont le survol et le focus déclenchent le tooltip, à la place de l’élément portant la directive. |

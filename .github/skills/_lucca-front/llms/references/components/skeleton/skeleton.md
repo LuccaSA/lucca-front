@@ -35,7 +35,7 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `dark` | `dark` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `dark` | `dark` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `size` | `size` | `'XS' \| 'S' \| 'M'` | — | — | — | — |
 
 ### SkeletonCardComponent (component)
@@ -46,7 +46,7 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `descriptionLines` | `descriptionLines` | `number` | `1` | — | `numberAttribute` | — |
+| `descriptionLines` | `descriptionLines` | `number` | `1` | — | `luNumberAttribute` | — |
 
 ### SkeletonDataTableComponent (component)
 
@@ -56,10 +56,10 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `dataTableBodyOnly` | `dataTableBodyOnly` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `cols` | `cols` | `number` | `5` | — | `numberAttribute` | — |
+| `dataTableBodyOnly` | `dataTableBodyOnly` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `cols` | `cols` | `number` | `5` | — | `luNumberAttribute` | — |
 | `colsAlign` | `colsAlign` | `Record<number, SkeletonColsAlign>` | — | — | — | — |
-| `rows` | `rows` | `number` | `8` | — | `numberAttribute` | — |
+| `rows` | `rows` | `number` | `8` | — | `luNumberAttribute` | — |
 
 ### SkeletonFancyBoxComponent (component)
 
@@ -73,10 +73,10 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `dark` | `dark` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `dark` | `dark` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `hiddenLabel` | `hiddenLabel` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 | `size` | `size` | `'XS' \| 'S' \| 'M'` | — | — | — | — |
-| `rows` | `rows` | `number` | `1` | — | `numberAttribute` | — |
+| `rows` | `rows` | `number` | `1` | — | `luNumberAttribute` | — |
 
 ### SkeletonHeaderComponent (component)
 
@@ -86,7 +86,7 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `dark` | `dark` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `dark` | `dark` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 ### SkeletonHighlightDataComponent (component)
 
@@ -96,7 +96,7 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `dark` | `dark` | `boolean` | `false` | — | `booleanAttribute` | — |
+| `dark` | `dark` | `boolean` | `false` | — | `luBooleanAttribute` | — |
 
 ### SkeletonIndexTableComponent (component)
 
@@ -106,10 +106,10 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `tableBodyOnly` | `tableBodyOnly` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `cols` | `cols` | `number` | `5` | — | `numberAttribute` | — |
+| `tableBodyOnly` | `tableBodyOnly` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `cols` | `cols` | `number` | `5` | — | `luNumberAttribute` | — |
 | `colsAlign` | `colsAlign` | `Record<number, SkeletonColsAlign>` | — | — | — | — |
-| `rows` | `rows` | `number` | `8` | — | `numberAttribute` | — |
+| `rows` | `rows` | `number` | `8` | — | `luNumberAttribute` | — |
 
 ### SkeletonTableComponent (component)
 
@@ -119,10 +119,10 @@ import { SkeletonButtonComponent, SkeletonCardComponent, SkeletonDataTableCompon
 
 | Property | Binding name | Type | Default | Required | Transform | Description |
 |----------|-------------|------|---------|----------|-----------|-------------|
-| `tableBodyOnly` | `tableBodyOnly` | `boolean` | `false` | — | `booleanAttribute` | — |
-| `cols` | `cols` | `number` | `5` | — | `numberAttribute` | — |
+| `tableBodyOnly` | `tableBodyOnly` | `boolean` | `false` | — | `luBooleanAttribute` | — |
+| `cols` | `cols` | `number` | `5` | — | `luNumberAttribute` | — |
 | `colsAlign` | `colsAlign` | `Record<number, SkeletonColsAlign>` | — | — | — | — |
-| `rows` | `rows` | `number` | `8` | — | `numberAttribute` | — |
+| `rows` | `rows` | `number` | `8` | — | `luNumberAttribute` | — |
 
 ### SkeletonUserPopoverComponent (component)
 
