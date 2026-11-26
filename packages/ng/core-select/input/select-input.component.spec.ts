@@ -355,13 +355,14 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 			const onChange = vi.fn();
 			component.registerOnChange(onChange);
 			await openPanelWithOptions();
+			await press('ArrowDown');
 
 			// Act
 			const event = await press('Enter');
 
 			// Assert
 			expect(event.defaultPrevented).toBe(true);
-			expect(onChange).toHaveBeenCalledExactlyOnceWith(config.toValue(vegetables[0]));
+			expect(onChange).toHaveBeenCalledExactlyOnceWith(config.toValue(vegetables[1]));
 		});
 
 		it.each([{ ctrlKey: true }, { shiftKey: true }])('should leave Enter to the browser when pressed with a modifier (%o)', async (modifier) => {
@@ -395,11 +396,14 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		it('should clear aria-activedescendant when the panel closes', async () => {
 			// Arrange
 			await openPanelWithOptions();
+			await press('ArrowDown');
+			const highlightedBeforeClosing = highlightedOptionName();
 
 			// Act
 			await press('Escape');
 
 			// Assert
+			expect(highlightedBeforeClosing).toContain(vegetables[1].name);
 			expect(combobox().getAttribute('aria-activedescendant') ?? '').toBe('');
 		});
 	});
