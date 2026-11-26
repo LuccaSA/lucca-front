@@ -43,6 +43,12 @@ export default {
 			control: false,
 			table: { category: 'inputs', type: { summary: '(view: T) => unknown' } },
 		},
+		isViewEditable: {
+			description:
+				'Fonction indiquant si une vue peut être renommée ou supprimée. Les autres vues, par exemple les vues prédéfinies, sont listées sans menu d’options. Toutes les vues sont modifiables par défaut. Passer un type guard pour affiner le type émis par <code>renameView</code> et <code>deleteView</code>.',
+			control: false,
+			table: { category: 'inputs', type: { summary: '((view: T) => view is TEditable) | ((view: T) => boolean)' } },
+		},
 		selectedView: {
 			description: 'Vue actuellement sélectionnée. Two-way.',
 			control: false,
@@ -52,13 +58,13 @@ export default {
 			description: 'Événement déclenché lorsque l’utilisateur demande à renommer une vue.',
 			action: 'renameView',
 			control: false,
-			table: { category: 'outputs', type: { summary: 'T' } },
+			table: { category: 'outputs', type: { summary: 'TEditable' } },
 		},
 		deleteView: {
 			description: 'Événement déclenché lorsque l’utilisateur demande à supprimer une vue.',
 			action: 'deleteView',
 			control: false,
-			table: { category: 'outputs', type: { summary: 'T' } },
+			table: { category: 'outputs', type: { summary: 'TEditable' } },
 		},
 		intl: intlArgType(luFilterPillsTranslations, 'LuFilterPillsLabel'),
 	},
@@ -146,4 +152,46 @@ export const Advanced: StoryObj<FilterViewSelectorComponent<SavedView>> = {
 	render: () => ({
 		template: `<sb-advanced-filter-view-story />`,
 	}),
+};
+
+type PredefinedView = 'all' | 'mine';
+type View = PredefinedView | SavedView;
+
+const predefinedViewLabels: Record<PredefinedView, string> = { all: 'Tous les collaborateurs', mine: 'Mon équipe' };
+
+const isSavedView = (view: View): view is SavedView => typeof view !== 'string';
+
+/**
+ * Des vues prédéfinies peuvent côtoyer les vues enregistrées. `isViewEditable` indique lesquelles peuvent être
+ * renommées ou supprimées : les autres sont listées sans menu d’options. Avec un type guard, `renameView` et
+ * `deleteView` émettent directement le type des vues enregistrées.
+ */
+export const PredefinedViews: StoryObj<FilterViewSelectorComponent<View, SavedView>> = {
+	render: (args) => {
+		const views: View[] = ['all', 'mine', { id: 1, name: 'Product manager' }, { id: 2, name: 'Product designer' }, { id: 3, name: 'Développeur' }];
+		return {
+			props: {
+				views,
+				selectedView: views[0],
+				isSavedView,
+				viewLabel: (view: View) => (isSavedView(view) ? view.name : predefinedViewLabels[view]),
+				renameView: (view: SavedView) => args['renameView']?.(view),
+				deleteView: (view: SavedView) => args['deleteView']?.(view),
+			},
+			template: `<lu-filter-bar>
+	<lu-filter-view-selector
+		*luFilterPillAddonBefore
+		[views]="views"
+		[viewLabel]="viewLabel"
+		[isViewEditable]="isSavedView"
+		[(selectedView)]="selectedView"
+		(renameView)="renameView($event)"
+		(deleteView)="deleteView($event)"
+	/>
+	<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
+		<lu-checkbox-input [ngModel]="false" />
+	</lu-filter-pill>
+</lu-filter-bar>`,
+		};
+	},
 };
