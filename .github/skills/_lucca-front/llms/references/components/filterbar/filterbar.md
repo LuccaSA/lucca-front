@@ -76,13 +76,14 @@ import { FilterPillComponent, FilterBarComponent, FilterViewSelectorComponent, F
 | `viewLabel` | `viewLabel` | `(view: T) => string` | `(view) => (view as { name: string }).name` | — | — | — |
 | `optionComparer` | `optionComparer` | `(a: T, b: T) => boolean` | `filterViewDefaultOptionComparer` | — | — | — |
 | `optionKey` | `optionKey` | `(view: T) => unknown` | `filterViewDefaultOptionKey` | — | — | — |
+| `isViewEditable` | `isViewEditable` | `((view: T) => view is TEditable) \| ((view: T) => boolean)` | `filterViewDefaultIsViewEditable` | — | — | — |
 
 #### Outputs
 
 | Property | Binding name | Type | Notes |
 |----------|-------------|------|-------|
-| `renameView` | `renameView` | `T` | — |
-| `deleteView` | `deleteView` | `T` | — |
+| `renameView` | `renameView` | `TEditable` | — |
+| `deleteView` | `deleteView` | `TEditable` | — |
 
 #### Models (two-way binding)
 
