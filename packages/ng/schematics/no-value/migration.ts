@@ -1,7 +1,7 @@
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import type { TmplAstElement } from '@angular/compiler';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
-import { SourceFile } from 'typescript';
+import { forEachChild, isCallExpression, isDecorator, isIdentifier, isObjectLiteralExpression, isPropertyAssignment, Node, SourceFile, SyntaxKind } from 'typescript';
 import { AngularTemplate, currentSchematicContext, extractNgTemplatesIncludingHtml, HtmlAst, insertAngularImportIfNeeded, insertTSImportIfNeeded, TemplateNode } from '../lib';
 
 // Only cells of Lucca Front tables are migrated: hand-made tables may use a dash for something else.
@@ -32,6 +32,7 @@ const DEFAULT_MASK_TEXTS = [
 interface Replacement {
 	start: number;
 	end: number;
+	line: number;
 }
 
 export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
@@ -44,7 +45,14 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		}
 	});
 
-	if (replacementsByFile.size) {
+	if (replacementsByFile.size && !canAddImport(sourceFile)) {
+		// The import can only be added to a single standalone component: report the cells instead of breaking compilation.
+		replacementsByFile.forEach((replacements, filePath) =>
+			replacements.forEach(({ line }) =>
+				currentSchematicContext.warn(`[no-value] ${filePath}:${line} — dash in a cell of a non-standalone component, or of a file with several components: replace it by hand with ${NO_VALUE} and import NoValueComponent.`),
+			),
+		);
+	} else if (replacementsByFile.size) {
 		const tsUpdate = tree.beginUpdate(path);
 		replacementsByFile.forEach((replacements, filePath) => {
 			const update = filePath === path ? tsUpdate : tree.beginUpdate(filePath);
@@ -60,6 +68,26 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		tree.commitUpdate(tsUpdate);
 	}
 	return tree.readText(path);
+}
+
+/**
+ * Whether the file holds a single component, standalone: the only case where its `imports` can be updated safely.
+ */
+function canAddImport(sourceFile: SourceFile): boolean {
+	const components: Node[] = [];
+	const visit = (node: Node) => {
+		if (isDecorator(node) && isCallExpression(node.expression) && isIdentifier(node.expression.expression) && node.expression.expression.text === 'Component') {
+			components.push(node.expression);
+		}
+		forEachChild(node, visit);
+	};
+	visit(sourceFile);
+	if (components.length !== 1) {
+		return false;
+	}
+	const [argument] = (components[0] as { arguments?: Node[] }).arguments ?? [];
+	const standalone = argument && isObjectLiteralExpression(argument) ? argument.properties.filter(isPropertyAssignment).find((prop) => isIdentifier(prop.name) && prop.name.text === 'standalone') : undefined;
+	return standalone?.initializer.kind !== SyntaxKind.FalseKeyword;
 }
 
 function replace(update: UpdateRecorder, replacements: Replacement[]): void {
@@ -104,8 +132,8 @@ function findReplacements(template: AngularTemplate, sourceFile: SourceFile): Re
 	const isMask = (node: TemplateNode) => isElement(node) && classesOf(node).includes('pr-u-mask');
 	// `<span class="pr-u-mask">Non renseigné</span>`
 	const isDefaultMask = (node: TemplateNode) => isInert(node, ['class']) && isMask(node) && DEFAULT_MASK_TEXTS.includes(textOf(node) ?? '');
-	const report = (node: TemplateNode, message: string) =>
-		currentSchematicContext.warn(`[no-value] ${template.filePath}:${lineOffset + node.sourceSpan.start.line + 1} — ${message}`);
+	const lineOf = (node: TemplateNode) => lineOffset + node.sourceSpan.start.line + 1;
+	const report = (node: TemplateNode, message: string) => currentSchematicContext.warn(`[no-value] ${template.filePath}:${lineOf(node)} — ${message}`);
 
 	const elementEnd = (node: TmplAstElement) => (node.endSourceSpan ?? node.sourceSpan).end.offset;
 
@@ -116,11 +144,11 @@ function findReplacements(template: AngularTemplate, sourceFile: SourceFile): Re
 		if (content.length === 1 && isText(first) && isDash(first.value)) {
 			const raw = template.content.slice(first.sourceSpan.start.offset, first.sourceSpan.end.offset);
 			const start = first.sourceSpan.start.offset + raw.indexOf(raw.trim());
-			replacements.push({ start: offset + start, end: offset + start + raw.trim().length });
+			replacements.push({ start: offset + start, end: offset + start + raw.trim().length, line: lineOf(first) });
 		} else if (content.length === 1 && (isDashPseudoElement(first) || isDashElement(first))) {
-			replacements.push({ start: offset + first.sourceSpan.start.offset, end: offset + elementEnd(first as TmplAstElement) });
+			replacements.push({ start: offset + first.sourceSpan.start.offset, end: offset + elementEnd(first as TmplAstElement), line: lineOf(first) });
 		} else if (content.length === 2 && isDashPseudoElement(first) && isDefaultMask(second)) {
-			replacements.push({ start: offset + first.sourceSpan.start.offset, end: offset + elementEnd(second as TmplAstElement) });
+			replacements.push({ start: offset + first.sourceSpan.start.offset, end: offset + elementEnd(second as TmplAstElement), line: lineOf(first) });
 		} else if (content.length === 2 && isDashPseudoElement(first) && isMask(second)) {
 			report(first, `dash with a custom visually hidden text: replace it by hand with ${NO_VALUE.replace(' />', ' alt="…" />')} to keep the text.`);
 		} else {

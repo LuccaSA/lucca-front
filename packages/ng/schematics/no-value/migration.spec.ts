@@ -26,9 +26,11 @@ describe('no-value Migration', () => {
 		await runSchematic('collection', collectionPath, 'no-value', { skipInstall: true }, tree);
 
 		// Assert
-		expect(warn).toHaveBeenCalledTimes(2);
+		expect(warn).toHaveBeenCalledTimes(4);
 		expect(warn).toHaveBeenCalledWith(expect.stringContaining("/inline-template.component.ts:26 — {{ manager ?? '–' }}"));
 		expect(warn).toHaveBeenCalledWith(expect.stringContaining('/inline-template.component.ts:28 — dash with a custom visually hidden text'));
+		expect(warn).toHaveBeenCalledWith(expect.stringContaining('/non-standalone.component.ts:10 — dash in a cell of a non-standalone component'));
+		expect(warn).toHaveBeenCalledWith(expect.stringContaining('/several-components.component.ts:5 — dash in a cell of a non-standalone component, or of a file with several components'));
 		warn.mockRestore();
 	});
 });
