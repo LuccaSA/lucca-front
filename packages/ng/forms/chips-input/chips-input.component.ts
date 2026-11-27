@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { ClearComponent } from '@lucca-front/ng/clear';
@@ -81,6 +81,13 @@ export class ChipsInputComponent implements ControlValueAccessor {
 	});
 
 	protected readonly hasRemovableChips = computed(() => this.chips().some((chip) => !chip.unkillable));
+
+	readonly #listFormat = new Intl.ListFormat(inject(LOCALE_ID));
+
+	/**
+	 * Values displayed in presentation mode, as a list formatted for the current locale
+	 */
+	protected readonly formattedValues = computed(() => this.#listFormat.format(this.values()));
 
 	#onChange: (value: string[]) => void = () => {};
 

@@ -32,7 +32,7 @@
 </div>
 <ng-container *luPresentationDisplayDefault>
 	@if (values().length > 0) {
-		{{ values().join(", ") }}
+		{{ formattedValues() }}
 	} @else {
 		<span aria-hidden="true" data-content-before="–"></span>
 	}
