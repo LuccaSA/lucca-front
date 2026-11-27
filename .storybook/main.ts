@@ -18,8 +18,12 @@ const config: StorybookConfig = {
 	stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-mcp'), getAbsolutePath('@storybook/addon-vitest')],
 	framework: {
-		name: '@storybook/angular-vite',
+		name: getAbsolutePath('@storybook/angular-vite'),
 		options: {},
+	},
+	typescript: {
+		// The `typescript` package stays on 6.x (Angular's compiler requires it), the docgen reads component types with the TypeScript 7.1 native API.
+		docgenSpecifier: '@typescript/native',
 	},
 	logLevel: process.env['CI'] ? 'error' : 'info',
 	staticDirs: ['./public'],
