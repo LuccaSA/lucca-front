@@ -13,6 +13,21 @@ const CELL_ATTRIBUTES = ['luIndexTableCell', 'luDataTableCell'];
 const CELL_CLASS = /^(indexTable|dataTable)-.*-cell$/;
 const QUOTED_DASH = new RegExp(`['"\`](${DASHES.join('|')})['"\`]`);
 const NO_VALUE = '<lu-no-value />';
+// Default visually hidden texts of a missing value, in every locale: any other text is kept, so the cell is reported instead.
+const DEFAULT_MASK_TEXTS = [
+	'Non renseigné',
+	'Not provided',
+	'Not entered',
+	'Nicht angegeben',
+	'No especificado',
+	'No indicado',
+	'Non inserito',
+	'Non indicato',
+	'Niet opgegeven',
+	'Niet ingevuld',
+	'Não conhecido',
+	'Nie wprowadzono',
+];
 
 interface Replacement {
 	start: number;
@@ -69,18 +84,28 @@ function findReplacements(template: AngularTemplate, sourceFile: SourceFile): Re
 	const isLfCell = (node: TmplAstElement, inTable: boolean) =>
 		['td', 'th'].includes(node.name) && (inTable || node.attributes.some((attr) => CELL_ATTRIBUTES.includes(attr.name)) || classesOf(node).some((c) => CELL_CLASS.test(c)));
 
+	// A `span` or `div` without behavior (no input, event or reference) and with these attributes only
+	const isInert = (node: TemplateNode, allowedAttributes: string[]): node is TmplAstElement =>
+		isElement(node) &&
+		['span', 'div'].includes(node.name) &&
+		!node.inputs.length &&
+		!node.outputs.length &&
+		!node.references.length &&
+		node.attributes.every((attr) => allowedAttributes.includes(attr.name));
+	const textOf = (node: TmplAstElement) => {
+		const children = node.children.filter((child) => !isBlank(child));
+		return children.length === 1 && isText(children[0]) ? children[0].value.trim() : undefined;
+	};
 	// `<span aria-hidden="true" data-content-before="–"></span>`
 	const isDashPseudoElement = (node: TemplateNode) =>
-		isElement(node) && isDash(node.attributes.find((attr) => attr.name === 'data-content-before')?.value) && node.children.every(isBlank) && node.inputs.length === 0;
+		isInert(node, ['aria-hidden', 'data-content-before']) && isDash(node.attributes.find((attr) => attr.name === 'data-content-before')?.value) && node.children.every(isBlank);
 	// `<span>–</span>` or `<span aria-hidden="true">–</span>`
-	const isDashElement = (node: TemplateNode) => {
-		if (!isElement(node) || node.inputs.length || node.attributes.some((attr) => attr.name !== 'aria-hidden')) {
-			return false;
-		}
-		const children = node.children.filter((child) => !isBlank(child));
-		return children.length === 1 && isText(children[0]) && isDash(children[0].value);
-	};
+	const isDashElement = (node: TemplateNode) => isInert(node, ['aria-hidden']) && isDash(textOf(node));
 	const isMask = (node: TemplateNode) => isElement(node) && classesOf(node).includes('pr-u-mask');
+	// `<span class="pr-u-mask">Non renseigné</span>`
+	const isDefaultMask = (node: TemplateNode) => isInert(node, ['class']) && isMask(node) && DEFAULT_MASK_TEXTS.includes(textOf(node) ?? '');
+	const report = (node: TemplateNode, message: string) =>
+		currentSchematicContext.warn(`[no-value] ${template.filePath}:${lineOffset + node.sourceSpan.start.line + 1} — ${message}`);
 
 	const elementEnd = (node: TmplAstElement) => (node.endSourceSpan ?? node.sourceSpan).end.offset;
 
@@ -94,14 +119,14 @@ function findReplacements(template: AngularTemplate, sourceFile: SourceFile): Re
 			replacements.push({ start: offset + start, end: offset + start + raw.trim().length });
 		} else if (content.length === 1 && (isDashPseudoElement(first) || isDashElement(first))) {
 			replacements.push({ start: offset + first.sourceSpan.start.offset, end: offset + elementEnd(first as TmplAstElement) });
-		} else if (content.length === 2 && isDashPseudoElement(first) && isMask(second)) {
+		} else if (content.length === 2 && isDashPseudoElement(first) && isDefaultMask(second)) {
 			replacements.push({ start: offset + first.sourceSpan.start.offset, end: offset + elementEnd(second as TmplAstElement) });
+		} else if (content.length === 2 && isDashPseudoElement(first) && isMask(second)) {
+			report(first, `dash with a custom visually hidden text: replace it by hand with ${NO_VALUE.replace(' />', ' alt="…" />')} to keep the text.`);
 		} else {
 			content.forEach((node) => {
 				if (node instanceof compiler.TmplAstBoundText && QUOTED_DASH.test(node.sourceSpan.toString())) {
-					currentSchematicContext.warn(
-						`[no-value] ${template.filePath}:${lineOffset + node.sourceSpan.start.line + 1} — ${node.sourceSpan.toString().trim()}: replace the fallback dash with ${NO_VALUE} by hand.`,
-					);
+					report(node, `${node.sourceSpan.toString().trim()}: replace the fallback dash with ${NO_VALUE} by hand.`);
 				}
 				blocksOf(node).forEach(migrateContent);
 			});

@@ -29,6 +29,9 @@ function accessibleText(element: Element): string {
 						<div><lu-no-value /></div>
 					</td>
 					<td class="textCell">Manager: <lu-no-value /></td>
+					<td class="imageCell"><img src="" alt="Manager" /><lu-no-value /></td>
+					<td class="buttonCell"><button type="button" aria-label="Edit"></button><lu-no-value /></td>
+					<td class="hiddenIconCell"><span aria-hidden="true">★</span><lu-no-value /></td>
 				</tr>
 			</tbody>
 		</table>
@@ -109,6 +112,19 @@ describe(NoValueComponent.name, () => {
 		const root = await render();
 
 		expect(accessibleText(root.querySelector('.textCell')!)).toBe('Manager: Not entered');
+	});
+
+	it('should add a visually hidden text in a table cell with an image alternative or a named control', async () => {
+		const root = await render();
+
+		expect(accessibleText(root.querySelector('.imageCell')!)).toBe('Not entered');
+		expect(accessibleText(root.querySelector('.buttonCell')!)).toBe('Not entered');
+	});
+
+	it('should ignore content hidden from assistive technologies in a table cell', async () => {
+		const root = await render();
+
+		expect(accessibleText(root.querySelector('.hiddenIconCell')!)).toBe('');
 	});
 
 	it('should add a visually hidden text in a cell of a layout table', async () => {

@@ -24,6 +24,8 @@ import { IndexTableComponent } from '@lucca-front/ng/index-table';
 						}
 					</td>
 					<td luIndexTableCell>{{ manager ?? '–' }}</td>
+					<td luIndexTableCell><button type="button" (click)="remove()">-</button></td>
+					<td luIndexTableCell><span aria-hidden="true" data-content-before="–"></span><span class="pr-u-mask">Non applicable</span></td>
 					<td luIndexTableCell>Paris - Lyon</td>
 					<td luIndexTableCell><span class="pr-u-colorTextLight">–</span></td>
 				</tr>

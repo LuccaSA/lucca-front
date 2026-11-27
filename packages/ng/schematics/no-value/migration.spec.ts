@@ -17,7 +17,7 @@ describe('no-value Migration', () => {
 		expectTree(tree).toMatchTree(expectedTree);
 	});
 
-	it('should report the fallback dashes of expressions it cannot migrate', async () => {
+	it('should report the cells it cannot migrate', async () => {
 		// Arrange
 		const tree = createTreeFromFolder(path.join(testsRoot, 'input'));
 		const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
@@ -26,8 +26,9 @@ describe('no-value Migration', () => {
 		await runSchematic('collection', collectionPath, 'no-value', { skipInstall: true }, tree);
 
 		// Assert
-		expect(warn).toHaveBeenCalledTimes(1);
+		expect(warn).toHaveBeenCalledTimes(2);
 		expect(warn).toHaveBeenCalledWith(expect.stringContaining("/inline-template.component.ts:26 — {{ manager ?? '–' }}"));
+		expect(warn).toHaveBeenCalledWith(expect.stringContaining('/inline-template.component.ts:28 — dash with a custom visually hidden text'));
 		warn.mockRestore();
 	});
 });

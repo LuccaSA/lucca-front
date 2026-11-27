@@ -4,6 +4,8 @@ import { LU_NO_VALUE_TRANSLATIONS } from './no-value.translate';
 
 const TABLE_CELL_SELECTOR = 'td, th, [role="cell"], [role="gridcell"], [role="rowheader"], [role="columnheader"]';
 const LAYOUT_TABLE_SELECTOR = 'table[role="presentation"], table[role="none"]';
+// Content announced by screen readers without being text: image alternatives, named elements, controls.
+const ACCESSIBLE_CONTENT_SELECTOR = 'img[alt]:not([alt=""]), [role="img"], [aria-label], [aria-labelledby], a[href], button, input, select, textarea';
 
 /**
  * Displays an em dash for a missing value.
@@ -45,7 +47,7 @@ export class NoValueComponent {
 }
 
 /**
- * Whether the element is in a table cell with no other text, which screen readers announce as empty.
+ * Whether the element is in a table cell with no other accessible content, which screen readers announce as empty.
  */
 function isAloneInTableCell(element: HTMLElement): boolean {
 	let cell = element.parentElement?.closest(TABLE_CELL_SELECTOR);
@@ -59,6 +61,6 @@ function isAloneInTableCell(element: HTMLElement): boolean {
 		return false;
 	}
 	const clone = cell.cloneNode(true) as Element;
-	clone.querySelectorAll('lu-no-value').forEach((noValue) => noValue.remove());
-	return !clone.textContent?.trim();
+	clone.querySelectorAll('lu-no-value, [aria-hidden="true"]').forEach((ignored) => ignored.remove());
+	return !clone.textContent?.trim() && !clone.querySelector(ACCESSIBLE_CONTENT_SELECTOR);
 }

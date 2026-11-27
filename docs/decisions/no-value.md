@@ -26,14 +26,15 @@ Status: accepted
 
 **Context** — A missing value is displayed as an em dash hidden from screen readers. Outside a table, nothing is then announced, so a visually hidden text is needed. In a table cell, screen readers already announce an empty cell (“blank” with VoiceOver), so the same text would only repeat it on every empty cell.
 
-**Decision** — `lu-no-value` finds out by itself whether it is the only text of a table cell (`td`, `th`, or an element with an ARIA cell or header role, layout tables with `role="presentation"` or `role="none"` excepted) and adds the hidden text (“Not entered”) in every other case, including a cell with another text (“Manager: —”). The `alt` input overrides this choice, in both directions: a more precise text (“No manager”), or an empty string to read nothing.
+**Decision** — `lu-no-value` finds out by itself whether it is the only accessible content of a table cell (`td`, `th`, or an element with an ARIA cell or header role, layout tables with `role="presentation"` or `role="none"` excepted) and adds the hidden text (“Not entered”) in every other case, including a cell with another text (“Manager: —”), an image alternative or a named control; content hidden with `aria-hidden` does not count. The `alt` input overrides this choice, in both directions: a more precise text (“No manager”), or an empty string to read nothing.
 
-**Consequences** — The same `<lu-no-value />` fits everywhere, and the right behavior does not depend on the developer’s knowledge of screen readers. The detection relies on the rendered DOM, so it also works in tables written in plain HTML.
+**Consequences** — The same `<lu-no-value />` fits everywhere, and the right behavior does not depend on the developer’s knowledge of screen readers. The detection relies on the rendered DOM, so it also works in tables written in plain HTML. The cell is checked once, after the component is rendered: content added to the same cell later is not taken into account, and `alt` forces the text in that case.
 
 **Rejected options** — Other ways to choose the behavior:
 
 - An option to set by hand: forgetting it outside a table means a missing value announced as nothing at all.
 - Only checking for a cell, whatever its content: a cell with another text is not announced as empty, so the missing value would be silent.
+- Watching the cell for later changes: an observer per empty cell, for a case the one value per column rule of tables already avoids.
 - Only checking the direct parent: a wrapping element in the cell would add the hidden text to a cell that is announced as empty.
 - A modifier on the cell that fills empty cells with a dash: some cells must stay truly empty (alert column, actions).
 
