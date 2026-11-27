@@ -45,6 +45,12 @@ Directory of the names shared across components. Before naming a new input, chec
 | `loading`  | `boolean`        | Applies the loading state.         | `isLoading`, `pending`        |
 | `expanded` | `model<boolean>` | Expands the `<component>` content. | `open`, `opened`, `collapsed` |
 
+### Filter views
+
+| Input            | Type                                                                     | Description                                                                                                                                                                                                         | Avoid                                                                   |
+| ---------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `isViewEditable` | `(view: T) => boolean`, or a type guard `(view: T) => view is TEditable` | Which views can be renamed or deleted: the others are listed without an options menu, like predefined views. Defaults to every view. Pass a type guard to narrow the type emitted by `renameView` and `deleteView`. | `editable` (boolean, applies to every view), `canEdit`, `readonlyViews` |
+
 ### Form fields
 
 | Input                | Type                           | Description                                                                                                                                                           | Avoid                          |

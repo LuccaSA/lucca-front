@@ -13,6 +13,7 @@ import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 export type LuOptionComparer<T> = (a: T, b: T) => boolean;
 export const filterViewDefaultOptionComparer: LuOptionComparer<unknown> = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 export const filterViewDefaultOptionKey: (option: unknown) => unknown = (option) => option;
+export const filterViewDefaultIsViewEditable: (view: unknown) => boolean = () => true;
 
 let nextId = 0;
 
@@ -27,12 +28,12 @@ let nextId = 0;
 		'(keydown.arrowDown)': 'popoverRef()?.openPopover()',
 	},
 })
-export class FilterViewSelectorComponent<T> {
+export class FilterViewSelectorComponent<T, TEditable extends T = T> {
 	readonly intl = input(...intlInputOptions(LU_FILTER_PILLS_TRANSLATIONS));
 
 	readonly popoverRef = viewChild(PopoverDirective);
 
-	/** The list of saved views to pick from. */
+	/** The list of views to pick from, either saved or predefined. */
 	readonly views = input.required<T[]>();
 
 	/** The currently selected view (two-way bindable). */
@@ -47,11 +48,17 @@ export class FilterViewSelectorComponent<T> {
 	/** Stable identity used for `@for` tracking. Same convention as `lu-select` — defaults to identity. */
 	readonly optionKey = input<(view: T) => unknown>(filterViewDefaultOptionKey);
 
+	/**
+	 * Which views can be renamed or deleted: the others are listed without an options menu, like predefined views.
+	 * Defaults to every view. Pass a type guard to narrow the type emitted by `renameView` and `deleteView`.
+	 */
+	readonly isViewEditable = input<((view: T) => view is TEditable) | ((view: T) => boolean)>(filterViewDefaultIsViewEditable);
+
 	/** Emitted when the user asks to rename a view. */
-	readonly renameView = output<T>();
+	readonly renameView = output<TEditable>();
 
 	/** Emitted when the user asks to delete a view. */
-	readonly deleteView = output<T>();
+	readonly deleteView = output<TEditable>();
 
 	/** Aligns the popover under the trigger, like the filter pills do. */
 	protected readonly popoverPositions: ConnectionPositionPair[] = [
@@ -85,6 +92,16 @@ export class FilterViewSelectorComponent<T> {
 
 	protected selectView(view: T): void {
 		this.selectedView.set(view);
+		this.popoverRef()?.close();
+	}
+
+	protected rename(view: T): void {
+		this.renameView.emit(view as TEditable);
+		this.popoverRef()?.close();
+	}
+
+	protected delete(view: T): void {
+		this.deleteView.emit(view as TEditable);
 		this.popoverRef()?.close();
 	}
 }

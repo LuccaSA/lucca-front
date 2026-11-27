@@ -1,7 +1,7 @@
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { createTestStory } from '@/helpers/stories';
 import { waitForAngular } from '@/helpers/test';
-import meta, { Basic } from '@/stories/forms/filter-pills/angular/filter-view-selector.stories';
+import meta, { Basic, PredefinedViews } from '@/stories/forms/filter-pills/angular/filter-view-selector.stories';
 
 export default {
 	...meta,
@@ -109,5 +109,30 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, step }) 
 		await expect(getRadios()).toHaveLength(0);
 		// The selector only emits: dropping a view is the consumer's job, so the selection stands.
 		await expect(getTrigger()).toHaveTextContent(`${SELECT_VIEW} - ${VIEW_NAMES[3]}`);
+	});
+});
+
+/**
+ * Predefined views sit next to saved ones: only the views accepted by `isViewEditable` get an options menu.
+ */
+export const PredefinedViewsTEST = createTestStory(PredefinedViews, async ({ canvasElement, step }) => {
+	await waitForAngular();
+	const canvas = within(canvasElement);
+
+	await step('Predefined views are listed without an options menu', async () => {
+		await userEvent.click(canvas.getByRole('button', { name: new RegExp(SELECT_VIEW) }));
+		await waitForAngular();
+
+		await expect(screen.queryAllByRole('radio')).toHaveLength(5);
+		await expect(screen.queryByRole('button', { name: optionsButtonName('Tous les collaborateurs') })).toBeNull();
+		await expect(screen.queryByRole('button', { name: optionsButtonName('Mon équipe') })).toBeNull();
+	});
+
+	await step('Saved views keep their options menu', async () => {
+		await userEvent.click(screen.getByRole('button', { name: optionsButtonName('Product designer') }));
+		await waitForAngular();
+
+		await expect(screen.getByRole('button', { name: 'Modifier le nom' })).toBeVisible();
+		await expect(screen.getByRole('button', { name: 'Supprimer' })).toBeVisible();
 	});
 });
