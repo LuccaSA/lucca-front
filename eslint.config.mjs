@@ -22,6 +22,10 @@ export default defineConfig(
 			// schematics && stories can be strictified
 			'packages/ng/schematics/**/*.ts',
 			'stories/**/*.ts',
+			// scenarios app: the host page is no Angular template, Playwright outputs are generated
+			'apps/scenarios/src/index.html',
+			'apps/scenarios/playwright-report/',
+			'apps/scenarios/test-results/',
 		],
 	},
 	{
@@ -163,6 +167,14 @@ export default defineConfig(
 			'@angular-eslint/template/button-has-type': 'error',
 			'@angular-eslint/template/prefer-self-closing-tags': 'error',
 			'@angular-eslint/template/prefer-control-flow': 'error',
+		},
+	},
+	// Scenarios app: a consuming application, its own selectors use the `app` prefix
+	{
+		files: ['apps/scenarios/**/*.ts'],
+		rules: {
+			'@angular-eslint/component-selector': ['error', { type: 'element', prefix: 'app', style: 'kebab-case' }],
+			'@angular-eslint/directive-selector': ['error', { type: 'attribute', prefix: 'app', style: 'camelCase' }],
 		},
 	},
 	// Storybook

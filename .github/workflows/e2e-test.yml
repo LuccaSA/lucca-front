@@ -43,3 +43,7 @@ jobs:
               && npm run test-storybook -- --shard=1/3 \
               && npm run test-storybook -- --shard=2/3 \
               && npm run test-storybook -- --shard=3/3"
+
+      # Journeys of the scenarios app, run against its production build (see apps/scenarios/playwright.config.ts)
+      - name: Run scenarios journeys
+        run: npm run test-scenarios

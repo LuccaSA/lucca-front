@@ -1,0 +1,11 @@
+{
+  // Editor and lint scope of the scenarios app: without it, they fall back to the root tsconfig.json, which takes in the whole repository
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // The app compiles the library from its sources, outside of this folder
+    "rootDir": "../..",
+    // For the Playwright config and specs, which run in Node
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts", "e2e/**/*.ts", "playwright.config.ts"]
+}
