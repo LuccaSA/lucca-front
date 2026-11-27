@@ -25,6 +25,9 @@
 		--components-listboxOption-content-flexWrap: wrap;
 		--components-listboxOption-content-justifyContent: space-between;
 		--components-listboxOption-content-insetBlockStart: 0;
+
+		// WebKit names a group after its whole content when its aria-labelledby target is `display: contents`.
+		--components-listboxOption-content-label-display: flex;
 		--components-listboxOption-content-boxShadow:
 			calc(var(--pr-t-spacings-100) * -1) 0 0 0 var(--pr-t-elevation-surface-raised),
 			var(--pr-t-spacings-100) 0 0 0 var(--pr-t-elevation-surface-raised),

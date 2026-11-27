@@ -12,13 +12,13 @@ export default {
 	render: (args: OptionBasicStory) => {
 		const modMultiple = args.multiple ? ` mod-multiple` : ``;
 		const withScrollElements = args.withScroll
-			? `<li role="group" class="listboxOption" aria-labelledby="group3">
-	<div class="listboxOption-content" id="group2">
+			? `<li role="group" class="listboxOption" aria-labelledby="group4">
+	<div class="listboxOption-content">
 		<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
 			<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 			<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 		</span>
-		Group 4
+		<span class="listboxOption-content-label" id="group4">Group 4</span>
 	</div>
 	<ul role="presentation" class="listboxOptionWrapper">
 		<li role="option" class="listboxOption">
@@ -117,12 +117,12 @@ export default {
 			],
 			template: cleanupTemplate(`<ul role="listbox" class="listboxOptionWrapper${modMultiple}">
 	<li role="group" class="listboxOption" aria-labelledby="group1">
-		<div class="listboxOption-content" id="group1">
+		<div class="listboxOption-content">
 			<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
 				<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 			</span>
-			Group 1
+			<span class="listboxOption-content-label" id="group1">Group 1</span>
 			<div role="option" class="listboxOption mod-select">
 				<div class="listboxOption-content">
 					<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
@@ -155,12 +155,12 @@ export default {
 		</ul>
 	</li>
 	<li role="group" class="listboxOption" aria-labelledby="group2">
-		<div class="listboxOption-content" id="group2">
+		<div class="listboxOption-content">
 			<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
 				<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 			</span>
-			Group 2
+			<span class="listboxOption-content-label" id="group2">Group 2</span>
 			<div role="option" class="listboxOption mod-select">
 				<div class="listboxOption-content">
 					<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
@@ -193,12 +193,12 @@ export default {
 		</ul>
 	</li>
 	<li role="group" class="listboxOption" aria-labelledby="group3">
-		<div class="listboxOption-content" id="group3">
+		<div class="listboxOption-content">
 			<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
 				<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 			</span>
-			Group 3
+			<span class="listboxOption-content-label" id="group3">Group 3</span>
 			<div role="option" class="listboxOption mod-select">
 				<div class="listboxOption-content">
 					<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">

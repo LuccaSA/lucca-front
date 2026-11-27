@@ -149,8 +149,7 @@ describe('FilterBarComponent: grouping the optional pills', () => {
 	it('renders one panel group per grouping value', fakeAsync(() => {
 		const overlayContainer = openPanel();
 
-		// The group title is rendered in the span next to the checkbox one
-		const groups = Array.from(overlayContainer.querySelectorAll('lu-listbox-option[group]'), (group) => group.querySelector('.listboxOption-content > span:not([aria-hidden])').textContent.trim());
+		const groups = Array.from(overlayContainer.querySelectorAll('lu-listbox-option[group]'), (group) => group.querySelector(`[id="${group.getAttribute('aria-labelledby')}"]`).textContent.trim());
 		expect(groups).toEqual(['', 'Dates', 'Organisation']);
 		overlayContainer.remove();
 	}));

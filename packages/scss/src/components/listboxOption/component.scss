@@ -66,6 +66,12 @@
 			}
 		}
 
+		.listboxOption-content-label {
+			align-items: flex-start;
+			display: var(--components-listboxOption-content-label-display);
+			gap: var(--pr-t-spacings-100);
+		}
+
 		.listboxOption-content-value {
 			flex-grow: 1;
 			min-inline-size: 0;
