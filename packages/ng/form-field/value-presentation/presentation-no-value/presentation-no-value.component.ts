@@ -9,7 +9,7 @@ import { LU_FORM_FIELD_TRANSLATIONS } from '../../form-field.translate';
  */
 @Component({
 	selector: 'lu-presentation-no-value',
-	template: `<span aria-hidden="true" data-content-before="–"></span><span class="pr-u-mask">{{ label() }}</span>`,
+	template: `<span aria-hidden="true" data-content-before="—"></span><span class="pr-u-mask">{{ label() }}</span>`,
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
