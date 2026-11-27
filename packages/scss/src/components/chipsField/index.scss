@@ -1,0 +1,32 @@
+@use 'exports' as *;
+
+.chipsField {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.is-invalid,
+		&:has(.chipsField-input[aria-invalid='true']) {
+			@include invalid;
+		}
+
+		&.is-disabled,
+		&:has(.chipsField-input:disabled) {
+			@include disabled;
+		}
+	}
+}
+
+@layer mods {
+	.chipsField-chip {
+		&.is-selected {
+			@include chipSelected;
+		}
+	}
+}

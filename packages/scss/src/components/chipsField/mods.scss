@@ -1,0 +1,19 @@
+@use '@lucca-front/scss/src/components/chip/exports' as chip;
+@use '@lucca-front/scss/src/components/clear/exports' as clear;
+
+@mixin S {
+	--components-chipsField-font: var(--pr-t-font-body-S);
+	--components-chipsField-padding: var(--pr-t-spacings-75);
+
+	.chipsField-chip.chip {
+		@include chip.S;
+	}
+
+	.chipsField-clear {
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		&.clear,
+		&:not(.clear) {
+			@include clear.S;
+		}
+	}
+}

@@ -1,0 +1,39 @@
+<!-- The click only moves the focus to the field: every chip and the clear button stay reachable with the keyboard -->
+<div class="chipsField" (click)="focusInput()">
+	<div class="chipsField-content">
+		@for (chip of chips(); track $index; let index = $index) {
+			<lu-chip
+				class="chipsField-chip"
+				[class.is-selected]="selectedIndex() === index"
+				[state]="chip.invalid ? 'critical' : null"
+				[unkillable]="chip.unkillable"
+				[disabled]="disabledInternal()"
+				withEllipsis
+				(kill)="removeAt(index)"
+				>{{ chip.value }}</lu-chip
+			>
+		}
+		<input
+			luInput
+			#inputElement
+			type="text"
+			class="chipsField-input"
+			autocomplete="off"
+			[placeholder]="placeholder()"
+			[disabled]="disabledInternal()"
+			(keydown)="onKeydown($event)"
+			(input)="onInput($event)"
+			(blur)="onBlur()"
+		/>
+	</div>
+	@if (hasClearer() && hasRemovableChips() && !disabledInternal()) {
+		<lu-clear class="chipsField-clear" (onClear)="clearValues()">{{ intl().clear }}</lu-clear>
+	}
+</div>
+<ng-container *luPresentationDisplayDefault>
+	@if (values().length > 0) {
+		{{ formattedValues() }}
+	} @else {
+		<span aria-hidden="true" data-content-before="–"></span>
+	}
+</ng-container>
