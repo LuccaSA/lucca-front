@@ -58,6 +58,7 @@ Schematics help automate migrations and updates when upgrading Lucca Front. They
 
 | Description | Version | Command |
 | ----------- | ------- | ------- |
+| Replace the dashes of empty cells with `<lu-no-value>` (Lucca Front tables only), and report the fallback dashes of expressions (`{{ value ?? '–' }}`) | 22.2+ | `ng g @lucca-front/ng:no-value` |
 | Migrate file upload usages: new `size` default, `FileEntry` rendered by the parent, `.fileEntryDisplayWrapper` as `<lu-file-entry-wrapper>` | 22.0.3+ | `ng g @lucca-front/ng:file-upload` |
 | Replace HTML loading with `<lu-loading>` | 21.1+ | `ng g @lucca-front/ng:lu-loading` |
 | Replace HTML containers with `<lu-container>` | 21.1+ | `ng g @lucca-front/ng:lu-container` |

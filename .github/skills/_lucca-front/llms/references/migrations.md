@@ -12,6 +12,7 @@
 |---------|----------|-------|
 | lu-label | `ng generate @lucca-front/ng:lu-label` | Replace the deprecated .label with lu-numeric-badge, lu-status-badge or lu-tag, and write a migration report |
 | menu | `ng generate @lucca-front/ng:menu` | Migrate the deprecated .menu classes to .horizontalNavigation. |
+| no-value | `ng generate @lucca-front/ng:no-value` | Replace the dashes of empty Lucca Front table cells with the lu-no-value component |
 | reorder | `ng generate @lucca-front/ng:reorder` | Make cdkDropList lists accessible with luReorder: keyboard and menu moves, announcements |
 | text-size | `ng generate @lucca-front/ng:text-size` | Replace the deprecated .(pr-)u-textXS~XXXL utilities with the body and heading utilities, and write a migration report |
 
@@ -37,6 +38,7 @@
 | lu-text-input | `ng generate @lucca-front/ng:lu-text-input` | Migrate deprecated textfield into lu-text-input where possible. | — |
 | menu | `ng generate @lucca-front/ng:menu` | Migrate the deprecated .menu classes to .horizontalNavigation. | — |
 | new-icons | `ng generate @lucca-front/ng:new-icons` | Replace old icon names with new ones. | — |
+| no-value | `ng generate @lucca-front/ng:no-value` | Replace the dashes of empty Lucca Front table cells with the lu-no-value component | — |
 | palettes | `ng generate @lucca-front/ng:palettes` | Replace palettes with new names. | — |
 | reorder | `ng generate @lucca-front/ng:reorder` | Make cdkDropList lists accessible with luReorder: keyboard and menu moves, announcements | — |
 | text-size | `ng generate @lucca-front/ng:text-size` | Replace the deprecated .(pr-)u-textXS~XXXL utilities with the body and heading utilities, and write a migration report | — |

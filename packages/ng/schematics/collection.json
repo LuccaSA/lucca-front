@@ -125,6 +125,11 @@
       "description": "Make cdkDropList lists accessible with luReorder: keyboard and menu moves, announcements",
       "factory": "./reorder/index",
       "schema": "./reorder/schema.json"
+    },
+    "no-value": {
+      "description": "Replace the dashes of empty Lucca Front table cells with the lu-no-value component",
+      "factory": "./no-value/index",
+      "schema": "./no-value/schema.json"
     }
   }
 }

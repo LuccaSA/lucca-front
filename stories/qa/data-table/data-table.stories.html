@@ -2303,6 +2303,43 @@
 				</lu-data-table>
 			</td>
 		</tr>
+		<tr>
+			<td>No value</td>
+			<td>
+				<div class="dataTableWrapper">
+					<table class="dataTable">
+						<thead class="dataTable-head">
+							<tr class="dataTable-head-row">
+								<th class="dataTable-head-row-cell">header</th>
+								<th class="dataTable-head-row-cell">header</th>
+							</tr>
+						</thead>
+						<tbody class="dataTable-body">
+							<tr class="dataTable-body-row">
+								<td class="dataTable-body-row-cell">cell</td>
+								<td class="dataTable-body-row-cell"><span aria-hidden="true" data-content-before="—"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</td>
+			<td>
+				<lu-data-table>
+					<thead luDataTableHead>
+						<tr luDataTableRow>
+							<th luDataTableCell>header</th>
+							<th luDataTableCell>header</th>
+						</tr>
+					</thead>
+					<tbody luDataTableBody>
+						<tr luDataTableRow>
+							<td luDataTableCell>cell</td>
+							<td luDataTableCell><lu-no-value /></td>
+						</tr>
+					</tbody>
+				</lu-data-table>
+			</td>
+		</tr>
 	</tbody>
 </table>
 

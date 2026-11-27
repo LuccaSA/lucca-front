@@ -19,6 +19,7 @@ import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
+import { NoValueComponent } from '@lucca-front/ng/no-value';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { CDN_URL } from '@lucca-front/ng/core';
 
@@ -26,6 +27,7 @@ import { CDN_URL } from '@lucca-front/ng/core';
 	selector: 'index-table-stories',
 	templateUrl: './index-table.stories.html',
 	imports: [
+		NoValueComponent,
 		StatusBadgeComponent,
 		TagComponent,
 		LuUserPictureComponent,
