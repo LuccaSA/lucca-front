@@ -24,7 +24,7 @@
 				<span class="filterPill_popover-content-option-input">
 					<input type="radio" [attr.id]="inputId(index)" [attr.name]="groupName" [checked]="isSelected(view)" (change)="selectView(view)" />
 				</span>
-				@if (asEditable(view); as editableView) {
+				@if (isViewEditable()(view)) {
 					<button type="button" class="filterPill_popover-content-option-actions" size="XS" luButton="ghost" [luDropdown]="optionsDropdown">
 						<lu-icon icon="menuDots" [alt]="intl().viewOptions | intlParams: { viewName: viewLabel()(view) }" />
 					</button>
@@ -32,13 +32,13 @@
 					<ng-template #optionsDropdown>
 						<lu-dropdown-menu>
 							<lu-dropdown-item>
-								<button type="button" lu-dropdown-action (click)="renameView.emit(editableView.view); popoverRef()?.close()">
+								<button type="button" lu-dropdown-action (click)="rename(view)">
 									<lu-icon icon="edit" />
 									{{ intl().renameView }}
 								</button>
 							</lu-dropdown-item>
 							<lu-dropdown-item>
-								<button type="button" lu-dropdown-action critical (click)="deleteView.emit(editableView.view); popoverRef()?.close()">
+								<button type="button" lu-dropdown-action critical (click)="delete(view)">
 									<lu-icon icon="trash" />
 									{{ intl().deleteView }}
 								</button>

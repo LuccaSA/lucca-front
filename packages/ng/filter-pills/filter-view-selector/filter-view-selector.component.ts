@@ -33,7 +33,7 @@ export class FilterViewSelectorComponent<T, TEditable extends T = T> {
 
 	readonly popoverRef = viewChild(PopoverDirective);
 
-	/** The list of saved views to pick from. */
+	/** The list of views to pick from, either saved or predefined. */
 	readonly views = input.required<T[]>();
 
 	/** The currently selected view (two-way bindable). */
@@ -82,14 +82,6 @@ export class FilterViewSelectorComponent<T, TEditable extends T = T> {
 		return this.optionComparer()(selected, view);
 	}
 
-	/**
-	 * Narrows a view for the options menu. Wrapped in an object so that falsy views (`0`, `''`) stay editable
-	 * through `@if (…; as …)`, and cast because `isViewEditable` may be a plain predicate rather than a type guard.
-	 */
-	protected asEditable(view: T): { view: TEditable } | null {
-		return this.isViewEditable()(view) ? { view: view as TEditable } : null;
-	}
-
 	protected inputId(index: number): string {
 		return `${this.groupName}-${index}`;
 	}
@@ -100,6 +92,16 @@ export class FilterViewSelectorComponent<T, TEditable extends T = T> {
 
 	protected selectView(view: T): void {
 		this.selectedView.set(view);
+		this.popoverRef()?.close();
+	}
+
+	protected rename(view: T): void {
+		this.renameView.emit(view as TEditable);
+		this.popoverRef()?.close();
+	}
+
+	protected delete(view: T): void {
+		this.deleteView.emit(view as TEditable);
 		this.popoverRef()?.close();
 	}
 }
