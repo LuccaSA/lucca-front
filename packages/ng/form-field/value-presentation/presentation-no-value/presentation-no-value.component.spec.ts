@@ -66,7 +66,7 @@ describe(ɵPresentationNoValueComponent.name, () => {
 	it('should expose a text to assistive technologies when data presentation has no value', () => {
 		const definition = renderDataPresentation(true);
 
-		expect(definition.querySelector('[aria-hidden="true"][data-content-before="–"]')).toBeTruthy();
+		expect(definition.querySelector('[aria-hidden="true"][data-content-before="—"]')).toBeTruthy();
 		expect(accessibleText(definition)).toBe('Not provided');
 	});
 

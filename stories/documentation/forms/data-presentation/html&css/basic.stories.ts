@@ -12,7 +12,7 @@ export default {
 function getTemplate(args): string {
 	const definition = args.noValue
 		? `
-		<span aria-hidden="true" data-content-before="–"></span>
+		<span aria-hidden="true" data-content-before="—"></span>
 		<span class="pr-u-mask">Non renseigné</span>
 	`
 		: 'Value';
