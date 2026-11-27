@@ -2,7 +2,10 @@ describe('ALuSelectInputComponent', () => {
 	it('should not fail because test suite is empty', () => {});
 });
 
-import { ComponentFixture } from '@angular/core/testing';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Subject } from 'rxjs';
+import { SelectDataSourceParams } from '../select.model';
 import { ALuSelectInputComponent } from './select-input.component';
 
 export type TestEntity = { id: number; name: string };
@@ -405,6 +408,139 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 			// Assert
 			expect(highlightedBeforeClosing).toContain(vegetables[1].name);
 			expect(combobox().getAttribute('aria-activedescendant') ?? '').toBe('');
+		});
+	});
+
+	describe('with options loaded asynchronously', () => {
+		type PendingRequest = { params: SelectDataSourceParams; answer: Subject<readonly TestEntity[]> };
+
+		/** Gives the select a paginated data source whose requests the test answers by hand */
+		function useHandAnsweredDataSource(): PendingRequest[] {
+			const requests: PendingRequest[] = [];
+			component.dataSource.set({
+				getOptions: (params) => {
+					const answer = new Subject<readonly TestEntity[]>();
+					requests.push({ params, answer });
+					return answer;
+				},
+			});
+			return requests;
+		}
+
+		async function openPanel(): Promise<void> {
+			component.openPanel();
+			await render();
+		}
+
+		async function search(clue: string): Promise<void> {
+			combobox().value = clue;
+			combobox().dispatchEvent(new Event('input'));
+			await render();
+		}
+
+		/** The panel lives in an overlay, outside the fixture */
+		function panel(): HTMLElement {
+			return TestBed.inject(OverlayContainer).getContainerElement();
+		}
+
+		function optionNames(): string[] {
+			return Array.from(panel().querySelectorAll('lu-select-option'), (option) => option.textContent?.trim() ?? '');
+		}
+
+		function loadingRow(): Element | null {
+			return panel().querySelector('lu-listbox-option.is-loading');
+		}
+
+		function emptyMessage(): Element | null {
+			return panel().querySelector('lu-listbox-option[empty]');
+		}
+
+		it('should show the loading row, and not the empty message, while the first page is pending', async () => {
+			// Arrange
+			useHandAnsweredDataSource();
+
+			// Act
+			await openPanel();
+
+			// Assert
+			expect(loadingRow()).not.toBeNull();
+			expect(emptyMessage()).toBeNull();
+		});
+
+		it('should replace the loading row with the options once the page answers', async () => {
+			// Arrange
+			const requests = useHandAnsweredDataSource();
+			await openPanel();
+
+			// Act
+			requests[0].answer.next(vegetables);
+			await render();
+
+			// Assert
+			expect(loadingRow()).toBeNull();
+			expect(optionNames()).toEqual(['Carrot', 'Leek', 'Turnip']);
+		});
+
+		it('should ignore the late answer to a search the user already replaced', async () => {
+			// Arrange
+			component.clueChange$.subscribe(); // Emulate a `(clueChange)=""` binding
+			const requests = useHandAnsweredDataSource();
+			await openPanel();
+			await search('car');
+			await search('lee');
+			const [, carRequest, leeRequest] = requests;
+
+			// Act: the answer for "lee" comes back before the one for "car"
+			leeRequest.answer.next([vegetables[1]]);
+			carRequest.answer.next([vegetables[0]]);
+			await render();
+
+			// Assert
+			expect(requests.map(({ params }) => params.clue)).toEqual(['', 'car', 'lee']);
+			expect(optionNames()).toEqual(['Leek']);
+		});
+
+		it('should stop loading and show the empty message when the request fails', async () => {
+			// Arrange
+			const requests = useHandAnsweredDataSource();
+			await openPanel();
+
+			// Act
+			requests[0].answer.error(new Error('Network error'));
+			await render();
+
+			// Assert
+			expect(loadingRow()).toBeNull();
+			expect(emptyMessage()).not.toBeNull();
+		});
+
+		describe('when the consumer owns the whole list ([options] and [loading])', () => {
+			it('should show the loading row over the current options while the loading input is set', async () => {
+				// Arrange
+				fixture.componentRef.setInput('options', [vegetables[0]]);
+
+				// Act
+				fixture.componentRef.setInput('loading', true);
+				await openPanel();
+
+				// Assert
+				expect(loadingRow()).not.toBeNull();
+				expect(optionNames()).toEqual(['Carrot']);
+			});
+
+			it('should replace the options with each new list instead of adding it to the previous one', async () => {
+				// Arrange
+				fixture.componentRef.setInput('options', [vegetables[0]]);
+				await openPanel();
+
+				// Act
+				fixture.componentRef.setInput('options', [vegetables[1], vegetables[2]]);
+				await render();
+
+				// Assert
+				expect(optionNames()).toEqual(['Leek', 'Turnip']);
+				expect(loadingRow()).toBeNull();
+			});
 		});
 	});
 }

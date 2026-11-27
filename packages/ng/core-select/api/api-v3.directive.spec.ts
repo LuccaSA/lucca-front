@@ -2,6 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ILuApiItem } from '@lucca-front/ng/api';
 import { ALuSelectInputComponent, SelectDataSource, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -24,6 +25,15 @@ class MockSelectComponent {}
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
+	url = '/api/v3/axisSections';
+}
+
+@Component({
+	template: `<lu-simple-select [apiV3]="url" />`,
+	imports: [LuSimpleSelectInputComponent, LuCoreSelectApiV3Directive],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class SimpleSelectHostComponent {
 	url = '/api/v3/axisSections';
 }
 
@@ -148,5 +158,52 @@ describe('CoreSelectApiV3Directive', () => {
 		tick();
 
 		expect(bobItems).toEqual(itemsMocks.slice(0, 5));
+	}));
+});
+
+describe('CoreSelectApiV3Directive on a simple select', () => {
+	let httpTestingController: HttpTestingController;
+	let fixture: ComponentFixture<SimpleSelectHostComponent>;
+	let select: LuSimpleSelectInputComponent<ILuApiItem>;
+
+	const pageUrl = (page: number) => `/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=${page * LU_SELECT_MAGIC_PAGE_SIZE},${LU_SELECT_MAGIC_PAGE_SIZE}`;
+
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [SimpleSelectHostComponent],
+			providers: [provideHttpClient(), provideHttpClientTesting()],
+		});
+
+		fixture = TestBed.createComponent(SimpleSelectHostComponent);
+		httpTestingController = TestBed.inject(HttpTestingController);
+		select = fixture.debugElement.query(By.directive(LuSimpleSelectInputComponent)).componentInstance as LuSimpleSelectInputComponent<ILuApiItem>;
+	});
+
+	it('should stop at the first empty page when the total is a multiple of the page size', fakeAsync(() => {
+		// Arrange: exactly two full pages
+		const twoFullPages = itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE * 2);
+		fixture.detectChanges();
+		tick();
+		select.openPanel();
+		fixture.detectChanges();
+		tick();
+		httpTestingController.expectOne(pageUrl(0)).flush({ data: { items: twoFullPages.slice(0, LU_SELECT_MAGIC_PAGE_SIZE) } });
+		select.nextPage$.next();
+		tick();
+		httpTestingController.expectOne(pageUrl(1)).flush({ data: { items: twoFullPages.slice(LU_SELECT_MAGIC_PAGE_SIZE) } });
+
+		// Act: the user keeps scrolling to the bottom of the panel
+		select.nextPage$.next();
+		tick();
+		httpTestingController.expectOne(pageUrl(2)).flush({ data: { items: [] } });
+		select.nextPage$.next();
+		tick();
+		select.nextPage$.next();
+		tick();
+
+		// Assert
+		httpTestingController.verify();
+		expect(select.dataSourceOptions()).toEqual(twoFullPages);
+		expect(select.loading()).toBe(false);
 	}));
 });
