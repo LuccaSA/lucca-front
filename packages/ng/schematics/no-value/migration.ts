@@ -63,7 +63,8 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		});
 		applyToUpdateRecorder(tsUpdate, [
 			insertTSImportIfNeeded(sourceFile, path, 'NoValueComponent', '@lucca-front/ng/no-value'),
-			insertAngularImportIfNeeded(sourceFile, path, 'NoValueComponent'),
+			// `flat()`: the helper returns one change per component since the shared schematics fix, a single change before.
+			...[insertAngularImportIfNeeded(sourceFile, path, 'NoValueComponent')].flat(),
 		]);
 		tree.commitUpdate(tsUpdate);
 	}
