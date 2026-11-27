@@ -170,6 +170,7 @@ describe('LuMultiSelectInputComponent', () => {
 			getFixture: () => fixture,
 			exampleValue: [{ id: 1, name: 'test' }],
 			emptyValue: [],
+			toValue: (option) => [option],
 			clearerSelector: '.multipleSelect-clear',
 			inputBoundToClue: false,
 		});

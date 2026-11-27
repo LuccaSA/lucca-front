@@ -94,6 +94,7 @@ describe('LuSimpleSelectInputComponent', () => {
 		getFixture: () => fixture,
 		exampleValue: { id: 1, name: 'test' },
 		emptyValue: null,
+		toValue: (option) => option,
 		clearerSelector: '.simpleSelect-field-clear',
 		inputBoundToClue: true,
 	});
@@ -283,18 +284,6 @@ describe('LuSimpleSelectInputComponent', () => {
 
 			// Assert
 			expect((nativeElement().querySelector('input') as HTMLInputElement).disabled).toBe(true);
-		});
-
-		it('should not open the panel when disabled', () => {
-			// Arrange
-			fixture.componentInstance.setDisabledState(true);
-			fixture.detectChanges();
-
-			// Act
-			fixture.componentInstance.openPanel();
-
-			// Assert
-			expect(fixture.componentInstance.isPanelOpen).toBe(false);
 		});
 
 		it('should hide the clearer when disabled', () => {
