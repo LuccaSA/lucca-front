@@ -1,4 +1,5 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { Platform } from '@angular/cdk/platform';
 import { ApplicationRef, ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -713,6 +714,179 @@ describe(`${LuSimpleSelectInputComponent.name} bottom sheet`, () => {
 			expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest' });
 		});
 	});
+
+	describe('back navigation', () => {
+		// The Android back button reaches the page as a `traverse` navigation, cancelable after a user
+		// activation; only the parts of `window.navigation` the sheet uses are faked.
+		function mockNavigation(): { listeners: Set<(event: NavigateEvent) => void>; traverse: (init?: Partial<NavigateEvent>) => NavigateEvent } {
+			const listeners = new Set<(event: NavigateEvent) => void>();
+			vi.stubGlobal('navigation', {
+				addEventListener: (type: string, listener: (event: NavigateEvent) => void) => {
+					if (type === 'navigate') {
+						listeners.add(listener);
+					}
+				},
+				removeEventListener: (type: string, listener: (event: NavigateEvent) => void) => {
+					if (type === 'navigate') {
+						listeners.delete(listener);
+					}
+				},
+			});
+			return {
+				listeners,
+				traverse: (init = {}) => {
+					const event = { navigationType: 'traverse', cancelable: true, preventDefault: vi.fn(), ...init } as unknown as NavigateEvent;
+					listeners.forEach((listener) => listener(event));
+					return event;
+				},
+			};
+		}
+
+		beforeEach(() => {
+			TestBed.inject(Platform).ANDROID = true;
+		});
+
+		afterEach(() => {
+			vi.unstubAllGlobals();
+		});
+
+		it('should close only the sheet when the back button traverses the history', () => {
+			// Arrange
+			const navigation = mockNavigation();
+			const select = selectOf(createHost(BareHostComponent, true));
+			select.openPanel();
+
+			// Act
+			const event = navigation.traverse();
+
+			// Assert
+			expect(event.preventDefault).toHaveBeenCalled();
+			expect(select.isPanelOpen).toBe(false);
+		});
+
+		it('should let a traversal it cannot cancel through, the sheet then closing on popstate as before', () => {
+			// Arrange
+			const navigation = mockNavigation();
+			const select = selectOf(createHost(BareHostComponent, true));
+			select.openPanel();
+
+			// Act
+			const event = navigation.traverse({ cancelable: false });
+
+			// Assert
+			expect(event.preventDefault).not.toHaveBeenCalled();
+			expect(select.isPanelOpen).toBe(true);
+		});
+
+		it.each(['push', 'replace', 'reload'] as const)('should let a %s navigation through, such as one started by the app while the sheet is open', (navigationType) => {
+			// Arrange
+			const navigation = mockNavigation();
+			const select = selectOf(createHost(BareHostComponent, true));
+			select.openPanel();
+
+			// Act
+			const event = navigation.traverse({ navigationType });
+
+			// Assert
+			expect(event.preventDefault).not.toHaveBeenCalled();
+			expect(select.isPanelOpen).toBe(true);
+		});
+
+		it('should stop listening once an option is chosen, so the next back button closes what is underneath', () => {
+			// Arrange
+			const navigation = mockNavigation();
+			const select = selectOf(createHost(BareHostComponent, true));
+			select.openPanel();
+
+			// Act
+			select.panelRef?.emitValue(options[1]);
+			const event = navigation.traverse();
+
+			// Assert
+			expect(select.value).toEqual(options[1]);
+			expect(event.preventDefault).not.toHaveBeenCalled();
+			expect(navigation.listeners.size).toBe(0);
+		});
+
+		it('should stop listening once the sheet is closed otherwise', () => {
+			// Arrange
+			const navigation = mockNavigation();
+			const select = selectOf(createHost(BareHostComponent, true));
+			select.openPanel();
+
+			// Act
+			select.closePanel();
+
+			// Assert
+			expect(navigation.listeners.size).toBe(0);
+		});
+
+		it('should stop listening once the select is destroyed with its sheet open', () => {
+			// Arrange
+			const navigation = mockNavigation();
+			const fixture = createHost(BareHostComponent, true);
+			selectOf(fixture).openPanel();
+
+			// Act
+			fixture.destroy();
+
+			// Assert
+			expect(navigation.listeners.size).toBe(0);
+		});
+
+		it('should stop listening once the viewport grows past the XS breakpoint', () => {
+			// Arrange
+			const navigation = mockNavigation();
+			const fixture = createHost(BareHostComponent, true);
+			selectOf(fixture).openPanel();
+
+			// Act
+			breakpointObserver.belowExtraSmallBreakpoint.next(false);
+			fixture.detectChanges();
+
+			// Assert
+			expect(navigation.listeners.size).toBe(0);
+		});
+
+		it('should listen for one sheet at a time when sheets are opened one after the other', () => {
+			// Arrange
+			const navigation = mockNavigation();
+			const select = selectOf(createHost(BareHostComponent, true));
+			select.openPanel();
+			navigation.traverse();
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(navigation.listeners.size).toBe(1);
+		});
+
+		it('should leave the back button alone off Android, where cancelling a traversal is not reliable', () => {
+			// Arrange
+			TestBed.inject(Platform).ANDROID = false;
+			const navigation = mockNavigation();
+			const select = selectOf(createHost(BareHostComponent, true));
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(navigation.listeners.size).toBe(0);
+		});
+
+		it('should open the sheet as before in a browser without the Navigation API', () => {
+			// Arrange
+			const select = selectOf(createHost(BareHostComponent, true));
+
+			// Act
+			select.openPanel();
+
+			// Assert
+			expect(select.isPanelOpen).toBe(true);
+		});
+	});
+
 	describe('pagination', () => {
 		function createPaginatedSelect(belowExtraSmallBreakpoint: boolean): { fixture: ComponentFixture<PaginatedHostComponent>; select: LuSimpleSelectInputComponent<Entity> } {
 			breakpointObserver.belowExtraSmallBreakpoint.next(belowExtraSmallBreakpoint);

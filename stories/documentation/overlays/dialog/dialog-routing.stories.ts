@@ -25,6 +25,8 @@ import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular-vite';
 import { map } from 'rxjs';
 import { StoryModelDisplayComponent } from '@/helpers/story-model-display.component';
+import { allLegumes, ILegume } from '@/stories/forms/select/select.utils';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 
 @Injectable()
 class DataProvider {
@@ -80,6 +82,7 @@ class DismissedComponent {}
 		FormsModule,
 		StoryModelDisplayComponent,
 		FormComponent,
+		LuSimpleSelectInputComponent,
 	],
 	template: `
 		<lu-dialog>
@@ -97,6 +100,9 @@ class DismissedComponent {}
 					</lu-form-field>
 					<lu-form-field label="I agree to allow this dialog to close" class="pr-u-marginBlockStart200">
 						<lu-checkbox-input [(ngModel)]="allowThisDialogToClose" name="canDeactivate" />
+					</lu-form-field>
+					<lu-form-field label="Legume" class="pr-u-marginBlockStart200">
+						<lu-simple-select [(ngModel)]="legume" name="legume" [options]="legumes" />
 					</lu-form-field>
 				</lu-dialog-content>
 				<lu-dialog-footer>
@@ -121,6 +127,9 @@ class TestDialogComponent {
 
 	dataNum = signal(this.data);
 	dataString = signal('');
+
+	legumes = allLegumes;
+	legume = signal<ILegume | null>(null);
 
 	formValue = computed(() => ({
 		dataNum: this.dataNum(),
