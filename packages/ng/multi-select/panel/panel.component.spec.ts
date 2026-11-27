@@ -77,7 +77,7 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 	}));
 
 	it('should name each group by its label, with ids distinct from the group itself', fakeAsync(() => {
-		component.groupingSignal.set({ selector: (option) => (option.id < 3 ? 'Racines' : 'Autres'), content: 'Groupe' });
+		component.groupingSignal.set({ selector: (option) => (option.id < 3 ? 'Légumes racines' : 'Autres'), content: 'Groupe' });
 		openPanel();
 
 		const groups = overlayContainerElement.querySelectorAll('lu-listbox-option[role="group"]');
@@ -85,7 +85,8 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 
 		const firstGroup = groups[0];
 		const labelId = firstGroup.getAttribute('aria-labelledby')!;
-		expect(labelId).toContain('-group-Racines');
+		// aria-labelledby is a space-separated id list, so the label id must not carry the group key
+		expect(labelId).toMatch(/-group-label-0$/);
 		// The group must be labelled by its label element, not by itself
 		expect(firstGroup.getAttribute('id')).not.toBe(labelId);
 		expect(overlayContainerElement.querySelectorAll(`[id="${labelId}"]`).length).toBe(1);
