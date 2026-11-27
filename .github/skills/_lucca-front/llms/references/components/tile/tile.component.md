@@ -9,11 +9,10 @@ Component selector : `lu-user-tile`
 ### Tile
 
 ```js
-import { provideHttpClient } from '@angular/common/http';
+import { HttpInterceptorFn, HttpResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuUser, LuUserTileComponent } from '@lucca-front/ng/user';
 import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
-import { LuUserPopoverStore } from '@lucca-front/ng/user-popover/service/user-popover.store';
 import { of } from 'rxjs';
 ```
 

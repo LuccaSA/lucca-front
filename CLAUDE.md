@@ -21,7 +21,7 @@ npm run test:eslint-plugin   # tests du plugin ESLint local (workspace dédié)
 npm run test-storybook       # tests d'interaction Storybook (vitest --project=storybook)
 npm run lint                 # lint:es (eslint packages/) + lint:style (stylelint SCSS)
 npm run lint:fix             # les deux, avec --fix
-npm run build                # build:ng (prisme + ng via ng-packagr) puis build.js (scss, icons, schematics) → dist/
+npm run build                # build:ng (prisme + ng via le builder `@angular/build:library`) puis build.js (scss, icons, schematics) → dist/
 npm run i18n:update          # récupère les traductions depuis Lokalise et prettifie les translations.ts
 ```
 
@@ -31,7 +31,7 @@ Environnement de test : Vitest + `@analogjs/vite-plugin-angular`, `happy-dom`, g
 
 Cinq workspaces sous `packages/`, publiés avec les dépendances `ng → scss → icons` :
 
-- **`@lucca-front/ng`** — composants Angular métier et logique spécifique Lucca. Chaque dossier de premier niveau (`button/`, `modal/`, `core-select/`…) est son **propre entrypoint secondaire ng-packagr** (avec son `ng-package.json`), donc son propre bundle. Les imports inter-entrypoints se font via `@lucca-front/ng/<name>` ; ESLint interdit les imports relatifs `packages/ng` ou `dist/ng`.
+- **`@lucca-front/ng`** — composants Angular métier et logique spécifique Lucca. Chaque dossier de premier niveau (`button/`, `modal/`, `core-select/`…) est son **propre entrypoint secondaire** (déclaré dans `exports` de `packages/ng/package.json`, à compléter pour tout nouveau dossier), donc son propre bundle. Les imports inter-entrypoints se font via `@lucca-front/ng/<name>` ; ESLint interdit les imports relatifs `packages/ng` ou `dist/ng`.
 - **`@lucca-front/prisme`** — composants purs du Design System (open source, atomiques/moléculaires, sans logique métier). Les nouveaux composants DS vont ici, pas dans `ng`.
 - **`@lucca-front/scss`** — framework SCSS ; **`@lucca-front/icons`** — police d'icônes (régénérée par le script `icons:update`).
 - **`@lucca-front/eslint-plugin`** — règles ESLint locales (chargées dans `eslint.config.mjs` sous `@lucca-front/*`).

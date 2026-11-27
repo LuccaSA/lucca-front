@@ -63,7 +63,7 @@ Un signal n'est breaking que s'il change quelque chose pour le consommateur. Ne 
 
 - un export **réexporté ailleurs** — vérifier le fichier courant avant de conclure. Un `public-api.ts` réduit à `export * from '@lucca/prisme/<composant>'` déplace l'implémentation sans casser l'import ;
 - un symbole préfixé **`ɵ`**, privé par convention Angular ;
-- un fichier situé dans un dossier **sans `ng-package.json`**, donc interne à l'entrypoint ;
+- un fichier situé dans un dossier **absent de `exports`** de `packages/ng/package.json` ou `packages/prisme/package.json`, donc interne à l'entrypoint ;
 - la suppression d'une API **dépréciée dans une version antérieure** : elle est attendue et se traite comme une migration, sans être une découverte ;
 - un déplacement ou renommage **interne** sans effet sur les imports publiés ;
 - une ligne **réécrite** et non supprimée : un `input()` dont seul le `transform` change, une variable CSS dont seule la valeur change, une classe dont le sélecteur est composé différemment. C'est le bruit dominant — d'où les comparaisons d'ensembles ci-dessus ;

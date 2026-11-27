@@ -33,7 +33,7 @@ export function replaceTextNodeContentPartWith<TNode extends LexicalNode>(textNo
 	return betweenNode;
 }
 
-/**
+/*!
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *
  * This source code is licensed under the MIT license found in the

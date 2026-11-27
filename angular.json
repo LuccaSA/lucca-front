@@ -40,14 +40,45 @@
   "newProjectRoot": "packages/ng",
   "projects": {
     "ng": {
-      "root": "./",
+      "root": "./packages/ng/",
       "projectType": "library",
       "architect": {
         "build": {
-          "builder": "@angular/build:ng-packagr",
+          "builder": "@angular/build:library",
           "options": {
-            "project": "packages/ng/ng-package.json",
-            "tsConfig": "packages/ng/tsconfig.lib.prod.json"
+            "tsConfig": "packages/ng/tsconfig.lib.prod.json",
+            "outputPath": "dist/ng",
+            "assets": [
+              {
+                "glob": "**/*.scss",
+                "input": "packages/ng/styles",
+                "output": "src"
+              },
+              {
+                "glob": "material/style/**/*.scss",
+                "input": "packages/ng"
+              },
+              {
+                "glob": "formly/src/**/*.scss",
+                "input": "packages/ng"
+              },
+              {
+                "glob": "formly/style/**/*.scss",
+                "input": "packages/ng"
+              },
+              {
+                "glob": "**/README.md",
+                "input": "packages/ng",
+                "ignore": ["**/node_modules/**"]
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["packages/ng/styles"]
+            },
+            "deleteOutputPath": true
+          },
+          "configurations": {
+            "development": {}
           }
         },
         "lint": {
@@ -63,9 +94,7 @@
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", ".storybook"],
             "port": 6006,
-            "styles": [
-              ".storybook/styles.scss"
-            ],
+            "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["packages/ng/styles", "node_modules"]
             }
@@ -78,25 +107,27 @@
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", ".storybook"],
             "outputDir": "storybook-static",
-            "styles": [
-              ".storybook/styles.scss"
-            ],
+            "styles": [".storybook/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["packages/ng/styles", "node_modules"]
             }
           }
         }
-      }
+      },
+      "sourceRoot": "./packages/ng/"
     },
     "prisme": {
       "root": "./packages/prisme/",
       "projectType": "library",
       "architect": {
         "build": {
-          "builder": "@angular/build:ng-packagr",
+          "builder": "@angular/build:library",
           "options": {
-            "project": "packages/prisme/ng-package.json",
-            "tsConfig": "packages/prisme/tsconfig.lib.prod.json"
+            "tsConfig": "packages/prisme/tsconfig.lib.prod.json",
+            "outputPath": "dist/prisme"
+          },
+          "configurations": {
+            "development": {}
           }
         },
         "lint": {
@@ -105,7 +136,8 @@
             "lintFilePatterns": ["packages/prisme/**/*.ts", "packages/prisme/**/*.html"]
           }
         }
-      }
+      },
+      "sourceRoot": "./packages/prisme/"
     },
     "web-components": {
       "root": "./packages/web-components/",

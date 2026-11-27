@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { SOFTWARE_ICON, SoftwareIconComponent } from '@lucca-front/ng/software-icon';
-import { SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
-import { SoftwareIconWrapperComponent } from '@lucca-front/ng/software-icon-wrapper/software-icon-wrapper.component';
+import { SoftwareIconWrapperComponent, SoftwareIconWrapperItemDirective } from '@lucca-front/ng/software-icon-wrapper';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular-vite';
 import { CDN_URL } from '@lucca-front/ng/core';
 

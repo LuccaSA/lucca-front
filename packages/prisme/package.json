@@ -2,6 +2,16 @@
   "name": "@lucca/prisme",
   "version": "0.0.0",
   "description": "Design system made by @lucca",
+  "exports": {
+    ".": "./public_api.ts",
+    "./button": "./button/public-api.ts",
+    "./core": "./core/public-api.ts",
+    "./icon": "./icon/public-api.ts",
+    "./numeric-badge": "./numeric-badge/public-api.ts",
+    "./skeleton": "./skeleton/public-api.ts",
+    "./tag": "./tag/public-api.ts",
+    "./tooltip": "./tooltip/public-api.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git",

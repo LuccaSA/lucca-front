@@ -225,7 +225,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:cbf7c70c9edc4b3ca4dc4f45e64a9071a9e51d9e466615f3f451707fe9f8e32e
+  content_hash: sha256:1fa0417df912cb8de70e51741e3e35e34811651c6ceb95d04af99c273cb528eb
 - kind: project-relative
   target: claude
   value: .claude/skills/generate-version-changelog-markdown/references/classification.md
@@ -657,7 +657,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:cbf7c70c9edc4b3ca4dc4f45e64a9071a9e51d9e466615f3f451707fe9f8e32e
+  content_hash: sha256:1fa0417df912cb8de70e51741e3e35e34811651c6ceb95d04af99c273cb528eb
 - kind: project-relative
   target: copilot
   value: .agents/skills/generate-version-changelog-markdown/references/classification.md
@@ -996,7 +996,7 @@ local_deployed_file_hashes:
   .agents/skills/generate-story/SKILL.md: sha256:7833d627812cb886ddd1c374a6fd711e64dcbc51fe4e0bd9b0d96ce9fae55451
   .agents/skills/generate-test/SKILL.md: sha256:634c59e99f9c001c665b722a520d7578e0a1a833f921eef6160c48b2f69526c7
   .agents/skills/generate-version-changelog-markdown/SKILL.md: sha256:b8b896da428099f04be64aaacd4814d8e256ce110e27fbb1abf0e7bd2f0cfc7d
-  .agents/skills/generate-version-changelog-markdown/references/breaking.md: sha256:cbf7c70c9edc4b3ca4dc4f45e64a9071a9e51d9e466615f3f451707fe9f8e32e
+  .agents/skills/generate-version-changelog-markdown/references/breaking.md: sha256:1fa0417df912cb8de70e51741e3e35e34811651c6ceb95d04af99c273cb528eb
   .agents/skills/generate-version-changelog-markdown/references/classification.md: sha256:2cb1c4456853026f9b5bab3614137c449a941e926c585e0184ac3dce675d9d6b
   .agents/skills/generate-version-changelog-markdown/references/examples.md: sha256:c92edfa544f46d291bbb46a47599614cead2707fbf981b767129075dfbf926c9
   .agents/skills/generate-version-changelog-markdown/references/naming.md: sha256:d099b39823566f17aded97e168cbcafe3fb34f7d883d3e61b2f573f7def12088
@@ -1031,7 +1031,7 @@ local_deployed_file_hashes:
   .claude/skills/generate-story/SKILL.md: sha256:7833d627812cb886ddd1c374a6fd711e64dcbc51fe4e0bd9b0d96ce9fae55451
   .claude/skills/generate-test/SKILL.md: sha256:634c59e99f9c001c665b722a520d7578e0a1a833f921eef6160c48b2f69526c7
   .claude/skills/generate-version-changelog-markdown/SKILL.md: sha256:b8b896da428099f04be64aaacd4814d8e256ce110e27fbb1abf0e7bd2f0cfc7d
-  .claude/skills/generate-version-changelog-markdown/references/breaking.md: sha256:cbf7c70c9edc4b3ca4dc4f45e64a9071a9e51d9e466615f3f451707fe9f8e32e
+  .claude/skills/generate-version-changelog-markdown/references/breaking.md: sha256:1fa0417df912cb8de70e51741e3e35e34811651c6ceb95d04af99c273cb528eb
   .claude/skills/generate-version-changelog-markdown/references/classification.md: sha256:2cb1c4456853026f9b5bab3614137c449a941e926c585e0184ac3dce675d9d6b
   .claude/skills/generate-version-changelog-markdown/references/examples.md: sha256:c92edfa544f46d291bbb46a47599614cead2707fbf981b767129075dfbf926c9
   .claude/skills/generate-version-changelog-markdown/references/naming.md: sha256:d099b39823566f17aded97e168cbcafe3fb34f7d883d3e61b2f573f7def12088
