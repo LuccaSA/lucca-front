@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { form, FormField } from '@angular/forms/signals';
+import { form, FormField, required } from '@angular/forms/signals';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import {
 	CheckboxInputComponent,
@@ -127,13 +127,29 @@ class InjectNgControlFormFieldStory {
 	readonly seasons = SEASONS;
 }
 
+@Component({
+	selector: 'inject-ng-control-form-field-validation-stories',
+	templateUrl: './inject-ng-control-form-field-validation.stories.html',
+	imports: [FormField, FormFieldComponent, TextInputComponent, TextareaInputComponent, NumberInputComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class InjectNgControlFormFieldValidationStory {
+	readonly model = signal({ title: '', notes: '', servings: null as number | null });
+
+	readonly recipeForm = form(this.model, (path) => {
+		required(path.title);
+		required(path.notes);
+		required(path.servings);
+	});
+}
+
 // ─── Meta & exports ───────────────────────────────────────────────────────────
 
 export default {
 	title: 'QA/Forms/InjectNgControl',
 	decorators: [
 		moduleMetadata({
-			imports: [InjectNgControlFormControlStory, InjectNgControlFormFieldStory],
+			imports: [InjectNgControlFormControlStory, InjectNgControlFormFieldStory, InjectNgControlFormFieldValidationStory],
 		}),
 	],
 } as Meta;
@@ -146,4 +162,9 @@ export const WithFormControl: StoryObj<InjectNgControlFormControlStory> = {
 export const WithFormField: StoryObj<InjectNgControlFormFieldStory> = {
 	args: {},
 	render: () => ({ template: '<inject-ng-control-form-field-stories />' }),
+};
+
+export const WithFormFieldValidation: StoryObj<InjectNgControlFormFieldValidationStory> = {
+	args: {},
+	render: () => ({ template: '<inject-ng-control-form-field-validation-stories />' }),
 };
