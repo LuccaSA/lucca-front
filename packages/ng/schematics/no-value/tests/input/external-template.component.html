@@ -1,0 +1,19 @@
+<table class="indexTable">
+	<tbody class="indexTable-body">
+		@for (row of rows; track row.name) {
+			<tr class="indexTable-body-row">
+				<th class="indexTable-body-row-cell">{{ row.name }}</th>
+				<td class="indexTable-body-row-cell">
+					@if (row.team) {
+						{{ row.team }}
+					} @else {
+						<span aria-hidden="true" data-content-before="—"></span>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<ng-template #row>
+	<td class="dataTable-body-row-cell">–</td>
+</ng-template>

@@ -170,6 +170,7 @@ Bouton → API : `./references/components/button/button.md`, Design : `./referen
 - multi-select
 - multilanguagefield
 - newbadge
+- novalue
 - number-format-input
 - number-input
 - numbers
