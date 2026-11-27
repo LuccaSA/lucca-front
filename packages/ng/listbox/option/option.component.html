@@ -1,4 +1,4 @@
-<div class="listboxOption-content" [class.is-hovered]="hovered()" [attr.id]="group() ? groupLabelId() : null">
+<div class="listboxOption-content" [class.is-hovered]="hovered()">
 	@if (multiple() && !add() && !selectAll() && !select()) {
 		<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
 			<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
@@ -8,7 +8,7 @@
 	@if (add()) {
 		<lu-icon icon="mathsPlus" />
 	}
-	<ng-content />
+	<span class="listboxOption-content-label" [attr.id]="group() ? groupLabelId() : null"><ng-content /></span>
 	<ng-content select="[group-action]" />
 	@if (selectAll()) {
 		<lu-listbox-option [elementId]="elementId() + '-selectAll'" select>{{ selectAll() }}</lu-listbox-option>

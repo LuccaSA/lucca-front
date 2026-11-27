@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OptionComponent } from './option.component';
 
@@ -48,5 +49,32 @@ describe(OptionComponent.name, () => {
 		fixture.detectChanges();
 
 		expect(host.hasAttribute('aria-checked')).toBe(false);
+	});
+});
+
+describe(`${OptionComponent.name} (group label)`, () => {
+	@Component({
+		selector: 'lu-test-group-option',
+		changeDetection: ChangeDetectionStrategy.OnPush,
+		imports: [OptionComponent],
+		template: `
+			<lu-listbox-option group>
+				<span>Légumes</span>
+				<div group-action class="link">Tout sélectionner</div>
+			</lu-listbox-option>
+		`,
+	})
+	class TestGroupOptionComponent {}
+
+	it('should name the group by its projected title only, leaving the group action out of the label', () => {
+		const fixture = TestBed.createComponent(TestGroupOptionComponent);
+		fixture.detectChanges();
+
+		const group = fixture.nativeElement.querySelector('lu-listbox-option[role="group"]') as HTMLElement;
+		const label = group.querySelector(`[id="${group.getAttribute('aria-labelledby')}"]`)!;
+
+		expect(label).toBeTruthy();
+		expect(label.textContent!.trim()).toBe('Légumes');
+		expect(label.querySelector('[group-action]')).toBeNull();
 	});
 });
