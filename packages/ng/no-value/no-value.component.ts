@@ -24,7 +24,7 @@ export class NoValueComponent {
 
 	/**
 	 * Text read by screen readers instead of the dash.
-	 * By default, "Not provided", and nothing when the dash is the only content of a table cell. An empty string reads nothing.
+	 * By default, "Not entered", and nothing when the dash is the only content of a table cell. An empty string reads nothing.
 	 */
 	readonly alt = input<string>();
 

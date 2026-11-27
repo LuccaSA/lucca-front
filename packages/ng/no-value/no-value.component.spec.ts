@@ -83,7 +83,7 @@ describe(NoValueComponent.name, () => {
 	it('should add a visually hidden text outside a table cell', async () => {
 		const root = await render();
 
-		expect(accessibleText(root.querySelector('.outside')!)).toBe('Not provided');
+		expect(accessibleText(root.querySelector('.outside')!)).toBe('Not entered');
 	});
 
 	it('should add no text inside a table cell', async () => {
@@ -108,13 +108,13 @@ describe(NoValueComponent.name, () => {
 	it('should add a visually hidden text in a table cell that has another text', async () => {
 		const root = await render();
 
-		expect(accessibleText(root.querySelector('.textCell')!)).toBe('Manager: Not provided');
+		expect(accessibleText(root.querySelector('.textCell')!)).toBe('Manager: Not entered');
 	});
 
 	it('should add a visually hidden text in a cell of a layout table', async () => {
 		const root = await render();
 
-		expect(accessibleText(root.querySelector('.layoutCell')!)).toBe('Not provided');
+		expect(accessibleText(root.querySelector('.layoutCell')!)).toBe('Not entered');
 	});
 
 	it('should look past a layout table for an enclosing table cell', async () => {

@@ -26,7 +26,7 @@ Status: accepted
 
 **Context** — A missing value is displayed as an em dash hidden from screen readers. Outside a table, nothing is then announced, so a visually hidden text is needed. In a table cell, screen readers already announce an empty cell (“blank” with VoiceOver), so the same text would only repeat it on every empty cell.
 
-**Decision** — `lu-no-value` finds out by itself whether it is the only text of a table cell (`td`, `th`, or an element with an ARIA cell or header role, layout tables with `role="presentation"` or `role="none"` excepted) and adds the hidden text (“Not provided”) in every other case, including a cell with another text (“Manager: —”). The `alt` input overrides this choice, in both directions: a more precise text (“No manager”), or an empty string to read nothing.
+**Decision** — `lu-no-value` finds out by itself whether it is the only text of a table cell (`td`, `th`, or an element with an ARIA cell or header role, layout tables with `role="presentation"` or `role="none"` excepted) and adds the hidden text (“Not entered”) in every other case, including a cell with another text (“Manager: —”). The `alt` input overrides this choice, in both directions: a more precise text (“No manager”), or an empty string to read nothing.
 
 **Consequences** — The same `<lu-no-value />` fits everywhere, and the right behavior does not depend on the developer’s knowledge of screen readers. The detection relies on the rendered DOM, so it also works in tables written in plain HTML.
 

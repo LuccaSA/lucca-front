@@ -1,18 +1,6 @@
 ﻿export const Translations = {
-	pt: {
-		noValue: 'Não conhecido',
-	},
-	es: {
-		noValue: 'No especificado',
-	},
-	'nl-BE': {
-		noValue: 'Niet opgegeven',
-	},
-	nl: {
-		noValue: 'Niet opgegeven',
-	},
-	it: {
-		noValue: 'Non inserito',
+	en: {
+		noValue: 'Not entered',
 	},
 	de: {
 		noValue: 'Nicht angegeben',
@@ -20,10 +8,22 @@
 	fr: {
 		noValue: 'Non renseigné',
 	},
-	en: {
-		noValue: 'Not provided',
+	it: {
+		noValue: 'Non indicato',
+	},
+	nl: {
+		noValue: 'Niet ingevuld',
+	},
+	'nl-BE': {
+		noValue: 'Niet ingevuld',
 	},
 	pl: {
-		noValue: 'Not provided',
+		noValue: 'Nie wprowadzono',
+	},
+	es: {
+		noValue: 'No indicado',
+	},
+	pt: {
+		noValue: 'Não conhecido',
 	},
 };
