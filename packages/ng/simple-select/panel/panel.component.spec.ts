@@ -110,7 +110,12 @@ describe('LuSelectPanelComponent (listbox rendering)', () => {
 		const firstGroup = groups[0];
 		const labelId = firstGroup.getAttribute('aria-labelledby')!;
 		expect(labelId).toContain('-group-Racines');
-		expect(firstGroup.querySelector(`[id="${labelId}"]`)).toBeTruthy();
+		// The group must be labelled by its label element, not by itself
+		expect(firstGroup.getAttribute('id')).not.toBe(labelId);
+		expect(overlayContainerElement.querySelectorAll(`[id="${labelId}"]`).length).toBe(1);
+		const label = firstGroup.querySelector(`[id="${labelId}"]`)!;
+		expect(label).toBeTruthy();
+		expect(label.textContent).toContain('Groupe');
 		expect(firstGroup.querySelectorAll('lu-listbox-option[role="option"]').length).toBe(2);
 		expect(firstGroup.querySelector('[optgroup]')!.classList).toContain('listboxOptionWrapper');
 	}));

@@ -76,6 +76,24 @@ describe('LuMultiSelectPanelComponent (listbox rendering)', () => {
 		expect(selected[0].classList).toContain('is-selected');
 	}));
 
+	it('should name each group by its label, with ids distinct from the group itself', fakeAsync(() => {
+		component.groupingSignal.set({ selector: (option) => (option.id < 3 ? 'Racines' : 'Autres'), content: 'Groupe' });
+		openPanel();
+
+		const groups = overlayContainerElement.querySelectorAll('lu-listbox-option[role="group"]');
+		expect(groups.length).toBe(2);
+
+		const firstGroup = groups[0];
+		const labelId = firstGroup.getAttribute('aria-labelledby')!;
+		expect(labelId).toContain('-group-Racines');
+		// The group must be labelled by its label element, not by itself
+		expect(firstGroup.getAttribute('id')).not.toBe(labelId);
+		expect(overlayContainerElement.querySelectorAll(`[id="${labelId}"]`).length).toBe(1);
+		const label = firstGroup.querySelector(`[id="${labelId}"]`)!;
+		expect(label).toBeTruthy();
+		expect(label.textContent).toContain('Groupe');
+	}));
+
 	it('should toggle the clicked option in the emitted value', fakeAsync(() => {
 		const onChange = vi.fn();
 		component.registerOnChange(onChange);
